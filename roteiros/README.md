@@ -8,8 +8,8 @@ número, um nome) confere aqui se alguma cena ficou desatualizada.
 
 | Animação | Roteiro | Onde aparece | Duração | Pergunta que responde |
 |---|---|---|---|---|
-| `senku-banner.svg` / `-en.svg` | [senku-banner.md](senku-banner.md) | topo do README, logo depois dos selos | 48 s, 6 cenas | por que o Senku existe e o que ele entrega |
-| `senku-fluxo.svg` / `-en.svg` | [senku-fluxo.md](senku-fluxo.md) | seção "Como funciona por dentro", antes da tabela de peças | 36 s, 5 passos | como uma conversa vira um processo mapeado e aprovado |
+| `senku-banner.svg` / `-en.svg` | [senku-banner.md](senku-banner.md) | topo do README, logo depois dos selos | 84 s, 6 cenas (48 s × 1,75) | por que o Senku existe e o que ele entrega |
+| `senku-fluxo.svg` / `-en.svg` | [senku-fluxo.md](senku-fluxo.md) | seção "Como funciona por dentro", antes da tabela de peças | 63 s, 5 passos (36 s × 1,75) | como uma conversa vira um processo mapeado e aprovado |
 
 Os SVGs saem de um gerador, não da mão:
 
@@ -17,7 +17,10 @@ Os SVGs saem de um gerador, não da mão:
 python ferramentas/animacoes.py
 ```
 
-O gerador grava os quatro arquivos em `assets/`. Os tempos no código
+O gerador grava os quatro arquivos em `assets/` na versão base (48 s e 36 s).
+Os SVGs publicados foram refinados à mão a partir dela e rodam 1,75 vez mais
+devagar (84 s e 63 s), com as mesmas cenas na mesma ordem. Rodar o gerador
+sobrescreve os refinados: guarde-os antes. Os tempos no código
 (`ferramentas/animacoes.py`) são os mesmos destes roteiros, em segundos, e cada
 SVG traz no topo do `<style>` o comentário de linha do tempo para conferir um
 contra o outro.
