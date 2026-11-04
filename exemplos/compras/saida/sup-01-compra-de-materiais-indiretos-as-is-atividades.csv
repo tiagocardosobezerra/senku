@@ -1,0 +1,15 @@
+﻿Nº;Id;Atividade;Responsável;Sistema;Entradas;Saídas;Regras;Tempo;Valor;Descrição;Como fazer;Exceções;A (aprova);C (consultado);I (informado);Segue para
+01;a1;Preencher requisição de compra;Solicitante;ERP;;Requisição de compra;;exec. 15 min;NAV-N;Abre a requisição no ERP com item, quantidade, centro de custo e justificativa.;;;;;;Analisar requisição
+02;a2;Analisar requisição;Gestor da área;ERP;;;R1;exec. 10 min · espera 2 d úteis;NAV-N;Confere necessidade, centro de custo e saldo de orçamento.;;;Gestor da área;;Solicitante;Requisição aprovada?
+03;a3;Cotar com fornecedores;Comprador;E-mail, Planilha de cotações;;Mapa de cotação;R2;exec. 1 h · espera 3 d úteis;NAV-N;Pede cotação por e-mail e consolida as propostas na planilha.;;;;;;Enviar proposta
+04;f_cot;Enviar proposta;Fornecedor;E-mail;;;;exec. 1 h · espera 2 d úteis;VA;;;;;;;Escolher fornecedor
+05;a4;Escolher fornecedor;Comprador;Planilha de cotações;;;R3;exec. 30 min;VA;;;;;;;Lançar cotação no ERP
+06;a5;Lançar cotação no ERP;Comprador;ERP;;;;exec. 20 min;NAV;Redigita no ERP os preços que já estão na planilha.;;;;;;Emitir pedido de compra
+07;a6;Emitir pedido de compra;Comprador;ERP;;Pedido de compra;;exec. 10 min;VA;;;;;;;Entregar material e nota fiscal
+08;a7;Entregar material e nota fiscal;Fornecedor;manual;;;;exec. 1 h · espera 5 d úteis;VA;;;;;;;Conferir material recebido + Lançar nota fiscal
+09;a9;Lançar nota fiscal;Fiscal / Contas a pagar;ERP;;;R5;exec. 15 min · espera 1 d útil;NAV-N;;;;;;;Entregar material ao solicitante
+10;a8;Conferir material recebido;Almoxarifado;manual;;;R4;exec. 20 min · espera 4 h;NAV-N;;;;;;;Material conforme o pedido?
+11;a11;Entregar material ao solicitante;Almoxarifado;manual;;;;exec. 15 min · espera 4 h;VA;;;;;;;Material entregue
+12;a1b;Corrigir requisição;Solicitante;ERP;;;;exec. 10 min · espera 1 d útil;NAV;;;;;;;Analisar requisição
+13;a10;Devolver material ao fornecedor;Almoxarifado;E-mail;;;;exec. 30 min · espera 1 d útil;NAV;;;;;;;Reenviar material
+14;a7r;Reenviar material;Fornecedor;manual;;;;exec. 1 h · espera 3 d úteis;NAV;;;;;;;Conferir material recebido

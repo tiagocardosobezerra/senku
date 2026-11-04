@@ -38,6 +38,39 @@ O Senku é uma skill do Claude para quem mapeia processos de negócio: analistas
 
 Nada de "acho que o gerente aprova depois". Se não veio de você, entra como pergunta, não como passo.
 
+## Veja o que ele entrega
+
+Tudo abaixo saiu de **um comando**, sem nenhum retoque à mão:
+
+```bash
+python3 senku.py documentar exemplos/compras/carta.json
+```
+
+O exemplo é um processo fictício, mas completo: **SUP-01 · Compra de materiais indiretos**, com 6 áreas, 14 atividades, 2 decisões, retrabalho, um fornecedor externo e trabalho em paralelo. O relato que deu origem a ele cabe num parágrafo:
+
+> A área que precisa de material abre a requisição no ERP. O gestor analisa e, se faltar centro de custo, devolve para correção. O comprador cota com os fornecedores, escolhe, lança a cotação no ERP e emite o pedido. O fornecedor entrega o material com a nota. O almoxarifado confere (e devolve o que não está conforme) e entrega ao solicitante, enquanto o fiscal lança a nota.
+
+### O fluxograma em raias
+
+<a href="exemplos/compras/saida/sup-01-compra-de-materiais-indiretos-as-is.svg"><img width="100%" alt="Fluxograma em raias do processo SUP-01, gerado pelo Senku" src="exemplos/compras/saida/sup-01-compra-de-materiais-indiretos-as-is.svg" /></a>
+
+Abra o mesmo fluxo no seu modelador: [`.bpmn`](exemplos/compras/saida/sup-01-compra-de-materiais-indiretos-as-is.bpmn) (Bizagi, bpmn.io, Camunda, ARIS, Signavio) · [`.drawio`](exemplos/compras/saida/sup-01-compra-de-materiais-indiretos-as-is.drawio) (diagrams.net e Visio) · [`.mmd`](exemplos/compras/saida/sup-01-compra-de-materiais-indiretos-as-is.mmd) (Mermaid).
+
+### O mapeamento do processo
+
+<table>
+<tr>
+<td width="50%"><a href="assets/vitrine/mapa-ficha.png"><img alt="Ficha do processo" src="assets/vitrine/mapa-ficha.png" /></a><br /><sub><b>Ficha do processo</b>: objetivo, dono, gatilho, volume, prazo e as 12 seções.</sub></td>
+<td width="50%"><a href="assets/vitrine/mapa-analise.png"><img alt="Análise do processo" src="assets/vitrine/mapa-analise.png" /></a><br /><sub><b>Análise</b>: lead time, prazo de 50%, 80% e 90% dos casos (simulação), eficiência do ciclo, passagens de bastão e carga de cada área.</sub></td>
+</tr>
+<tr>
+<td width="50%"><a href="assets/vitrine/mapa-oportunidades.png"><img alt="Oportunidades Lean" src="assets/vitrine/mapa-oportunidades.png" /></a><br /><sub><b>Oportunidades Lean</b>: os desperdícios que o mapa mostra, do maior para o menor.</sub></td>
+<td width="50%"><a href="assets/vitrine/mapa-riscos.png"><img alt="Dores, melhorias e riscos" src="assets/vitrine/mapa-riscos.png" /></a><br /><sub><b>Dores, plano de ação e riscos</b>: cada dor com a melhoria que a resolve e cada risco com o seu controle.</sub></td>
+</tr>
+</table>
+
+O documento inteiro: [Markdown](exemplos/compras/saida/sup-01-compra-de-materiais-indiretos-as-is.md) (abre direto no GitHub) · [Word](exemplos/compras/saida/sup-01-compra-de-materiais-indiretos-as-is.docx) · [HTML](exemplos/compras/saida/sup-01-compra-de-materiais-indiretos-as-is.html) (baixe e abra no navegador para imprimir em PDF) · [planilha das atividades](exemplos/compras/saida/sup-01-compra-de-materiais-indiretos-as-is-atividades.csv).
+
 ## Resultados
 
 Medidos na versão 1.13.0, com os exemplos do repositório (um processo de compras e um de crédito, fictícios).
@@ -172,10 +205,10 @@ senku/
 ├── carta/                 # O motor: carta, entrevista, lacunas, validação, fichas, simulação, análise, layout, aceite, importação
 ├── saidas/                # Os geradores: SVG, PNG, BPMN, draw.io, Mermaid, HTML, Word e Markdown
 ├── referencias/           # Guias: carta, entrevista, notação, estilo, análise e documento
-├── exemplos/              # Processos fictícios completos: compras (SUP-01) e crédito
+├── exemplos/              # Processos fictícios completos, com tudo o que o Senku gera: compras (SUP-01) e crédito
 ├── roteiros/              # Roteiros das animações do README
 ├── ferramentas/           # Empacotador da skill, gerador das animações, fuzz e testes de estresse
-├── assets/                # Animações do README
+├── assets/                # Animações e vitrine do README
 └── testes/                # Suíte de testes e casos de regressão
 ```
 

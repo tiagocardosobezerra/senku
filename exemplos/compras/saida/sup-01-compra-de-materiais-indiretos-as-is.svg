@@ -1,0 +1,214 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3222 952" width="3222" height="952" font-family="Segoe UI, Roboto, Helvetica, Arial, sans-serif" role="img" aria-label="Fluxograma: SUP-01 · Compra de materiais indiretos">
+<defs><marker id="seta" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#44546a"/></marker></defs>
+<rect width="100%" height="100%" fill="#ffffff"/>
+<text x="16" y="36" font-size="17" font-weight="600" fill="#1d2733">SUP-01 · Compra de materiais indiretos</text>
+<text x="16" y="53" font-size="11.5" fill="#5b6878">AS-IS · versão 0.3 · dono: Gerente de Suprimentos</text>
+<rect x="166" y="62.0" width="3040.0" height="120.0" fill="#f6f8fb" stroke="#c5cfdc" stroke-width="1"/>
+<rect x="166" y="182.0" width="3040.0" height="120.0" fill="#ffffff" stroke="#c5cfdc" stroke-width="1"/>
+<rect x="166" y="302.0" width="3040.0" height="120.0" fill="#f6f8fb" stroke="#c5cfdc" stroke-width="1"/>
+<rect x="166" y="422.0" width="3040.0" height="120.0" fill="#eef0f3" stroke="#c5cfdc" stroke-width="1"/>
+<rect x="166" y="542.0" width="3040.0" height="240.0" fill="#f6f8fb" stroke="#c5cfdc" stroke-width="1"/>
+<rect x="166" y="782.0" width="3040.0" height="120.0" fill="#ffffff" stroke="#c5cfdc" stroke-width="1"/>
+<path d="M281.0,122.0 L386.0,122.0" fill="none" stroke="#44546a" stroke-width="1.4" marker-end="url(#seta)"/>
+<path d="M516.0,122.0 L546.0,122.0 L546.0,190.0 L621.0,190.0 L621.0,207.0" fill="none" stroke="#44546a" stroke-width="1.4" marker-end="url(#seta)"/>
+<path d="M706.0,242.0 L806.0,242.0" fill="none" stroke="#44546a" stroke-width="1.4" marker-end="url(#seta)"/>
+<path d="M831.0,267.0 L831.0,310.0 L1001.0,310.0 L1001.0,327.0" fill="none" stroke="#44546a" stroke-width="1.4" marker-end="url(#seta)"/>
+<text x="836.0" y="280.0" font-size="11" fill="#5b6878" text-anchor="start" stroke="#ffffff" stroke-width="3" paint-order="stroke">Sim (85%)</text>
+<path d="M831.0,217.0 L831.0,174.0 L1041.0,174.0 L1041.0,157.0" fill="none" stroke="#44546a" stroke-width="1.4" marker-end="url(#seta)"/>
+<text x="836.0" y="211.0" font-size="11" fill="#5b6878" text-anchor="start" stroke="#ffffff" stroke-width="3" paint-order="stroke">Não (15%)</text>
+<path d="M1063.0,157.0 L1063.0,197.0 L553.0,197.0 L553.0,294.0 L611.0,294.0 L611.0,277.0" fill="none" stroke="#44546a" stroke-width="1.4" stroke-dasharray="5 4" marker-end="url(#seta)"/>
+<path d="M1086.0,362.0 L1116.0,362.0 L1116.0,430.0 L1191.0,430.0 L1191.0,447.0" fill="none" stroke="#44546a" stroke-width="1.4" marker-end="url(#seta)"/>
+<path d="M1276.0,482.0 L1306.0,482.0 L1306.0,414.0 L1421.0,414.0 L1421.0,397.0" fill="none" stroke="#44546a" stroke-width="1.4" marker-end="url(#seta)"/>
+<path d="M1466.0,362.0 L1526.0,362.0" fill="none" stroke="#44546a" stroke-width="1.4" marker-end="url(#seta)"/>
+<path d="M1656.0,362.0 L1716.0,362.0" fill="none" stroke="#44546a" stroke-width="1.4" marker-end="url(#seta)"/>
+<path d="M1846.0,362.0 L1876.0,362.0 L1876.0,437.0 L1951.0,437.0 L1951.0,447.0" fill="none" stroke="#44546a" stroke-width="1.4" marker-end="url(#seta)"/>
+<path d="M2036.0,482.0 L2066.0,482.0 L2066.0,550.0 L2073.0,550.0 L2073.0,602.0 L2136.0,602.0" fill="none" stroke="#44546a" stroke-width="1.4" marker-end="url(#seta)"/>
+<path d="M2186.0,602.0 L2286.0,602.0" fill="none" stroke="#44546a" stroke-width="1.4" marker-end="url(#seta)"/>
+<path d="M2161.0,627.0 L2161.0,670.0 L2256.0,670.0 L2256.0,790.0 L2331.0,790.0 L2331.0,807.0" fill="none" stroke="#44546a" stroke-width="1.4" marker-end="url(#seta)"/>
+<path d="M2416.0,602.0 L2516.0,602.0" fill="none" stroke="#44546a" stroke-width="1.4" marker-end="url(#seta)"/>
+<path d="M2541.0,627.0 L2541.0,654.0 L2636.0,654.0 L2636.0,722.0 L2706.0,722.0" fill="none" stroke="#44546a" stroke-width="1.4" marker-end="url(#seta)"/>
+<text x="2546.0" y="640.0" font-size="11" fill="#5b6878" text-anchor="start" stroke="#ffffff" stroke-width="3" paint-order="stroke">Sim (92%)</text>
+<path d="M2566.0,602.0 L2666.0,602.0" fill="none" stroke="#44546a" stroke-width="1.4" marker-end="url(#seta)"/>
+<text x="2570.0" y="596.0" font-size="11" fill="#5b6878" text-anchor="start" stroke="#ffffff" stroke-width="3" paint-order="stroke">Não (8%)</text>
+<path d="M2796.0,602.0 L2826.0,602.0 L2826.0,534.0 L2941.0,534.0 L2941.0,517.0" fill="none" stroke="#44546a" stroke-width="1.4" marker-end="url(#seta)"/>
+<path d="M2963.0,517.0 L2963.0,557.0 L2263.0,557.0 L2263.0,677.0 L2321.0,677.0 L2321.0,637.0" fill="none" stroke="#44546a" stroke-width="1.4" stroke-dasharray="5 4" marker-end="url(#seta)"/>
+<path d="M2416.0,842.0 L2446.0,842.0 L2446.0,774.0 L2643.0,774.0 L2643.0,722.0 L2706.0,722.0" fill="none" stroke="#44546a" stroke-width="1.4" marker-end="url(#seta)"/>
+<path d="M2756.0,722.0 L2856.0,722.0" fill="none" stroke="#44546a" stroke-width="1.4" marker-end="url(#seta)"/>
+<path d="M2986.0,722.0 L3016.0,722.0 L3016.0,167.0 L3111.0,167.0 L3111.0,142.0" fill="none" stroke="#44546a" stroke-width="1.4" marker-end="url(#seta)"/>
+<g data-id="inicio"><title>Necessidade de material identificada  [id: inicio]
+Responsável: Solicitante</title>
+<circle cx="261.0" cy="122.0" r="19.1" fill="#ffffff" stroke="#2e7d32" stroke-width="1.8"/>
+
+<text font-size="11" fill="#1d2733" font-weight="normal" text-anchor="middle" stroke="#ffffff" stroke-width="3" paint-order="stroke"><tspan x="261.0" y="155.7">Necessidade de</tspan><tspan x="261.0" y="168.8">material</tspan><tspan x="261.0" y="182.1">identificada</tspan></text>
+</g>
+<g data-id="a1"><title>Preencher requisição de compra  [id: a1]
+Responsável: Solicitante
+Sistema: ERP
+Abre a requisição no ERP com item, quantidade, centro de custo e justificativa.
+Tempo: execucao 15min, espera 0</title>
+<rect x="386.0" y="87.0" width="130" height="70" rx="9" fill="#ffffff" stroke="#a86b00" stroke-width="2"/>
+<text font-size="11.5" fill="#1d2733" font-weight="normal" text-anchor="middle" stroke="#ffffff" stroke-width="3" paint-order="stroke"><tspan x="451.0" y="112.2">Preencher</tspan><tspan x="451.0" y="126.0">requisição de</tspan><tspan x="451.0" y="139.8">compra</tspan></text>
+<text x="392.0" y="100.0" font-size="10" font-weight="700" fill="#5b6878">01</text>
+<text x="451.0" y="152.0" font-size="9" text-anchor="middle" fill="#5b6878">ERP</text>
+</g>
+<g data-id="a2"><title>Analisar requisição  [id: a2]
+Responsável: Gestor da área
+Sistema: ERP
+Confere necessidade, centro de custo e saldo de orçamento.
+Tempo: execucao 10min, espera 2d
+R1: O gestor aprova até R$ 10 mil; acima disso, também o diretor da área (Tabela de alçadas 2026).</title>
+<rect x="576.0" y="207.0" width="130" height="70" rx="9" fill="#ffffff" stroke="#a86b00" stroke-width="2"/>
+<text font-size="11.5" fill="#1d2733" font-weight="normal" text-anchor="middle" stroke="#ffffff" stroke-width="3" paint-order="stroke"><tspan x="641.0" y="246.0">Analisar requisição</tspan></text>
+<text x="582.0" y="220.0" font-size="10" font-weight="700" fill="#5b6878">02</text>
+<text x="641.0" y="272.0" font-size="9" text-anchor="middle" fill="#5b6878">ERP</text>
+</g>
+<g data-id="d1"><title>Requisição aprovada?  [id: d1]
+Responsável: Gestor da área</title>
+<path d="M831.0,217.0 L856.0,242.0 L831.0,267.0 L806.0,242.0 z" fill="#fff8e1" stroke="#a86b00" stroke-width="1.5"/>
+<text font-size="11" fill="#1d2733" font-weight="normal" text-anchor="end" stroke="#ffffff" stroke-width="3" paint-order="stroke"><tspan x="821.0" y="276.8">Requisição</tspan><tspan x="821.0" y="290.0">aprovada?</tspan></text>
+</g>
+<g data-id="a1b"><title>Corrigir requisição  [id: a1b]
+Responsável: Solicitante
+Sistema: ERP
+Tempo: execucao 10min, espera 1d</title>
+<rect x="956.0" y="87.0" width="130" height="70" rx="9" fill="#ffffff" stroke="#b3261e" stroke-width="2"/>
+<text font-size="11.5" fill="#1d2733" font-weight="normal" text-anchor="middle" stroke="#ffffff" stroke-width="3" paint-order="stroke"><tspan x="1021.0" y="126.0">Corrigir requisição</tspan></text>
+<text x="962.0" y="100.0" font-size="10" font-weight="700" fill="#5b6878">12</text>
+<text x="1021.0" y="152.0" font-size="9" text-anchor="middle" fill="#5b6878">ERP</text>
+</g>
+<g data-id="a3"><title>Cotar com fornecedores  [id: a3]
+Responsável: Comprador
+Sistema: E-mail, Planilha de cotações
+Pede cotação por e-mail e consolida as propostas na planilha.
+Tempo: execucao 1h, espera 3d
+R2: Compras acima de R$ 5 mil exigem no mínimo 3 cotações.</title>
+<rect x="956.0" y="327.0" width="130" height="70" rx="9" fill="#ffffff" stroke="#a86b00" stroke-width="2"/>
+<text font-size="11.5" fill="#1d2733" font-weight="normal" text-anchor="middle" stroke="#ffffff" stroke-width="3" paint-order="stroke"><tspan x="1021.0" y="359.1">Cotar com</tspan><tspan x="1021.0" y="372.9">fornecedores</tspan></text>
+<text x="962.0" y="340.0" font-size="10" font-weight="700" fill="#5b6878">03</text>
+<text x="1021.0" y="392.0" font-size="9" text-anchor="middle" fill="#5b6878">E-mail, Planilha de cotaç…</text>
+</g>
+<g data-id="f_cot"><title>Enviar proposta  [id: f_cot]
+Responsável: Fornecedor
+Sistema: E-mail
+Tempo: execucao 1h, espera 2d</title>
+<rect x="1146.0" y="447.0" width="130" height="70" rx="9" fill="#ffffff" stroke="#2e7d32" stroke-width="2"/>
+<text font-size="11.5" fill="#1d2733" font-weight="normal" text-anchor="middle" stroke="#ffffff" stroke-width="3" paint-order="stroke"><tspan x="1211.0" y="486.0">Enviar proposta</tspan></text>
+<text x="1152.0" y="460.0" font-size="10" font-weight="700" fill="#5b6878">04</text>
+<text x="1211.0" y="512.0" font-size="9" text-anchor="middle" fill="#5b6878">E-mail</text>
+</g>
+<g data-id="a4"><title>Escolher fornecedor  [id: a4]
+Responsável: Comprador
+Sistema: Planilha de cotações
+Tempo: execucao 30min
+R3: Vence o menor custo total (preço + frete + prazo), entre fornecedores homologados.</title>
+<rect x="1336.0" y="327.0" width="130" height="70" rx="9" fill="#ffffff" stroke="#2e7d32" stroke-width="2"/>
+<text font-size="11.5" fill="#1d2733" font-weight="normal" text-anchor="middle" stroke="#ffffff" stroke-width="3" paint-order="stroke"><tspan x="1401.0" y="366.0">Escolher fornecedor</tspan></text>
+<text x="1342.0" y="340.0" font-size="10" font-weight="700" fill="#5b6878">05</text>
+<text x="1401.0" y="392.0" font-size="9" text-anchor="middle" fill="#5b6878">Planilha de cotações</text>
+</g>
+<g data-id="a5"><title>Lançar cotação no ERP  [id: a5]
+Responsável: Comprador
+Sistema: ERP
+Redigita no ERP os preços que já estão na planilha.
+Tempo: execucao 20min</title>
+<rect x="1526.0" y="327.0" width="130" height="70" rx="9" fill="#ffffff" stroke="#b3261e" stroke-width="2"/>
+<text font-size="11.5" fill="#1d2733" font-weight="normal" text-anchor="middle" stroke="#ffffff" stroke-width="3" paint-order="stroke"><tspan x="1591.0" y="359.1">Lançar cotação no</tspan><tspan x="1591.0" y="372.9">ERP</tspan></text>
+<text x="1532.0" y="340.0" font-size="10" font-weight="700" fill="#5b6878">06</text>
+<text x="1591.0" y="392.0" font-size="9" text-anchor="middle" fill="#5b6878">ERP</text>
+</g>
+<g data-id="a6"><title>Emitir pedido de compra  [id: a6]
+Responsável: Comprador
+Sistema: ERP
+Tempo: execucao 10min</title>
+<rect x="1716.0" y="327.0" width="130" height="70" rx="9" fill="#ffffff" stroke="#2e7d32" stroke-width="2"/>
+<text font-size="11.5" fill="#1d2733" font-weight="normal" text-anchor="middle" stroke="#ffffff" stroke-width="3" paint-order="stroke"><tspan x="1781.0" y="359.1">Emitir pedido de</tspan><tspan x="1781.0" y="372.9">compra</tspan></text>
+<text x="1722.0" y="340.0" font-size="10" font-weight="700" fill="#5b6878">07</text>
+<text x="1781.0" y="392.0" font-size="9" text-anchor="middle" fill="#5b6878">ERP</text>
+</g>
+<g data-id="a7"><title>Entregar material e nota fiscal  [id: a7]
+Responsável: Fornecedor
+Tempo: execucao 1h, espera 5d</title>
+<rect x="1906.0" y="447.0" width="130" height="70" rx="9" fill="#ffffff" stroke="#2e7d32" stroke-width="2"/>
+<text font-size="11.5" fill="#1d2733" font-weight="normal" text-anchor="middle" stroke="#ffffff" stroke-width="3" paint-order="stroke"><tspan x="1971.0" y="483.1">Entregar material e</tspan><tspan x="1971.0" y="496.9">nota fiscal</tspan></text>
+<text x="1912.0" y="460.0" font-size="10" font-weight="700" fill="#5b6878">08</text>
+</g>
+<g data-id="p1"><title>(paralelo)  [id: p1]
+Responsável: Almoxarifado</title>
+<path d="M2161.0,577.0 L2186.0,602.0 L2161.0,627.0 L2136.0,602.0 z" fill="#fff8e1" stroke="#a86b00" stroke-width="1.5"/>
+<path d="M2151.0,602.0 h20 M2161.0,592.0 v20" stroke="#a86b00" stroke-width="3"/>
+</g>
+<g data-id="a8"><title>Conferir material recebido  [id: a8]
+Responsável: Almoxarifado
+Tempo: execucao 20min, espera 4h
+R4: Quantidade e especificação devem bater com o pedido; divergência acima de 2% é devolvida.</title>
+<rect x="2286.0" y="567.0" width="130" height="70" rx="9" fill="#ffffff" stroke="#a86b00" stroke-width="2"/>
+<text font-size="11.5" fill="#1d2733" font-weight="normal" text-anchor="middle" stroke="#ffffff" stroke-width="3" paint-order="stroke"><tspan x="2351.0" y="603.1">Conferir material</tspan><tspan x="2351.0" y="616.9">recebido</tspan></text>
+<text x="2292.0" y="580.0" font-size="10" font-weight="700" fill="#5b6878">10</text>
+</g>
+<g data-id="d2"><title>Material conforme o pedido?  [id: d2]
+Responsável: Almoxarifado</title>
+<path d="M2541.0,577.0 L2566.0,602.0 L2541.0,627.0 L2516.0,602.0 z" fill="#fff8e1" stroke="#a86b00" stroke-width="1.5"/>
+<text font-size="11" fill="#1d2733" font-weight="normal" text-anchor="end" stroke="#ffffff" stroke-width="3" paint-order="stroke"><tspan x="2531.0" y="636.9">Material conforme</tspan><tspan x="2531.0" y="650.1">o pedido?</tspan></text>
+</g>
+<g data-id="a10"><title>Devolver material ao fornecedor  [id: a10]
+Responsável: Almoxarifado
+Sistema: E-mail
+Tempo: execucao 30min, espera 1d</title>
+<rect x="2666.0" y="567.0" width="130" height="70" rx="9" fill="#ffffff" stroke="#b3261e" stroke-width="2"/>
+<text font-size="11.5" fill="#1d2733" font-weight="normal" text-anchor="middle" stroke="#ffffff" stroke-width="3" paint-order="stroke"><tspan x="2731.0" y="599.1">Devolver material</tspan><tspan x="2731.0" y="612.9">ao fornecedor</tspan></text>
+<text x="2672.0" y="580.0" font-size="10" font-weight="700" fill="#5b6878">13</text>
+<text x="2731.0" y="632.0" font-size="9" text-anchor="middle" fill="#5b6878">E-mail</text>
+</g>
+<g data-id="a7r"><title>Reenviar material  [id: a7r]
+Responsável: Fornecedor
+Tempo: execucao 1h, espera 3d</title>
+<rect x="2856.0" y="447.0" width="130" height="70" rx="9" fill="#ffffff" stroke="#b3261e" stroke-width="2"/>
+<text font-size="11.5" fill="#1d2733" font-weight="normal" text-anchor="middle" stroke="#ffffff" stroke-width="3" paint-order="stroke"><tspan x="2921.0" y="490.0">Reenviar material</tspan></text>
+<text x="2862.0" y="460.0" font-size="10" font-weight="700" fill="#5b6878">14</text>
+</g>
+<g data-id="a9"><title>Lançar nota fiscal  [id: a9]
+Responsável: Fiscal / Contas a pagar
+Sistema: ERP
+Tempo: execucao 15min, espera 1d
+R5: A nota só é lançada com pedido de compra aprovado (conferência de 3 vias: pedido, recebimento, nota).</title>
+<rect x="2286.0" y="807.0" width="130" height="70" rx="9" fill="#ffffff" stroke="#a86b00" stroke-width="2"/>
+<text font-size="11.5" fill="#1d2733" font-weight="normal" text-anchor="middle" stroke="#ffffff" stroke-width="3" paint-order="stroke"><tspan x="2351.0" y="846.0">Lançar nota fiscal</tspan></text>
+<text x="2292.0" y="820.0" font-size="10" font-weight="700" fill="#5b6878">09</text>
+<text x="2351.0" y="872.0" font-size="9" text-anchor="middle" fill="#5b6878">ERP</text>
+</g>
+<g data-id="p2"><title>(paralelo)  [id: p2]
+Responsável: Almoxarifado</title>
+<path d="M2731.0,697.0 L2756.0,722.0 L2731.0,747.0 L2706.0,722.0 z" fill="#fff8e1" stroke="#a86b00" stroke-width="1.5"/>
+<path d="M2721.0,722.0 h20 M2731.0,712.0 v20" stroke="#a86b00" stroke-width="3"/>
+</g>
+<g data-id="a11"><title>Entregar material ao solicitante  [id: a11]
+Responsável: Almoxarifado
+Tempo: execucao 15min, espera 4h</title>
+<rect x="2856.0" y="687.0" width="130" height="70" rx="9" fill="#ffffff" stroke="#2e7d32" stroke-width="2"/>
+<text font-size="11.5" fill="#1d2733" font-weight="normal" text-anchor="middle" stroke="#ffffff" stroke-width="3" paint-order="stroke"><tspan x="2921.0" y="723.1">Entregar material</tspan><tspan x="2921.0" y="736.9">ao solicitante</tspan></text>
+<text x="2862.0" y="700.0" font-size="10" font-weight="700" fill="#5b6878">11</text>
+</g>
+<g data-id="fim"><title>Material entregue  [id: fim]
+Responsável: Solicitante</title>
+<circle cx="3111.0" cy="122.0" r="18.0" fill="#ffffff" stroke="#b3261e" stroke-width="4"/>
+
+<text font-size="11" fill="#1d2733" font-weight="normal" text-anchor="middle" stroke="#ffffff" stroke-width="3" paint-order="stroke"><tspan x="3111.0" y="97.8">Material entregue</tspan></text>
+</g>
+<rect x="0" y="61.0" width="16" height="842.0" fill="#ffffff"/>
+<rect x="3206.0" y="61.0" width="16" height="842.0" fill="#ffffff"/>
+<rect x="16" y="62.0" width="150.0" height="120.0" fill="#e3e9f2" stroke="#c5cfdc" stroke-width="1"/>
+<text font-size="12.5" fill="#1d2733" font-weight="600" text-anchor="middle" stroke="#ffffff" stroke-width="3" paint-order="stroke"><tspan x="91.0" y="126.4">Solicitante</tspan></text>
+<rect x="16" y="182.0" width="150.0" height="120.0" fill="#e3e9f2" stroke="#c5cfdc" stroke-width="1"/>
+<text font-size="12.5" fill="#1d2733" font-weight="600" text-anchor="middle" stroke="#ffffff" stroke-width="3" paint-order="stroke"><tspan x="91.0" y="246.4">Gestor da área</tspan></text>
+<rect x="16" y="302.0" width="150.0" height="120.0" fill="#e3e9f2" stroke="#c5cfdc" stroke-width="1"/>
+<text font-size="12.5" fill="#1d2733" font-weight="600" text-anchor="middle" stroke="#ffffff" stroke-width="3" paint-order="stroke"><tspan x="91.0" y="366.4">Comprador</tspan></text>
+<rect x="16" y="422.0" width="150.0" height="120.0" fill="#e3e9f2" stroke="#c5cfdc" stroke-width="1"/>
+<text font-size="12.5" fill="#1d2733" font-weight="600" text-anchor="middle" stroke="#ffffff" stroke-width="3" paint-order="stroke"><tspan x="91.0" y="478.9">Fornecedor</tspan><tspan x="91.0" y="493.9">(externo)</tspan></text>
+<rect x="16" y="542.0" width="150.0" height="240.0" fill="#e3e9f2" stroke="#c5cfdc" stroke-width="1"/>
+<text font-size="12.5" fill="#1d2733" font-weight="600" text-anchor="middle" stroke="#ffffff" stroke-width="3" paint-order="stroke"><tspan x="91.0" y="666.4">Almoxarifado</tspan></text>
+<rect x="16" y="782.0" width="150.0" height="120.0" fill="#e3e9f2" stroke="#c5cfdc" stroke-width="1"/>
+<text font-size="12.5" fill="#1d2733" font-weight="600" text-anchor="middle" stroke="#ffffff" stroke-width="3" paint-order="stroke"><tspan x="91.0" y="838.9">Fiscal / Contas a</tspan><tspan x="91.0" y="853.9">pagar</tspan></text>
+<rect x="166" y="914" width="14" height="12" rx="3" fill="none" stroke="#2e7d32" stroke-width="2"/><text x="186" y="924" font-size="11" fill="#5b6878">VA: agrega valor</text>
+<rect x="376" y="914" width="14" height="12" rx="3" fill="none" stroke="#a86b00" stroke-width="2"/><text x="396" y="924" font-size="11" fill="#5b6878">NAV-N: necessária, não agrega</text>
+<rect x="586" y="914" width="14" height="12" rx="3" fill="none" stroke="#b3261e" stroke-width="2"/><text x="606" y="924" font-size="11" fill="#5b6878">NAV: desperdício</text>
+</svg>

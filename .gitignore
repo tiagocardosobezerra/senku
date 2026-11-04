@@ -3,6 +3,8 @@ __pycache__/
 .ruff_cache/
 # saídas geradas e aceites locais
 saida/
+# ...menos a vitrine: o que o Senku gera para o exemplo de compras
+!exemplos/compras/saida/
 *.aprovacao.json
 # ...menos os aceites fictícios que os testes usam como entrada
 !testes/casos/**/*.aprovacao.json

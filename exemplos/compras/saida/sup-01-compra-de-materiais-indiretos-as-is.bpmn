@@ -1,0 +1,388 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:senku="http://senku/carta" id="Definicoes.Processo_SUP-01" targetNamespace="http://senku/processos" exporter="Senku" exporterVersion="2">
+  <bpmn:collaboration id="Colaboracao.Processo_SUP-01">
+    <bpmn:participant id="Pool.Processo_SUP-01" name="SUP-01 · Compra de materiais indiretos" processRef="Processo_SUP-01"/>
+  </bpmn:collaboration>
+  <bpmn:process id="Processo_SUP-01" name="SUP-01 · Compra de materiais indiretos" isExecutable="false">
+    <bpmn:documentation>Entregar ao solicitante o material de uso interno (escritório, manutenção, TI) no prazo combinado, pelo menor custo total e com a despesa autorizada.</bpmn:documentation>
+    <bpmn:extensionElements><senku:carta>{&quot;formato&quot;:&quot;senku/1&quot;,&quot;processo&quot;:{&quot;codigo&quot;:&quot;SUP-01&quot;,&quot;nome&quot;:&quot;Compra de materiais indiretos&quot;,&quot;cenario&quot;:&quot;as-is&quot;,&quot;versao&quot;:&quot;0.3&quot;,&quot;objetivo&quot;:&quot;Entregar ao solicitante o material de uso interno (escritório, manutenção, TI) no prazo combinado, pelo menor custo total e com a despesa autorizada.&quot;,&quot;dono&quot;:&quot;Gerente de Suprimentos&quot;,&quot;area&quot;:&quot;Suprimentos&quot;,&quot;macroprocesso&quot;:&quot;Gestão de suprimentos&quot;,&quot;nivel&quot;:&quot;processo&quot;,&quot;gatilho&quot;:&quot;Uma área precisa de material que não há no estoque&quot;,&quot;resultado&quot;:&quot;Material entregue ao solicitante e nota fiscal lançada para pagamento&quot;,&quot;frequencia&quot;:&quot;contínuo&quot;,&quot;volume&quot;:&quot;cerca de 120 requisições por mês&quot;,&quot;prazo_informado&quot;:&quot;de 10 a 15 dias úteis (prazo combinado: 10 dias úteis)&quot;,&quot;escopo&quot;:{&quot;inicio&quot;:&quot;Solicitante abre a requisição de compra&quot;,&quot;fim&quot;:&quot;Nota fiscal lançada no contas a pagar e material entregue&quot;,&quot;inclui&quot;:[&quot;materiais indiretos até R$ 50 mil&quot;],&quot;nao_inclui&quot;:[&quot;compra de matéria-prima (processo SUP-02)&quot;,&quot;pagamento ao fornecedor (processo FIN-03)&quot;,&quot;contratação de serviços&quot;]},&quot;normas&quot;:[&quot;Política de Compras PC-001 rev. 4&quot;,&quot;Tabela de alçadas 2026&quot;],&quot;premissas&quot;:[&quot;Tempos estimados na entrevista de 28/10/2026, não medidos no sistema&quot;]},&quot;sipoc&quot;:{&quot;fornecedores&quot;:[&quot;Áreas solicitantes&quot;,&quot;Fornecedores cadastrados&quot;,&quot;Controladoria (orçamento)&quot;],&quot;entradas&quot;:[&quot;Necessidade de material&quot;,&quot;Orçamento da área&quot;,&quot;Cotações&quot;,&quot;Nota fiscal&quot;],&quot;saidas&quot;:[&quot;Pedido de compra&quot;,&quot;Material entregue&quot;,&quot;Nota fiscal lançada&quot;],&quot;clientes&quot;:[&quot;Área solicitante&quot;,&quot;Contas a pagar&quot;]},&quot;papeis&quot;:[{&quot;id&quot;:&quot;solicitante&quot;,&quot;nome&quot;:&quot;Solicitante&quot;,&quot;tipo&quot;:&quot;interno&quot;},{&quot;id&quot;:&quot;gestor&quot;,&quot;nome&quot;:&quot;Gestor da área&quot;,&quot;tipo&quot;:&quot;interno&quot;},{&quot;id&quot;:&quot;compras&quot;,&quot;nome&quot;:&quot;Comprador&quot;,&quot;tipo&quot;:&quot;interno&quot;},{&quot;id&quot;:&quot;fornecedor&quot;,&quot;nome&quot;:&quot;Fornecedor&quot;,&quot;tipo&quot;:&quot;externo&quot;},{&quot;id&quot;:&quot;almox&quot;,&quot;nome&quot;:&quot;Almoxarifado&quot;,&quot;tipo&quot;:&quot;interno&quot;},{&quot;id&quot;:&quot;fiscal&quot;,&quot;nome&quot;:&quot;Fiscal / Contas a pagar&quot;,&quot;tipo&quot;:&quot;interno&quot;}],&quot;sistemas&quot;:[{&quot;id&quot;:&quot;erp&quot;,&quot;nome&quot;:&quot;ERP&quot;},{&quot;id&quot;:&quot;email&quot;,&quot;nome&quot;:&quot;E-mail&quot;},{&quot;id&quot;:&quot;planilha&quot;,&quot;nome&quot;:&quot;Planilha de cotações&quot;}],&quot;regras&quot;:[{&quot;id&quot;:&quot;R1&quot;,&quot;texto&quot;:&quot;O gestor aprova até R$ 10 mil; acima disso, também o diretor da área (Tabela de alçadas 2026).&quot;,&quot;fonte&quot;:&quot;Tabela de alçadas 2026&quot;},{&quot;id&quot;:&quot;R2&quot;,&quot;texto&quot;:&quot;Compras acima de R$ 5 mil exigem no mínimo 3 cotações.&quot;,&quot;fonte&quot;:&quot;PC-001, item 4.2&quot;},{&quot;id&quot;:&quot;R3&quot;,&quot;texto&quot;:&quot;Vence o menor custo total (preço + frete + prazo), entre fornecedores homologados.&quot;,&quot;fonte&quot;:&quot;PC-001, item 4.5&quot;},{&quot;id&quot;:&quot;R4&quot;,&quot;texto&quot;:&quot;Quantidade e especificação devem bater com o pedido; divergência acima de 2% é devolvida.&quot;,&quot;fonte&quot;:&quot;Prática do almoxarifado&quot;},{&quot;id&quot;:&quot;R5&quot;,&quot;texto&quot;:&quot;A nota só é lançada com pedido de compra aprovado (conferência de 3 vias: pedido, recebimento, nota).&quot;,&quot;fonte&quot;:&quot;Controladoria&quot;}],&quot;indicadores&quot;:[{&quot;nome&quot;:&quot;Lead time da requisição&quot;,&quot;objetivo&quot;:&quot;Prazo que o solicitante sente&quot;,&quot;formula&quot;:&quot;data de entrega ao solicitante - data de abertura da requisição (dias úteis)&quot;,&quot;meta&quot;:&quot;≤ 10 dias úteis&quot;,&quot;polaridade&quot;:&quot;menor é melhor&quot;,&quot;periodicidade&quot;:&quot;mensal&quot;,&quot;fonte&quot;:&quot;ERP&quot;,&quot;dono&quot;:&quot;Gerente de Suprimentos&quot;,&quot;atual&quot;:&quot;14 dias úteis (estimado na entrevista)&quot;},{&quot;nome&quot;:&quot;Requisições devolvidas para correção&quot;,&quot;formula&quot;:&quot;requisições reprovadas / requisições analisadas&quot;,&quot;meta&quot;:&quot;≤ 5%&quot;,&quot;polaridade&quot;:&quot;menor é melhor&quot;,&quot;periodicidade&quot;:&quot;mensal&quot;,&quot;fonte&quot;:&quot;ERP&quot;,&quot;dono&quot;:&quot;Gerente de Suprimentos&quot;,&quot;atual&quot;:&quot;≈ 25% (estimado)&quot;},{&quot;nome&quot;:&quot;Saving de compras&quot;,&quot;formula&quot;:&quot;(maior cotação - cotação escolhida) / maior cotação&quot;,&quot;meta&quot;:&quot;≥ 8%&quot;,&quot;polaridade&quot;:&quot;maior é melhor&quot;,&quot;periodicidade&quot;:&quot;trimestral&quot;,&quot;fonte&quot;:&quot;Planilha de cotações&quot;,&quot;dono&quot;:&quot;Gerente de Suprimentos&quot;,&quot;atual&quot;:&quot;não medido hoje&quot;}],&quot;dores&quot;:[{&quot;id&quot;:&quot;D1&quot;,&quot;descricao&quot;:&quot;Requisição volta para correção porque falta centro de custo ou especificação.&quot;,&quot;elementos&quot;:[&quot;a1&quot;,&quot;d1&quot;],&quot;impacto&quot;:&quot;alto&quot;,&quot;frequencia&quot;:&quot;15% das requisições&quot;},{&quot;id&quot;:&quot;D2&quot;,&quot;descricao&quot;:&quot;A cotação é redigitada da planilha para o ERP, com erro de preço às vezes.&quot;,&quot;elementos&quot;:[&quot;a5&quot;],&quot;impacto&quot;:&quot;médio&quot;},{&quot;id&quot;:&quot;D3&quot;,&quot;descricao&quot;:&quot;Aprovação do gestor fica parada dias na caixa de entrada.&quot;,&quot;elementos&quot;:[&quot;a2&quot;],&quot;impacto&quot;:&quot;alto&quot;}],&quot;riscos&quot;:[{&quot;id&quot;:&quot;K1&quot;,&quot;descricao&quot;:&quot;Pagamento de nota sem material recebido&quot;,&quot;elementos&quot;:[&quot;a9&quot;],&quot;controle&quot;:&quot;Conferência de 3 vias no lançamento (R5)&quot;,&quot;tipo_controle&quot;:&quot;preventivo&quot;,&quot;probabilidade&quot;:&quot;baixa&quot;,&quot;impacto&quot;:&quot;alto&quot;},{&quot;id&quot;:&quot;K2&quot;,&quot;descricao&quot;:&quot;Compra direcionada a um fornecedor&quot;,&quot;elementos&quot;:[&quot;a3&quot;,&quot;a4&quot;],&quot;controle&quot;:&quot;Mínimo de 3 cotações acima de R$ 5 mil (R2)&quot;,&quot;tipo_controle&quot;:&quot;preventivo&quot;,&quot;probabilidade&quot;:&quot;média&quot;,&quot;impacto&quot;:&quot;alto&quot;}],&quot;melhorias&quot;:[{&quot;id&quot;:&quot;M1&quot;,&quot;descricao&quot;:&quot;Campos obrigatórios e catálogo de itens na requisição do ERP&quot;,&quot;resolve&quot;:[&quot;D1&quot;],&quot;elementos&quot;:[&quot;a1&quot;],&quot;impacto&quot;:&quot;alto&quot;,&quot;esforco&quot;:&quot;baixo&quot;,&quot;responsavel&quot;:&quot;Analista de TI do ERP&quot;,&quot;prazo&quot;:&quot;30/11/2026&quot;,&quot;status&quot;:&quot;aprovada&quot;},{&quot;id&quot;:&quot;M2&quot;,&quot;descricao&quot;:&quot;Cotação direto no ERP (portal do fornecedor), sem planilha&quot;,&quot;resolve&quot;:[&quot;D2&quot;],&quot;elementos&quot;:[&quot;a3&quot;,&quot;a5&quot;],&quot;impacto&quot;:&quot;médio&quot;,&quot;esforco&quot;:&quot;médio&quot;,&quot;responsavel&quot;:&quot;Gerente de Suprimentos&quot;,&quot;prazo&quot;:&quot;31/03/2027&quot;,&quot;status&quot;:&quot;proposta&quot;},{&quot;id&quot;:&quot;M3&quot;,&quot;descricao&quot;:&quot;Aprovação pelo celular com lembrete automático em 24h e SLA de 1 dia útil&quot;,&quot;resolve&quot;:[&quot;D3&quot;],&quot;elementos&quot;:[&quot;a2&quot;],&quot;impacto&quot;:&quot;alto&quot;,&quot;esforco&quot;:&quot;baixo&quot;,&quot;responsavel&quot;:&quot;Gerente de Suprimentos&quot;,&quot;prazo&quot;:&quot;15/12/2026&quot;,&quot;status&quot;:&quot;em andamento&quot;}],&quot;glossario&quot;:[{&quot;termo&quot;:&quot;Material indireto&quot;,&quot;definicao&quot;:&quot;Material que não entra no produto vendido (escritório, manutenção, TI).&quot;},{&quot;termo&quot;:&quot;Conferência de 3 vias&quot;,&quot;definicao&quot;:&quot;Pedido, recebimento e nota fiscal precisam bater antes do lançamento.&quot;}],&quot;pendencias&quot;:[{&quot;pergunta&quot;:&quot;Confirmar com a Controladoria se a alçada de R$ 10 mil vale para TI.&quot;,&quot;para&quot;:&quot;Controladoria&quot;}]}</senku:carta></bpmn:extensionElements>
+    <bpmn:laneSet id="Raias.Processo_SUP-01">
+      <bpmn:lane id="Raia_solicitante" name="Solicitante">
+        <bpmn:flowNodeRef>inicio</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>a1</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>a1b</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>fim</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="Raia_gestor" name="Gestor da área">
+        <bpmn:flowNodeRef>a2</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>d1</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="Raia_compras" name="Comprador">
+        <bpmn:flowNodeRef>a3</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>a4</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>a5</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>a6</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="Raia_fornecedor" name="Fornecedor">
+        <bpmn:flowNodeRef>f_cot</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>a7</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>a7r</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="Raia_almox" name="Almoxarifado">
+        <bpmn:flowNodeRef>p1</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>a8</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>d2</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>a10</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>p2</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>a11</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="Raia_fiscal" name="Fiscal / Contas a pagar">
+        <bpmn:flowNodeRef>a9</bpmn:flowNodeRef>
+      </bpmn:lane>
+    </bpmn:laneSet>
+    <bpmn:startEvent id="inicio" name="Necessidade de material identificada">
+      <bpmn:extensionElements><senku:dados>{&quot;id&quot;:&quot;inicio&quot;,&quot;tipo&quot;:&quot;inicio&quot;,&quot;nome&quot;:&quot;Necessidade de material identificada&quot;,&quot;papel&quot;:&quot;solicitante&quot;}</senku:dados></bpmn:extensionElements>
+      <bpmn:outgoing>Fluxo_f1</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:userTask id="a1" name="Preencher requisição de compra">
+      <bpmn:documentation>Abre a requisição no ERP com item, quantidade, centro de custo e justificativa.&#10;Sistema: ERP&#10;Tempo: execução 15min, espera 0&#10;Valor: NAV-N</bpmn:documentation>
+      <bpmn:extensionElements><senku:dados>{&quot;id&quot;:&quot;a1&quot;,&quot;nome&quot;:&quot;Preencher requisição de compra&quot;,&quot;papel&quot;:&quot;solicitante&quot;,&quot;sistema&quot;:&quot;erp&quot;,&quot;descricao&quot;:&quot;Abre a requisição no ERP com item, quantidade, centro de custo e justificativa.&quot;,&quot;saidas&quot;:[&quot;Requisição de compra&quot;],&quot;tempo&quot;:{&quot;execucao&quot;:&quot;15min&quot;,&quot;espera&quot;:&quot;0&quot;},&quot;valor&quot;:&quot;NAV-N&quot;,&quot;_doc&quot;:&quot;Abre a requisição no ERP com item, quantidade, centro de custo e justificativa. Sistema: ERP Tempo: execução 15min, espera 0 Valor: NAV-N&quot;}</senku:dados></bpmn:extensionElements>
+      <bpmn:incoming>Fluxo_f1</bpmn:incoming>
+      <bpmn:outgoing>Fluxo_f2</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:userTask id="a2" name="Analisar requisição">
+      <bpmn:documentation>Confere necessidade, centro de custo e saldo de orçamento.&#10;Sistema: ERP&#10;Tempo: execução 10min, espera 2d&#10;Regra R1: O gestor aprova até R$ 10 mil; acima disso, também o diretor da área (Tabela de alçadas 2026).&#10;Valor: NAV-N</bpmn:documentation>
+      <bpmn:extensionElements><senku:dados>{&quot;id&quot;:&quot;a2&quot;,&quot;nome&quot;:&quot;Analisar requisição&quot;,&quot;papel&quot;:&quot;gestor&quot;,&quot;sistema&quot;:&quot;erp&quot;,&quot;descricao&quot;:&quot;Confere necessidade, centro de custo e saldo de orçamento.&quot;,&quot;regras&quot;:[&quot;R1&quot;],&quot;tempo&quot;:{&quot;execucao&quot;:&quot;10min&quot;,&quot;espera&quot;:&quot;2d&quot;},&quot;valor&quot;:&quot;NAV-N&quot;,&quot;raci&quot;:{&quot;A&quot;:&quot;gestor&quot;,&quot;I&quot;:[&quot;solicitante&quot;]},&quot;_doc&quot;:&quot;Confere necessidade, centro de custo e saldo de orçamento. Sistema: ERP Tempo: execução 10min, espera 2d Regra R1: O gestor aprova até R$ 10 mil; acima disso, também o diretor da área (Tabela de alçadas 2026). Valor: NAV-N&quot;}</senku:dados></bpmn:extensionElements>
+      <bpmn:incoming>Fluxo_f2</bpmn:incoming>
+      <bpmn:incoming>Fluxo_f6</bpmn:incoming>
+      <bpmn:outgoing>Fluxo_f3</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:exclusiveGateway id="d1" name="Requisição aprovada?">
+      <bpmn:extensionElements><senku:dados>{&quot;id&quot;:&quot;d1&quot;,&quot;tipo&quot;:&quot;decisao&quot;,&quot;nome&quot;:&quot;Requisição aprovada?&quot;,&quot;papel&quot;:&quot;gestor&quot;}</senku:dados></bpmn:extensionElements>
+      <bpmn:incoming>Fluxo_f3</bpmn:incoming>
+      <bpmn:outgoing>Fluxo_f4</bpmn:outgoing>
+      <bpmn:outgoing>Fluxo_f5</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:userTask id="a1b" name="Corrigir requisição">
+      <bpmn:documentation>Sistema: ERP&#10;Tempo: execução 10min, espera 1d&#10;Valor: NAV</bpmn:documentation>
+      <bpmn:extensionElements><senku:dados>{&quot;id&quot;:&quot;a1b&quot;,&quot;nome&quot;:&quot;Corrigir requisição&quot;,&quot;papel&quot;:&quot;solicitante&quot;,&quot;sistema&quot;:&quot;erp&quot;,&quot;tempo&quot;:{&quot;execucao&quot;:&quot;10min&quot;,&quot;espera&quot;:&quot;1d&quot;},&quot;valor&quot;:&quot;NAV&quot;,&quot;_doc&quot;:&quot;Sistema: ERP Tempo: execução 10min, espera 1d Valor: NAV&quot;}</senku:dados></bpmn:extensionElements>
+      <bpmn:incoming>Fluxo_f5</bpmn:incoming>
+      <bpmn:outgoing>Fluxo_f6</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:userTask id="a3" name="Cotar com fornecedores">
+      <bpmn:documentation>Pede cotação por e-mail e consolida as propostas na planilha.&#10;Sistema: E-mail, Planilha de cotações&#10;Tempo: execução 1h, espera 3d&#10;Regra R2: Compras acima de R$ 5 mil exigem no mínimo 3 cotações.&#10;Valor: NAV-N</bpmn:documentation>
+      <bpmn:extensionElements><senku:dados>{&quot;id&quot;:&quot;a3&quot;,&quot;nome&quot;:&quot;Cotar com fornecedores&quot;,&quot;papel&quot;:&quot;compras&quot;,&quot;sistema&quot;:[&quot;email&quot;,&quot;planilha&quot;],&quot;descricao&quot;:&quot;Pede cotação por e-mail e consolida as propostas na planilha.&quot;,&quot;regras&quot;:[&quot;R2&quot;],&quot;saidas&quot;:[&quot;Mapa de cotação&quot;],&quot;tempo&quot;:{&quot;execucao&quot;:&quot;1h&quot;,&quot;espera&quot;:&quot;3d&quot;},&quot;valor&quot;:&quot;NAV-N&quot;,&quot;_doc&quot;:&quot;Pede cotação por e-mail e consolida as propostas na planilha. Sistema: E-mail, Planilha de cotações Tempo: execução 1h, espera 3d Regra R2: Compras acima de R$ 5 mil exigem no mínimo 3 cotações. Valor: NAV-N&quot;}</senku:dados></bpmn:extensionElements>
+      <bpmn:incoming>Fluxo_f4</bpmn:incoming>
+      <bpmn:outgoing>Fluxo_f7</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:userTask id="f_cot" name="Enviar proposta">
+      <bpmn:documentation>Sistema: E-mail&#10;Tempo: execução 1h, espera 2d&#10;Valor: VA</bpmn:documentation>
+      <bpmn:extensionElements><senku:dados>{&quot;id&quot;:&quot;f_cot&quot;,&quot;nome&quot;:&quot;Enviar proposta&quot;,&quot;papel&quot;:&quot;fornecedor&quot;,&quot;sistema&quot;:&quot;email&quot;,&quot;tempo&quot;:{&quot;execucao&quot;:&quot;1h&quot;,&quot;espera&quot;:&quot;2d&quot;},&quot;valor&quot;:&quot;VA&quot;,&quot;_doc&quot;:&quot;Sistema: E-mail Tempo: execução 1h, espera 2d Valor: VA&quot;}</senku:dados></bpmn:extensionElements>
+      <bpmn:incoming>Fluxo_f7</bpmn:incoming>
+      <bpmn:outgoing>Fluxo_f8</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:userTask id="a4" name="Escolher fornecedor">
+      <bpmn:documentation>Sistema: Planilha de cotações&#10;Tempo: execução 30min&#10;Regra R3: Vence o menor custo total (preço + frete + prazo), entre fornecedores homologados.&#10;Valor: VA</bpmn:documentation>
+      <bpmn:extensionElements><senku:dados>{&quot;id&quot;:&quot;a4&quot;,&quot;nome&quot;:&quot;Escolher fornecedor&quot;,&quot;papel&quot;:&quot;compras&quot;,&quot;sistema&quot;:&quot;planilha&quot;,&quot;regras&quot;:[&quot;R3&quot;],&quot;tempo&quot;:{&quot;execucao&quot;:&quot;30min&quot;},&quot;valor&quot;:&quot;VA&quot;,&quot;_doc&quot;:&quot;Sistema: Planilha de cotações Tempo: execução 30min Regra R3: Vence o menor custo total (preço + frete + prazo), entre fornecedores homologados. Valor: VA&quot;}</senku:dados></bpmn:extensionElements>
+      <bpmn:incoming>Fluxo_f8</bpmn:incoming>
+      <bpmn:outgoing>Fluxo_f9</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:userTask id="a5" name="Lançar cotação no ERP">
+      <bpmn:documentation>Redigita no ERP os preços que já estão na planilha.&#10;Sistema: ERP&#10;Tempo: execução 20min&#10;Valor: NAV</bpmn:documentation>
+      <bpmn:extensionElements><senku:dados>{&quot;id&quot;:&quot;a5&quot;,&quot;nome&quot;:&quot;Lançar cotação no ERP&quot;,&quot;papel&quot;:&quot;compras&quot;,&quot;sistema&quot;:&quot;erp&quot;,&quot;descricao&quot;:&quot;Redigita no ERP os preços que já estão na planilha.&quot;,&quot;tempo&quot;:{&quot;execucao&quot;:&quot;20min&quot;},&quot;valor&quot;:&quot;NAV&quot;,&quot;_doc&quot;:&quot;Redigita no ERP os preços que já estão na planilha. Sistema: ERP Tempo: execução 20min Valor: NAV&quot;}</senku:dados></bpmn:extensionElements>
+      <bpmn:incoming>Fluxo_f9</bpmn:incoming>
+      <bpmn:outgoing>Fluxo_f10</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:userTask id="a6" name="Emitir pedido de compra">
+      <bpmn:documentation>Sistema: ERP&#10;Tempo: execução 10min&#10;Valor: VA</bpmn:documentation>
+      <bpmn:extensionElements><senku:dados>{&quot;id&quot;:&quot;a6&quot;,&quot;nome&quot;:&quot;Emitir pedido de compra&quot;,&quot;papel&quot;:&quot;compras&quot;,&quot;sistema&quot;:&quot;erp&quot;,&quot;saidas&quot;:[&quot;Pedido de compra&quot;],&quot;tempo&quot;:{&quot;execucao&quot;:&quot;10min&quot;},&quot;valor&quot;:&quot;VA&quot;,&quot;_doc&quot;:&quot;Sistema: ERP Tempo: execução 10min Valor: VA&quot;}</senku:dados></bpmn:extensionElements>
+      <bpmn:incoming>Fluxo_f10</bpmn:incoming>
+      <bpmn:outgoing>Fluxo_f11</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:task id="a7" name="Entregar material e nota fiscal">
+      <bpmn:documentation>Tempo: execução 1h, espera 5d&#10;Valor: VA</bpmn:documentation>
+      <bpmn:extensionElements><senku:dados>{&quot;id&quot;:&quot;a7&quot;,&quot;nome&quot;:&quot;Entregar material e nota fiscal&quot;,&quot;papel&quot;:&quot;fornecedor&quot;,&quot;sistema&quot;:[],&quot;tempo&quot;:{&quot;execucao&quot;:&quot;1h&quot;,&quot;espera&quot;:&quot;5d&quot;},&quot;valor&quot;:&quot;VA&quot;,&quot;_doc&quot;:&quot;Tempo: execução 1h, espera 5d Valor: VA&quot;}</senku:dados></bpmn:extensionElements>
+      <bpmn:incoming>Fluxo_f11</bpmn:incoming>
+      <bpmn:outgoing>Fluxo_f12</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:parallelGateway id="p1">
+      <bpmn:extensionElements><senku:dados>{&quot;id&quot;:&quot;p1&quot;,&quot;tipo&quot;:&quot;paralelo&quot;,&quot;papel&quot;:&quot;almox&quot;}</senku:dados></bpmn:extensionElements>
+      <bpmn:incoming>Fluxo_f12</bpmn:incoming>
+      <bpmn:outgoing>Fluxo_f13</bpmn:outgoing>
+      <bpmn:outgoing>Fluxo_f14</bpmn:outgoing>
+    </bpmn:parallelGateway>
+    <bpmn:task id="a8" name="Conferir material recebido">
+      <bpmn:documentation>Tempo: execução 20min, espera 4h&#10;Regra R4: Quantidade e especificação devem bater com o pedido; divergência acima de 2% é devolvida.&#10;Valor: NAV-N</bpmn:documentation>
+      <bpmn:extensionElements><senku:dados>{&quot;id&quot;:&quot;a8&quot;,&quot;nome&quot;:&quot;Conferir material recebido&quot;,&quot;papel&quot;:&quot;almox&quot;,&quot;sistema&quot;:[],&quot;regras&quot;:[&quot;R4&quot;],&quot;tempo&quot;:{&quot;execucao&quot;:&quot;20min&quot;,&quot;espera&quot;:&quot;4h&quot;},&quot;valor&quot;:&quot;NAV-N&quot;,&quot;_doc&quot;:&quot;Tempo: execução 20min, espera 4h Regra R4: Quantidade e especificação devem bater com o pedido; divergência acima de 2% é devolvida. Valor: NAV-N&quot;}</senku:dados></bpmn:extensionElements>
+      <bpmn:incoming>Fluxo_f13</bpmn:incoming>
+      <bpmn:incoming>Fluxo_f19</bpmn:incoming>
+      <bpmn:outgoing>Fluxo_f15</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:exclusiveGateway id="d2" name="Material conforme o pedido?">
+      <bpmn:extensionElements><senku:dados>{&quot;id&quot;:&quot;d2&quot;,&quot;tipo&quot;:&quot;decisao&quot;,&quot;nome&quot;:&quot;Material conforme o pedido?&quot;,&quot;papel&quot;:&quot;almox&quot;}</senku:dados></bpmn:extensionElements>
+      <bpmn:incoming>Fluxo_f15</bpmn:incoming>
+      <bpmn:outgoing>Fluxo_f16</bpmn:outgoing>
+      <bpmn:outgoing>Fluxo_f17</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:userTask id="a10" name="Devolver material ao fornecedor">
+      <bpmn:documentation>Sistema: E-mail&#10;Tempo: execução 30min, espera 1d&#10;Valor: NAV</bpmn:documentation>
+      <bpmn:extensionElements><senku:dados>{&quot;id&quot;:&quot;a10&quot;,&quot;nome&quot;:&quot;Devolver material ao fornecedor&quot;,&quot;papel&quot;:&quot;almox&quot;,&quot;sistema&quot;:&quot;email&quot;,&quot;tempo&quot;:{&quot;execucao&quot;:&quot;30min&quot;,&quot;espera&quot;:&quot;1d&quot;},&quot;valor&quot;:&quot;NAV&quot;,&quot;_doc&quot;:&quot;Sistema: E-mail Tempo: execução 30min, espera 1d Valor: NAV&quot;}</senku:dados></bpmn:extensionElements>
+      <bpmn:incoming>Fluxo_f17</bpmn:incoming>
+      <bpmn:outgoing>Fluxo_f18</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:task id="a7r" name="Reenviar material">
+      <bpmn:documentation>Tempo: execução 1h, espera 3d&#10;Valor: NAV</bpmn:documentation>
+      <bpmn:extensionElements><senku:dados>{&quot;id&quot;:&quot;a7r&quot;,&quot;nome&quot;:&quot;Reenviar material&quot;,&quot;papel&quot;:&quot;fornecedor&quot;,&quot;sistema&quot;:[],&quot;tempo&quot;:{&quot;execucao&quot;:&quot;1h&quot;,&quot;espera&quot;:&quot;3d&quot;},&quot;valor&quot;:&quot;NAV&quot;,&quot;_doc&quot;:&quot;Tempo: execução 1h, espera 3d Valor: NAV&quot;}</senku:dados></bpmn:extensionElements>
+      <bpmn:incoming>Fluxo_f18</bpmn:incoming>
+      <bpmn:outgoing>Fluxo_f19</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:userTask id="a9" name="Lançar nota fiscal">
+      <bpmn:documentation>Sistema: ERP&#10;Tempo: execução 15min, espera 1d&#10;Regra R5: A nota só é lançada com pedido de compra aprovado (conferência de 3 vias: pedido, recebimento, nota).&#10;Valor: NAV-N</bpmn:documentation>
+      <bpmn:extensionElements><senku:dados>{&quot;id&quot;:&quot;a9&quot;,&quot;nome&quot;:&quot;Lançar nota fiscal&quot;,&quot;papel&quot;:&quot;fiscal&quot;,&quot;sistema&quot;:&quot;erp&quot;,&quot;regras&quot;:[&quot;R5&quot;],&quot;tempo&quot;:{&quot;execucao&quot;:&quot;15min&quot;,&quot;espera&quot;:&quot;1d&quot;},&quot;valor&quot;:&quot;NAV-N&quot;,&quot;_doc&quot;:&quot;Sistema: ERP Tempo: execução 15min, espera 1d Regra R5: A nota só é lançada com pedido de compra aprovado (conferência de 3 vias: pedido, recebimento, nota). Valor: NAV-N&quot;}</senku:dados></bpmn:extensionElements>
+      <bpmn:incoming>Fluxo_f14</bpmn:incoming>
+      <bpmn:outgoing>Fluxo_f20</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:parallelGateway id="p2">
+      <bpmn:extensionElements><senku:dados>{&quot;id&quot;:&quot;p2&quot;,&quot;tipo&quot;:&quot;paralelo&quot;,&quot;papel&quot;:&quot;almox&quot;}</senku:dados></bpmn:extensionElements>
+      <bpmn:incoming>Fluxo_f16</bpmn:incoming>
+      <bpmn:incoming>Fluxo_f20</bpmn:incoming>
+      <bpmn:outgoing>Fluxo_f21</bpmn:outgoing>
+    </bpmn:parallelGateway>
+    <bpmn:task id="a11" name="Entregar material ao solicitante">
+      <bpmn:documentation>Tempo: execução 15min, espera 4h&#10;Valor: VA</bpmn:documentation>
+      <bpmn:extensionElements><senku:dados>{&quot;id&quot;:&quot;a11&quot;,&quot;nome&quot;:&quot;Entregar material ao solicitante&quot;,&quot;papel&quot;:&quot;almox&quot;,&quot;sistema&quot;:[],&quot;tempo&quot;:{&quot;execucao&quot;:&quot;15min&quot;,&quot;espera&quot;:&quot;4h&quot;},&quot;valor&quot;:&quot;VA&quot;,&quot;_doc&quot;:&quot;Tempo: execução 15min, espera 4h Valor: VA&quot;}</senku:dados></bpmn:extensionElements>
+      <bpmn:incoming>Fluxo_f21</bpmn:incoming>
+      <bpmn:outgoing>Fluxo_f22</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:endEvent id="fim" name="Material entregue">
+      <bpmn:extensionElements><senku:dados>{&quot;id&quot;:&quot;fim&quot;,&quot;tipo&quot;:&quot;fim&quot;,&quot;nome&quot;:&quot;Material entregue&quot;,&quot;papel&quot;:&quot;solicitante&quot;}</senku:dados></bpmn:extensionElements>
+      <bpmn:incoming>Fluxo_f22</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Fluxo_f1" sourceRef="inicio" targetRef="a1"/>
+    <bpmn:sequenceFlow id="Fluxo_f2" sourceRef="a1" targetRef="a2"/>
+    <bpmn:sequenceFlow id="Fluxo_f3" sourceRef="a2" targetRef="d1"/>
+    <bpmn:sequenceFlow id="Fluxo_f4" sourceRef="d1" targetRef="a3" name="Sim">
+      <bpmn:documentation>85% dos casos</bpmn:documentation>
+      <bpmn:extensionElements><senku:dados>{&quot;percentual&quot;:85.0}</senku:dados></bpmn:extensionElements>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Fluxo_f5" sourceRef="d1" targetRef="a1b" name="Não">
+      <bpmn:documentation>15% dos casos</bpmn:documentation>
+      <bpmn:extensionElements><senku:dados>{&quot;percentual&quot;:15.0}</senku:dados></bpmn:extensionElements>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Fluxo_f6" sourceRef="a1b" targetRef="a2"/>
+    <bpmn:sequenceFlow id="Fluxo_f7" sourceRef="a3" targetRef="f_cot"/>
+    <bpmn:sequenceFlow id="Fluxo_f8" sourceRef="f_cot" targetRef="a4"/>
+    <bpmn:sequenceFlow id="Fluxo_f9" sourceRef="a4" targetRef="a5"/>
+    <bpmn:sequenceFlow id="Fluxo_f10" sourceRef="a5" targetRef="a6"/>
+    <bpmn:sequenceFlow id="Fluxo_f11" sourceRef="a6" targetRef="a7"/>
+    <bpmn:sequenceFlow id="Fluxo_f12" sourceRef="a7" targetRef="p1"/>
+    <bpmn:sequenceFlow id="Fluxo_f13" sourceRef="p1" targetRef="a8"/>
+    <bpmn:sequenceFlow id="Fluxo_f14" sourceRef="p1" targetRef="a9"/>
+    <bpmn:sequenceFlow id="Fluxo_f15" sourceRef="a8" targetRef="d2"/>
+    <bpmn:sequenceFlow id="Fluxo_f16" sourceRef="d2" targetRef="p2" name="Sim">
+      <bpmn:documentation>92% dos casos</bpmn:documentation>
+      <bpmn:extensionElements><senku:dados>{&quot;percentual&quot;:92.0}</senku:dados></bpmn:extensionElements>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Fluxo_f17" sourceRef="d2" targetRef="a10" name="Não">
+      <bpmn:documentation>8% dos casos</bpmn:documentation>
+      <bpmn:extensionElements><senku:dados>{&quot;percentual&quot;:8.0}</senku:dados></bpmn:extensionElements>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Fluxo_f18" sourceRef="a10" targetRef="a7r"/>
+    <bpmn:sequenceFlow id="Fluxo_f19" sourceRef="a7r" targetRef="a8"/>
+    <bpmn:sequenceFlow id="Fluxo_f20" sourceRef="a9" targetRef="p2"/>
+    <bpmn:sequenceFlow id="Fluxo_f21" sourceRef="p2" targetRef="a11"/>
+    <bpmn:sequenceFlow id="Fluxo_f22" sourceRef="a11" targetRef="fim"/>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="Diagrama.Processo_SUP-01">
+    <bpmndi:BPMNPlane id="Plano.Processo_SUP-01" bpmnElement="Colaboracao.Processo_SUP-01">
+      <bpmndi:BPMNShape id="Pool.Processo_SUP-01.di" bpmnElement="Pool.Processo_SUP-01" isHorizontal="true"><dc:Bounds x="20" y="20" width="3100" height="840"/></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Raia_solicitante.di" bpmnElement="Raia_solicitante" isHorizontal="true"><dc:Bounds x="50" y="20" width="3070" height="120"/></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Raia_gestor.di" bpmnElement="Raia_gestor" isHorizontal="true"><dc:Bounds x="50" y="140" width="3070" height="120"/></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Raia_compras.di" bpmnElement="Raia_compras" isHorizontal="true"><dc:Bounds x="50" y="260" width="3070" height="120"/></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Raia_fornecedor.di" bpmnElement="Raia_fornecedor" isHorizontal="true"><dc:Bounds x="50" y="380" width="3070" height="120"/></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Raia_almox.di" bpmnElement="Raia_almox" isHorizontal="true"><dc:Bounds x="50" y="500" width="3070" height="240"/></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Raia_fiscal.di" bpmnElement="Raia_fiscal" isHorizontal="true"><dc:Bounds x="50" y="740" width="3070" height="120"/></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="inicio.di" bpmnElement="inicio"><dc:Bounds x="155" y="60" width="40" height="40"/>
+<bpmndi:BPMNLabel><dc:Bounds x="125" y="104" width="100" height="27"/></bpmndi:BPMNLabel>
+</bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="a1.di" bpmnElement="a1"><dc:Bounds x="300" y="45" width="130" height="70"/>
+</bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="a2.di" bpmnElement="a2"><dc:Bounds x="490" y="165" width="130" height="70"/>
+</bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="d1.di" bpmnElement="d1" isMarkerVisible="true"><dc:Bounds x="720" y="175" width="50" height="50"/>
+<bpmndi:BPMNLabel><dc:Bounds x="650" y="141" width="100" height="27"/></bpmndi:BPMNLabel>
+</bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="a1b.di" bpmnElement="a1b"><dc:Bounds x="870" y="45" width="130" height="70"/>
+</bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="a3.di" bpmnElement="a3"><dc:Bounds x="870" y="285" width="130" height="70"/>
+</bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="f_cot.di" bpmnElement="f_cot"><dc:Bounds x="1060" y="405" width="130" height="70"/>
+</bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="a4.di" bpmnElement="a4"><dc:Bounds x="1250" y="285" width="130" height="70"/>
+</bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="a5.di" bpmnElement="a5"><dc:Bounds x="1440" y="285" width="130" height="70"/>
+</bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="a6.di" bpmnElement="a6"><dc:Bounds x="1630" y="285" width="130" height="70"/>
+</bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="a7.di" bpmnElement="a7"><dc:Bounds x="1820" y="405" width="130" height="70"/>
+</bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="p1.di" bpmnElement="p1"><dc:Bounds x="2050" y="535" width="50" height="50"/>
+</bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="a8.di" bpmnElement="a8"><dc:Bounds x="2200" y="525" width="130" height="70"/>
+</bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="d2.di" bpmnElement="d2" isMarkerVisible="true"><dc:Bounds x="2430" y="535" width="50" height="50"/>
+<bpmndi:BPMNLabel><dc:Bounds x="2360" y="501" width="100" height="27"/></bpmndi:BPMNLabel>
+</bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="a10.di" bpmnElement="a10"><dc:Bounds x="2580" y="525" width="130" height="70"/>
+</bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="a7r.di" bpmnElement="a7r"><dc:Bounds x="2770" y="405" width="130" height="70"/>
+</bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="a9.di" bpmnElement="a9"><dc:Bounds x="2200" y="765" width="130" height="70"/>
+</bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="p2.di" bpmnElement="p2"><dc:Bounds x="2620" y="655" width="50" height="50"/>
+</bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="a11.di" bpmnElement="a11"><dc:Bounds x="2770" y="645" width="130" height="70"/>
+</bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="fim.di" bpmnElement="fim"><dc:Bounds x="3005" y="60" width="40" height="40"/>
+<bpmndi:BPMNLabel><dc:Bounds x="2975" y="104" width="100" height="27"/></bpmndi:BPMNLabel>
+</bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Fluxo_f1.di" bpmnElement="Fluxo_f1">
+        <di:waypoint x="195" y="80"/>
+        <di:waypoint x="300" y="80"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Fluxo_f2.di" bpmnElement="Fluxo_f2">
+        <di:waypoint x="430" y="80"/>
+        <di:waypoint x="460" y="80"/>
+        <di:waypoint x="460" y="148"/>
+        <di:waypoint x="535" y="148"/>
+        <di:waypoint x="535" y="165"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Fluxo_f3.di" bpmnElement="Fluxo_f3">
+        <di:waypoint x="620" y="200"/>
+        <di:waypoint x="720" y="200"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Fluxo_f4.di" bpmnElement="Fluxo_f4">
+        <di:waypoint x="745" y="225"/>
+        <di:waypoint x="745" y="268"/>
+        <di:waypoint x="915" y="268"/>
+        <di:waypoint x="915" y="285"/>
+        <bpmndi:BPMNLabel><dc:Bounds x="750" y="226" width="30" height="14"/></bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Fluxo_f5.di" bpmnElement="Fluxo_f5">
+        <di:waypoint x="745" y="175"/>
+        <di:waypoint x="745" y="132"/>
+        <di:waypoint x="955" y="132"/>
+        <di:waypoint x="955" y="115"/>
+        <bpmndi:BPMNLabel><dc:Bounds x="750" y="157" width="30" height="14"/></bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Fluxo_f6.di" bpmnElement="Fluxo_f6">
+        <di:waypoint x="977" y="115"/>
+        <di:waypoint x="977" y="155"/>
+        <di:waypoint x="467" y="155"/>
+        <di:waypoint x="467" y="252"/>
+        <di:waypoint x="525" y="252"/>
+        <di:waypoint x="525" y="235"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Fluxo_f7.di" bpmnElement="Fluxo_f7">
+        <di:waypoint x="1000" y="320"/>
+        <di:waypoint x="1030" y="320"/>
+        <di:waypoint x="1030" y="388"/>
+        <di:waypoint x="1105" y="388"/>
+        <di:waypoint x="1105" y="405"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Fluxo_f8.di" bpmnElement="Fluxo_f8">
+        <di:waypoint x="1190" y="440"/>
+        <di:waypoint x="1220" y="440"/>
+        <di:waypoint x="1220" y="372"/>
+        <di:waypoint x="1335" y="372"/>
+        <di:waypoint x="1335" y="355"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Fluxo_f9.di" bpmnElement="Fluxo_f9">
+        <di:waypoint x="1380" y="320"/>
+        <di:waypoint x="1440" y="320"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Fluxo_f10.di" bpmnElement="Fluxo_f10">
+        <di:waypoint x="1570" y="320"/>
+        <di:waypoint x="1630" y="320"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Fluxo_f11.di" bpmnElement="Fluxo_f11">
+        <di:waypoint x="1760" y="320"/>
+        <di:waypoint x="1790" y="320"/>
+        <di:waypoint x="1790" y="395"/>
+        <di:waypoint x="1865" y="395"/>
+        <di:waypoint x="1865" y="405"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Fluxo_f12.di" bpmnElement="Fluxo_f12">
+        <di:waypoint x="1950" y="440"/>
+        <di:waypoint x="1980" y="440"/>
+        <di:waypoint x="1980" y="508"/>
+        <di:waypoint x="1987" y="508"/>
+        <di:waypoint x="1987" y="560"/>
+        <di:waypoint x="2050" y="560"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Fluxo_f13.di" bpmnElement="Fluxo_f13">
+        <di:waypoint x="2100" y="560"/>
+        <di:waypoint x="2200" y="560"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Fluxo_f14.di" bpmnElement="Fluxo_f14">
+        <di:waypoint x="2075" y="585"/>
+        <di:waypoint x="2075" y="628"/>
+        <di:waypoint x="2170" y="628"/>
+        <di:waypoint x="2170" y="748"/>
+        <di:waypoint x="2245" y="748"/>
+        <di:waypoint x="2245" y="765"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Fluxo_f15.di" bpmnElement="Fluxo_f15">
+        <di:waypoint x="2330" y="560"/>
+        <di:waypoint x="2430" y="560"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Fluxo_f16.di" bpmnElement="Fluxo_f16">
+        <di:waypoint x="2455" y="585"/>
+        <di:waypoint x="2455" y="612"/>
+        <di:waypoint x="2550" y="612"/>
+        <di:waypoint x="2550" y="680"/>
+        <di:waypoint x="2620" y="680"/>
+        <bpmndi:BPMNLabel><dc:Bounds x="2460" y="586" width="30" height="14"/></bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Fluxo_f17.di" bpmnElement="Fluxo_f17">
+        <di:waypoint x="2480" y="560"/>
+        <di:waypoint x="2580" y="560"/>
+        <bpmndi:BPMNLabel><dc:Bounds x="2484" y="542" width="30" height="14"/></bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Fluxo_f18.di" bpmnElement="Fluxo_f18">
+        <di:waypoint x="2710" y="560"/>
+        <di:waypoint x="2740" y="560"/>
+        <di:waypoint x="2740" y="492"/>
+        <di:waypoint x="2855" y="492"/>
+        <di:waypoint x="2855" y="475"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Fluxo_f19.di" bpmnElement="Fluxo_f19">
+        <di:waypoint x="2877" y="475"/>
+        <di:waypoint x="2877" y="515"/>
+        <di:waypoint x="2177" y="515"/>
+        <di:waypoint x="2177" y="635"/>
+        <di:waypoint x="2235" y="635"/>
+        <di:waypoint x="2235" y="595"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Fluxo_f20.di" bpmnElement="Fluxo_f20">
+        <di:waypoint x="2330" y="800"/>
+        <di:waypoint x="2360" y="800"/>
+        <di:waypoint x="2360" y="732"/>
+        <di:waypoint x="2557" y="732"/>
+        <di:waypoint x="2557" y="680"/>
+        <di:waypoint x="2620" y="680"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Fluxo_f21.di" bpmnElement="Fluxo_f21">
+        <di:waypoint x="2670" y="680"/>
+        <di:waypoint x="2770" y="680"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Fluxo_f22.di" bpmnElement="Fluxo_f22">
+        <di:waypoint x="2900" y="680"/>
+        <di:waypoint x="2930" y="680"/>
+        <di:waypoint x="2930" y="125"/>
+        <di:waypoint x="3025" y="125"/>
+        <di:waypoint x="3025" y="100"/>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

@@ -1,0 +1,66 @@
+flowchart LR
+  subgraph R0["Solicitante"]
+    direction LR
+    inicio(["Necessidade de material identificada"]):::inicio
+    a1["01 Preencher requisição de compra"]:::atividade
+    a1b["12 Corrigir requisição"]:::atividade
+    fim(["Material entregue"]):::fim
+  end
+  subgraph R1["Gestor da área"]
+    direction LR
+    a2["02 Analisar requisição"]:::atividade
+    d1{"Requisição aprovada?"}:::porta
+  end
+  subgraph R2["Comprador"]
+    direction LR
+    a3["03 Cotar com fornecedores"]:::atividade
+    a4["05 Escolher fornecedor"]:::atividade
+    a5["06 Lançar cotação no ERP"]:::atividade
+    a6["07 Emitir pedido de compra"]:::atividade
+  end
+  subgraph R3["Fornecedor"]
+    direction LR
+    f_cot["04 Enviar proposta"]:::atividade
+    a7["08 Entregar material e nota fiscal"]:::atividade
+    a7r["14 Reenviar material"]:::atividade
+  end
+  subgraph R4["Almoxarifado"]
+    direction LR
+    p1{"+"}:::porta
+    a8["10 Conferir material recebido"]:::atividade
+    d2{"Material conforme o pedido?"}:::porta
+    a10["13 Devolver material ao fornecedor"]:::atividade
+    p2{"+"}:::porta
+    a11["11 Entregar material ao solicitante"]:::atividade
+  end
+  subgraph R5["Fiscal / Contas a pagar"]
+    direction LR
+    a9["09 Lançar nota fiscal"]:::atividade
+  end
+  inicio --> a1
+  a1 --> a2
+  a2 --> d1
+  d1 -->|"Sim (85%)"| a3
+  d1 -->|"Não (15%)"| a1b
+  a1b -.-> a2
+  a3 --> f_cot
+  f_cot --> a4
+  a4 --> a5
+  a5 --> a6
+  a6 --> a7
+  a7 --> p1
+  p1 --> a8
+  p1 --> a9
+  a8 --> d2
+  d2 -->|"Sim (92%)"| p2
+  d2 -->|"Não (8%)"| a10
+  a10 --> a7r
+  a7r -.-> a8
+  a9 --> p2
+  p2 --> a11
+  a11 --> fim
+  classDef inicio fill:#ffffff,stroke:#2e7d32,stroke-width:2px
+  classDef fim fill:#ffffff,stroke:#b3261e,stroke-width:4px
+  classDef evento fill:#ffffff,stroke:#a86b00,stroke-width:2px
+  classDef porta fill:#fff8e1,stroke:#a86b00
+  classDef atividade fill:#ffffff,stroke:#2f4a6d
