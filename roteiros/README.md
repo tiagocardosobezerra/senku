@@ -47,7 +47,7 @@ contra o outro.
    análise (14,1 d úteis, 17,2 d no p80, 4% de eficiência, 7 passagens) são os
    que o `senku.py analisar` imprime para ele.
 7. **Número só com a fonte da medição.** A cena de resultados termina com
-   "Medido na versão 1.13.0, com os exemplos do repositório."
+   "Medido na versão 1.14.0, com os exemplos do repositório."
 8. **Fim que emenda no começo.** Tudo some no último meio segundo e a cena 1
    começa do zero, sem salto.
 9. **Autossuficiente.** Fontes embutidas em base64 (Inter, Poppins e

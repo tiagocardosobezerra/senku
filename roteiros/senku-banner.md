@@ -238,13 +238,13 @@ mão. E o que o README promete foi medido.
 | centro | `carta.json` | igual |
 | rótulos | FLUXOGRAMA · MAPEAMENTO | FLOWCHART · PROCESS MAP |
 | arquivos | `fluxograma.svg` · `fluxograma.png` · `processo.bpmn` · `processo.drawio` · `processo.mmd` / `mapeamento.html` · `mapeamento.docx` · `mapeamento.md` · `atividades.csv` | iguais |
-| painel 1 | **206** · testes automatizados | **206** · automated tests |
+| painel 1 | **213** · testes automatizados | **213** · automated tests |
 | painel 2 | **73** · verificações de boa modelagem | **73** · modeling checks |
 | painel 3 | **4.000** · casos simulados a cada análise | **4,000** · cases simulated per analysis |
 | painel 4 | **0** · dependências para instalar | **0** · dependencies to install |
-| nota (40,6–43,0 s) | Medido na versão 1.13.0, com os exemplos do repositório. | Measured on version 1.13.0, with the repository examples. |
+| nota (40,6–43,0 s) | Medido na versão 1.14.0, com os exemplos do repositório. | Measured on version 1.14.0, with the repository examples. |
 
-**Fonte dos números.** 206: `python -m unittest discover -s testes`. 73:
+**Fonte dos números.** 213: `python -m unittest discover -s testes`. 73:
 códigos distintos de achado em `carta/validacao.py`. 4.000: `CASOS` em
 `carta/simulacao.py`. 0: o Senku só usa a biblioteca padrão. Confira antes de
 gerar o SVG de novo.

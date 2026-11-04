@@ -459,7 +459,7 @@ def banner(lang, fontes):
              880, 210 + i * 52,
              L.kf([(36.1 + i * 0.2, 'opacity:0;transform:translateX(-120px)'), (36.45 + i * 0.2, 'opacity:1;transform:none'),
                    (38.2, 'opacity:1;filter:none'), (38.6, 'opacity:0;filter:blur(8px)')])))
-    paineis = [(206, T('testes automatizados', 'automated tests'), None),
+    paineis = [(213, T('testes automatizados', 'automated tests'), None),
                (73, T('verificações de boa modelagem', 'modeling checks'), None),
                (None, T('casos simulados a cada análise', 'cases simulated per analysis'), T('4.000', '4,000')),
                (0, T('dependências para instalar', 'dependencies to install'), None)]
@@ -478,8 +478,8 @@ def banner(lang, fontes):
              '<div class="%s" style="height:3px;background:%s;margin-top:18px;transform-origin:0 0;border-radius:2px">'
              '</div>' % (num, escape(r), barra, LIMA), 92 + i * 280, 200, 'card ' + caixa, 'padding:28px 26px',
              w=256, h=200))
-    a(el(T('Medido na versão 1.13.0, com os exemplos do repositório.',
-           'Measured on version 1.13.0, with the repository examples.'), 0, 470,
+    a(el(T('Medido na versão 1.14.0, com os exemplos do repositório.',
+           'Measured on version 1.14.0, with the repository examples.'), 0, 470,
          'cap ' + L.kf([(40.6, 'opacity:0'), (41.0, 'opacity:1'), (42.4, 'opacity:1'), (43.0, 'opacity:0')]),
          'font-size:18px;color:#94A3B8'))
 
