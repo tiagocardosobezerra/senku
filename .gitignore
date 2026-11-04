@@ -4,6 +4,8 @@ __pycache__/
 # saídas geradas e aceites locais
 saida/
 *.aprovacao.json
+# ...menos os aceites fictícios que os testes usam como entrada
+!testes/casos/**/*.aprovacao.json
 # mapeamentos reais ficam fora do repositório
 local/
 # zip da skill: gerado pelo ferramentas/empacotar.py, vai para a release, não para o git

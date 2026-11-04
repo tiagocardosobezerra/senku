@@ -1,0 +1,1155 @@
+{
+  "por": "Rafael (Gerente)",
+  "quando": "03/11/2026 13:53",
+  "hash": "2871910ba5755c62765529db5554d5bd99a1d622d9426cdb4b358eb3186b8a12",
+  "versao": "0.4",
+  "cenario": "as-is",
+  "observacao": "",
+  "retrato": {
+    "elementos": {
+      "inicio": {
+        "nome": "Pedido de crédito recebido",
+        "tipo": "inicio",
+        "papel": "Vendedor",
+        "sistema": [],
+        "tempo": {},
+        "regras": [],
+        "raci": {},
+        "valor": "",
+        "automatizada": false,
+        "encerra": false,
+        "gatilho": "mensagem",
+        "descricao": "",
+        "como": [],
+        "entradas": [],
+        "saidas": [],
+        "excecoes": [],
+        "segue": [
+          [
+            "",
+            "a1",
+            null
+          ]
+        ]
+      },
+      "a1": {
+        "nome": "Registrar proposta de crédito",
+        "tipo": "atividade",
+        "papel": "Vendedor",
+        "sistema": [
+          "CRM"
+        ],
+        "tempo": {
+          "execucao": "20min"
+        },
+        "regras": [],
+        "raci": {},
+        "valor": "NAV-N",
+        "automatizada": false,
+        "encerra": false,
+        "gatilho": "nenhum",
+        "descricao": "Abre a proposta no CRM com CNPJ, limite pedido, prazo de pagamento e previsão de compra mensal.",
+        "como": [],
+        "entradas": [],
+        "saidas": [
+          "Proposta de crédito"
+        ],
+        "excecoes": [],
+        "segue": [
+          [
+            "",
+            "a2",
+            null
+          ]
+        ]
+      },
+      "a2": {
+        "nome": "Solicitar documentos ao cliente",
+        "tipo": "atividade",
+        "papel": "Vendedor",
+        "sistema": [
+          "E-mail"
+        ],
+        "tempo": {
+          "execucao": "10min"
+        },
+        "regras": [],
+        "raci": {},
+        "valor": "NAV-N",
+        "automatizada": false,
+        "encerra": false,
+        "gatilho": "nenhum",
+        "descricao": "Pede contrato social, dois últimos balanços e cartão CNPJ.",
+        "como": [],
+        "entradas": [],
+        "saidas": [],
+        "excecoes": [],
+        "segue": [
+          [
+            "",
+            "c1",
+            null
+          ]
+        ]
+      },
+      "c1": {
+        "nome": "Enviar documentos",
+        "tipo": "atividade",
+        "papel": "Cliente PJ",
+        "sistema": [
+          "E-mail"
+        ],
+        "tempo": {
+          "execucao": "30min",
+          "espera": "3d"
+        },
+        "regras": [],
+        "raci": {},
+        "valor": "NAV-N",
+        "automatizada": false,
+        "encerra": false,
+        "gatilho": "nenhum",
+        "descricao": "",
+        "como": [],
+        "entradas": [],
+        "saidas": [],
+        "excecoes": [],
+        "segue": [
+          [
+            "",
+            "a3",
+            null
+          ]
+        ]
+      },
+      "a3": {
+        "nome": "Conferir documentação",
+        "tipo": "atividade",
+        "papel": "Cadastro",
+        "sistema": [
+          "CRM"
+        ],
+        "tempo": {
+          "execucao": "25min",
+          "espera": "1d"
+        },
+        "regras": [
+          "R1"
+        ],
+        "raci": {},
+        "valor": "NAV-N",
+        "automatizada": false,
+        "encerra": false,
+        "gatilho": "nenhum",
+        "descricao": "",
+        "como": [
+          "Conferir CNPJ ativo na Receita",
+          "Conferir se o signatário consta no contrato social",
+          "Conferir balanço assinado por contador"
+        ],
+        "entradas": [],
+        "saidas": [],
+        "excecoes": [],
+        "segue": [
+          [
+            "",
+            "d1",
+            null
+          ]
+        ]
+      },
+      "d1": {
+        "nome": "Documentação completa?",
+        "tipo": "decisao",
+        "papel": "Cadastro",
+        "sistema": [],
+        "tempo": {},
+        "regras": [],
+        "raci": {},
+        "valor": "",
+        "automatizada": false,
+        "encerra": false,
+        "gatilho": "nenhum",
+        "descricao": "",
+        "como": [],
+        "entradas": [],
+        "saidas": [],
+        "excecoes": [],
+        "segue": [
+          [
+            "Não",
+            "a2b",
+            35.0
+          ],
+          [
+            "Sim",
+            "s1",
+            65.0
+          ]
+        ]
+      },
+      "a2b": {
+        "nome": "Cobrar documentos pendentes",
+        "tipo": "atividade",
+        "papel": "Vendedor",
+        "sistema": [
+          "E-mail"
+        ],
+        "tempo": {
+          "execucao": "10min",
+          "espera": "1d"
+        },
+        "regras": [],
+        "raci": {},
+        "valor": "NAV",
+        "automatizada": false,
+        "encerra": false,
+        "gatilho": "nenhum",
+        "descricao": "",
+        "como": [],
+        "entradas": [],
+        "saidas": [],
+        "excecoes": [],
+        "segue": [
+          [
+            "",
+            "c1",
+            null
+          ]
+        ]
+      },
+      "s1": {
+        "nome": "Verificar KYC e PLD",
+        "tipo": "subprocesso",
+        "papel": "Cadastro",
+        "sistema": [
+          "ERP"
+        ],
+        "tempo": {
+          "execucao": "40min",
+          "espera": "4h"
+        },
+        "regras": [
+          "R2"
+        ],
+        "raci": {},
+        "valor": "NAV-N",
+        "automatizada": false,
+        "encerra": false,
+        "gatilho": "nenhum",
+        "descricao": "Checagem de sócios em listas restritivas e PEP (mapeado em CRE-02.1).",
+        "como": [],
+        "entradas": [],
+        "saidas": [],
+        "excecoes": [],
+        "segue": [
+          [
+            "",
+            "d0",
+            null
+          ]
+        ]
+      },
+      "d0": {
+        "nome": "Sócios sem restrição de PLD?",
+        "tipo": "decisao",
+        "papel": "Cadastro",
+        "sistema": [],
+        "tempo": {},
+        "regras": [],
+        "raci": {},
+        "valor": "",
+        "automatizada": false,
+        "encerra": false,
+        "gatilho": "nenhum",
+        "descricao": "",
+        "como": [],
+        "entradas": [],
+        "saidas": [],
+        "excecoes": [],
+        "segue": [
+          [
+            "Não",
+            "a12",
+            2.0
+          ],
+          [
+            "Sim",
+            "x1",
+            98.0
+          ]
+        ]
+      },
+      "x1": {
+        "nome": "Consultar score no bureau",
+        "tipo": "atividade",
+        "papel": "ERP (automático)",
+        "sistema": [
+          "Bureau",
+          "ERP"
+        ],
+        "tempo": {
+          "execucao": "1min"
+        },
+        "regras": [],
+        "raci": {},
+        "valor": "NAV-N",
+        "automatizada": true,
+        "encerra": false,
+        "gatilho": "nenhum",
+        "descricao": "Integração busca score, protestos, ações e cheques sem fundo.",
+        "como": [],
+        "entradas": [],
+        "saidas": [],
+        "excecoes": [],
+        "segue": [
+          [
+            "",
+            "x2",
+            null
+          ]
+        ]
+      },
+      "x2": {
+        "nome": "Calcular limite sugerido",
+        "tipo": "atividade",
+        "papel": "ERP (automático)",
+        "sistema": [
+          "ERP"
+        ],
+        "tempo": {
+          "execucao": "1min"
+        },
+        "regras": [
+          "R3"
+        ],
+        "raci": {},
+        "valor": "VA",
+        "automatizada": true,
+        "encerra": false,
+        "gatilho": "nenhum",
+        "descricao": "",
+        "como": [],
+        "entradas": [],
+        "saidas": [],
+        "excecoes": [],
+        "segue": [
+          [
+            "",
+            "d2",
+            null
+          ]
+        ]
+      },
+      "d2": {
+        "nome": "Qual faixa de risco?",
+        "tipo": "decisao",
+        "papel": "ERP (automático)",
+        "sistema": [],
+        "tempo": {},
+        "regras": [
+          "R3"
+        ],
+        "raci": {},
+        "valor": "",
+        "automatizada": false,
+        "encerra": false,
+        "gatilho": "nenhum",
+        "descricao": "",
+        "como": [],
+        "entradas": [],
+        "saidas": [],
+        "excecoes": [],
+        "segue": [
+          [
+            "Alto",
+            "a12",
+            10.0
+          ],
+          [
+            "Baixo e até R$ 50 mil",
+            "j0",
+            40.0
+          ],
+          [
+            "Médio, ou acima de R$ 50 mil",
+            "a4",
+            50.0
+          ]
+        ]
+      },
+      "a4": {
+        "nome": "Analisar crédito",
+        "tipo": "atividade",
+        "papel": "Analista de Crédito",
+        "sistema": [
+          "Bureau",
+          "Planilha de análise"
+        ],
+        "tempo": {
+          "execucao": "2h",
+          "espera": "3d"
+        },
+        "regras": [
+          "R4"
+        ],
+        "raci": {
+          "A": [
+            "Analista de Crédito"
+          ],
+          "C": [
+            "Vendedor"
+          ]
+        },
+        "valor": "VA",
+        "automatizada": false,
+        "encerra": false,
+        "gatilho": "nenhum",
+        "descricao": "Analisa balanço (liquidez, endividamento), histórico de pagamento e referências comerciais; registra parecer.",
+        "como": [],
+        "entradas": [],
+        "saidas": [
+          "Parecer de crédito"
+        ],
+        "excecoes": [],
+        "segue": [
+          [
+            "",
+            "d3",
+            null
+          ],
+          [
+            "Prazo de análise (5 dias úteis) estourado",
+            "a4~1",
+            8.0
+          ]
+        ]
+      },
+      "a4~1": {
+        "nome": "Prazo de análise (5 dias úteis) estourado",
+        "tipo": "borda",
+        "papel": "Analista de Crédito",
+        "sistema": [],
+        "tempo": {
+          "espera": "5d"
+        },
+        "regras": [],
+        "raci": {},
+        "valor": "",
+        "automatizada": false,
+        "encerra": false,
+        "gatilho": "tempo",
+        "descricao": "",
+        "como": [],
+        "entradas": [],
+        "saidas": [],
+        "excecoes": [],
+        "segue": [
+          [
+            "",
+            "a5",
+            null
+          ]
+        ]
+      },
+      "d3": {
+        "nome": "Limite dentro da alçada do analista?",
+        "tipo": "decisao",
+        "papel": "Analista de Crédito",
+        "sistema": [],
+        "tempo": {},
+        "regras": [
+          "R5"
+        ],
+        "raci": {},
+        "valor": "",
+        "automatizada": false,
+        "encerra": false,
+        "gatilho": "nenhum",
+        "descricao": "",
+        "como": [],
+        "entradas": [],
+        "saidas": [],
+        "excecoes": [],
+        "segue": [
+          [
+            "Não",
+            "a5",
+            30.0
+          ],
+          [
+            "Sim",
+            "d4",
+            70.0
+          ]
+        ]
+      },
+      "d4": {
+        "nome": "Parecer favorável?",
+        "tipo": "decisao",
+        "papel": "Analista de Crédito",
+        "sistema": [],
+        "tempo": {},
+        "regras": [],
+        "raci": {},
+        "valor": "",
+        "automatizada": false,
+        "encerra": false,
+        "gatilho": "nenhum",
+        "descricao": "",
+        "como": [],
+        "entradas": [],
+        "saidas": [],
+        "excecoes": [],
+        "segue": [
+          [
+            "Não",
+            "a12",
+            20.0
+          ],
+          [
+            "Sim",
+            "j0",
+            80.0
+          ]
+        ]
+      },
+      "a5": {
+        "nome": "Preparar dossiê para o comitê",
+        "tipo": "atividade",
+        "papel": "Analista de Crédito",
+        "sistema": [
+          "Planilha de análise"
+        ],
+        "tempo": {
+          "execucao": "1h"
+        },
+        "regras": [],
+        "raci": {},
+        "valor": "NAV-N",
+        "automatizada": false,
+        "encerra": false,
+        "gatilho": "nenhum",
+        "descricao": "",
+        "como": [],
+        "entradas": [],
+        "saidas": [],
+        "excecoes": [],
+        "segue": [
+          [
+            "",
+            "e1",
+            null
+          ]
+        ]
+      },
+      "e1": {
+        "nome": "Aguardar reunião quinzenal do comitê",
+        "tipo": "evento",
+        "papel": "Comitê de Crédito",
+        "sistema": [],
+        "tempo": {
+          "espera": "5d"
+        },
+        "regras": [],
+        "raci": {},
+        "valor": "",
+        "automatizada": false,
+        "encerra": false,
+        "gatilho": "tempo",
+        "descricao": "",
+        "como": [],
+        "entradas": [],
+        "saidas": [],
+        "excecoes": [],
+        "segue": [
+          [
+            "",
+            "a6",
+            null
+          ]
+        ]
+      },
+      "a6": {
+        "nome": "Deliberar sobre o limite",
+        "tipo": "atividade",
+        "papel": "Comitê de Crédito",
+        "sistema": [],
+        "tempo": {
+          "execucao": "15min"
+        },
+        "regras": [
+          "R5"
+        ],
+        "raci": {
+          "A": [
+            "Comitê de Crédito"
+          ],
+          "C": [
+            "Analista de Crédito"
+          ],
+          "I": [
+            "Vendedor"
+          ]
+        },
+        "valor": "NAV-N",
+        "automatizada": false,
+        "encerra": false,
+        "gatilho": "nenhum",
+        "descricao": "",
+        "como": [],
+        "entradas": [],
+        "saidas": [
+          "Ata do comitê"
+        ],
+        "excecoes": [],
+        "segue": [
+          [
+            "",
+            "d5",
+            null
+          ]
+        ]
+      },
+      "d5": {
+        "nome": "Comitê aprovou?",
+        "tipo": "decisao",
+        "papel": "Comitê de Crédito",
+        "sistema": [],
+        "tempo": {},
+        "regras": [],
+        "raci": {},
+        "valor": "",
+        "automatizada": false,
+        "encerra": false,
+        "gatilho": "nenhum",
+        "descricao": "",
+        "como": [],
+        "entradas": [],
+        "saidas": [],
+        "excecoes": [],
+        "segue": [
+          [
+            "Aprovado",
+            "j0",
+            60.0
+          ],
+          [
+            "Pede nova análise",
+            "a4",
+            15.0
+          ],
+          [
+            "Recusado",
+            "a12",
+            25.0
+          ]
+        ]
+      },
+      "j0": {
+        "nome": "",
+        "tipo": "decisao",
+        "papel": "Analista de Crédito",
+        "sistema": [],
+        "tempo": {},
+        "regras": [],
+        "raci": {},
+        "valor": "",
+        "automatizada": false,
+        "encerra": false,
+        "gatilho": "nenhum",
+        "descricao": "",
+        "como": [],
+        "entradas": [],
+        "saidas": [],
+        "excecoes": [],
+        "segue": [
+          [
+            "",
+            "p1",
+            null
+          ]
+        ]
+      },
+      "p1": {
+        "nome": "",
+        "tipo": "paralelo",
+        "papel": "Analista de Crédito",
+        "sistema": [],
+        "tempo": {},
+        "regras": [],
+        "raci": {},
+        "valor": "",
+        "automatizada": false,
+        "encerra": false,
+        "gatilho": "nenhum",
+        "descricao": "",
+        "como": [],
+        "entradas": [],
+        "saidas": [],
+        "excecoes": [],
+        "segue": [
+          [
+            "",
+            "a7",
+            null
+          ],
+          [
+            "",
+            "a8",
+            null
+          ]
+        ]
+      },
+      "a7": {
+        "nome": "Emitir contrato de crédito",
+        "tipo": "atividade",
+        "papel": "Jurídico",
+        "sistema": [
+          "DocuSign"
+        ],
+        "tempo": {
+          "execucao": "40min",
+          "espera": "2d"
+        },
+        "regras": [
+          "R6"
+        ],
+        "raci": {},
+        "valor": "NAV-N",
+        "automatizada": false,
+        "encerra": false,
+        "gatilho": "nenhum",
+        "descricao": "",
+        "como": [],
+        "entradas": [],
+        "saidas": [],
+        "excecoes": [],
+        "segue": [
+          [
+            "",
+            "c2",
+            null
+          ]
+        ]
+      },
+      "c2": {
+        "nome": "Assinar contrato",
+        "tipo": "atividade",
+        "papel": "Cliente PJ",
+        "sistema": [
+          "DocuSign"
+        ],
+        "tempo": {
+          "execucao": "10min",
+          "espera": "3d"
+        },
+        "regras": [],
+        "raci": {},
+        "valor": "NAV-N",
+        "automatizada": false,
+        "encerra": false,
+        "gatilho": "nenhum",
+        "descricao": "",
+        "como": [],
+        "entradas": [],
+        "saidas": [],
+        "excecoes": [],
+        "segue": [
+          [
+            "",
+            "d6",
+            null
+          ]
+        ]
+      },
+      "d6": {
+        "nome": "Assinou em até 10 dias?",
+        "tipo": "decisao",
+        "papel": "Cliente PJ",
+        "sistema": [],
+        "tempo": {},
+        "regras": [
+          "R6"
+        ],
+        "raci": {},
+        "valor": "",
+        "automatizada": false,
+        "encerra": false,
+        "gatilho": "nenhum",
+        "descricao": "",
+        "como": [],
+        "entradas": [],
+        "saidas": [],
+        "excecoes": [],
+        "segue": [
+          [
+            "Não",
+            "a13",
+            10.0
+          ],
+          [
+            "Sim",
+            "p2",
+            90.0
+          ]
+        ]
+      },
+      "a8": {
+        "nome": "Cadastrar limite no ERP",
+        "tipo": "atividade",
+        "papel": "Cadastro",
+        "sistema": [
+          "ERP"
+        ],
+        "tempo": {
+          "execucao": "15min",
+          "espera": "1d"
+        },
+        "regras": [],
+        "raci": {},
+        "valor": "VA",
+        "automatizada": false,
+        "encerra": false,
+        "gatilho": "nenhum",
+        "descricao": "Cadastra limite, prazo e garantias; limite fica bloqueado até o contrato assinado.",
+        "como": [],
+        "entradas": [],
+        "saidas": [],
+        "excecoes": [],
+        "segue": [
+          [
+            "",
+            "p2",
+            null
+          ]
+        ]
+      },
+      "p2": {
+        "nome": "",
+        "tipo": "paralelo",
+        "papel": "Cadastro",
+        "sistema": [],
+        "tempo": {},
+        "regras": [],
+        "raci": {},
+        "valor": "",
+        "automatizada": false,
+        "encerra": false,
+        "gatilho": "nenhum",
+        "descricao": "",
+        "como": [],
+        "entradas": [],
+        "saidas": [],
+        "excecoes": [],
+        "segue": [
+          [
+            "",
+            "a9",
+            null
+          ]
+        ]
+      },
+      "a9": {
+        "nome": "Desbloquear limite",
+        "tipo": "atividade",
+        "papel": "Cadastro",
+        "sistema": [
+          "ERP"
+        ],
+        "tempo": {
+          "execucao": "5min",
+          "espera": "4h"
+        },
+        "regras": [],
+        "raci": {},
+        "valor": "VA",
+        "automatizada": false,
+        "encerra": false,
+        "gatilho": "nenhum",
+        "descricao": "",
+        "como": [],
+        "entradas": [],
+        "saidas": [],
+        "excecoes": [],
+        "segue": [
+          [
+            "",
+            "a10",
+            null
+          ]
+        ]
+      },
+      "a10": {
+        "nome": "Avisar vendedor da liberação",
+        "tipo": "atividade",
+        "papel": "Cadastro",
+        "sistema": [
+          "E-mail"
+        ],
+        "tempo": {
+          "execucao": "5min"
+        },
+        "regras": [],
+        "raci": {},
+        "valor": "NAV-N",
+        "automatizada": false,
+        "encerra": false,
+        "gatilho": "nenhum",
+        "descricao": "",
+        "como": [],
+        "entradas": [],
+        "saidas": [],
+        "excecoes": [],
+        "segue": [
+          [
+            "",
+            "fim_ok",
+            null
+          ]
+        ]
+      },
+      "fim_ok": {
+        "nome": "Crédito liberado",
+        "tipo": "fim",
+        "papel": "Vendedor",
+        "sistema": [],
+        "tempo": {},
+        "regras": [],
+        "raci": {},
+        "valor": "",
+        "automatizada": false,
+        "encerra": false,
+        "gatilho": "nenhum",
+        "descricao": "",
+        "como": [],
+        "entradas": [],
+        "saidas": [],
+        "excecoes": [],
+        "segue": []
+      },
+      "a12": {
+        "nome": "Comunicar recusa ao cliente",
+        "tipo": "atividade",
+        "papel": "Vendedor",
+        "sistema": [
+          "E-mail"
+        ],
+        "tempo": {
+          "execucao": "15min",
+          "espera": "1d"
+        },
+        "regras": [
+          "R7"
+        ],
+        "raci": {},
+        "valor": "NAV-N",
+        "automatizada": false,
+        "encerra": false,
+        "gatilho": "nenhum",
+        "descricao": "",
+        "como": [],
+        "entradas": [],
+        "saidas": [],
+        "excecoes": [],
+        "segue": [
+          [
+            "",
+            "fim_rec",
+            null
+          ]
+        ]
+      },
+      "fim_rec": {
+        "nome": "Crédito recusado",
+        "tipo": "fim",
+        "papel": "Vendedor",
+        "sistema": [],
+        "tempo": {},
+        "regras": [],
+        "raci": {},
+        "valor": "",
+        "automatizada": false,
+        "encerra": false,
+        "gatilho": "nenhum",
+        "descricao": "",
+        "como": [],
+        "entradas": [],
+        "saidas": [],
+        "excecoes": [],
+        "segue": []
+      },
+      "a13": {
+        "nome": "Cancelar proposta",
+        "tipo": "atividade",
+        "papel": "Jurídico",
+        "sistema": [
+          "CRM"
+        ],
+        "tempo": {
+          "execucao": "10min"
+        },
+        "regras": [],
+        "raci": {},
+        "valor": "NAV",
+        "automatizada": false,
+        "encerra": false,
+        "gatilho": "nenhum",
+        "descricao": "",
+        "como": [],
+        "entradas": [],
+        "saidas": [],
+        "excecoes": [],
+        "segue": [
+          [
+            "",
+            "fim_exp",
+            null
+          ]
+        ]
+      },
+      "fim_exp": {
+        "nome": "Proposta expirada",
+        "tipo": "fim",
+        "papel": "Jurídico",
+        "sistema": [],
+        "tempo": {},
+        "regras": [],
+        "raci": {},
+        "valor": "",
+        "automatizada": false,
+        "encerra": true,
+        "gatilho": "nenhum",
+        "descricao": "",
+        "como": [],
+        "entradas": [],
+        "saidas": [],
+        "excecoes": [],
+        "segue": []
+      }
+    },
+    "regras": {
+      "R1": "Sem contrato social atualizado, dois últimos balanços e cartão CNPJ ativo, a proposta não segue.",
+      "R2": "Sócio em lista restritiva ou PEP sem diligência reforçada: recusa obrigatória.",
+      "R3": "Score ≥ 700 e limite até R$ 50 mil: aprovação automática. Score < 400 ou protesto ativo: recusa. Demais: análise manual.",
+      "R4": "Liquidez corrente mínima de 1,0 e endividamento até 70% do patrimônio líquido.",
+      "R5": "Analista aprova até R$ 200 mil; gerente até R$ 500 mil; acima disso, comitê.",
+      "R6": "Contrato não assinado em 10 dias corridos expira; nova proposta reinicia a análise.",
+      "R7": "A recusa não informa o motivo detalhado de score; o vendedor oferece venda à vista ou com garantia."
+    },
+    "indicadores": {
+      "Prazo de concessão": {
+        "formula": "data de desbloqueio - data da proposta (dias úteis), mediana",
+        "meta": "≤ 5 dias úteis",
+        "polaridade": "menor é melhor",
+        "periodicidade": "mensal",
+        "fonte": "CRM + ERP",
+        "dono": "Gerente de Crédito e Cobrança"
+      },
+      "Taxa de aprovação automática": {
+        "formula": "propostas aprovadas sem análise manual / propostas analisadas",
+        "meta": "≥ 50%",
+        "polaridade": "maior é melhor",
+        "periodicidade": "mensal",
+        "fonte": "ERP",
+        "dono": "Gerente de Crédito e Cobrança"
+      },
+      "Inadimplência da safra": {
+        "formula": "valor vencido > 60 dias / limite liberado, por mês de concessão",
+        "meta": "≤ 2,5%",
+        "polaridade": "menor é melhor",
+        "periodicidade": "mensal",
+        "fonte": "ERP",
+        "dono": "Gerente de Crédito e Cobrança"
+      },
+      "Retrabalho de documentação": {
+        "formula": "propostas devolvidas por documento / propostas recebidas",
+        "meta": "≤ 15%",
+        "polaridade": "menor é melhor",
+        "periodicidade": "mensal",
+        "fonte": "CRM",
+        "dono": "Coordenador Comercial"
+      }
+    },
+    "riscos": {
+      "K1": {
+        "descricao": "Liberar limite sem contrato assinado",
+        "controle": "Limite cadastrado bloqueado; desbloqueio só após o paralelo (contrato + cadastro)",
+        "tipo_controle": "preventivo"
+      },
+      "K2": {
+        "descricao": "Conceder crédito a empresa com sócio sancionado (PLD)",
+        "controle": "Checagem KYC obrigatória antes do bureau (R2)",
+        "tipo_controle": "preventivo"
+      },
+      "K3": {
+        "descricao": "Analista aprovar acima da própria alçada",
+        "controle": "Alçada parametrizada no ERP por usuário",
+        "tipo_controle": "preventivo"
+      },
+      "K4": {
+        "descricao": "Limite liberado diferente do aprovado",
+        "controle": "",
+        "tipo_controle": ""
+      }
+    },
+    "dores": {
+      "D1": "35% das propostas voltam por documento faltando; o cliente manda aos poucos por e-mail.",
+      "D2": "Proposta acima da alçada espera a reunião quinzenal do comitê (até 15 dias).",
+      "D3": "Análise manual em planilha fora do ERP: parecer não fica no histórico do cliente."
+    },
+    "melhorias": {
+      "M1": "Portal do cliente com checklist e upload obrigatório de documentos",
+      "M2": "Comitê virtual assíncrono (aprovação no ERP em até 48h) para limites entre R$ 500 mil e R$ 1 milhão",
+      "M3": "Parecer de crédito em formulário do ERP, anexado ao cadastro do cliente"
+    },
+    "processo": {
+      "nome": "Concessão de limite de crédito para cliente PJ",
+      "objetivo": "Liberar limite de crédito para clientes pessoa jurídica com risco aceitável, no menor prazo, dentro da política de crédito e das alçadas.",
+      "dono": "Gerente de Crédito e Cobrança",
+      "gatilho": "Vendedor recebe pedido de cliente novo ou pedido de aumento de limite",
+      "resultado": "Limite cadastrado no ERP e contrato assinado, ou recusa comunicada ao cliente",
+      "prazo_informado": "de 5 a 20 dias úteis; o comercial reclama dos casos que vão a comitê",
+      "volume": "cerca de 260 propostas por mês (70% clientes novos)",
+      "frequencia": "contínuo",
+      "escopo": {
+        "inicio": "Vendedor registra a proposta de crédito",
+        "fim": "Limite liberado no ERP, ou cliente informado da recusa ou da expiração",
+        "inclui": [
+          "clientes novos",
+          "aumento de limite de clientes ativos"
+        ],
+        "nao_inclui": [
+          "renovação anual automática (CRE-03)",
+          "cobrança e bloqueio por atraso (CRE-05)",
+          "venda à vista"
+        ]
+      },
+      "sipoc": {
+        "fornecedores": [
+          "Cliente PJ",
+          "Vendedor",
+          "Bureau de crédito",
+          "Receita Federal (consulta CNPJ)"
+        ],
+        "entradas": [
+          "Proposta de crédito",
+          "Contrato social e balanço",
+          "Score e restrições do bureau",
+          "Política e alçadas"
+        ],
+        "saidas": [
+          "Parecer de crédito",
+          "Contrato de crédito assinado",
+          "Limite cadastrado no ERP",
+          "Comunicação de recusa"
+        ],
+        "clientes": [
+          "Cliente PJ",
+          "Área Comercial",
+          "Faturamento"
+        ]
+      }
+    }
+  }
+}

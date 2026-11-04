@@ -1,0 +1,541 @@
+{
+  "por": "Ana (Gerente)",
+  "quando": "03/11/2026 14:24",
+  "hash": "003219c4a37a24752d1fcb0db4911f67571cc1ba2460bd01dee73768fe47789c",
+  "versao": "",
+  "cenario": "as-is",
+  "observacao": "",
+  "retrato": {
+    "elementos": {
+      "i": {
+        "nome": "Sinistro aberto",
+        "tipo": "inicio",
+        "papel": "Segurado",
+        "sistema": [],
+        "tempo": {},
+        "regras": [],
+        "raci": {},
+        "valor": "",
+        "automatizada": false,
+        "encerra": false,
+        "gatilho": "nenhum",
+        "anexo": null,
+        "interrompe": false,
+        "descricao": "",
+        "como": [],
+        "entradas": [],
+        "saidas": [],
+        "excecoes": [],
+        "segue": [
+          [
+            "",
+            "a1",
+            null
+          ]
+        ]
+      },
+      "a1": {
+        "nome": "Enviar documentos",
+        "tipo": "atividade",
+        "papel": "Segurado",
+        "sistema": [],
+        "tempo": {},
+        "regras": [],
+        "raci": {},
+        "valor": "",
+        "automatizada": false,
+        "encerra": false,
+        "gatilho": "nenhum",
+        "anexo": null,
+        "interrompe": false,
+        "descricao": "",
+        "como": [],
+        "entradas": [],
+        "saidas": [],
+        "excecoes": [],
+        "segue": [
+          [
+            "",
+            "a2",
+            null
+          ]
+        ]
+      },
+      "a2": {
+        "nome": "Analisar sinistro",
+        "tipo": "atividade",
+        "papel": "Analista",
+        "sistema": [],
+        "tempo": {
+          "execucao": "2h",
+          "espera": "3d"
+        },
+        "regras": [],
+        "raci": {},
+        "valor": "",
+        "automatizada": false,
+        "encerra": false,
+        "gatilho": "nenhum",
+        "anexo": null,
+        "interrompe": false,
+        "descricao": "",
+        "como": [],
+        "entradas": [],
+        "saidas": [],
+        "excecoes": [],
+        "segue": [
+          [
+            "",
+            "d1",
+            null
+          ],
+          [
+            "Catástrofe declarada",
+            "a2~5",
+            1.0
+          ],
+          [
+            "Fraude detectada",
+            "a2~3",
+            2.0
+          ],
+          [
+            "Lembrete de 24h",
+            "a2~4",
+            30.0
+          ],
+          [
+            "Prazo de 48h estourado",
+            "a2~1",
+            10.0
+          ],
+          [
+            "Segurado desistiu",
+            "a2~2",
+            5.0
+          ],
+          [
+            "Valor revisto acima de 100 mil",
+            "a2~6",
+            3.0
+          ]
+        ]
+      },
+      "a2~1": {
+        "nome": "Prazo de 48h estourado",
+        "tipo": "borda",
+        "papel": "Analista",
+        "sistema": [],
+        "tempo": {
+          "espera": "48hc"
+        },
+        "regras": [],
+        "raci": {},
+        "valor": "",
+        "automatizada": false,
+        "encerra": false,
+        "gatilho": "tempo",
+        "anexo": "a2",
+        "interrompe": true,
+        "descricao": "",
+        "como": [],
+        "entradas": [],
+        "saidas": [],
+        "excecoes": [],
+        "segue": [
+          [
+            "",
+            "a3",
+            null
+          ]
+        ]
+      },
+      "a2~2": {
+        "nome": "Segurado desistiu",
+        "tipo": "borda",
+        "papel": "Analista",
+        "sistema": [],
+        "tempo": {},
+        "regras": [],
+        "raci": {},
+        "valor": "",
+        "automatizada": false,
+        "encerra": false,
+        "gatilho": "mensagem",
+        "anexo": "a2",
+        "interrompe": true,
+        "descricao": "",
+        "como": [],
+        "entradas": [],
+        "saidas": [],
+        "excecoes": [],
+        "segue": [
+          [
+            "",
+            "f2",
+            null
+          ]
+        ]
+      },
+      "a2~3": {
+        "nome": "Fraude detectada",
+        "tipo": "borda",
+        "papel": "Analista",
+        "sistema": [],
+        "tempo": {},
+        "regras": [],
+        "raci": {},
+        "valor": "",
+        "automatizada": false,
+        "encerra": false,
+        "gatilho": "erro",
+        "anexo": "a2",
+        "interrompe": true,
+        "descricao": "",
+        "como": [],
+        "entradas": [],
+        "saidas": [],
+        "excecoes": [],
+        "segue": [
+          [
+            "",
+            "a5",
+            null
+          ]
+        ]
+      },
+      "a2~4": {
+        "nome": "Lembrete de 24h",
+        "tipo": "borda",
+        "papel": "Analista",
+        "sistema": [],
+        "tempo": {
+          "espera": "24hc"
+        },
+        "regras": [],
+        "raci": {},
+        "valor": "",
+        "automatizada": false,
+        "encerra": false,
+        "gatilho": "tempo",
+        "anexo": "a2",
+        "interrompe": false,
+        "descricao": "",
+        "como": [],
+        "entradas": [],
+        "saidas": [],
+        "excecoes": [],
+        "segue": [
+          [
+            "",
+            "a4",
+            null
+          ]
+        ]
+      },
+      "a2~5": {
+        "nome": "Catástrofe declarada",
+        "tipo": "borda",
+        "papel": "Analista",
+        "sistema": [],
+        "tempo": {},
+        "regras": [],
+        "raci": {},
+        "valor": "",
+        "automatizada": false,
+        "encerra": false,
+        "gatilho": "sinal",
+        "anexo": "a2",
+        "interrompe": true,
+        "descricao": "",
+        "como": [],
+        "entradas": [],
+        "saidas": [],
+        "excecoes": [],
+        "segue": [
+          [
+            "",
+            "a2",
+            null
+          ]
+        ]
+      },
+      "a2~6": {
+        "nome": "Valor revisto acima de 100 mil",
+        "tipo": "borda",
+        "papel": "Analista",
+        "sistema": [],
+        "tempo": {},
+        "regras": [],
+        "raci": {},
+        "valor": "",
+        "automatizada": false,
+        "encerra": false,
+        "gatilho": "condicao",
+        "anexo": "a2",
+        "interrompe": true,
+        "descricao": "",
+        "como": [],
+        "entradas": [],
+        "saidas": [],
+        "excecoes": [],
+        "segue": [
+          [
+            "",
+            "a3",
+            null
+          ]
+        ]
+      },
+      "a3": {
+        "nome": "Escalar ao supervisor",
+        "tipo": "atividade",
+        "papel": "Supervisor",
+        "sistema": [],
+        "tempo": {
+          "execucao": "30min"
+        },
+        "regras": [],
+        "raci": {},
+        "valor": "",
+        "automatizada": false,
+        "encerra": false,
+        "gatilho": "nenhum",
+        "anexo": null,
+        "interrompe": false,
+        "descricao": "",
+        "como": [],
+        "entradas": [],
+        "saidas": [],
+        "excecoes": [],
+        "segue": [
+          [
+            "",
+            "a2",
+            null
+          ]
+        ]
+      },
+      "a4": {
+        "nome": "Avisar analista",
+        "tipo": "atividade",
+        "papel": "Supervisor",
+        "sistema": [],
+        "tempo": {
+          "execucao": "5min"
+        },
+        "regras": [],
+        "raci": {},
+        "valor": "",
+        "automatizada": false,
+        "encerra": false,
+        "gatilho": "nenhum",
+        "anexo": null,
+        "interrompe": false,
+        "descricao": "",
+        "como": [],
+        "entradas": [],
+        "saidas": [],
+        "excecoes": [],
+        "segue": [
+          [
+            "",
+            "f3",
+            null
+          ]
+        ]
+      },
+      "a5": {
+        "nome": "Abrir investigação",
+        "tipo": "atividade",
+        "papel": "Supervisor",
+        "sistema": [],
+        "tempo": {
+          "execucao": "1h"
+        },
+        "regras": [],
+        "raci": {},
+        "valor": "",
+        "automatizada": false,
+        "encerra": false,
+        "gatilho": "nenhum",
+        "anexo": null,
+        "interrompe": false,
+        "descricao": "",
+        "como": [],
+        "entradas": [],
+        "saidas": [],
+        "excecoes": [],
+        "segue": [
+          [
+            "",
+            "f4",
+            null
+          ]
+        ]
+      },
+      "d1": {
+        "nome": "Sinistro coberto?",
+        "tipo": "decisao",
+        "papel": "Analista",
+        "sistema": [],
+        "tempo": {},
+        "regras": [],
+        "raci": {},
+        "valor": "",
+        "automatizada": false,
+        "encerra": false,
+        "gatilho": "nenhum",
+        "anexo": null,
+        "interrompe": false,
+        "descricao": "",
+        "como": [],
+        "entradas": [],
+        "saidas": [],
+        "excecoes": [],
+        "segue": [
+          [
+            "Não",
+            "f2",
+            20.0
+          ],
+          [
+            "Sim",
+            "a6",
+            80.0
+          ]
+        ]
+      },
+      "a6": {
+        "nome": "Pagar indenização",
+        "tipo": "atividade",
+        "papel": "Analista",
+        "sistema": [],
+        "tempo": {
+          "execucao": "30min"
+        },
+        "regras": [],
+        "raci": {},
+        "valor": "",
+        "automatizada": false,
+        "encerra": false,
+        "gatilho": "nenhum",
+        "anexo": null,
+        "interrompe": false,
+        "descricao": "",
+        "como": [],
+        "entradas": [],
+        "saidas": [],
+        "excecoes": [],
+        "segue": [
+          [
+            "",
+            "f1",
+            null
+          ]
+        ]
+      },
+      "f1": {
+        "nome": "Indenização paga",
+        "tipo": "fim",
+        "papel": "Analista",
+        "sistema": [],
+        "tempo": {},
+        "regras": [],
+        "raci": {},
+        "valor": "",
+        "automatizada": false,
+        "encerra": false,
+        "gatilho": "nenhum",
+        "anexo": null,
+        "interrompe": false,
+        "descricao": "",
+        "como": [],
+        "entradas": [],
+        "saidas": [],
+        "excecoes": [],
+        "segue": []
+      },
+      "f2": {
+        "nome": "Sinistro encerrado sem pagamento",
+        "tipo": "fim",
+        "papel": "Analista",
+        "sistema": [],
+        "tempo": {},
+        "regras": [],
+        "raci": {},
+        "valor": "",
+        "automatizada": false,
+        "encerra": false,
+        "gatilho": "nenhum",
+        "anexo": null,
+        "interrompe": false,
+        "descricao": "",
+        "como": [],
+        "entradas": [],
+        "saidas": [],
+        "excecoes": [],
+        "segue": []
+      },
+      "f3": {
+        "nome": "Lembrete enviado",
+        "tipo": "fim",
+        "papel": "Supervisor",
+        "sistema": [],
+        "tempo": {},
+        "regras": [],
+        "raci": {},
+        "valor": "",
+        "automatizada": false,
+        "encerra": false,
+        "gatilho": "nenhum",
+        "anexo": null,
+        "interrompe": false,
+        "descricao": "",
+        "como": [],
+        "entradas": [],
+        "saidas": [],
+        "excecoes": [],
+        "segue": []
+      },
+      "f4": {
+        "nome": "Investigação aberta",
+        "tipo": "fim",
+        "papel": "Supervisor",
+        "sistema": [],
+        "tempo": {},
+        "regras": [],
+        "raci": {},
+        "valor": "",
+        "automatizada": false,
+        "encerra": true,
+        "gatilho": "nenhum",
+        "anexo": null,
+        "interrompe": false,
+        "descricao": "",
+        "como": [],
+        "entradas": [],
+        "saidas": [],
+        "excecoes": [],
+        "segue": []
+      }
+    },
+    "regras": {},
+    "indicadores": {},
+    "riscos": {},
+    "dores": {},
+    "melhorias": {},
+    "processo": {
+      "nome": "Análise de sinistro",
+      "objetivo": "",
+      "dono": "",
+      "gatilho": "",
+      "resultado": "",
+      "prazo_informado": "",
+      "volume": "300 por mês",
+      "frequencia": "",
+      "escopo": {},
+      "sipoc": {}
+    }
+  }
+}

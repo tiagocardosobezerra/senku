@@ -1,0 +1,206 @@
+{
+  "por": "Ana (Gerente)",
+  "quando": "03/11/2026 13:46",
+  "hash": "a980de0a46e6b85e92a4fc076568f890e361a8dcec457d9b3519f9d8693139c2",
+  "versao": "",
+  "cenario": "as-is",
+  "observacao": "",
+  "retrato": {
+    "elementos": {
+      "i": {
+        "nome": "Pedido recebido",
+        "tipo": "inicio",
+        "papel": "Analista",
+        "sistema": [],
+        "tempo": {},
+        "regras": [],
+        "raci": {},
+        "valor": "",
+        "automatizada": false,
+        "encerra": false,
+        "gatilho": "nenhum",
+        "descricao": "",
+        "como": [],
+        "entradas": [],
+        "saidas": [],
+        "excecoes": [],
+        "segue": [
+          [
+            "",
+            "a1",
+            null
+          ]
+        ]
+      },
+      "a1": {
+        "nome": "Analisar pedido",
+        "tipo": "atividade",
+        "papel": "Analista",
+        "sistema": [],
+        "tempo": {
+          "execucao": "1h",
+          "espera": "1d"
+        },
+        "regras": [],
+        "raci": {},
+        "valor": "",
+        "automatizada": false,
+        "encerra": false,
+        "gatilho": "nenhum",
+        "descricao": "",
+        "como": [],
+        "entradas": [],
+        "saidas": [],
+        "excecoes": [],
+        "segue": [
+          [
+            "",
+            "a2",
+            null
+          ],
+          [
+            "Prazo de 48h estourado",
+            "a1~1",
+            50.0
+          ]
+        ]
+      },
+      "a1~1": {
+        "nome": "Prazo de 48h estourado",
+        "tipo": "borda",
+        "papel": "Analista",
+        "sistema": [],
+        "tempo": {
+          "espera": "48h"
+        },
+        "regras": [],
+        "raci": {},
+        "valor": "",
+        "automatizada": false,
+        "encerra": false,
+        "gatilho": "tempo",
+        "descricao": "",
+        "como": [],
+        "entradas": [],
+        "saidas": [],
+        "excecoes": [],
+        "segue": [
+          [
+            "",
+            "a3",
+            null
+          ]
+        ]
+      },
+      "a2": {
+        "nome": "Concluir pedido",
+        "tipo": "atividade",
+        "papel": "Analista",
+        "sistema": [],
+        "tempo": {
+          "execucao": "1h"
+        },
+        "regras": [],
+        "raci": {},
+        "valor": "",
+        "automatizada": false,
+        "encerra": false,
+        "gatilho": "nenhum",
+        "descricao": "",
+        "como": [],
+        "entradas": [],
+        "saidas": [],
+        "excecoes": [],
+        "segue": [
+          [
+            "",
+            "f",
+            null
+          ]
+        ]
+      },
+      "a3": {
+        "nome": "Escalar pedido",
+        "tipo": "atividade",
+        "papel": "Supervisor",
+        "sistema": [],
+        "tempo": {
+          "execucao": "1h"
+        },
+        "regras": [],
+        "raci": {},
+        "valor": "",
+        "automatizada": false,
+        "encerra": false,
+        "gatilho": "nenhum",
+        "descricao": "",
+        "como": [],
+        "entradas": [],
+        "saidas": [],
+        "excecoes": [],
+        "segue": [
+          [
+            "",
+            "f2",
+            null
+          ]
+        ]
+      },
+      "f": {
+        "nome": "Pedido concluído",
+        "tipo": "fim",
+        "papel": "Analista",
+        "sistema": [],
+        "tempo": {},
+        "regras": [],
+        "raci": {},
+        "valor": "",
+        "automatizada": false,
+        "encerra": false,
+        "gatilho": "nenhum",
+        "descricao": "",
+        "como": [],
+        "entradas": [],
+        "saidas": [],
+        "excecoes": [],
+        "segue": []
+      },
+      "f2": {
+        "nome": "Pedido escalado",
+        "tipo": "fim",
+        "papel": "Supervisor",
+        "sistema": [],
+        "tempo": {},
+        "regras": [],
+        "raci": {},
+        "valor": "",
+        "automatizada": false,
+        "encerra": false,
+        "gatilho": "nenhum",
+        "descricao": "",
+        "como": [],
+        "entradas": [],
+        "saidas": [],
+        "excecoes": [],
+        "segue": []
+      }
+    },
+    "regras": {},
+    "indicadores": {},
+    "riscos": {},
+    "dores": {},
+    "melhorias": {},
+    "processo": {
+      "nome": "Análise com SLA",
+      "objetivo": "",
+      "dono": "",
+      "gatilho": "",
+      "resultado": "",
+      "prazo_informado": "",
+      "volume": "",
+      "frequencia": "",
+      "escopo": {},
+      "sipoc": {}
+    }
+  }
+}

@@ -1,0 +1,743 @@
+{
+  "por": "Ana (Gerente)",
+  "quando": "03/11/2026 14:25",
+  "hash": "7cc2ad878f44571eba06f995cfe034bc3a14d342c0191245d4a518641b1372bc",
+  "versao": "0.3",
+  "cenario": "as-is",
+  "observacao": "",
+  "retrato": {
+    "elementos": {
+      "inicio": {
+        "nome": "Necessidade de material identificada",
+        "tipo": "inicio",
+        "papel": "Solicitante",
+        "sistema": [],
+        "tempo": {},
+        "regras": [],
+        "raci": {},
+        "valor": "",
+        "automatizada": false,
+        "encerra": false,
+        "gatilho": "nenhum",
+        "anexo": null,
+        "interrompe": false,
+        "descricao": "",
+        "como": [],
+        "entradas": [],
+        "saidas": [],
+        "excecoes": [],
+        "segue": [
+          [
+            "",
+            "a1",
+            null
+          ]
+        ]
+      },
+      "a1": {
+        "nome": "Preencher requisição de compra",
+        "tipo": "atividade",
+        "papel": "Solicitante",
+        "sistema": [
+          "ERP"
+        ],
+        "tempo": {
+          "execucao": "15min",
+          "espera": "0"
+        },
+        "regras": [],
+        "raci": {},
+        "valor": "NAV-N",
+        "automatizada": false,
+        "encerra": false,
+        "gatilho": "nenhum",
+        "anexo": null,
+        "interrompe": false,
+        "descricao": "Abre a requisição no ERP com item, quantidade, centro de custo e justificativa.",
+        "como": [],
+        "entradas": [],
+        "saidas": [
+          "Requisição de compra"
+        ],
+        "excecoes": [],
+        "segue": [
+          [
+            "",
+            "a2",
+            null
+          ]
+        ]
+      },
+      "a2": {
+        "nome": "Analisar requisição",
+        "tipo": "atividade",
+        "papel": "Gestor da área",
+        "sistema": [
+          "ERP"
+        ],
+        "tempo": {
+          "execucao": "10min",
+          "espera": "2d"
+        },
+        "regras": [
+          "R1"
+        ],
+        "raci": {
+          "A": [
+            "Gestor da área"
+          ],
+          "I": [
+            "Solicitante"
+          ]
+        },
+        "valor": "NAV-N",
+        "automatizada": false,
+        "encerra": false,
+        "gatilho": "nenhum",
+        "anexo": null,
+        "interrompe": false,
+        "descricao": "Confere necessidade, centro de custo e saldo de orçamento.",
+        "como": [],
+        "entradas": [],
+        "saidas": [],
+        "excecoes": [],
+        "segue": [
+          [
+            "",
+            "d1",
+            null
+          ]
+        ]
+      },
+      "d1": {
+        "nome": "Requisição aprovada?",
+        "tipo": "decisao",
+        "papel": "Gestor da área",
+        "sistema": [],
+        "tempo": {},
+        "regras": [],
+        "raci": {},
+        "valor": "",
+        "automatizada": false,
+        "encerra": false,
+        "gatilho": "nenhum",
+        "anexo": null,
+        "interrompe": false,
+        "descricao": "",
+        "como": [],
+        "entradas": [],
+        "saidas": [],
+        "excecoes": [],
+        "segue": [
+          [
+            "Não",
+            "a1b",
+            15.0
+          ],
+          [
+            "Sim",
+            "a3",
+            85.0
+          ]
+        ]
+      },
+      "a1b": {
+        "nome": "Corrigir requisição",
+        "tipo": "atividade",
+        "papel": "Solicitante",
+        "sistema": [
+          "ERP"
+        ],
+        "tempo": {
+          "execucao": "10min",
+          "espera": "1d"
+        },
+        "regras": [],
+        "raci": {},
+        "valor": "NAV",
+        "automatizada": false,
+        "encerra": false,
+        "gatilho": "nenhum",
+        "anexo": null,
+        "interrompe": false,
+        "descricao": "",
+        "como": [],
+        "entradas": [],
+        "saidas": [],
+        "excecoes": [],
+        "segue": [
+          [
+            "",
+            "a2",
+            null
+          ]
+        ]
+      },
+      "a3": {
+        "nome": "Cotar com fornecedores",
+        "tipo": "atividade",
+        "papel": "Comprador",
+        "sistema": [
+          "E-mail",
+          "Planilha de cotações"
+        ],
+        "tempo": {
+          "execucao": "1h",
+          "espera": "3d"
+        },
+        "regras": [
+          "R2"
+        ],
+        "raci": {},
+        "valor": "NAV-N",
+        "automatizada": false,
+        "encerra": false,
+        "gatilho": "nenhum",
+        "anexo": null,
+        "interrompe": false,
+        "descricao": "Pede cotação por e-mail e consolida as propostas na planilha.",
+        "como": [],
+        "entradas": [],
+        "saidas": [
+          "Mapa de cotação"
+        ],
+        "excecoes": [],
+        "segue": [
+          [
+            "",
+            "f_cot",
+            null
+          ]
+        ]
+      },
+      "f_cot": {
+        "nome": "Enviar proposta",
+        "tipo": "atividade",
+        "papel": "Fornecedor",
+        "sistema": [
+          "E-mail"
+        ],
+        "tempo": {
+          "execucao": "1h",
+          "espera": "2d"
+        },
+        "regras": [],
+        "raci": {},
+        "valor": "VA",
+        "automatizada": false,
+        "encerra": false,
+        "gatilho": "nenhum",
+        "anexo": null,
+        "interrompe": false,
+        "descricao": "",
+        "como": [],
+        "entradas": [],
+        "saidas": [],
+        "excecoes": [],
+        "segue": [
+          [
+            "",
+            "a4",
+            null
+          ]
+        ]
+      },
+      "a4": {
+        "nome": "Escolher fornecedor",
+        "tipo": "atividade",
+        "papel": "Comprador",
+        "sistema": [
+          "Planilha de cotações"
+        ],
+        "tempo": {
+          "execucao": "30min"
+        },
+        "regras": [
+          "R3"
+        ],
+        "raci": {},
+        "valor": "VA",
+        "automatizada": false,
+        "encerra": false,
+        "gatilho": "nenhum",
+        "anexo": null,
+        "interrompe": false,
+        "descricao": "",
+        "como": [],
+        "entradas": [],
+        "saidas": [],
+        "excecoes": [],
+        "segue": [
+          [
+            "",
+            "a5",
+            null
+          ]
+        ]
+      },
+      "a5": {
+        "nome": "Lançar cotação no ERP",
+        "tipo": "atividade",
+        "papel": "Comprador",
+        "sistema": [
+          "ERP"
+        ],
+        "tempo": {
+          "execucao": "20min"
+        },
+        "regras": [],
+        "raci": {},
+        "valor": "NAV",
+        "automatizada": false,
+        "encerra": false,
+        "gatilho": "nenhum",
+        "anexo": null,
+        "interrompe": false,
+        "descricao": "Redigita no ERP os preços que já estão na planilha.",
+        "como": [],
+        "entradas": [],
+        "saidas": [],
+        "excecoes": [],
+        "segue": [
+          [
+            "",
+            "a6",
+            null
+          ]
+        ]
+      },
+      "a6": {
+        "nome": "Emitir pedido de compra",
+        "tipo": "atividade",
+        "papel": "Comprador",
+        "sistema": [
+          "ERP"
+        ],
+        "tempo": {
+          "execucao": "10min"
+        },
+        "regras": [],
+        "raci": {},
+        "valor": "VA",
+        "automatizada": false,
+        "encerra": false,
+        "gatilho": "nenhum",
+        "anexo": null,
+        "interrompe": false,
+        "descricao": "",
+        "como": [],
+        "entradas": [],
+        "saidas": [
+          "Pedido de compra"
+        ],
+        "excecoes": [],
+        "segue": [
+          [
+            "",
+            "a7",
+            null
+          ]
+        ]
+      },
+      "a7": {
+        "nome": "Entregar material e nota fiscal",
+        "tipo": "atividade",
+        "papel": "Fornecedor",
+        "sistema": [],
+        "tempo": {
+          "execucao": "1h",
+          "espera": "5d"
+        },
+        "regras": [],
+        "raci": {},
+        "valor": "VA",
+        "automatizada": false,
+        "encerra": false,
+        "gatilho": "nenhum",
+        "anexo": null,
+        "interrompe": false,
+        "descricao": "",
+        "como": [],
+        "entradas": [],
+        "saidas": [],
+        "excecoes": [],
+        "segue": [
+          [
+            "",
+            "p1",
+            null
+          ]
+        ]
+      },
+      "p1": {
+        "nome": "",
+        "tipo": "paralelo",
+        "papel": "Almoxarifado",
+        "sistema": [],
+        "tempo": {},
+        "regras": [],
+        "raci": {},
+        "valor": "",
+        "automatizada": false,
+        "encerra": false,
+        "gatilho": "nenhum",
+        "anexo": null,
+        "interrompe": false,
+        "descricao": "",
+        "como": [],
+        "entradas": [],
+        "saidas": [],
+        "excecoes": [],
+        "segue": [
+          [
+            "",
+            "a8",
+            null
+          ],
+          [
+            "",
+            "a9",
+            null
+          ]
+        ]
+      },
+      "a8": {
+        "nome": "Conferir material recebido",
+        "tipo": "atividade",
+        "papel": "Almoxarifado",
+        "sistema": [],
+        "tempo": {
+          "execucao": "20min",
+          "espera": "4h"
+        },
+        "regras": [
+          "R4"
+        ],
+        "raci": {},
+        "valor": "NAV-N",
+        "automatizada": false,
+        "encerra": false,
+        "gatilho": "nenhum",
+        "anexo": null,
+        "interrompe": false,
+        "descricao": "",
+        "como": [],
+        "entradas": [],
+        "saidas": [],
+        "excecoes": [],
+        "segue": [
+          [
+            "",
+            "d2",
+            null
+          ]
+        ]
+      },
+      "d2": {
+        "nome": "Material conforme o pedido?",
+        "tipo": "decisao",
+        "papel": "Almoxarifado",
+        "sistema": [],
+        "tempo": {},
+        "regras": [],
+        "raci": {},
+        "valor": "",
+        "automatizada": false,
+        "encerra": false,
+        "gatilho": "nenhum",
+        "anexo": null,
+        "interrompe": false,
+        "descricao": "",
+        "como": [],
+        "entradas": [],
+        "saidas": [],
+        "excecoes": [],
+        "segue": [
+          [
+            "Não",
+            "a10",
+            8.0
+          ],
+          [
+            "Sim",
+            "p2",
+            92.0
+          ]
+        ]
+      },
+      "a10": {
+        "nome": "Devolver material ao fornecedor",
+        "tipo": "atividade",
+        "papel": "Almoxarifado",
+        "sistema": [
+          "E-mail"
+        ],
+        "tempo": {
+          "execucao": "30min",
+          "espera": "1d"
+        },
+        "regras": [],
+        "raci": {},
+        "valor": "NAV",
+        "automatizada": false,
+        "encerra": false,
+        "gatilho": "nenhum",
+        "anexo": null,
+        "interrompe": false,
+        "descricao": "",
+        "como": [],
+        "entradas": [],
+        "saidas": [],
+        "excecoes": [],
+        "segue": [
+          [
+            "",
+            "a7r",
+            null
+          ]
+        ]
+      },
+      "a7r": {
+        "nome": "Reenviar material",
+        "tipo": "atividade",
+        "papel": "Fornecedor",
+        "sistema": [],
+        "tempo": {
+          "execucao": "1h",
+          "espera": "3d"
+        },
+        "regras": [],
+        "raci": {},
+        "valor": "NAV",
+        "automatizada": false,
+        "encerra": false,
+        "gatilho": "nenhum",
+        "anexo": null,
+        "interrompe": false,
+        "descricao": "",
+        "como": [],
+        "entradas": [],
+        "saidas": [],
+        "excecoes": [],
+        "segue": [
+          [
+            "",
+            "a8",
+            null
+          ]
+        ]
+      },
+      "a9": {
+        "nome": "Lançar nota fiscal",
+        "tipo": "atividade",
+        "papel": "Fiscal / Contas a pagar",
+        "sistema": [
+          "ERP"
+        ],
+        "tempo": {
+          "execucao": "15min",
+          "espera": "1d"
+        },
+        "regras": [
+          "R5"
+        ],
+        "raci": {},
+        "valor": "NAV-N",
+        "automatizada": false,
+        "encerra": false,
+        "gatilho": "nenhum",
+        "anexo": null,
+        "interrompe": false,
+        "descricao": "",
+        "como": [],
+        "entradas": [],
+        "saidas": [],
+        "excecoes": [],
+        "segue": [
+          [
+            "",
+            "p2",
+            null
+          ]
+        ]
+      },
+      "p2": {
+        "nome": "",
+        "tipo": "paralelo",
+        "papel": "Almoxarifado",
+        "sistema": [],
+        "tempo": {},
+        "regras": [],
+        "raci": {},
+        "valor": "",
+        "automatizada": false,
+        "encerra": false,
+        "gatilho": "nenhum",
+        "anexo": null,
+        "interrompe": false,
+        "descricao": "",
+        "como": [],
+        "entradas": [],
+        "saidas": [],
+        "excecoes": [],
+        "segue": [
+          [
+            "",
+            "a11",
+            null
+          ]
+        ]
+      },
+      "a11": {
+        "nome": "Entregar material ao solicitante",
+        "tipo": "atividade",
+        "papel": "Almoxarifado",
+        "sistema": [],
+        "tempo": {
+          "execucao": "15min",
+          "espera": "4h"
+        },
+        "regras": [],
+        "raci": {},
+        "valor": "VA",
+        "automatizada": false,
+        "encerra": false,
+        "gatilho": "nenhum",
+        "anexo": null,
+        "interrompe": false,
+        "descricao": "",
+        "como": [],
+        "entradas": [],
+        "saidas": [],
+        "excecoes": [],
+        "segue": [
+          [
+            "",
+            "fim",
+            null
+          ]
+        ]
+      },
+      "fim": {
+        "nome": "Material entregue",
+        "tipo": "fim",
+        "papel": "Solicitante",
+        "sistema": [],
+        "tempo": {},
+        "regras": [],
+        "raci": {},
+        "valor": "",
+        "automatizada": false,
+        "encerra": false,
+        "gatilho": "nenhum",
+        "anexo": null,
+        "interrompe": false,
+        "descricao": "",
+        "como": [],
+        "entradas": [],
+        "saidas": [],
+        "excecoes": [],
+        "segue": []
+      }
+    },
+    "regras": {
+      "R1": "O gestor aprova até R$ 10 mil; acima disso, também o diretor da área (Tabela de alçadas 2026).",
+      "R2": "Compras acima de R$ 5 mil exigem no mínimo 3 cotações.",
+      "R3": "Vence o menor custo total (preço + frete + prazo), entre fornecedores homologados.",
+      "R4": "Quantidade e especificação devem bater com o pedido; divergência acima de 2% é devolvida.",
+      "R5": "A nota só é lançada com pedido de compra aprovado (conferência de 3 vias: pedido, recebimento, nota)."
+    },
+    "indicadores": {
+      "Lead time da requisição": {
+        "formula": "data de entrega ao solicitante - data de abertura da requisição (dias úteis)",
+        "meta": "≤ 10 dias úteis",
+        "polaridade": "menor é melhor",
+        "periodicidade": "mensal",
+        "fonte": "ERP",
+        "dono": "Gerente de Suprimentos"
+      },
+      "Requisições devolvidas para correção": {
+        "formula": "requisições reprovadas / requisições analisadas",
+        "meta": "≤ 5%",
+        "polaridade": "menor é melhor",
+        "periodicidade": "mensal",
+        "fonte": "ERP",
+        "dono": "Gerente de Suprimentos"
+      },
+      "Saving de compras": {
+        "formula": "(maior cotação - cotação escolhida) / maior cotação",
+        "meta": "≥ 8%",
+        "polaridade": "maior é melhor",
+        "periodicidade": "trimestral",
+        "fonte": "Planilha de cotações",
+        "dono": "Gerente de Suprimentos"
+      }
+    },
+    "riscos": {
+      "K1": {
+        "descricao": "Pagamento de nota sem material recebido",
+        "controle": "Conferência de 3 vias no lançamento (R5)",
+        "tipo_controle": "preventivo"
+      },
+      "K2": {
+        "descricao": "Compra direcionada a um fornecedor",
+        "controle": "Mínimo de 3 cotações acima de R$ 5 mil (R2)",
+        "tipo_controle": "preventivo"
+      }
+    },
+    "dores": {
+      "D1": "Requisição volta para correção porque falta centro de custo ou especificação.",
+      "D2": "A cotação é redigitada da planilha para o ERP, com erro de preço às vezes.",
+      "D3": "Aprovação do gestor fica parada dias na caixa de entrada."
+    },
+    "melhorias": {
+      "M1": "Campos obrigatórios e catálogo de itens na requisição do ERP",
+      "M2": "Cotação direto no ERP (portal do fornecedor), sem planilha",
+      "M3": "Aprovação pelo celular com lembrete automático em 24h e SLA de 1 dia útil"
+    },
+    "processo": {
+      "nome": "Compra de materiais indiretos",
+      "objetivo": "Entregar ao solicitante o material de uso interno (escritório, manutenção, TI) no prazo combinado, pelo menor custo total e com a despesa autorizada.",
+      "dono": "Gerente de Suprimentos",
+      "gatilho": "Uma área precisa de material que não há no estoque",
+      "resultado": "Material entregue ao solicitante e nota fiscal lançada para pagamento",
+      "prazo_informado": "de 10 a 15 dias úteis (prazo combinado: 10 dias úteis)",
+      "volume": "cerca de 120 requisições por mês",
+      "frequencia": "contínuo",
+      "escopo": {
+        "inicio": "Solicitante abre a requisição de compra",
+        "fim": "Nota fiscal lançada no contas a pagar e material entregue",
+        "inclui": [
+          "materiais indiretos até R$ 50 mil"
+        ],
+        "nao_inclui": [
+          "compra de matéria-prima (processo SUP-02)",
+          "pagamento ao fornecedor (processo FIN-03)",
+          "contratação de serviços"
+        ]
+      },
+      "sipoc": {
+        "fornecedores": [
+          "Áreas solicitantes",
+          "Fornecedores cadastrados",
+          "Controladoria (orçamento)"
+        ],
+        "entradas": [
+          "Necessidade de material",
+          "Orçamento da área",
+          "Cotações",
+          "Nota fiscal"
+        ],
+        "saidas": [
+          "Pedido de compra",
+          "Material entregue",
+          "Nota fiscal lançada"
+        ],
+        "clientes": [
+          "Área solicitante",
+          "Contas a pagar"
+        ]
+      }
+    }
+  }
+}

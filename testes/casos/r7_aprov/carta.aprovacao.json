@@ -1,0 +1,350 @@
+{
+  "por": "Ana (Gerente)",
+  "quando": "03/11/2026 15:46",
+  "hash": "ddb2b9f160a583ec30df25b4ccc3dc674141e6c9279d1c8f9f81af720e1424b0",
+  "versao": "",
+  "cenario": "as-is",
+  "observacao": "",
+  "retrato": {
+    "elementos": {
+      "i": {
+        "nome": "Pedido de cotação recebido",
+        "tipo": "inicio",
+        "papel": "Comercial",
+        "sistema": [],
+        "tempo": {},
+        "regras": [],
+        "raci": {},
+        "valor": "",
+        "automatizada": false,
+        "encerra": false,
+        "gatilho": "mensagem",
+        "anexo": null,
+        "interrompe": false,
+        "descricao": "",
+        "como": [],
+        "entradas": [],
+        "saidas": [],
+        "excecoes": [],
+        "segue": [
+          [
+            "",
+            "a1",
+            null
+          ]
+        ]
+      },
+      "a1": {
+        "nome": "Calcular frete",
+        "tipo": "atividade",
+        "papel": "Operações",
+        "sistema": [
+          "TMS"
+        ],
+        "tempo": {
+          "execucao": "30min",
+          "espera": "4h"
+        },
+        "regras": [
+          "R1"
+        ],
+        "raci": {},
+        "valor": "VA",
+        "automatizada": false,
+        "encerra": false,
+        "gatilho": "nenhum",
+        "anexo": null,
+        "interrompe": false,
+        "descricao": "Usa a tabela ANTT",
+        "como": [],
+        "entradas": [],
+        "saidas": [],
+        "excecoes": [],
+        "segue": [
+          [
+            "",
+            "a2",
+            null
+          ],
+          [
+            "Prazo de 8h estourado",
+            "a1~1",
+            10.0
+          ]
+        ]
+      },
+      "a1~1": {
+        "nome": "Prazo de 8h estourado",
+        "tipo": "borda",
+        "papel": "Operações",
+        "sistema": [],
+        "tempo": {
+          "espera": "8hc"
+        },
+        "regras": [],
+        "raci": {},
+        "valor": "",
+        "automatizada": false,
+        "encerra": false,
+        "gatilho": "tempo",
+        "anexo": "a1",
+        "interrompe": true,
+        "descricao": "",
+        "como": [],
+        "entradas": [],
+        "saidas": [],
+        "excecoes": [],
+        "segue": [
+          [
+            "",
+            "a9",
+            null
+          ]
+        ]
+      },
+      "a2": {
+        "nome": "Enviar cotação",
+        "tipo": "atividade",
+        "papel": "Comercial",
+        "sistema": [],
+        "tempo": {
+          "execucao": "10min"
+        },
+        "regras": [],
+        "raci": {},
+        "valor": "",
+        "automatizada": false,
+        "encerra": false,
+        "gatilho": "nenhum",
+        "anexo": null,
+        "interrompe": false,
+        "descricao": "",
+        "como": [],
+        "entradas": [],
+        "saidas": [],
+        "excecoes": [],
+        "segue": [
+          [
+            "",
+            "ev",
+            null
+          ]
+        ]
+      },
+      "ev": {
+        "nome": "Cotação enviada",
+        "tipo": "evento",
+        "papel": "Comercial",
+        "sistema": [],
+        "tempo": {},
+        "regras": [],
+        "raci": {},
+        "valor": "",
+        "automatizada": false,
+        "encerra": false,
+        "gatilho": "mensagem",
+        "anexo": null,
+        "interrompe": false,
+        "descricao": "",
+        "como": [],
+        "entradas": [],
+        "saidas": [],
+        "excecoes": [],
+        "segue": [
+          [
+            "",
+            "cr",
+            null
+          ]
+        ]
+      },
+      "cr": {
+        "nome": "O que vier primeiro",
+        "tipo": "corrida",
+        "papel": "Comercial",
+        "sistema": [],
+        "tempo": {},
+        "regras": [],
+        "raci": {},
+        "valor": "",
+        "automatizada": false,
+        "encerra": false,
+        "gatilho": "nenhum",
+        "anexo": null,
+        "interrompe": false,
+        "descricao": "",
+        "como": [],
+        "entradas": [],
+        "saidas": [],
+        "excecoes": [],
+        "segue": [
+          [
+            "",
+            "m",
+            60.0
+          ],
+          [
+            "",
+            "t",
+            40.0
+          ]
+        ]
+      },
+      "m": {
+        "nome": "Aceite recebido",
+        "tipo": "evento",
+        "papel": "Comercial",
+        "sistema": [],
+        "tempo": {
+          "espera": "1d"
+        },
+        "regras": [],
+        "raci": {},
+        "valor": "",
+        "automatizada": false,
+        "encerra": false,
+        "gatilho": "mensagem",
+        "anexo": null,
+        "interrompe": false,
+        "descricao": "",
+        "como": [],
+        "entradas": [],
+        "saidas": [],
+        "excecoes": [],
+        "segue": [
+          [
+            "",
+            "f",
+            null
+          ]
+        ]
+      },
+      "t": {
+        "nome": "Aguardar 3 dias corridos",
+        "tipo": "evento",
+        "papel": "Comercial",
+        "sistema": [],
+        "tempo": {
+          "espera": "3 dias corridos"
+        },
+        "regras": [],
+        "raci": {},
+        "valor": "",
+        "automatizada": false,
+        "encerra": false,
+        "gatilho": "tempo",
+        "anexo": null,
+        "interrompe": false,
+        "descricao": "",
+        "como": [],
+        "entradas": [],
+        "saidas": [],
+        "excecoes": [],
+        "segue": [
+          [
+            "",
+            "fx",
+            null
+          ]
+        ]
+      },
+      "a9": {
+        "nome": "Escalar ao coordenador",
+        "tipo": "atividade",
+        "papel": "Operações",
+        "sistema": [],
+        "tempo": {
+          "execucao": "15min"
+        },
+        "regras": [],
+        "raci": {},
+        "valor": "",
+        "automatizada": false,
+        "encerra": false,
+        "gatilho": "nenhum",
+        "anexo": null,
+        "interrompe": false,
+        "descricao": "",
+        "como": [],
+        "entradas": [],
+        "saidas": [],
+        "excecoes": [],
+        "segue": [
+          [
+            "",
+            "a2",
+            null
+          ]
+        ]
+      },
+      "f": {
+        "nome": "Frete contratado",
+        "tipo": "fim",
+        "papel": "Comercial",
+        "sistema": [],
+        "tempo": {},
+        "regras": [],
+        "raci": {},
+        "valor": "",
+        "automatizada": false,
+        "encerra": false,
+        "gatilho": "nenhum",
+        "anexo": null,
+        "interrompe": false,
+        "descricao": "",
+        "como": [],
+        "entradas": [],
+        "saidas": [],
+        "excecoes": [],
+        "segue": []
+      },
+      "fx": {
+        "nome": "Cotação expirada",
+        "tipo": "fim",
+        "papel": "Comercial",
+        "sistema": [],
+        "tempo": {},
+        "regras": [],
+        "raci": {},
+        "valor": "",
+        "automatizada": false,
+        "encerra": true,
+        "gatilho": "nenhum",
+        "anexo": null,
+        "interrompe": false,
+        "descricao": "",
+        "como": [],
+        "entradas": [],
+        "saidas": [],
+        "excecoes": [],
+        "segue": []
+      }
+    },
+    "regras": {
+      "R1": "Frete acima de R$ 5 mil exige aprovação"
+    },
+    "indicadores": {},
+    "riscos": {},
+    "dores": {},
+    "melhorias": {},
+    "processo": {
+      "nome": "Cotação de frete",
+      "objetivo": "",
+      "dono": "",
+      "gatilho": "",
+      "resultado": "",
+      "prazo_informado": "",
+      "volume": "300 por mês",
+      "frequencia": "",
+      "escopo": {},
+      "sipoc": {}
+    }
+  },
+  "secoes": {
+    "processo": "d99c020d1c0081c00c8049c2e4ef6e607a94cc8d4b0113ef5d60171b3b9eef23",
+    "papeis": "78f5daf0ef7c2f381cff87fdd84c7d87eff2726912df9123a71002bd21002ffa",
+    "sistemas": "4ce48ed130b83b7644f9c13e330ea041c736081c07f412eae5ab530c2b7135be",
+    "regras": "45d2515240d93c932f39143c64b74068d5e98db6c302b490537bc9d5efb52788",
+    "elementos": "63c1165d9fd5fe4a5b2371d62d740b5388352878d4b7b54a3e5fb65b76723d0f"
+  }
+}

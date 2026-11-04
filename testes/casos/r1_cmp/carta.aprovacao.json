@@ -1,0 +1,403 @@
+{
+  "por": "Ana (Gerente)",
+  "quando": "03/11/2026 10:39",
+  "hash": "cef7b5b3a1bdc791971b1782eaccf0cec430f4fc3d83bfb6c611e3639a5a18e1",
+  "versao": "0.3",
+  "cenario": "as-is",
+  "observacao": "",
+  "retrato": {
+    "elementos": {
+      "inicio": {
+        "nome": "Necessidade de material identificada",
+        "tipo": "inicio",
+        "papel": "Solicitante",
+        "sistema": [],
+        "tempo": {},
+        "regras": [],
+        "segue": [
+          [
+            "",
+            "a1",
+            null
+          ]
+        ]
+      },
+      "a1": {
+        "nome": "Preencher requisição de compra",
+        "tipo": "atividade",
+        "papel": "Solicitante",
+        "sistema": [
+          "ERP"
+        ],
+        "tempo": {
+          "execucao": "15min",
+          "espera": "0"
+        },
+        "regras": [],
+        "segue": [
+          [
+            "",
+            "a2",
+            null
+          ]
+        ]
+      },
+      "a2": {
+        "nome": "Analisar requisição",
+        "tipo": "atividade",
+        "papel": "Gestor da área",
+        "sistema": [
+          "ERP"
+        ],
+        "tempo": {
+          "execucao": "10min",
+          "espera": "2d"
+        },
+        "regras": [
+          "R1"
+        ],
+        "segue": [
+          [
+            "",
+            "d1",
+            null
+          ]
+        ]
+      },
+      "d1": {
+        "nome": "Requisição aprovada?",
+        "tipo": "decisao",
+        "papel": "Gestor da área",
+        "sistema": [],
+        "tempo": {},
+        "regras": [],
+        "segue": [
+          [
+            "Não",
+            "a1b",
+            15.0
+          ],
+          [
+            "Sim",
+            "a3",
+            85.0
+          ]
+        ]
+      },
+      "a1b": {
+        "nome": "Corrigir requisição",
+        "tipo": "atividade",
+        "papel": "Solicitante",
+        "sistema": [
+          "ERP"
+        ],
+        "tempo": {
+          "execucao": "10min",
+          "espera": "1d"
+        },
+        "regras": [],
+        "segue": [
+          [
+            "",
+            "a2",
+            null
+          ]
+        ]
+      },
+      "a3": {
+        "nome": "Cotar com fornecedores",
+        "tipo": "atividade",
+        "papel": "Comprador",
+        "sistema": [
+          "E-mail",
+          "Planilha de cotações"
+        ],
+        "tempo": {
+          "execucao": "1h",
+          "espera": "3d"
+        },
+        "regras": [
+          "R2"
+        ],
+        "segue": [
+          [
+            "",
+            "f_cot",
+            null
+          ]
+        ]
+      },
+      "f_cot": {
+        "nome": "Enviar proposta",
+        "tipo": "atividade",
+        "papel": "Fornecedor",
+        "sistema": [
+          "E-mail"
+        ],
+        "tempo": {
+          "execucao": "1h",
+          "espera": "2d"
+        },
+        "regras": [],
+        "segue": [
+          [
+            "",
+            "a4",
+            null
+          ]
+        ]
+      },
+      "a4": {
+        "nome": "Escolher fornecedor",
+        "tipo": "atividade",
+        "papel": "Comprador",
+        "sistema": [
+          "Planilha de cotações"
+        ],
+        "tempo": {
+          "execucao": "30min"
+        },
+        "regras": [
+          "R3"
+        ],
+        "segue": [
+          [
+            "",
+            "a5",
+            null
+          ]
+        ]
+      },
+      "a5": {
+        "nome": "Lançar cotação no ERP",
+        "tipo": "atividade",
+        "papel": "Comprador",
+        "sistema": [
+          "ERP"
+        ],
+        "tempo": {
+          "execucao": "20min"
+        },
+        "regras": [],
+        "segue": [
+          [
+            "",
+            "a6",
+            null
+          ]
+        ]
+      },
+      "a6": {
+        "nome": "Emitir pedido de compra",
+        "tipo": "atividade",
+        "papel": "Comprador",
+        "sistema": [
+          "ERP"
+        ],
+        "tempo": {
+          "execucao": "10min"
+        },
+        "regras": [],
+        "segue": [
+          [
+            "",
+            "a7",
+            null
+          ]
+        ]
+      },
+      "a7": {
+        "nome": "Entregar material e nota fiscal",
+        "tipo": "atividade",
+        "papel": "Fornecedor",
+        "sistema": [],
+        "tempo": {
+          "execucao": "1h",
+          "espera": "5d"
+        },
+        "regras": [],
+        "segue": [
+          [
+            "",
+            "p1",
+            null
+          ]
+        ]
+      },
+      "p1": {
+        "nome": "",
+        "tipo": "paralelo",
+        "papel": "Almoxarifado",
+        "sistema": [],
+        "tempo": {},
+        "regras": [],
+        "segue": [
+          [
+            "",
+            "a8",
+            null
+          ],
+          [
+            "",
+            "a9",
+            null
+          ]
+        ]
+      },
+      "a8": {
+        "nome": "Conferir material recebido",
+        "tipo": "atividade",
+        "papel": "Almoxarifado",
+        "sistema": [],
+        "tempo": {
+          "execucao": "20min",
+          "espera": "4h"
+        },
+        "regras": [
+          "R4"
+        ],
+        "segue": [
+          [
+            "",
+            "d2",
+            null
+          ]
+        ]
+      },
+      "d2": {
+        "nome": "Material conforme o pedido?",
+        "tipo": "decisao",
+        "papel": "Almoxarifado",
+        "sistema": [],
+        "tempo": {},
+        "regras": [],
+        "segue": [
+          [
+            "Não",
+            "a10",
+            8.0
+          ],
+          [
+            "Sim",
+            "p2",
+            92.0
+          ]
+        ]
+      },
+      "a10": {
+        "nome": "Devolver material ao fornecedor",
+        "tipo": "atividade",
+        "papel": "Almoxarifado",
+        "sistema": [
+          "E-mail"
+        ],
+        "tempo": {
+          "execucao": "30min",
+          "espera": "1d"
+        },
+        "regras": [],
+        "segue": [
+          [
+            "",
+            "a7r",
+            null
+          ]
+        ]
+      },
+      "a7r": {
+        "nome": "Reenviar material",
+        "tipo": "atividade",
+        "papel": "Fornecedor",
+        "sistema": [],
+        "tempo": {
+          "execucao": "1h",
+          "espera": "3d"
+        },
+        "regras": [],
+        "segue": [
+          [
+            "",
+            "a8",
+            null
+          ]
+        ]
+      },
+      "a9": {
+        "nome": "Lançar nota fiscal",
+        "tipo": "atividade",
+        "papel": "Fiscal / Contas a pagar",
+        "sistema": [
+          "ERP"
+        ],
+        "tempo": {
+          "execucao": "15min",
+          "espera": "1d"
+        },
+        "regras": [
+          "R5"
+        ],
+        "segue": [
+          [
+            "",
+            "p2",
+            null
+          ]
+        ]
+      },
+      "p2": {
+        "nome": "",
+        "tipo": "paralelo",
+        "papel": "Almoxarifado",
+        "sistema": [],
+        "tempo": {},
+        "regras": [],
+        "segue": [
+          [
+            "",
+            "a11",
+            null
+          ]
+        ]
+      },
+      "a11": {
+        "nome": "Entregar material ao solicitante",
+        "tipo": "atividade",
+        "papel": "Almoxarifado",
+        "sistema": [],
+        "tempo": {
+          "execucao": "15min",
+          "espera": "4h"
+        },
+        "regras": [],
+        "segue": [
+          [
+            "",
+            "fim",
+            null
+          ]
+        ]
+      },
+      "fim": {
+        "nome": "Material entregue",
+        "tipo": "fim",
+        "papel": "Solicitante",
+        "sistema": [],
+        "tempo": {},
+        "regras": [],
+        "segue": []
+      }
+    },
+    "regras": {
+      "R1": "O gestor aprova até R$ 10 mil; acima disso, também o diretor da área (Tabela de alçadas 2026).",
+      "R2": "Compras acima de R$ 5 mil exigem no mínimo 3 cotações.",
+      "R3": "Vence o menor custo total (preço + frete + prazo), entre fornecedores homologados.",
+      "R4": "Quantidade e especificação devem bater com o pedido; divergência acima de 2% é devolvida.",
+      "R5": "A nota só é lançada com pedido de compra aprovado (conferência de 3 vias: pedido, recebimento, nota)."
+    },
+    "indicadores": {
+      "Lead time da requisição": "data de entrega ao solicitante - data de abertura da requisição (dias úteis)",
+      "Requisições devolvidas para correção": "requisições reprovadas / requisições analisadas",
+      "Saving de compras": "(maior cotação - cotação escolhida) / maior cotação"
+    }
+  }
+}
