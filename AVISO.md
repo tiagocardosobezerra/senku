@@ -37,6 +37,15 @@ Ao mapear um processo com o Senku:
    carta só se você os puser lá. Siga as regras de privacidade da sua empresa
    (no Brasil, a LGPD).
 
+## O Memory Card é seu
+
+O Memory Card guarda cartas e documentos de processos reais num repositório
+**seu**, privado por padrão. O Senku confere no GitHub que o cartão é privado
+antes e depois de cada envio e recusa se não for (a não ser que você o tenha
+ligado com `--publico`, de propósito). Qual é o seu cartão fica só na sua
+instalação (`local/memory_card.json`): nada dele vem junto com o Senku, e nada
+dele sai quando o Senku é publicado.
+
 ## Os números do Senku são estimativas
 
 Os tempos, percentuais e volumes vêm da entrevista, não de medição no sistema.

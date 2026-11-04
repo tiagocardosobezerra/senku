@@ -64,6 +64,21 @@ Se for guardar dentro dela, use `local/`: fica fora do git e do zip. Cartas de
 processos reais nunca vão para um repositório público (veja
 [AVISO.md](AVISO.md)).
 
+## Memory Card (opcional)
+
+Para salvar e versionar os processos aprovados num repositório seu no GitHub
+(o mesmo cartão do Vegapunk), instale o [GitHub CLI](https://cli.github.com/),
+autentique (`gh auth login`) e ligue ao cartão uma vez:
+
+```bash
+python senku.py cartao iniciar --repo SEU_USUARIO/memory-card
+```
+
+Se o cartão já existe, ele é usado (e o clone em `~/memory-card`, se houver);
+se não, é criado privado. A configuração fica em `local/memory_card.json`,
+fora do git e do zip. Guia em
+[referencias/memory-card.md](referencias/memory-card.md).
+
 ## Animações do README
 
 Os SVGs de `assets/` saem de um gerador, a partir dos roteiros de

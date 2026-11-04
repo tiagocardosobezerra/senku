@@ -24,6 +24,7 @@ O Senku é uma skill do Claude para quem mapeia processos de negócio: analistas
 * **Escreve o mapeamento completo.** Ficha, escopo, SIPOC, descrição das atividades, regras de negócio, matriz RACI, indicadores, tempos, valor agregado, dores, riscos e controles, oportunidades Lean priorizadas e glossário, em HTML, Word, Markdown e uma planilha CSV das atividades.
 * **Pede o aceite do dono e guarda.** O `aprovar` registra quem aprovou, quando e um hash por seção. Mudou depois? O `situacao` avisa e o `comparar` mostra o que mudou, campo por campo.
 * **Redesenha com base.** O TO-BE nasce da carta aprovada e é comparado com o AS-IS, atividade por atividade.
+* **Guarda o processo aprovado no Memory Card.** Como o cartão de memória de um videogame: depois do aceite, cada processo vira um save no seu repositório privado do GitHub (o mesmo cartão do Vegapunk), com o fluxograma, o mapeamento, a carta, a versão e o motivo de cada mudança. Antes de mapear um processo novo, ele procura no cartão se já existe.
 * **Traz o que você já tem.** Importa `.bpmn` do Bizagi, bpmn.io, Camunda, ARIS e Signavio. Exportou, editou no modelador e trouxe de volta? As suas edições valem, e o que o BPMN não guarda volta da carta.
 
 ## Como fica na prática
@@ -73,11 +74,11 @@ O documento inteiro: [Markdown](exemplos/compras/saida/sup-01-compra-de-materiai
 
 ## Resultados
 
-Medidos na versão 1.13.0, com os exemplos do repositório (um processo de compras e um de crédito, fictícios).
+Medidos na versão 1.14.0, com os exemplos do repositório (um processo de compras e um de crédito, fictícios).
 
 | O quê | Resultado |
 |---|---|
-| Testes automatizados | **206 passando** |
+| Testes automatizados | **213 passando** |
 | Verificações de boa modelagem (7PMG, BPMN Method and Style, tempos, RACI, prazos) | **73** |
 | Casos simulados a cada análise | **4.000** |
 | Formatos de saída (SVG, PNG, BPMN 2.0, draw.io, Mermaid, HTML, Word, Markdown, CSV) | **9** |
@@ -141,6 +142,7 @@ Perdeu o fio? `python3 senku.py situacao <carta>` diz em que etapa você está e
 | `comparar [--contra]` | o que mudou desde o aceite, ou AS-IS x TO-BE |
 | `tobe` | começa o TO-BE a partir da carta aprovada |
 | `importar ARQ.bpmn [--base carta.json]` | traz um mapa que já existe, ou a volta de um mapa editado no modelador |
+| `cartao buscar \| enviar \| catalogo \| marcar` | o Memory Card: procura antes de mapear, salva depois do aceite |
 
 ### O que é gerado
 
@@ -156,6 +158,17 @@ Numa pasta `saida/` ao lado da carta, com o código e o nome do processo no nome
 | `.docx` | o mapeamento no Word, com sumário, retrato e paisagem por seção e quadro de aceite |
 | `.md` | o mapeamento em Markdown |
 | `-atividades.csv` | a planilha das atividades, para o Excel |
+
+### Memory Card: seus processos salvos
+
+Processo aprovado não precisa se perder numa pasta. O Memory Card salva cada um num repositório **seu** no GitHub (privado por padrão), o mesmo cartão do [Vegapunk](https://github.com/tiagocardosobezerra/vegapunk): os relatórios dele em `saves/vegapunk/`, os processos do Senku em `saves/senku/<área>/<macroprocesso>/<processo>/`.
+
+```bash
+gh auth login                                                  # uma vez
+python3 senku.py cartao iniciar --repo SEU_USUARIO/memory-card  # liga ao cartão (ou cria um privado)
+```
+
+Depois do aceite, o Claude oferece salvar: mostra a prévia (o artigo com o fluxograma e os números, a ficha, os arquivos, o diff de uma versão nova) e só envia com o seu "sim". Cada save leva a carta aprovada, o aceite, o `.bpmn`, o `.drawio`, o Word, o HTML e o Markdown, e o AS-IS e o TO-BE do mesmo processo ficam ligados. Antes de mapear um processo novo, ele procura no cartão se alguém já mapeou. Guia completo em [`referencias/memory-card.md`](referencias/memory-card.md).
 
 ### De onde vêm as regras
 
@@ -182,6 +195,7 @@ As fontes e o motivo de cada verificação estão em [`referencias/`](referencia
 | **Saídas** | SVG, PNG, BPMN, draw.io, Mermaid, HTML, Word e Markdown (`saidas/`) |
 | **Aceite** | o "sim" do dono, o hash por seção e a comparação de versões (`carta/aprovacao.py`) |
 | **Importar** | traz `.bpmn` de outros modeladores e a volta de um mapa editado (`carta/importar.py`) |
+| **Memory Card** | salva, versiona e procura os processos aprovados no cartão do usuário (`carta/memory_card.py`) |
 
 Para conferir a instalação a qualquer momento:
 
@@ -202,9 +216,9 @@ senku/
 ├── LICENCAS-DE-TERCEIROS.md  # Fontes das animações (OFL) e projetos que inspiraram o desenho
 ├── LICENSE                # MIT License
 ├── senku.py               # Porta de entrada: todos os comandos
-├── carta/                 # O motor: carta, entrevista, lacunas, validação, fichas, simulação, análise, layout, aceite, importação
+├── carta/                 # O motor: carta, entrevista, lacunas, validação, fichas, simulação, análise, layout, aceite, importação, Memory Card
 ├── saidas/                # Os geradores: SVG, PNG, BPMN, draw.io, Mermaid, HTML, Word e Markdown
-├── referencias/           # Guias: carta, entrevista, notação, estilo, análise e documento
+├── referencias/           # Guias: carta, entrevista, notação, estilo, análise, documento e Memory Card
 ├── exemplos/              # Processos fictícios completos, com tudo o que o Senku gera: compras (SUP-01) e crédito
 ├── roteiros/              # Roteiros das animações do README
 ├── ferramentas/           # Empacotador da skill, gerador das animações, fuzz e testes de estresse

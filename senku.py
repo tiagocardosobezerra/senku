@@ -22,6 +22,7 @@ Fluxo:
     tobe        começa o TO-BE a partir do AS-IS
     importar    traz um .bpmn que já existe (Bizagi, bpmn.io, Camunda, ARIS...) para uma carta
     situacao    em que etapa está e qual é o próximo passo
+    cartao      Memory Card: procura, salva e versiona os processos aprovados no cartão do usuário
 
 Uso:
     python senku.py novo PASTA --processo "NOME" [--codigo C] [--dono "CARGO"]
@@ -36,6 +37,9 @@ Uso:
     python senku.py tobe CARTA [-o carta-tobe.json]
     python senku.py importar ARQUIVO.bpmn -o PASTA/carta.json
     python senku.py situacao CARTA
+    python senku.py cartao iniciar --repo DONO/memory-card | buscar TERMOS | catalogo
+    python senku.py cartao enviar CARTA [--categoria C --secao S --artigo A] [--motivo M] [--confirmar]
+    python senku.py cartao marcar REF --status em-uso|rascunho [--confirmar]
     python senku.py status
 ================================================================================
 """
@@ -75,6 +79,7 @@ Apoio
   entrevista [BLOCO]  o roteiro de perguntas (abertura, sipoc, passos, decisoes, tempos, gestao, tobe)
   comparar            o que mudou desde o aceite, ou AS-IS x TO-BE (--contra)
   --pools             (desenhar/documentar) no BPMN, cliente e fornecedor em pool próprio, com mensagens
+  cartao              Memory Card: procure antes de mapear, salve depois do aceite (buscar, enviar)
 
 Ajuda de um comando: python senku.py COMANDO --help
 """
@@ -118,6 +123,10 @@ def cmd_novo(a):
     gravar_texto(os.path.join(a.pasta, 'ROTEIRO.md'), ROTEIRO.format(nome=a.processo))
     print(f'✓ criada {destino}')
     print('Próximo: python senku.py entrevista abertura  (pergunte poucas por vez e grave na carta)')
+    from carta import memory_card
+    if memory_card.disponivel()[0]:
+        memory_card.lembrete(f'procure no Memory Card se este processo já foi mapeado: python senku.py cartao '
+                             f'buscar {a.processo}')
 
 
 def cmd_entrevista(a):
@@ -239,7 +248,20 @@ def cmd_aprovar(a):
               '(papéis, tempos, percentuais). Registre na observação do aceite que o dono aprovou assim, ou '
               'feche as lacunas e aprove de novo.')
     print('Gere o documento de novo (documentar) para sair sem a marca de RASCUNHO.')
+    _lembrar_cartao(c)
     return 0
+
+
+def _lembrar_cartao(c):
+    """Depois do aceite: o processo aprovado vai para o Memory Card (prévia; envio só com o "sim")."""
+    from carta import memory_card
+    ok, motivo = memory_card.disponivel()
+    if ok:
+        memory_card.lembrete(f'processo aprovado: ofereça salvar no Memory Card. Prévia: python senku.py cartao '
+                             f'enviar {c.caminho} (mostre a prévia; --confirmar só com o "sim")')
+    elif memory_card.configurado():
+        memory_card.lembrete(f'o Memory Card não está disponível aqui ({motivo}). Entregue os arquivos e diga que '
+                             'salvar é pelo Claude Code na máquina do cartão.')
 
 
 def cmd_comparar(a):
@@ -374,11 +396,110 @@ def cmd_situacao(a):
     n = validacao.resumo(achados)
     print(f'Validação: {n["erro"]} erro(s), {n["aviso"]} aviso(s) · lacunas: {len(qs)}')
     print(f'Próximo: {prox}')
+    from carta import memory_card
+    no_cartao = memory_card.situacao_da_carta(c)
+    if no_cartao and estado == 'aprovada':
+        print('Memory Card: ' + {'salvo': 'este aceite está salvo no cartão',
+                                 'desatualizado': 'o cartão tem uma versão anterior; salve a nova '
+                                                  f'(python senku.py cartao enviar {c.caminho} --motivo "...")',
+                                 'ausente': f'ainda não salvo (python senku.py cartao enviar {c.caminho})'}[no_cartao])
     return 0
 
 
 def cmd_status(a):
     print(f'Senku {VERSAO} · Python {sys.version.split()[0]} · pasta {RAIZ}')
+    from carta import memory_card
+    if memory_card.configurado():
+        ok, motivo = memory_card.disponivel()
+        if ok:
+            cfg = memory_card.config()
+            meus = [f for f in memory_card.ler_catalogo(cfg['pasta']) if f.get('solucao') == memory_card.SOLUCAO]
+            print(f'Memory Card: {cfg["repo"] or "local"} · pasta {cfg["pasta"]} · {len(meus)} processo(s) do Senku')
+        else:
+            print(f'Memory Card: configurado, mas NÃO funciona aqui ({motivo})')
+    else:
+        print('Memory Card: não configurado (python senku.py cartao iniciar --repo SEU_USUARIO/memory-card)')
+    return 0
+
+
+# ---------------------------------------------------------------- Memory Card
+def cmd_cartao(a):
+    from carta import memory_card as mc
+    try:
+        return _cartao(mc, a)
+    except mc.CartaoRecusado as e:
+        print(f'✗ RECUSADO: {e}')
+        return 1
+
+
+def _cartao(mc, a):
+    if a.acao == 'iniciar':
+        cfg = mc.iniciar(a.repo, a.pasta, a.publico, a.substituir)
+        print(f'✓ cartão: {cfg["repo"] or "local (sem GitHub)"} ({"PÚBLICO" if cfg["publico"] else "privado"})')
+        print(f'  pasta: {cfg["pasta"]}')
+        print(f'  configuração: {mc.caminho_config()} (fora do git e do pacote)')
+        return 0
+    if a.acao == 'catalogo':
+        fichas = mc.ler_catalogo(mc.preparar_pasta())
+        if not a.todas:
+            fichas = [f for f in fichas if f.get('solucao') == mc.SOLUCAO]
+        if a.json:
+            print(json.dumps(fichas, ensure_ascii=False, indent=2))
+        else:
+            print(mc.gerar_catalogo_md(fichas) if fichas else 'nenhum processo do Senku no cartão')
+        return 0
+    if a.acao == 'buscar':
+        achados = mc.buscar(mc.preparar_pasta(), a.termos, a.limite)
+        if not achados:
+            print('nenhum save para esses termos')
+        for pontos, f in achados:
+            print(f'{pontos:3d}  {f["ref"]}  (v{f["versao"]}, {f["status"]})  {f["artigo"]} — {f.get("descricao", "")}')
+        return 0
+    if a.acao == 'marcar':
+        pasta = mc.preparar_pasta()
+        ficha = mc.ler_ficha(pasta, a.ref)
+        print(f'{a.ref}: {ficha["status"]} → {a.status}')
+        if ficha['status'] == a.status:
+            print('nada a mudar')
+            return 0
+        if not a.confirmar:
+            print('prévia: nada foi gravado. Repita com --confirmar.')
+            return 0
+        mc.marcar(pasta, a.ref, a.status)
+        print('✓ enviado')
+        return 0
+    pasta = mc.preparar_pasta()                    # enviar
+    e = mc.montar_envio(a.carta, pasta, a.categoria, a.secao, a.artigo, a.descricao, a.texto, a.motivo, a.status,
+                        a.relacionado or (), a.sem_aceite)
+    cfg = mc.config()
+    try:
+        fi = e['ficha']
+        print(f'destino: {cfg["repo"] or cfg["pasta"]} → {mc.SAVES}/{e["ref"]}/  versão {fi["versao"]}'
+              + (' (SUBSTITUI a anterior)' if e['substitui'] else ' (save novo)'))
+        print(f'status: {fi["status"]} · aceite: ' + (f'{fi["aceite"]["por"]} em {fi["aceite"]["quando"]}'
+                                                      if fi['aceite'] else 'nenhum'))
+        print('arquivos: ' + ', '.join(sorted(os.listdir(e['tmp']))))
+        for av in e['avisos']:
+            print(f'AVISO: {av}')
+        if e['novos_relacionados']:
+            print('relacionados novos (ganham o link de volta): ' + ', '.join(e['novos_relacionados']))
+        print('\nficha:')
+        print(json.dumps(fi, ensure_ascii=False, indent=2))
+        if e['substitui']:
+            print('\n--- diff da carta ---\n' + (e['diff_carta'] or '(carta igual)'))
+            print('--- diff do artigo ---\n' + (e['diff_readme'] or '(artigo igual)'))
+        else:
+            print('\n--- artigo ---\n' + e['readme'])
+        if not a.confirmar:
+            print('prévia: nada foi gravado. Mostre ao usuário e, com o "sim", repita com --confirmar.')
+            return 0
+        mc.gravar_envio(e, pasta)
+    finally:
+        mc.descartar(e)
+    if cfg['repo']:
+        print(f'✓ enviado: https://github.com/{cfg["repo"]}/tree/main/{mc.SAVES}/{e["ref"]}')
+    else:
+        print(f'✓ gravado no cartão local: {e["destino"]}')
     return 0
 
 
@@ -490,7 +611,40 @@ def main(argv=None):
     s.add_argument('carta')
     s.set_defaults(func=cmd_situacao)
 
-    sub.add_parser('status', help='versão do Senku').set_defaults(func=cmd_status)
+    sub.add_parser('status', help='versão do Senku e o Memory Card').set_defaults(func=cmd_status)
+
+    for nome in ('cartao', 'memory-card'):
+        s = sub.add_parser(nome, help='Memory Card: procura, salva e versiona os processos aprovados'
+                           if nome == 'cartao' else 'o mesmo que cartao')
+        cs = s.add_subparsers(dest='acao', required=True, parser_class=_Parser, metavar='ACAO')
+        x = cs.add_parser('iniciar', help='liga ao cartão (o mesmo do Vegapunk) ou cria um privado')
+        x.add_argument('--repo', help='DONO/NOME no GitHub (sem ele: cartão só local, com --pasta)')
+        x.add_argument('--pasta')
+        x.add_argument('--publico', action='store_true')
+        x.add_argument('--substituir', action='store_true', help='troca o cartão desta instalação')
+        x = cs.add_parser('catalogo', help='os processos salvos')
+        x.add_argument('--todas', action='store_true', help='todas as soluções, não só o Senku')
+        x.add_argument('--json', action='store_true')
+        x = cs.add_parser('buscar', help='procura no cartão antes de mapear')
+        x.add_argument('termos', nargs='+')
+        x.add_argument('--limite', type=int, default=10)
+        x = cs.add_parser('enviar', help='salva o processo aprovado (prévia; grava só com --confirmar)')
+        x.add_argument('carta')
+        x.add_argument('--categoria', help='padrão: a área da carta')
+        x.add_argument('--secao', help='padrão: o macroprocesso da carta')
+        x.add_argument('--artigo', help='padrão: "CÓDIGO · Nome (CENÁRIO)"')
+        x.add_argument('--descricao', help='padrão: o objetivo do processo')
+        x.add_argument('--texto', help='corpo do artigo em Markdown (padrão: montado da carta)')
+        x.add_argument('--motivo', help='obrigatório numa versão nova')
+        x.add_argument('--status', choices=('rascunho', 'em-uso'))
+        x.add_argument('--relacionado', action='append', help='REF de outro save do Senku')
+        x.add_argument('--sem-aceite', action='store_true', help='salva sem aceite válido, como rascunho')
+        x.add_argument('--confirmar', action='store_true')
+        x = cs.add_parser('marcar', help='muda o status de um save')
+        x.add_argument('ref')
+        x.add_argument('--status', required=True, choices=('rascunho', 'em-uso'))
+        x.add_argument('--confirmar', action='store_true')
+        s.set_defaults(func=cmd_cartao)
     a = ap.parse_args(argv)
     return a.func(a) or 0
 

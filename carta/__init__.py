@@ -15,5 +15,5 @@ documento de mapeamento) é desenhado a partir dela, nunca à mão.
     aprovacao   o "sim" do dono do processo (hash da carta) e a diferença entre versões
 """
 
-VERSAO = '1.13.0'
+VERSAO = '1.14.0'
 FORMATO = 'senku/1'

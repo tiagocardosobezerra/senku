@@ -1,6 +1,6 @@
 ---
 name: senku
-description: "Mapeador de processos de negócio. A pessoa conta como o trabalho anda (em conversa, áudio transcrito, procedimento colado, planilha ou um .bpmn que já existe) e o Senku conduz a entrevista, escreve a carta do processo, aponta o que falta perguntar, confere o fluxo contra regras de boa modelagem (7PMG, BPMN Method and Style) e desenha o FLUXOGRAMA DE ATIVIDADES em raias (SVG, BPMN 2.0 que abre no Bizagi/bpmn.io/Camunda, draw.io/Visio, Mermaid) e o MAPEAMENTO DO PROCESSO completo (ficha, escopo, SIPOC, descrição das atividades, regras de negócio, matriz RACI, indicadores, tempos, valor agregado, passagens de bastão, retrabalho, dores, riscos e controles, oportunidades Lean, AS-IS x TO-BE), com aceite do dono do processo. Use para mapear, documentar, desenhar, revisar ou redesenhar processo, fluxograma, fluxo de atividades, BPMN, raias/swimlane, SIPOC, RACI, POP/procedimento, AS-IS/TO-BE ou melhoria de processo."
+description: "Mapeador de processos de negócio. A pessoa conta como o trabalho anda (em conversa, áudio transcrito, procedimento colado, planilha ou um .bpmn que já existe) e o Senku conduz a entrevista, escreve a carta do processo, aponta o que falta perguntar, confere o fluxo contra regras de boa modelagem (7PMG, BPMN Method and Style) e desenha o FLUXOGRAMA DE ATIVIDADES em raias (SVG, BPMN 2.0 que abre no Bizagi/bpmn.io/Camunda, draw.io/Visio, Mermaid) e o MAPEAMENTO DO PROCESSO completo (ficha, escopo, SIPOC, descrição das atividades, regras de negócio, matriz RACI, indicadores, tempos, valor agregado, passagens de bastão, retrabalho, dores, riscos e controles, oportunidades Lean, AS-IS x TO-BE), com aceite do dono do processo, e salva, versiona e procura os processos aprovados no Memory Card do usuário. Use para mapear, documentar, desenhar, revisar ou redesenhar processo, fluxograma, fluxo de atividades, BPMN, raias/swimlane, SIPOC, RACI, POP/procedimento, AS-IS/TO-BE ou melhoria de processo."
 ---
 
 # Senku
@@ -49,6 +49,17 @@ etapa e o próximo passo.
    cliente): use o papel. Os únicos nomes de pessoa da carta são os de quem
    participou do mapeamento (`participantes`, `historico`) e de quem aprovou
    (`aprovar --por`): é o registro do documento, e eles não vão para o `.bpmn`.
+9. **Memory Card: procure antes, ofereça depois.** Com um cartão configurado
+   (`status` mostra), antes de mapear um processo novo rode
+   `cartao buscar <termos>` e ofereça partir do que já existe. **Depois do
+   aceite, sempre** ofereça salvar: `cartao enviar <carta>` mostra a prévia
+   (destino, ficha, artigo, arquivos); `--confirmar` só com o "sim". Versão
+   nova de um processo salvo pede `--motivo`, e a prévia mostra o diff. O
+   cartão só funciona onde há o `gh` autenticado e a pasta do cartão (o Claude
+   Code na máquina do usuário); fora disso (o claude.ai), não ofereça salvar:
+   entregue os arquivos e diga que salvar é pelo Claude Code. Nunca rode
+   `cartao iniciar` sem a pessoa pedir. Leia os `LEMBRETE:` da saída
+   ([memory-card.md](referencias/memory-card.md)).
 
 ## Qual caminho seguir
 
@@ -61,6 +72,7 @@ etapa e o próximo passo.
 | tem o mapa no Bizagi, bpmn.io, Camunda, ARIS | `importar <arquivo.bpmn> -o <pasta>/carta.json` e siga do passo 4 (arquivo com vários pools: `--pool "Nome do pool"` escolhe qual trazer) |
 | quer o documento em Word ou PDF | `documentar` já gera o `.docx`; PDF pelo HTML (Ctrl+P) ou pelo Word (Salvar como PDF) |
 | melhorar o processo (TO-BE) | passo 9 |
+| guardar um processo aprovado, versionar uma mudança, achar um processo já mapeado (Memory Card) | antes de mapear: `cartao buscar`; depois do aceite: prévia do `cartao enviar` e, com o "sim", `--confirmar`; mudança pede `--motivo`; sem cartão configurado, aponte para o `cartao iniciar` ([memory-card.md](referencias/memory-card.md)) |
 
 **Onde guardar.** A pasta do processo fica **fora** da pasta da skill (ex.:
 `C:/processos/<nome>` ou a pasta de trabalho da pessoa): `novo` cria onde você
@@ -105,7 +117,9 @@ mandar. A carta tem dado do cliente; a skill é ferramenta.
    `aprovar <carta> --por "Nome (cargo)"` e `documentar` de novo (mudar a
    versão depois do aceite volta o documento para RASCUNHO). Mudou depois?
    `comparar <carta>` mostra o quê; novo aceite. Os aceites anteriores ficam
-   guardados e aparecem na seção 12 do documento.
+   guardados e aparecem na seção 12 do documento. Logo depois do aceite,
+   ofereça salvar no Memory Card (regra 9): `cartao enviar <carta>` (prévia)
+   e, com o "sim", `--confirmar`.
 9. **TO-BE** (se pedirem melhoria): `tobe <carta>` copia para
    `carta-tobe.json`; cada mudança resolve uma dor (`melhorias[].resolve`).
    `comparar <as-is> --contra <to-be>` dá a diferença em atividades,
@@ -192,4 +206,5 @@ mandar. A carta tem dado do cliente; a skill é ferramenta.
 - [referencias/estilo.md](referencias/estilo.md): regras de boa modelagem (7PMG, Method and Style, casa) e cada aviso
 - [referencias/analise.md](referencias/analise.md): valor agregado, Lean, tempos, RACI, indicadores, TO-BE
 - [referencias/documento.md](referencias/documento.md): as seções do mapeamento e como apresentar
+- [referencias/memory-card.md](referencias/memory-card.md): o cartão dos processos aprovados (buscar, enviar, versão, privacidade)
 - Exemplo completo: `exemplos/compras/carta.json` (compra de materiais, AS-IS com tudo preenchido)
