@@ -1,0 +1,11 @@
+{"processo": {"nome": "Proposta P1"},
+ "papeis": [{"id": "ven", "nome": "Vendedor"}, {"id": "cli", "nome": "Cliente", "tipo": "externo"}],
+ "elementos": [
+  {"id": "i", "tipo": "inicio", "nome": "Pedido recebido", "papel": "ven", "segue": "a1"},
+  {"id": "a1", "nome": "Enviar proposta", "papel": "ven", "sistema": [], "segue": "c1"},
+  {"id": "c1", "tipo": "corrida", "nome": "O que vier primeiro", "papel": "ven", "segue": [{"para": "e1", "percentual": 70}, {"para": "e2", "percentual": 30}]},
+  {"id": "e1", "tipo": "evento", "gatilho": "mensagem", "nome": "Aceite enviado pelo cliente", "papel": "cli", "segue": "a2"},
+  {"id": "e2", "tipo": "evento", "gatilho": "tempo", "nome": "Aguardar 10 dias corridos", "papel": "ven", "segue": "f2"},
+  {"id": "a2", "nome": "Faturar pedido", "papel": "ven", "sistema": [], "segue": "f"},
+  {"id": "f", "tipo": "fim", "nome": "Pedido faturado"},
+  {"id": "f2", "tipo": "fim", "nome": "Proposta expirada"}]}

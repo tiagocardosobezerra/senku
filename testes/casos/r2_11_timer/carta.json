@@ -1,0 +1,8 @@
+{"processo":{"nome":"Timer"},"papeis":[{"id":"c","nome":"Atendente"}],
+ "elementos":[
+  {"id":"i","tipo":"inicio","nome":"Chamado aberto","papel":"c","segue":"a1"},
+  {"id":"a1","nome":"Solicitar documento","papel":"c","segue":"e1"},
+  {"id":"e1","tipo":"evento","gatilho":"tempo","nome":"Aguardar 48 horas","segue":"e2"},
+  {"id":"e2","tipo":"evento","gatilho":"tempo","nome":"Aguardar 2 dias","segue":"a2"},
+  {"id":"a2","nome":"Encerrar chamado","papel":"c","segue":"f"},
+  {"id":"f","tipo":"fim","nome":"Chamado encerrado"}]}

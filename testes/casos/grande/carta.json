@@ -1,0 +1,732 @@
+{
+ "processo": {
+  "nome": "Processo grande com dez raias"
+ },
+ "papeis": [
+  {
+   "id": "r0",
+   "nome": "Atendimento",
+   "tipo": "interno"
+  },
+  {
+   "id": "r1",
+   "nome": "Comercial",
+   "tipo": "interno"
+  },
+  {
+   "id": "r2",
+   "nome": "Crédito",
+   "tipo": "interno"
+  },
+  {
+   "id": "r3",
+   "nome": "Jurídico",
+   "tipo": "interno"
+  },
+  {
+   "id": "r4",
+   "nome": "Financeiro",
+   "tipo": "interno"
+  },
+  {
+   "id": "r5",
+   "nome": "Logística",
+   "tipo": "interno"
+  },
+  {
+   "id": "r6",
+   "nome": "Fiscal",
+   "tipo": "interno"
+  },
+  {
+   "id": "r7",
+   "nome": "TI",
+   "tipo": "interno"
+  },
+  {
+   "id": "r8",
+   "nome": "Diretoria",
+   "tipo": "interno"
+  },
+  {
+   "id": "r9",
+   "nome": "Cliente",
+   "tipo": "externo"
+  }
+ ],
+ "elementos": [
+  {
+   "id": "inicio",
+   "tipo": "inicio",
+   "nome": "Solicitação recebida",
+   "papel": "r0",
+   "segue": "a1"
+  },
+  {
+   "id": "a1",
+   "nome": "Enviar proposta",
+   "papel": "r3",
+   "tempo": {
+    "execucao": "1h",
+    "espera": "4h"
+   },
+   "segue": "a2"
+  },
+  {
+   "id": "a2",
+   "nome": "Validar contrato",
+   "papel": "r6",
+   "tempo": {
+    "execucao": "1h",
+    "espera": "4h"
+   },
+   "segue": "a3"
+  },
+  {
+   "id": "a3",
+   "nome": "Analisar pedido",
+   "papel": "r1",
+   "tempo": {
+    "execucao": "1h",
+    "espera": "4h"
+   },
+   "segue": "a4"
+  },
+  {
+   "id": "a4",
+   "nome": "Calcular cadastro",
+   "papel": "r6",
+   "tempo": {
+    "execucao": "1h",
+    "espera": "4h"
+   },
+   "segue": "a5"
+  },
+  {
+   "id": "a5",
+   "nome": "Emitir parecer técnico detalhado",
+   "papel": "r0",
+   "tempo": {
+    "execucao": "1h",
+    "espera": "4h"
+   },
+   "segue": "a6"
+  },
+  {
+   "id": "a6",
+   "nome": "Analisar cadastro",
+   "papel": "r4",
+   "tempo": {
+    "execucao": "30min",
+    "espera": "1d"
+   },
+   "segue": "d1"
+  },
+  {
+   "id": "d1",
+   "tipo": "decisao",
+   "nome": "Resultado 1 ok?",
+   "papel": "r4",
+   "segue": [
+    {
+     "para": "a7",
+     "rotulo": "Sim",
+     "percentual": 80
+    },
+    {
+     "para": "a3",
+     "rotulo": "Não",
+     "percentual": 20
+    }
+   ]
+  },
+  {
+   "id": "a7",
+   "nome": "Registrar cadastro",
+   "papel": "r3",
+   "tempo": {
+    "execucao": "1h",
+    "espera": "4h"
+   },
+   "segue": "a8"
+  },
+  {
+   "id": "a8",
+   "nome": "Emitir contrato",
+   "papel": "r4",
+   "tempo": {
+    "execucao": "1h",
+    "espera": "4h"
+   },
+   "segue": "a9"
+  },
+  {
+   "id": "a9",
+   "nome": "Enviar parecer técnico detalhado",
+   "papel": "r4",
+   "tempo": {
+    "execucao": "1h",
+    "espera": "4h"
+   },
+   "segue": "a10"
+  },
+  {
+   "id": "a10",
+   "nome": "Preparar parecer técnico detalhado",
+   "papel": "r1",
+   "tempo": {
+    "execucao": "1h",
+    "espera": "4h"
+   },
+   "segue": "a11"
+  },
+  {
+   "id": "a11",
+   "nome": "Calcular nota fiscal",
+   "papel": "r6",
+   "tempo": {
+    "execucao": "1h",
+    "espera": "4h"
+   },
+   "segue": "a12"
+  },
+  {
+   "id": "a12",
+   "nome": "Validar cadastro",
+   "papel": "r2",
+   "tempo": {
+    "execucao": "30min",
+    "espera": "1d"
+   },
+   "segue": "d2"
+  },
+  {
+   "id": "d2",
+   "tipo": "decisao",
+   "nome": "Resultado 2 ok?",
+   "papel": "r2",
+   "segue": [
+    {
+     "para": "a13",
+     "rotulo": "Sim",
+     "percentual": 80
+    },
+    {
+     "para": "a9",
+     "rotulo": "Não",
+     "percentual": 20
+    }
+   ]
+  },
+  {
+   "id": "a13",
+   "nome": "Calcular cadastro",
+   "papel": "r1",
+   "tempo": {
+    "execucao": "1h",
+    "espera": "4h"
+   },
+   "segue": "a14"
+  },
+  {
+   "id": "a14",
+   "nome": "Enviar cadastro",
+   "papel": "r0",
+   "tempo": {
+    "execucao": "1h",
+    "espera": "4h"
+   },
+   "segue": "a15"
+  },
+  {
+   "id": "a15",
+   "nome": "Emitir boleto",
+   "papel": "r8",
+   "tempo": {
+    "execucao": "1h",
+    "espera": "4h"
+   },
+   "segue": "a16"
+  },
+  {
+   "id": "a16",
+   "nome": "Preparar cadastro",
+   "papel": "r6",
+   "tempo": {
+    "execucao": "1h",
+    "espera": "4h"
+   },
+   "segue": "a17"
+  },
+  {
+   "id": "a17",
+   "nome": "Validar contrato",
+   "papel": "r6",
+   "tempo": {
+    "execucao": "1h",
+    "espera": "4h"
+   },
+   "segue": "a18"
+  },
+  {
+   "id": "a18",
+   "nome": "Enviar pedido",
+   "papel": "r3",
+   "tempo": {
+    "execucao": "30min",
+    "espera": "1d"
+   },
+   "segue": "d3"
+  },
+  {
+   "id": "d3",
+   "tipo": "decisao",
+   "nome": "Resultado 3 ok?",
+   "papel": "r3",
+   "segue": [
+    {
+     "para": "a19",
+     "rotulo": "Sim",
+     "percentual": 80
+    },
+    {
+     "para": "a14",
+     "rotulo": "Não",
+     "percentual": 20
+    }
+   ]
+  },
+  {
+   "id": "a19",
+   "nome": "Registrar romaneio",
+   "papel": "r1",
+   "tempo": {
+    "execucao": "1h",
+    "espera": "4h"
+   },
+   "segue": "a20"
+  },
+  {
+   "id": "a20",
+   "nome": "Calcular romaneio",
+   "papel": "r4",
+   "tempo": {
+    "execucao": "1h",
+    "espera": "4h"
+   },
+   "segue": "a21"
+  },
+  {
+   "id": "a21",
+   "nome": "Conferir nota fiscal",
+   "papel": "r5",
+   "tempo": {
+    "execucao": "1h",
+    "espera": "4h"
+   },
+   "segue": "a22"
+  },
+  {
+   "id": "a22",
+   "nome": "Lançar nota fiscal",
+   "papel": "r1",
+   "tempo": {
+    "execucao": "1h",
+    "espera": "4h"
+   },
+   "segue": "a23"
+  },
+  {
+   "id": "a23",
+   "nome": "Enviar contrato",
+   "papel": "r7",
+   "tempo": {
+    "execucao": "1h",
+    "espera": "4h"
+   },
+   "segue": "a24"
+  },
+  {
+   "id": "a24",
+   "nome": "Preparar parecer técnico detalhado",
+   "papel": "r5",
+   "tempo": {
+    "execucao": "30min",
+    "espera": "1d"
+   },
+   "segue": "d4"
+  },
+  {
+   "id": "d4",
+   "tipo": "decisao",
+   "nome": "Resultado 4 ok?",
+   "papel": "r5",
+   "segue": [
+    {
+     "para": "a25",
+     "rotulo": "Sim",
+     "percentual": 80
+    },
+    {
+     "para": "a19",
+     "rotulo": "Não",
+     "percentual": 20
+    }
+   ]
+  },
+  {
+   "id": "a25",
+   "nome": "Emitir parecer técnico detalhado",
+   "papel": "r8",
+   "tempo": {
+    "execucao": "1h",
+    "espera": "4h"
+   },
+   "segue": "a26"
+  },
+  {
+   "id": "a26",
+   "nome": "Registrar nota fiscal",
+   "papel": "r1",
+   "tempo": {
+    "execucao": "1h",
+    "espera": "4h"
+   },
+   "segue": "a27"
+  },
+  {
+   "id": "a27",
+   "nome": "Preparar nota fiscal",
+   "papel": "r4",
+   "tempo": {
+    "execucao": "1h",
+    "espera": "4h"
+   },
+   "segue": "a28"
+  },
+  {
+   "id": "a28",
+   "nome": "Aprovar contrato",
+   "papel": "r1",
+   "tempo": {
+    "execucao": "1h",
+    "espera": "4h"
+   },
+   "segue": "a29"
+  },
+  {
+   "id": "a29",
+   "nome": "Validar pedido",
+   "papel": "r4",
+   "tempo": {
+    "execucao": "1h",
+    "espera": "4h"
+   },
+   "segue": "a30"
+  },
+  {
+   "id": "a30",
+   "nome": "Analisar cadastro",
+   "papel": "r0",
+   "tempo": {
+    "execucao": "30min",
+    "espera": "1d"
+   },
+   "segue": "d5"
+  },
+  {
+   "id": "d5",
+   "tipo": "decisao",
+   "nome": "Resultado 5 ok?",
+   "papel": "r0",
+   "segue": [
+    {
+     "para": "a31",
+     "rotulo": "Sim",
+     "percentual": 80
+    },
+    {
+     "para": "a26",
+     "rotulo": "Não",
+     "percentual": 20
+    }
+   ]
+  },
+  {
+   "id": "a31",
+   "nome": "Registrar parecer técnico detalhado",
+   "papel": "r5",
+   "tempo": {
+    "execucao": "1h",
+    "espera": "4h"
+   },
+   "segue": "a32"
+  },
+  {
+   "id": "a32",
+   "nome": "Aprovar contrato",
+   "papel": "r4",
+   "tempo": {
+    "execucao": "1h",
+    "espera": "4h"
+   },
+   "segue": "a33"
+  },
+  {
+   "id": "a33",
+   "nome": "Preparar proposta",
+   "papel": "r6",
+   "tempo": {
+    "execucao": "1h",
+    "espera": "4h"
+   },
+   "segue": "a34"
+  },
+  {
+   "id": "a34",
+   "nome": "Preparar nota fiscal",
+   "papel": "r4",
+   "tempo": {
+    "execucao": "1h",
+    "espera": "4h"
+   },
+   "segue": "a35"
+  },
+  {
+   "id": "a35",
+   "nome": "Enviar contrato",
+   "papel": "r7",
+   "tempo": {
+    "execucao": "1h",
+    "espera": "4h"
+   },
+   "segue": "a36"
+  },
+  {
+   "id": "a36",
+   "nome": "Preparar contrato",
+   "papel": "r4",
+   "tempo": {
+    "execucao": "30min",
+    "espera": "1d"
+   },
+   "segue": "d6"
+  },
+  {
+   "id": "d6",
+   "tipo": "decisao",
+   "nome": "Resultado 6 ok?",
+   "papel": "r4",
+   "segue": [
+    {
+     "para": "a37",
+     "rotulo": "Sim",
+     "percentual": 80
+    },
+    {
+     "para": "a31",
+     "rotulo": "Não",
+     "percentual": 20
+    }
+   ]
+  },
+  {
+   "id": "a37",
+   "nome": "Preparar pedido",
+   "papel": "r5",
+   "tempo": {
+    "execucao": "1h",
+    "espera": "4h"
+   },
+   "segue": "a38"
+  },
+  {
+   "id": "a38",
+   "nome": "Registrar romaneio",
+   "papel": "r5",
+   "tempo": {
+    "execucao": "1h",
+    "espera": "4h"
+   },
+   "segue": "a39"
+  },
+  {
+   "id": "a39",
+   "nome": "Aprovar parecer técnico detalhado",
+   "papel": "r2",
+   "tempo": {
+    "execucao": "1h",
+    "espera": "4h"
+   },
+   "segue": "a40"
+  },
+  {
+   "id": "a40",
+   "nome": "Preparar proposta",
+   "papel": "r4",
+   "tempo": {
+    "execucao": "1h",
+    "espera": "4h"
+   },
+   "segue": "a41"
+  },
+  {
+   "id": "a41",
+   "nome": "Emitir boleto",
+   "papel": "r7",
+   "tempo": {
+    "execucao": "1h",
+    "espera": "4h"
+   },
+   "segue": "a42"
+  },
+  {
+   "id": "a42",
+   "nome": "Registrar pedido",
+   "papel": "r3",
+   "tempo": {
+    "execucao": "30min",
+    "espera": "1d"
+   },
+   "segue": "d7"
+  },
+  {
+   "id": "d7",
+   "tipo": "decisao",
+   "nome": "Resultado 7 ok?",
+   "papel": "r3",
+   "segue": [
+    {
+     "para": "a43",
+     "rotulo": "Sim",
+     "percentual": 80
+    },
+    {
+     "para": "a40",
+     "rotulo": "Não",
+     "percentual": 20
+    }
+   ]
+  },
+  {
+   "id": "a43",
+   "nome": "Conferir contrato",
+   "papel": "r0",
+   "tempo": {
+    "execucao": "1h",
+    "espera": "4h"
+   },
+   "segue": "a44"
+  },
+  {
+   "id": "a44",
+   "nome": "Registrar romaneio",
+   "papel": "r9",
+   "tempo": {
+    "execucao": "1h",
+    "espera": "4h"
+   },
+   "segue": "a45"
+  },
+  {
+   "id": "a45",
+   "nome": "Emitir parecer técnico detalhado",
+   "papel": "r9",
+   "tempo": {
+    "execucao": "1h",
+    "espera": "4h"
+   },
+   "segue": "a46"
+  },
+  {
+   "id": "a46",
+   "nome": "Analisar cadastro",
+   "papel": "r0",
+   "tempo": {
+    "execucao": "1h",
+    "espera": "4h"
+   },
+   "segue": "a47"
+  },
+  {
+   "id": "a47",
+   "nome": "Emitir romaneio",
+   "papel": "r6",
+   "tempo": {
+    "execucao": "1h",
+    "espera": "4h"
+   },
+   "segue": "a48"
+  },
+  {
+   "id": "a48",
+   "nome": "Validar boleto",
+   "papel": "r3",
+   "tempo": {
+    "execucao": "30min",
+    "espera": "1d"
+   },
+   "segue": "d8"
+  },
+  {
+   "id": "d8",
+   "tipo": "decisao",
+   "nome": "Resultado 8 ok?",
+   "papel": "r3",
+   "segue": [
+    {
+     "para": "a49",
+     "rotulo": "Sim",
+     "percentual": 80
+    },
+    {
+     "para": "a45",
+     "rotulo": "Não",
+     "percentual": 20
+    }
+   ]
+  },
+  {
+   "id": "a49",
+   "nome": "Registrar nota fiscal",
+   "papel": "r7",
+   "tempo": {
+    "execucao": "1h",
+    "espera": "4h"
+   },
+   "segue": "a50"
+  },
+  {
+   "id": "a50",
+   "nome": "Validar nota fiscal",
+   "papel": "r6",
+   "tempo": {
+    "execucao": "1h",
+    "espera": "4h"
+   },
+   "segue": "a51"
+  },
+  {
+   "id": "a51",
+   "nome": "Emitir romaneio",
+   "papel": "r6",
+   "tempo": {
+    "execucao": "1h",
+    "espera": "4h"
+   },
+   "segue": "a52"
+  },
+  {
+   "id": "a52",
+   "nome": "Arquivar processo",
+   "papel": "r0",
+   "segue": "fim"
+  },
+  {
+   "id": "fim",
+   "tipo": "fim",
+   "nome": "Processo concluído",
+   "papel": "r0"
+  }
+ ]
+}

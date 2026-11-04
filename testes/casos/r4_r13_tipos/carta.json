@@ -1,0 +1,10 @@
+{"processo": {"nome": "Teste 🚀 <&> \"aspas\" ‮RTL", "codigo": "X/01:é", "versao": 2},
+ "papeis": [{"id": "a b", "nome": "Área & <Cia>"}, {"id": "Raia_a_b", "nome": "Outra"}],
+ "sistemas": ["SAP", {"id": "erp", "nome": "ERP"}],
+ "elementos": [
+  {"id": "início 1", "tipo": "Início", "nome": "Começo 🙂", "segue": 7},
+  {"id": 7, "nome": "Analisar pedido muito longo com várias palavras para testar quebra de linha e corte de texto no desenho e no documento, e mais palavras ainda para passar de 120 caracteres", "papel": "Área & <Cia>", "sistema": "SAP",
+   "tempo": "2h", "bordas": {"gatilho": "tempo"}, "segue": [{"para": "d 1", "percentual": "100%"}]},
+  {"id": "d 1", "tipo": "XOR", "nome": "OK?", "papel": "a b", "segue": [{"para": "fim", "rotulo": "Sim", "percentual": "0,8"}, {"para": "7", "rotulo": "Não", "percentual": 0.2}]},
+  {"id": "fim", "tipo": "end", "nome": "Fim"},
+  {"id": "7~1", "tipo": "atividade", "nome": "Colidir com id de borda", "papel": "Raia_a_b", "segue": "fim"}]}

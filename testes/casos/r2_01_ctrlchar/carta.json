@@ -1,0 +1,1 @@
+{"processo": {"nome": "Reembolso"}, "papeis": [{"id": "rh", "nome": "Analista de RH"}], "elementos": [{"id": "i", "tipo": "inicio", "nome": "Pedido recebido", "papel": "rh", "segue": "a1"}, {"id": "a1", "nome": "Conferir\u000bcomprovantes", "papel": "rh", "segue": "f"}, {"id": "f", "tipo": "fim", "nome": "Pedido conferido"}]}

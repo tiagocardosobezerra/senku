@@ -1,0 +1,211 @@
+{
+ "elementos": [
+  {
+   "id": "i",
+   "tipo": "inicio",
+   "nome": "Pedido recebido",
+   "papel": "x",
+   "segue": "a1"
+  },
+  {
+   "id": "a1",
+   "nome": "Executar a1",
+   "papel": "x",
+   "segue": "d1"
+  },
+  {
+   "id": "d1",
+   "tipo": "decisao",
+   "nome": "Q1?",
+   "papel": "x",
+   "segue": [
+    {
+     "para": "d2",
+     "rotulo": "Sim"
+    },
+    {
+     "para": "z1",
+     "rotulo": "Não"
+    }
+   ]
+  },
+  {
+   "id": "d2",
+   "tipo": "decisao",
+   "nome": "Q2?",
+   "papel": "x",
+   "segue": [
+    {
+     "para": "d3",
+     "rotulo": "Sim"
+    },
+    {
+     "para": "z2",
+     "rotulo": "Não"
+    }
+   ]
+  },
+  {
+   "id": "d3",
+   "tipo": "decisao",
+   "nome": "Q3?",
+   "papel": "x",
+   "segue": [
+    {
+     "para": "d4",
+     "rotulo": "Sim"
+    },
+    {
+     "para": "z3",
+     "rotulo": "Não"
+    }
+   ]
+  },
+  {
+   "id": "d4",
+   "tipo": "decisao",
+   "nome": "Q4?",
+   "papel": "x",
+   "segue": [
+    {
+     "para": "d5",
+     "rotulo": "Sim"
+    },
+    {
+     "para": "z4",
+     "rotulo": "Não"
+    }
+   ]
+  },
+  {
+   "id": "d5",
+   "tipo": "decisao",
+   "nome": "Q5?",
+   "papel": "x",
+   "segue": [
+    {
+     "para": "d6",
+     "rotulo": "Sim"
+    },
+    {
+     "para": "z5",
+     "rotulo": "Não"
+    }
+   ]
+  },
+  {
+   "id": "d6",
+   "tipo": "decisao",
+   "nome": "Q6?",
+   "papel": "x",
+   "segue": [
+    {
+     "para": "d7",
+     "rotulo": "Sim"
+    },
+    {
+     "para": "z6",
+     "rotulo": "Não"
+    }
+   ]
+  },
+  {
+   "id": "d7",
+   "tipo": "decisao",
+   "nome": "Q7?",
+   "papel": "x",
+   "segue": [
+    {
+     "para": "d8",
+     "rotulo": "Sim"
+    },
+    {
+     "para": "z7",
+     "rotulo": "Não"
+    }
+   ]
+  },
+  {
+   "id": "d8",
+   "tipo": "decisao",
+   "nome": "Q8?",
+   "papel": "x",
+   "segue": [
+    {
+     "para": "f",
+     "rotulo": "Sim"
+    },
+    {
+     "para": "z8",
+     "rotulo": "Não"
+    }
+   ]
+  },
+  {
+   "id": "z1",
+   "nome": "Executar z1",
+   "papel": "x",
+   "segue": "f"
+  },
+  {
+   "id": "z2",
+   "nome": "Executar z2",
+   "papel": "x",
+   "segue": "f"
+  },
+  {
+   "id": "z3",
+   "nome": "Executar z3",
+   "papel": "x",
+   "segue": "f"
+  },
+  {
+   "id": "z4",
+   "nome": "Executar z4",
+   "papel": "x",
+   "segue": "f"
+  },
+  {
+   "id": "z5",
+   "nome": "Executar z5",
+   "papel": "x",
+   "segue": "f"
+  },
+  {
+   "id": "z6",
+   "nome": "Executar z6",
+   "papel": "x",
+   "segue": "f"
+  },
+  {
+   "id": "z7",
+   "nome": "Executar z7",
+   "papel": "x",
+   "segue": "f"
+  },
+  {
+   "id": "z8",
+   "nome": "Executar z8",
+   "papel": "x",
+   "segue": "f"
+  },
+  {
+   "id": "f",
+   "tipo": "fim",
+   "nome": "Concluído"
+  }
+ ],
+ "processo": {
+  "nome": "deep_nested"
+ },
+ "papeis": [
+  {
+   "id": "x",
+   "nome": "Analista"
+  },
+  {
+   "id": "y",
+   "nome": "Gestor"
+  }
+ ]
+}

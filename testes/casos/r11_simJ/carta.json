@@ -1,0 +1,99 @@
+{
+ "processo": {
+  "nome": "simJ"
+ },
+ "papeis": [
+  {
+   "id": "a",
+   "nome": "Analista"
+  },
+  {
+   "id": "g",
+   "nome": "Gestor"
+  }
+ ],
+ "elementos": [
+  {
+   "id": "i",
+   "tipo": "inicio",
+   "nome": "Inicio",
+   "papel": "a",
+   "segue": "o1"
+  },
+  {
+   "id": "o1",
+   "tipo": "inclusivo",
+   "nome": "Quais?",
+   "papel": "a",
+   "segue": [
+    {
+     "para": "x",
+     "rotulo": "X",
+     "percentual": 80
+    },
+    {
+     "para": "y",
+     "rotulo": "Y",
+     "percentual": 50
+    },
+    {
+     "para": "z",
+     "rotulo": "Z",
+     "percentual": 40
+    }
+   ]
+  },
+  {
+   "id": "x",
+   "nome": "Fazer X",
+   "papel": "a",
+   "segue": "o2",
+   "tempo": {
+    "execucao": "2h"
+   }
+  },
+  {
+   "id": "z",
+   "nome": "Fazer Z",
+   "papel": "a",
+   "segue": "o2",
+   "tempo": {
+    "execucao": "3h"
+   }
+  },
+  {
+   "id": "y",
+   "nome": "Fazer Y",
+   "papel": "g",
+   "segue": "fy",
+   "tempo": {
+    "execucao": "6h"
+   }
+  },
+  {
+   "id": "fy",
+   "tipo": "fim",
+   "nome": "Y feito"
+  },
+  {
+   "id": "o2",
+   "tipo": "inclusivo",
+   "papel": "a",
+   "segue": "w"
+  },
+  {
+   "id": "w",
+   "nome": "Fechar",
+   "papel": "a",
+   "segue": "f",
+   "tempo": {
+    "execucao": "1h"
+   }
+  },
+  {
+   "id": "f",
+   "tipo": "fim",
+   "nome": "Pronto"
+  }
+ ]
+}

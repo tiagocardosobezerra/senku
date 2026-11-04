@@ -1,0 +1,890 @@
+{
+  "formato": "senku/1",
+  "processo": {
+    "codigo": "CRE-02",
+    "nome": "Concessão de limite de crédito para cliente PJ",
+    "cenario": "as-is",
+    "versao": "0.4",
+    "objetivo": "Liberar limite de crédito para clientes pessoa jurídica com risco aceitável, no menor prazo, dentro da política de crédito e das alçadas.",
+    "dono": "Gerente de Crédito e Cobrança",
+    "area": "Financeiro",
+    "macroprocesso": "Gestão de receitas",
+    "nivel": "processo",
+    "gatilho": "Vendedor recebe pedido de cliente novo ou pedido de aumento de limite",
+    "resultado": "Limite cadastrado no ERP e contrato assinado, ou recusa comunicada ao cliente",
+    "frequencia": "contínuo",
+    "volume": "cerca de 260 propostas por mês (70% clientes novos)",
+    "prazo_informado": "de 5 a 20 dias úteis; o comercial reclama dos casos que vão a comitê",
+    "escopo": {
+      "inicio": "Vendedor registra a proposta de crédito",
+      "fim": "Limite liberado no ERP, ou cliente informado da recusa ou da expiração",
+      "inclui": [
+        "clientes novos",
+        "aumento de limite de clientes ativos"
+      ],
+      "nao_inclui": [
+        "renovação anual automática (CRE-03)",
+        "cobrança e bloqueio por atraso (CRE-05)",
+        "venda à vista"
+      ]
+    },
+    "normas": [
+      "Política de Crédito POL-FIN-07 rev. 3",
+      "Matriz de alçadas de crédito 2026",
+      "Procedimento KYC / PLD (Lei 9.613/1998)"
+    ],
+    "premissas": [
+      "Tempos e percentuais estimados nas entrevistas de 21 e 22/10/2026",
+      "Score do bureau consultado por integração automática do ERP"
+    ]
+  },
+  "participantes": [
+    {
+      "nome": "Marina Lopes",
+      "papel": "Analista de Crédito Sênior",
+      "data": "21/10/2026"
+    },
+    {
+      "nome": "Rafael Souza",
+      "papel": "Gerente de Crédito e Cobrança",
+      "data": "21/10/2026"
+    },
+    {
+      "nome": "Bruno Costa",
+      "papel": "Coordenador Comercial",
+      "data": "22/10/2026"
+    },
+    {
+      "nome": "Letícia Prado",
+      "papel": "Advogada (Jurídico)",
+      "data": "22/10/2026"
+    }
+  ],
+  "sipoc": {
+    "fornecedores": [
+      "Cliente PJ",
+      "Vendedor",
+      "Bureau de crédito",
+      "Receita Federal (consulta CNPJ)"
+    ],
+    "entradas": [
+      "Proposta de crédito",
+      "Contrato social e balanço",
+      "Score e restrições do bureau",
+      "Política e alçadas"
+    ],
+    "saidas": [
+      "Parecer de crédito",
+      "Contrato de crédito assinado",
+      "Limite cadastrado no ERP",
+      "Comunicação de recusa"
+    ],
+    "clientes": [
+      "Cliente PJ",
+      "Área Comercial",
+      "Faturamento"
+    ]
+  },
+  "papeis": [
+    {
+      "id": "cliente",
+      "nome": "Cliente PJ",
+      "tipo": "externo"
+    },
+    {
+      "id": "vendedor",
+      "nome": "Vendedor",
+      "tipo": "interno"
+    },
+    {
+      "id": "cadastro",
+      "nome": "Cadastro",
+      "tipo": "interno"
+    },
+    {
+      "id": "erp",
+      "nome": "ERP (automático)",
+      "tipo": "sistema"
+    },
+    {
+      "id": "analista",
+      "nome": "Analista de Crédito",
+      "tipo": "interno"
+    },
+    {
+      "id": "comite",
+      "nome": "Comitê de Crédito",
+      "tipo": "interno"
+    },
+    {
+      "id": "juridico",
+      "nome": "Jurídico",
+      "tipo": "interno"
+    }
+  ],
+  "sistemas": [
+    {
+      "id": "crm",
+      "nome": "CRM",
+      "descricao": "Salesforce"
+    },
+    {
+      "id": "sis_erp",
+      "nome": "ERP",
+      "descricao": "TOTVS Protheus"
+    },
+    {
+      "id": "bureau",
+      "nome": "Bureau",
+      "descricao": "Serasa Experian, via integração"
+    },
+    {
+      "id": "email",
+      "nome": "E-mail"
+    },
+    {
+      "id": "planilha",
+      "nome": "Planilha de análise"
+    },
+    {
+      "id": "docusign",
+      "nome": "DocuSign"
+    }
+  ],
+  "elementos": [
+    {
+      "id": "inicio",
+      "tipo": "inicio",
+      "gatilho": "mensagem",
+      "nome": "Pedido de crédito recebido",
+      "papel": "vendedor",
+      "segue": "a1"
+    },
+    {
+      "id": "a1",
+      "nome": "Registrar proposta de crédito",
+      "papel": "vendedor",
+      "sistema": "crm",
+      "descricao": "Abre a proposta no CRM com CNPJ, limite pedido, prazo de pagamento e previsão de compra mensal.",
+      "saidas": [
+        "Proposta de crédito"
+      ],
+      "tempo": {
+        "execucao": "20min"
+      },
+      "valor": "NAV-N",
+      "segue": "a2"
+    },
+    {
+      "id": "a2",
+      "nome": "Solicitar documentos ao cliente",
+      "papel": "vendedor",
+      "sistema": "email",
+      "descricao": "Pede contrato social, dois últimos balanços e cartão CNPJ.",
+      "tempo": {
+        "execucao": "10min"
+      },
+      "valor": "NAV-N",
+      "segue": "c1"
+    },
+    {
+      "id": "c1",
+      "nome": "Enviar documentos",
+      "papel": "cliente",
+      "sistema": "email",
+      "tempo": {
+        "execucao": "30min",
+        "espera": "3d"
+      },
+      "valor": "NAV-N",
+      "segue": "a3"
+    },
+    {
+      "id": "a3",
+      "nome": "Conferir documentação",
+      "papel": "cadastro",
+      "sistema": "crm",
+      "regras": [
+        "R1"
+      ],
+      "como": [
+        "Conferir CNPJ ativo na Receita",
+        "Conferir se o signatário consta no contrato social",
+        "Conferir balanço assinado por contador"
+      ],
+      "tempo": {
+        "execucao": "25min",
+        "espera": "1d"
+      },
+      "valor": "NAV-N",
+      "segue": "d1"
+    },
+    {
+      "id": "d1",
+      "tipo": "decisao",
+      "nome": "Documentação completa?",
+      "papel": "cadastro",
+      "segue": [
+        {
+          "para": "s1",
+          "rotulo": "Sim",
+          "percentual": 65
+        },
+        {
+          "para": "a2b",
+          "rotulo": "Não",
+          "percentual": 35
+        }
+      ]
+    },
+    {
+      "id": "a2b",
+      "nome": "Cobrar documentos pendentes",
+      "papel": "vendedor",
+      "sistema": "email",
+      "tempo": {
+        "execucao": "10min",
+        "espera": "1d"
+      },
+      "valor": "NAV",
+      "segue": "c1"
+    },
+    {
+      "id": "s1",
+      "tipo": "subprocesso",
+      "nome": "Verificar KYC e PLD",
+      "papel": "cadastro",
+      "sistema": [
+        "sis_erp"
+      ],
+      "regras": [
+        "R2"
+      ],
+      "descricao": "Checagem de sócios em listas restritivas e PEP (mapeado em CRE-02.1).",
+      "tempo": {
+        "execucao": "15min",
+        "espera": "2h30"
+      },
+      "valor": "NAV-N",
+      "segue": "d0",
+      "detalhe": "kyc/carta.json"
+    },
+    {
+      "id": "d0",
+      "tipo": "decisao",
+      "nome": "Sócios sem restrição de PLD?",
+      "papel": "cadastro",
+      "segue": [
+        {
+          "para": "x1",
+          "rotulo": "Sim",
+          "percentual": 98
+        },
+        {
+          "para": "a12",
+          "rotulo": "Não",
+          "percentual": 2
+        }
+      ]
+    },
+    {
+      "id": "x1",
+      "nome": "Consultar score no bureau",
+      "papel": "erp",
+      "sistema": [
+        "sis_erp",
+        "bureau"
+      ],
+      "automatizada": true,
+      "descricao": "Integração busca score, protestos, ações e cheques sem fundo.",
+      "tempo": {
+        "execucao": "1min"
+      },
+      "valor": "NAV-N",
+      "segue": "x2"
+    },
+    {
+      "id": "x2",
+      "nome": "Calcular limite sugerido",
+      "papel": "erp",
+      "sistema": "sis_erp",
+      "automatizada": true,
+      "regras": [
+        "R3"
+      ],
+      "tempo": {
+        "execucao": "1min"
+      },
+      "valor": "VA",
+      "segue": "d2"
+    },
+    {
+      "id": "d2",
+      "tipo": "decisao",
+      "nome": "Qual faixa de risco?",
+      "papel": "erp",
+      "regras": [
+        "R3"
+      ],
+      "segue": [
+        {
+          "para": "j0",
+          "rotulo": "Baixo e até R$ 50 mil",
+          "percentual": 40
+        },
+        {
+          "para": "a4",
+          "rotulo": "Médio, ou acima de R$ 50 mil",
+          "percentual": 50
+        },
+        {
+          "para": "a12",
+          "rotulo": "Alto",
+          "percentual": 10
+        }
+      ]
+    },
+    {
+      "id": "a4",
+      "nome": "Analisar crédito",
+      "papel": "analista",
+      "sistema": [
+        "planilha",
+        "bureau"
+      ],
+      "regras": [
+        "R4"
+      ],
+      "descricao": "Analisa balanço (liquidez, endividamento), histórico de pagamento e referências comerciais; registra parecer.",
+      "saidas": [
+        "Parecer de crédito"
+      ],
+      "tempo": {
+        "execucao": "2h",
+        "espera": "3d"
+      },
+      "valor": "VA",
+      "raci": {
+        "A": "analista",
+        "C": [
+          "vendedor"
+        ]
+      },
+      "segue": "d3",
+      "bordas": [
+        {
+          "gatilho": "tempo",
+          "nome": "Prazo de análise (5 dias úteis) estourado",
+          "tempo": "5d",
+          "percentual": 8,
+          "segue": "a5"
+        }
+      ]
+    },
+    {
+      "id": "d3",
+      "tipo": "decisao",
+      "nome": "Limite dentro da alçada do analista?",
+      "papel": "analista",
+      "regras": [
+        "R5"
+      ],
+      "segue": [
+        {
+          "para": "d4",
+          "rotulo": "Sim",
+          "percentual": 70
+        },
+        {
+          "para": "a5",
+          "rotulo": "Não",
+          "percentual": 30
+        }
+      ]
+    },
+    {
+      "id": "d4",
+      "tipo": "decisao",
+      "nome": "Parecer favorável?",
+      "papel": "analista",
+      "segue": [
+        {
+          "para": "j0",
+          "rotulo": "Sim",
+          "percentual": 80
+        },
+        {
+          "para": "a12",
+          "rotulo": "Não",
+          "percentual": 20
+        }
+      ]
+    },
+    {
+      "id": "a5",
+      "nome": "Preparar dossiê para o comitê",
+      "papel": "analista",
+      "sistema": "planilha",
+      "tempo": {
+        "execucao": "1h"
+      },
+      "valor": "NAV-N",
+      "segue": "e1"
+    },
+    {
+      "id": "e1",
+      "tipo": "evento",
+      "gatilho": "tempo",
+      "nome": "Aguardar reunião quinzenal do comitê",
+      "papel": "comite",
+      "tempo": {
+        "espera": "5d"
+      },
+      "segue": "a6"
+    },
+    {
+      "id": "a6",
+      "nome": "Deliberar sobre o limite",
+      "papel": "comite",
+      "regras": [
+        "R5"
+      ],
+      "saidas": [
+        "Ata do comitê"
+      ],
+      "tempo": {
+        "execucao": "15min"
+      },
+      "valor": "NAV-N",
+      "raci": {
+        "A": "comite",
+        "C": [
+          "analista"
+        ],
+        "I": [
+          "vendedor"
+        ]
+      },
+      "segue": "d5"
+    },
+    {
+      "id": "d5",
+      "tipo": "decisao",
+      "nome": "Comitê aprovou?",
+      "papel": "comite",
+      "segue": [
+        {
+          "para": "j0",
+          "rotulo": "Aprovado",
+          "percentual": 60
+        },
+        {
+          "para": "a4",
+          "rotulo": "Pede nova análise",
+          "percentual": 15
+        },
+        {
+          "para": "a12",
+          "rotulo": "Recusado",
+          "percentual": 25
+        }
+      ]
+    },
+    {
+      "id": "j0",
+      "tipo": "decisao",
+      "papel": "analista",
+      "segue": "p1"
+    },
+    {
+      "id": "p1",
+      "tipo": "paralelo",
+      "papel": "analista",
+      "segue": [
+        "a7",
+        "a8"
+      ]
+    },
+    {
+      "id": "a7",
+      "nome": "Emitir contrato de crédito",
+      "papel": "juridico",
+      "sistema": "docusign",
+      "regras": [
+        "R6"
+      ],
+      "tempo": {
+        "execucao": "40min",
+        "espera": "2d"
+      },
+      "valor": "NAV-N",
+      "segue": "c2"
+    },
+    {
+      "id": "c2",
+      "nome": "Assinar contrato",
+      "papel": "cliente",
+      "sistema": "docusign",
+      "tempo": {
+        "execucao": "10min",
+        "espera": "3d"
+      },
+      "valor": "NAV-N",
+      "segue": "p2",
+      "regras": [
+        "R6"
+      ],
+      "bordas": [
+        {
+          "id": "c2b",
+          "gatilho": "tempo",
+          "nome": "Prazo de 10 dias corridos vencido",
+          "tempo": "10dc",
+          "percentual": 10,
+          "segue": "a13"
+        }
+      ]
+    },
+    {
+      "id": "a8",
+      "nome": "Cadastrar limite no ERP",
+      "papel": "cadastro",
+      "sistema": "sis_erp",
+      "descricao": "Cadastra limite, prazo e garantias; limite fica bloqueado até o contrato assinado.",
+      "tempo": {
+        "execucao": "15min",
+        "espera": "1d"
+      },
+      "valor": "VA",
+      "segue": "p2"
+    },
+    {
+      "id": "p2",
+      "tipo": "paralelo",
+      "papel": "cadastro",
+      "segue": "a9"
+    },
+    {
+      "id": "a9",
+      "nome": "Desbloquear limite",
+      "papel": "cadastro",
+      "sistema": "sis_erp",
+      "tempo": {
+        "execucao": "5min",
+        "espera": "4h"
+      },
+      "valor": "VA",
+      "segue": "a10"
+    },
+    {
+      "id": "a10",
+      "nome": "Avisar vendedor da liberação",
+      "papel": "cadastro",
+      "sistema": "email",
+      "tempo": {
+        "execucao": "5min"
+      },
+      "valor": "NAV-N",
+      "segue": "fim_ok"
+    },
+    {
+      "id": "fim_ok",
+      "tipo": "fim",
+      "nome": "Crédito liberado",
+      "papel": "vendedor"
+    },
+    {
+      "id": "a12",
+      "nome": "Comunicar recusa ao cliente",
+      "papel": "vendedor",
+      "sistema": "email",
+      "regras": [
+        "R7"
+      ],
+      "tempo": {
+        "execucao": "15min",
+        "espera": "1d"
+      },
+      "valor": "NAV-N",
+      "segue": "fim_rec"
+    },
+    {
+      "id": "fim_rec",
+      "tipo": "fim",
+      "nome": "Crédito recusado",
+      "papel": "vendedor"
+    },
+    {
+      "id": "a13",
+      "nome": "Cancelar proposta",
+      "papel": "juridico",
+      "sistema": "crm",
+      "tempo": {
+        "execucao": "10min"
+      },
+      "valor": "NAV",
+      "segue": "fim_exp"
+    },
+    {
+      "id": "fim_exp",
+      "tipo": "fim",
+      "nome": "Proposta expirada",
+      "papel": "juridico",
+      "encerra": true
+    }
+  ],
+  "regras": [
+    {
+      "id": "R1",
+      "texto": "Sem contrato social atualizado, dois últimos balanços e cartão CNPJ ativo, a proposta não segue.",
+      "fonte": "POL-FIN-07, item 3.1"
+    },
+    {
+      "id": "R2",
+      "texto": "Sócio em lista restritiva ou PEP sem diligência reforçada: recusa obrigatória.",
+      "fonte": "Procedimento KYC/PLD"
+    },
+    {
+      "id": "R3",
+      "texto": "Score ≥ 700 e limite até R$ 50 mil: aprovação automática. Score < 400 ou protesto ativo: recusa. Demais: análise manual.",
+      "fonte": "POL-FIN-07, item 4"
+    },
+    {
+      "id": "R4",
+      "texto": "Liquidez corrente mínima de 1,0 e endividamento até 70% do patrimônio líquido.",
+      "fonte": "POL-FIN-07, item 5.2"
+    },
+    {
+      "id": "R5",
+      "texto": "Analista aprova até R$ 200 mil; gerente até R$ 500 mil; acima disso, comitê.",
+      "fonte": "Matriz de alçadas 2026"
+    },
+    {
+      "id": "R6",
+      "texto": "Contrato não assinado em 10 dias corridos expira; nova proposta reinicia a análise.",
+      "fonte": "POL-FIN-07, item 7"
+    },
+    {
+      "id": "R7",
+      "texto": "A recusa não informa o motivo detalhado de score; o vendedor oferece venda à vista ou com garantia.",
+      "fonte": "Jurídico"
+    }
+  ],
+  "indicadores": [
+    {
+      "nome": "Prazo de concessão",
+      "formula": "data de desbloqueio - data da proposta (dias úteis), mediana",
+      "meta": "≤ 5 dias úteis",
+      "polaridade": "menor é melhor",
+      "periodicidade": "mensal",
+      "fonte": "CRM + ERP",
+      "dono": "Gerente de Crédito e Cobrança",
+      "atual": "9 dias úteis (mediana set/2026)"
+    },
+    {
+      "nome": "Taxa de aprovação automática",
+      "formula": "propostas aprovadas sem análise manual / propostas analisadas",
+      "meta": "≥ 50%",
+      "polaridade": "maior é melhor",
+      "periodicidade": "mensal",
+      "fonte": "ERP",
+      "dono": "Gerente de Crédito e Cobrança",
+      "atual": "40%"
+    },
+    {
+      "nome": "Inadimplência da safra",
+      "formula": "valor vencido > 60 dias / limite liberado, por mês de concessão",
+      "meta": "≤ 2,5%",
+      "polaridade": "menor é melhor",
+      "periodicidade": "mensal",
+      "fonte": "ERP",
+      "dono": "Gerente de Crédito e Cobrança",
+      "atual": "2,1%"
+    },
+    {
+      "nome": "Retrabalho de documentação",
+      "formula": "propostas devolvidas por documento / propostas recebidas",
+      "meta": "≤ 15%",
+      "polaridade": "menor é melhor",
+      "periodicidade": "mensal",
+      "fonte": "CRM",
+      "dono": "Coordenador Comercial",
+      "atual": "35%"
+    }
+  ],
+  "dores": [
+    {
+      "id": "D1",
+      "descricao": "35% das propostas voltam por documento faltando; o cliente manda aos poucos por e-mail.",
+      "elementos": [
+        "a2",
+        "c1",
+        "a3"
+      ],
+      "impacto": "alto",
+      "frequencia": "35%"
+    },
+    {
+      "id": "D2",
+      "descricao": "Proposta acima da alçada espera a reunião quinzenal do comitê (até 15 dias).",
+      "elementos": [
+        "e1",
+        "a6"
+      ],
+      "impacto": "alto",
+      "frequencia": "15% do total"
+    },
+    {
+      "id": "D3",
+      "descricao": "Análise manual em planilha fora do ERP: parecer não fica no histórico do cliente.",
+      "elementos": [
+        "a4"
+      ],
+      "impacto": "médio"
+    }
+  ],
+  "riscos": [
+    {
+      "id": "K1",
+      "descricao": "Liberar limite sem contrato assinado",
+      "elementos": [
+        "a8",
+        "a9"
+      ],
+      "controle": "Limite cadastrado bloqueado; desbloqueio só após o paralelo (contrato + cadastro)",
+      "tipo_controle": "preventivo",
+      "probabilidade": "baixa",
+      "impacto": "alto"
+    },
+    {
+      "id": "K2",
+      "descricao": "Conceder crédito a empresa com sócio sancionado (PLD)",
+      "elementos": [
+        "s1"
+      ],
+      "controle": "Checagem KYC obrigatória antes do bureau (R2)",
+      "tipo_controle": "preventivo",
+      "probabilidade": "baixa",
+      "impacto": "muito alto"
+    },
+    {
+      "id": "K3",
+      "descricao": "Analista aprovar acima da própria alçada",
+      "elementos": [
+        "d3"
+      ],
+      "controle": "Alçada parametrizada no ERP por usuário",
+      "tipo_controle": "preventivo",
+      "probabilidade": "média",
+      "impacto": "médio"
+    },
+    {
+      "id": "K4",
+      "descricao": "Limite liberado diferente do aprovado",
+      "elementos": [
+        "a8"
+      ],
+      "controle": "",
+      "tipo_controle": "",
+      "probabilidade": "média",
+      "impacto": "alto"
+    }
+  ],
+  "melhorias": [
+    {
+      "id": "M1",
+      "descricao": "Portal do cliente com checklist e upload obrigatório de documentos",
+      "resolve": [
+        "D1"
+      ],
+      "elementos": [
+        "a2",
+        "c1"
+      ],
+      "impacto": "alto",
+      "esforco": "médio",
+      "responsavel": "Coordenador Comercial",
+      "prazo": "31/01/2027",
+      "status": "em andamento"
+    },
+    {
+      "id": "M2",
+      "descricao": "Comitê virtual assíncrono (aprovação no ERP em até 48h) para limites entre R$ 500 mil e R$ 1 milhão",
+      "resolve": [
+        "D2"
+      ],
+      "elementos": [
+        "e1",
+        "a6"
+      ],
+      "impacto": "alto",
+      "esforco": "baixo",
+      "responsavel": "Gerente de Crédito e Cobrança",
+      "prazo": "15/12/2026",
+      "status": "aprovada"
+    },
+    {
+      "id": "M3",
+      "descricao": "Parecer de crédito em formulário do ERP, anexado ao cadastro do cliente",
+      "resolve": [
+        "D3"
+      ],
+      "elementos": [
+        "a4"
+      ],
+      "impacto": "médio",
+      "esforco": "médio",
+      "responsavel": "TI - ERP",
+      "prazo": "31/03/2027",
+      "status": "proposta"
+    }
+  ],
+  "glossario": [
+    {
+      "termo": "KYC",
+      "definicao": "Know Your Customer: identificação e verificação de quem é o cliente e seus sócios."
+    },
+    {
+      "termo": "PLD",
+      "definicao": "Prevenção à lavagem de dinheiro (Lei 9.613/1998)."
+    },
+    {
+      "termo": "PEP",
+      "definicao": "Pessoa exposta politicamente."
+    },
+    {
+      "termo": "Alçada",
+      "definicao": "Valor máximo que cada cargo pode aprovar sozinho."
+    }
+  ],
+  "pendencias": [
+    {
+      "pergunta": "Quem confere se o limite cadastrado no ERP é igual ao aprovado (K4 sem controle)?",
+      "para": "Gerente de Crédito e Cobrança"
+    },
+    {
+      "pergunta": "A faixa do gerente (R$ 200 a 500 mil) passa pelo analista ou vai direto? O fluxo atual manda tudo acima da alçada do analista ao comitê.",
+      "para": "Gerente de Crédito e Cobrança"
+    }
+  ],
+  "historico": [
+    {
+      "versao": "0.1",
+      "data": "21/10/2026",
+      "autor": "Marina Lopes",
+      "mudanca": "Entrevista com Crédito"
+    },
+    {
+      "versao": "0.3",
+      "data": "22/10/2026",
+      "autor": "Marina Lopes",
+      "mudanca": "Comercial e Jurídico: documentação, contrato e expiração"
+    },
+    {
+      "versao": "0.4",
+      "data": "23/10/2026",
+      "autor": "Marina Lopes",
+      "mudanca": "KYC como subprocesso; paralelo contrato x cadastro"
+    }
+  ]
+}

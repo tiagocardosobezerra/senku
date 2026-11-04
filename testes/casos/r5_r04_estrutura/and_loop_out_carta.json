@@ -1,0 +1,79 @@
+{
+ "processo": {
+  "nome": "Teste"
+ },
+ "papeis": [
+  {
+   "id": "p",
+   "nome": "Analista"
+  }
+ ],
+ "elementos": [
+  {
+   "id": "i",
+   "tipo": "inicio",
+   "nome": "Começo",
+   "segue": "a0"
+  },
+  {
+   "id": "a0",
+   "nome": "Analisar item a0",
+   "papel": "p",
+   "segue": "g1"
+  },
+  {
+   "id": "g1",
+   "tipo": "paralelo",
+   "papel": "p",
+   "segue": [
+    "a1",
+    "a2"
+   ]
+  },
+  {
+   "id": "a1",
+   "nome": "Analisar item a1",
+   "papel": "p",
+   "segue": "d"
+  },
+  {
+   "id": "d",
+   "tipo": "decisao",
+   "nome": "Ok?",
+   "papel": "p",
+   "segue": [
+    {
+     "para": "m",
+     "rotulo": "Sim"
+    },
+    {
+     "para": "a0",
+     "rotulo": "Não"
+    }
+   ]
+  },
+  {
+   "id": "a2",
+   "nome": "Analisar item a2",
+   "papel": "p",
+   "segue": "m"
+  },
+  {
+   "id": "m",
+   "tipo": "paralelo",
+   "papel": "p",
+   "segue": "a3"
+  },
+  {
+   "id": "a3",
+   "nome": "Analisar item a3",
+   "papel": "p",
+   "segue": "f"
+  },
+  {
+   "id": "f",
+   "tipo": "fim",
+   "nome": "Feito"
+  }
+ ]
+}

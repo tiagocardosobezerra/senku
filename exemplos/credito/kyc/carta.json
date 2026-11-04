@@ -1,0 +1,104 @@
+{
+  "formato": "senku/1",
+  "processo": {
+    "codigo": "CRE-02.1",
+    "nome": "Verificar KYC e PLD",
+    "nivel": "subprocesso",
+    "macroprocesso": "CRE-02 Concessão de limite de crédito",
+    "dono": "Gerente de Crédito e Cobrança",
+    "objetivo": "Garantir que a empresa e os sócios não estão em listas restritivas antes de conceder crédito."
+  },
+  "papeis": [
+    {
+      "id": "cadastro",
+      "nome": "Cadastro"
+    },
+    {
+      "id": "compliance",
+      "nome": "Compliance"
+    }
+  ],
+  "sistemas": [
+    {
+      "id": "erp",
+      "nome": "ERP"
+    }
+  ],
+  "elementos": [
+    {
+      "id": "i",
+      "tipo": "inicio",
+      "nome": "Documentação conferida",
+      "papel": "cadastro",
+      "segue": "a1"
+    },
+    {
+      "id": "a1",
+      "nome": "Consultar sócios em listas restritivas",
+      "papel": "cadastro",
+      "sistema": "erp",
+      "tempo": {
+        "execucao": "15min",
+        "espera": "2h"
+      },
+      "segue": "d1"
+    },
+    {
+      "id": "d1",
+      "tipo": "decisao",
+      "nome": "Algum sócio em lista ou PEP?",
+      "papel": "cadastro",
+      "segue": [
+        {
+          "para": "f1",
+          "rotulo": "Não",
+          "percentual": 95
+        },
+        {
+          "para": "a2",
+          "rotulo": "Sim",
+          "percentual": 5
+        }
+      ]
+    },
+    {
+      "id": "a2",
+      "nome": "Fazer diligência reforçada",
+      "papel": "compliance",
+      "sistema": [],
+      "tempo": {
+        "execucao": "2h",
+        "espera": "1d"
+      },
+      "segue": "d2"
+    },
+    {
+      "id": "d2",
+      "tipo": "decisao",
+      "nome": "Risco aceitável?",
+      "papel": "compliance",
+      "segue": [
+        {
+          "para": "f1",
+          "rotulo": "Sim",
+          "percentual": 60
+        },
+        {
+          "para": "f2",
+          "rotulo": "Não",
+          "percentual": 40
+        }
+      ]
+    },
+    {
+      "id": "f1",
+      "tipo": "fim",
+      "nome": "KYC aprovado"
+    },
+    {
+      "id": "f2",
+      "tipo": "fim",
+      "nome": "KYC reprovado"
+    }
+  ]
+}

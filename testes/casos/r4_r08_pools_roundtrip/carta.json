@@ -1,0 +1,113 @@
+{
+  "formato": "senku/1",
+  "processo": {
+    "nome": "Reembolso",
+    "codigo": "FIN-09"
+  },
+  "participantes": [],
+  "sipoc": {
+    "fornecedores": [],
+    "entradas": [],
+    "saidas": [],
+    "clientes": []
+  },
+  "papeis": [
+    {
+      "id": "ana",
+      "nome": "Analista Financeiro"
+    },
+    {
+      "id": "ger",
+      "nome": "Gerente"
+    }
+  ],
+  "sistemas": [],
+  "elementos": [
+    {
+      "id": "i",
+      "tipo": "inicio",
+      "nome": "Despesa realizada",
+      "papel": "ana",
+      "segue": "a1"
+    },
+    {
+      "id": "a1",
+      "tipo": "atividade",
+      "nome": "Conferir comprovantes",
+      "papel": "ana",
+      "segue": "d1"
+    },
+    {
+      "id": "d1",
+      "tipo": "decisao",
+      "nome": "Comprovantes completos?",
+      "papel": "ana",
+      "segue": [
+        {
+          "para": "a2",
+          "rotulo": "Sim"
+        },
+        {
+          "para": "d2",
+          "rotulo": "Não"
+        }
+      ]
+    },
+    {
+      "id": "d2",
+      "tipo": "decisao",
+      "nome": "Dentro do prazo?",
+      "papel": "ana",
+      "segue": [
+        {
+          "para": "a1",
+          "rotulo": "Sim"
+        },
+        {
+          "para": "f2",
+          "rotulo": "Não"
+        }
+      ]
+    },
+    {
+      "id": "a2",
+      "tipo": "atividade",
+      "nome": "Aprovar reembolso",
+      "papel": "ger",
+      "segue": "f"
+    },
+    {
+      "id": "f",
+      "tipo": "fim",
+      "nome": "Reembolso pago",
+      "papel": "ger"
+    },
+    {
+      "id": "f2",
+      "tipo": "fim",
+      "nome": "Reembolso negado",
+      "papel": "ana"
+    }
+  ],
+  "regras": [],
+  "indicadores": [],
+  "dores": [],
+  "riscos": [],
+  "melhorias": [],
+  "glossario": [],
+  "pendencias": [
+    {
+      "pergunta": "Mensagem \"Enviar comprovantes\" de \"Despesa realizada\" para \"Colaborador\" no mapa original: confira se a troca está nas atividades da carta."
+    },
+    {
+      "pergunta": "Mensagem \"Enviar comprovantes\" de \"Colaborador\" para \"Conferir comprovantes\" no mapa original: confira se a troca está nas atividades da carta."
+    },
+    {
+      "pergunta": "Mensagem \"Complementar comprovantes\" de \"Comprovantes completos?\" para \"Colaborador\" no mapa original: confira se a troca está nas atividades da carta."
+    },
+    {
+      "pergunta": "Mensagem \"Complementar comprovantes\" de \"Colaborador\" para \"Dentro do prazo?\" no mapa original: confira se a troca está nas atividades da carta."
+    }
+  ],
+  "historico": []
+}

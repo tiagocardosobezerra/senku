@@ -1,0 +1,203 @@
+{
+ "processo": {
+  "nome": "Mix estrutural"
+ },
+ "papeis": [
+  {
+   "id": "sol",
+   "nome": "Solicitante"
+  },
+  {
+   "id": "ges",
+   "nome": "Gestor"
+  },
+  {
+   "id": "com",
+   "nome": "Compras"
+  },
+  {
+   "id": "cli",
+   "nome": "Cliente",
+   "tipo": "externo"
+  },
+  {
+   "id": "erp",
+   "nome": "ERP",
+   "tipo": "sistema"
+  }
+ ],
+ "elementos": [
+  {
+   "id": "i",
+   "tipo": "inicio",
+   "nome": "Pedido recebido",
+   "gatilho": "mensagem",
+   "segue": "a1"
+  },
+  {
+   "id": "a1",
+   "nome": "Analisar pedido",
+   "papel": "ges",
+   "segue": "d1"
+  },
+  {
+   "id": "d1",
+   "tipo": "decisao",
+   "nome": "Valor acima de 10 mil?",
+   "papel": "ges",
+   "segue": [
+    {
+     "para": "d2",
+     "rotulo": "Sim"
+    },
+    {
+     "para": "m1",
+     "rotulo": "Não"
+    }
+   ]
+  },
+  {
+   "id": "d2",
+   "tipo": "decisao",
+   "nome": "Fornecedor homologado?",
+   "papel": "ges",
+   "segue": [
+    {
+     "para": "s1",
+     "rotulo": "Sim"
+    },
+    {
+     "para": "f_canc",
+     "rotulo": "Não"
+    }
+   ]
+  },
+  {
+   "id": "s1",
+   "tipo": "subprocesso",
+   "nome": "Homologar contrato",
+   "papel": "com",
+   "segue": "m1"
+  },
+  {
+   "id": "m1",
+   "tipo": "decisao",
+   "papel": "com",
+   "segue": "p1"
+  },
+  {
+   "id": "p1",
+   "tipo": "paralelo",
+   "papel": "com",
+   "segue": [
+    "a2",
+    "a3"
+   ]
+  },
+  {
+   "id": "a2",
+   "nome": "Cotar preços",
+   "papel": "com",
+   "segue": "p2"
+  },
+  {
+   "id": "a3",
+   "nome": "Reservar orçamento",
+   "papel": "erp",
+   "automatizada": true,
+   "sistema": [],
+   "segue": "p2"
+  },
+  {
+   "id": "p2",
+   "tipo": "paralelo",
+   "papel": "com",
+   "segue": "a4"
+  },
+  {
+   "id": "a4",
+   "nome": "Enviar proposta",
+   "papel": "com",
+   "segue": "e1"
+  },
+  {
+   "id": "e1",
+   "tipo": "evento",
+   "gatilho": "mensagem",
+   "nome": "Resposta do cliente recebida",
+   "segue": "d3"
+  },
+  {
+   "id": "d3",
+   "tipo": "decisao",
+   "nome": "Cliente aceitou?",
+   "papel": "cli",
+   "segue": [
+    {
+     "para": "o1",
+     "rotulo": "Sim",
+     "percentual": 70
+    },
+    {
+     "para": "m1",
+     "rotulo": "Pediu revisão",
+     "percentual": 20
+    },
+    {
+     "para": "f_exp",
+     "rotulo": "Não respondeu",
+     "percentual": 10
+    }
+   ]
+  },
+  {
+   "id": "o1",
+   "tipo": "inclusivo",
+   "papel": "com",
+   "segue": [
+    {
+     "para": "a5",
+     "rotulo": "Precisa frete"
+    },
+    {
+     "para": "a6",
+     "rotulo": "Precisa seguro"
+    }
+   ]
+  },
+  {
+   "id": "a5",
+   "nome": "Contratar frete",
+   "papel": "com",
+   "segue": "o2"
+  },
+  {
+   "id": "a6",
+   "nome": "Contratar seguro",
+   "papel": "com",
+   "segue": "o2"
+  },
+  {
+   "id": "o2",
+   "tipo": "inclusivo",
+   "papel": "com",
+   "segue": "f_ok"
+  },
+  {
+   "id": "f_ok",
+   "tipo": "fim",
+   "nome": "Pedido fechado"
+  },
+  {
+   "id": "f_canc",
+   "tipo": "fim",
+   "nome": "Pedido cancelado"
+  },
+  {
+   "id": "f_exp",
+   "tipo": "fim",
+   "nome": "Proposta expirada",
+   "encerra": true
+  }
+ ]
+}

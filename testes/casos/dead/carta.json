@@ -1,0 +1,8 @@
+{"processo":{"nome":"Deadlock"},"papeis":[{"id":"a","nome":"Analista"}],
+"elementos":[{"id":"i","tipo":"inicio","nome":"Pedido recebido","papel":"a","segue":"a1"},
+{"id":"a1","nome":"Analisar pedido","papel":"a","segue":"d"},
+{"id":"d","tipo":"decisao","nome":"Urgente?","papel":"a","segue":[{"para":"a2","rotulo":"Sim"},{"para":"a3","rotulo":"Não"}]},
+{"id":"a2","nome":"Atender urgente","papel":"a","segue":"j"},
+{"id":"a3","nome":"Atender normal","papel":"a","segue":"j"},
+{"id":"j","tipo":"paralelo","papel":"a","segue":"f"},
+{"id":"f","tipo":"fim","nome":"Pedido atendido","papel":"a"}]}

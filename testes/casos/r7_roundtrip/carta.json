@@ -1,0 +1,141 @@
+{
+ "processo": {
+  "nome": "Cotação de frete",
+  "codigo": "LOG-3",
+  "volume": "300 por mês"
+ },
+ "papeis": [
+  {
+   "id": "com",
+   "nome": "Comercial"
+  },
+  {
+   "id": "op",
+   "nome": "Operações"
+  },
+  {
+   "id": "cli",
+   "nome": "Cliente",
+   "tipo": "externo"
+  }
+ ],
+ "sistemas": [
+  {
+   "id": "tms",
+   "nome": "TMS"
+  }
+ ],
+ "regras": [
+  {
+   "id": "R1",
+   "texto": "Frete acima de R$ 5 mil exige aprovação"
+  }
+ ],
+ "elementos": [
+  {
+   "id": "i",
+   "tipo": "inicio",
+   "nome": "Pedido de cotação recebido",
+   "papel": "com",
+   "gatilho": "mensagem",
+   "segue": "a1"
+  },
+  {
+   "id": "a1",
+   "nome": "Calcular frete",
+   "papel": "op",
+   "sistema": [
+    "tms"
+   ],
+   "descricao": "Usa a tabela ANTT",
+   "tempo": {
+    "execucao": "30min",
+    "espera": "4h"
+   },
+   "regras": [
+    "R1"
+   ],
+   "valor": "VA",
+   "segue": "a2",
+   "bordas": [
+    {
+     "gatilho": "tempo",
+     "nome": "Prazo de 8h estourado",
+     "tempo": "8hc",
+     "percentual": 10,
+     "segue": "a9"
+    }
+   ]
+  },
+  {
+   "id": "a2",
+   "nome": "Enviar cotação",
+   "papel": "com",
+   "sistema": "manual",
+   "tempo": {
+    "execucao": "10min"
+   },
+   "segue": "ev"
+  },
+  {
+   "id": "ev",
+   "tipo": "evento",
+   "gatilho": "mensagem",
+   "envia": true,
+   "nome": "Cotação enviada",
+   "segue": "cr"
+  },
+  {
+   "id": "cr",
+   "tipo": "corrida",
+   "nome": "O que vier primeiro",
+   "segue": [
+    {
+     "para": "m",
+     "percentual": 60
+    },
+    {
+     "para": "t",
+     "percentual": 40
+    }
+   ]
+  },
+  {
+   "id": "m",
+   "tipo": "evento",
+   "gatilho": "mensagem",
+   "nome": "Aceite recebido",
+   "tempo": {
+    "espera": "1d"
+   },
+   "segue": "f"
+  },
+  {
+   "id": "t",
+   "tipo": "evento",
+   "gatilho": "tempo",
+   "nome": "Aguardar 3 dias corridos",
+   "segue": "fx"
+  },
+  {
+   "id": "a9",
+   "nome": "Escalar ao coordenador",
+   "papel": "op",
+   "tempo": {
+    "execucao": "15min"
+   },
+   "segue": "a2"
+  },
+  {
+   "id": "f",
+   "tipo": "fim",
+   "nome": "Frete contratado"
+  },
+  {
+   "id": "fx",
+   "tipo": "fim",
+   "nome": "Cotação expirada",
+   "encerra": true
+  }
+ ]
+}

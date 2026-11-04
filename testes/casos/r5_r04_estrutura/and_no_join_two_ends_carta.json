@@ -1,0 +1,50 @@
+{
+ "processo": {
+  "nome": "Teste"
+ },
+ "papeis": [
+  {
+   "id": "p",
+   "nome": "Analista"
+  }
+ ],
+ "elementos": [
+  {
+   "id": "i",
+   "tipo": "inicio",
+   "nome": "Começo",
+   "segue": "g1"
+  },
+  {
+   "id": "g1",
+   "tipo": "paralelo",
+   "papel": "p",
+   "segue": [
+    "a1",
+    "a2"
+   ]
+  },
+  {
+   "id": "a1",
+   "nome": "Analisar item a1",
+   "papel": "p",
+   "segue": "f1"
+  },
+  {
+   "id": "a2",
+   "nome": "Analisar item a2",
+   "papel": "p",
+   "segue": "f2"
+  },
+  {
+   "id": "f1",
+   "tipo": "fim",
+   "nome": "Pago"
+  },
+  {
+   "id": "f2",
+   "tipo": "fim",
+   "nome": "Arquivado"
+  }
+ ]
+}

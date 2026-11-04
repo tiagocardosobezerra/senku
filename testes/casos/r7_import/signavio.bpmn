@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" xmlns:signavio="http://www.signavio.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" exporter="Signavio Process Editor, http://www.signavio.com" exporterVersion="17.4.0" id="sid-def" targetNamespace="http://www.signavio.com">
+  <collaboration id="sid-collab">
+    <participant id="sid-pool" name="Reembolso de despesas" processRef="sid-proc"/>
+    <participant id="sid-pool-banco" name="Banco"/>
+    <messageFlow id="sid-mf1" sourceRef="sid-pagar" targetRef="sid-pool-banco" name="Ordem de pagamento"/>
+  </collaboration>
+  <process id="sid-proc" isExecutable="false" name="Reembolso de despesas">
+    <laneSet id="sid-ls">
+      <lane id="sid-lane-empresa" name="Empresa">
+        <childLaneSet id="sid-cls">
+          <lane id="sid-lane-col" name="Colaborador">
+            <flowNodeRef>sid-start</flowNodeRef>
+            <flowNodeRef>sid-lancar</flowNodeRef>
+            <flowNodeRef>sid-corrigir</flowNodeRef>
+          </lane>
+          <lane id="sid-lane-gest" name="Gestor">
+            <flowNodeRef>sid-aprovar</flowNodeRef>
+            <flowNodeRef>sid-gw1</flowNodeRef>
+            <flowNodeRef>sid-tb</flowNodeRef>
+          </lane>
+          <lane id="sid-lane-fin" name="Financeiro">
+            <flowNodeRef>sid-sub</flowNodeRef>
+            <flowNodeRef>sid-pagar</flowNodeRef>
+            <flowNodeRef>sid-end</flowNodeRef>
+            <flowNodeRef>sid-end2</flowNodeRef>
+            <flowNodeRef>sid-err</flowNodeRef>
+            <flowNodeRef>sid-evsub</flowNodeRef>
+          </lane>
+        </childLaneSet>
+      </lane>
+    </laneSet>
+    <startEvent id="sid-start" name="Despesa realizada">
+      <extensionElements><signavio:signavioMetaData metaKey="bgcolor" metaValue="#ffffff"/></extensionElements>
+      <outgoing>sid-f1</outgoing>
+    </startEvent>
+    <task id="sid-lancar" name="Lançar despesa no app" startQuantity="1" completionQuantity="1">
+      <documentation>Foto do recibo &amp; valor &lt; R$ 500</documentation>
+      <incoming>sid-f1</incoming><incoming>sid-f6</incoming><outgoing>sid-f2</outgoing>
+    </task>
+    <userTask id="sid-aprovar" name="Aprovar despesa">
+      <incoming>sid-f2</incoming><outgoing>sid-f3</outgoing>
+    </userTask>
+    <boundaryEvent id="sid-tb" name="3 dias sem aprovação" attachedToRef="sid-aprovar" cancelActivity="true">
+      <outgoing>sid-f9</outgoing>
+      <timerEventDefinition id="sid-ted"><timeDuration xsi:type="tFormalExpression">P3D</timeDuration></timerEventDefinition>
+    </boundaryEvent>
+    <exclusiveGateway id="sid-gw1" name="Aprovada?" gatewayDirection="Diverging" default="sid-f5">
+      <incoming>sid-f3</incoming><outgoing>sid-f4</outgoing><outgoing>sid-f5</outgoing>
+    </exclusiveGateway>
+    <task id="sid-corrigir" name="Corrigir lançamento"><incoming>sid-f5</incoming><outgoing>sid-f6</outgoing></task>
+    <subProcess id="sid-sub" name="Conferir política">
+      <incoming>sid-f4</incoming><outgoing>sid-f7</outgoing>
+      <startEvent id="sid-s-i"><outgoing>sid-sf1</outgoing></startEvent>
+      <task id="sid-s-a" name="Checar limites"><incoming>sid-sf1</incoming><outgoing>sid-sf2</outgoing></task>
+      <endEvent id="sid-s-f"><incoming>sid-sf2</incoming></endEvent>
+      <sequenceFlow id="sid-sf1" sourceRef="sid-s-i" targetRef="sid-s-a"/>
+      <sequenceFlow id="sid-sf2" sourceRef="sid-s-a" targetRef="sid-s-f"/>
+    </subProcess>
+    <boundaryEvent id="sid-err" name="Fora da política" attachedToRef="sid-sub">
+      <outgoing>sid-f10</outgoing><errorEventDefinition id="sid-eed"/>
+    </boundaryEvent>
+    <sendTask id="sid-pagar" name="Pagar reembolso"><incoming>sid-f7</incoming><outgoing>sid-f8</outgoing></sendTask>
+    <endEvent id="sid-end" name="Reembolso pago"><incoming>sid-f8</incoming></endEvent>
+    <endEvent id="sid-end2" name="Reembolso negado"><incoming>sid-f10</incoming><incoming>sid-f9</incoming></endEvent>
+    <subProcess id="sid-evsub" name="Tratar fraude" triggeredByEvent="true">
+      <startEvent id="sid-ev-i" name="Fraude detectada" isInterrupting="true"><outgoing>sid-ef1</outgoing><signalEventDefinition/></startEvent>
+      <task id="sid-ev-a" name="Bloquear colaborador"><incoming>sid-ef1</incoming><outgoing>sid-ef2</outgoing></task>
+      <endEvent id="sid-ev-f"><incoming>sid-ef2</incoming></endEvent>
+      <sequenceFlow id="sid-ef1" sourceRef="sid-ev-i" targetRef="sid-ev-a"/>
+      <sequenceFlow id="sid-ef2" sourceRef="sid-ev-a" targetRef="sid-ev-f"/>
+    </subProcess>
+    <sequenceFlow id="sid-f1" sourceRef="sid-start" targetRef="sid-lancar"/>
+    <sequenceFlow id="sid-f2" sourceRef="sid-lancar" targetRef="sid-aprovar"/>
+    <sequenceFlow id="sid-f3" sourceRef="sid-aprovar" targetRef="sid-gw1"/>
+    <sequenceFlow id="sid-f4" name="Sim" sourceRef="sid-gw1" targetRef="sid-sub"><conditionExpression xsi:type="tFormalExpression">${aprovada}</conditionExpression></sequenceFlow>
+    <sequenceFlow id="sid-f5" sourceRef="sid-gw1" targetRef="sid-corrigir"/>
+    <sequenceFlow id="sid-f6" sourceRef="sid-corrigir" targetRef="sid-lancar"/>
+    <sequenceFlow id="sid-f7" sourceRef="sid-sub" targetRef="sid-pagar"/>
+    <sequenceFlow id="sid-f8" sourceRef="sid-pagar" targetRef="sid-end"/>
+    <sequenceFlow id="sid-f9" sourceRef="sid-tb" targetRef="sid-end2"/>
+    <sequenceFlow id="sid-f10" sourceRef="sid-err" targetRef="sid-end2"/>
+  </process>
+  <bpmndi:BPMNDiagram id="sid-dia"><bpmndi:BPMNPlane id="sid-pl" bpmnElement="sid-collab"/></bpmndi:BPMNDiagram>
+</definitions>

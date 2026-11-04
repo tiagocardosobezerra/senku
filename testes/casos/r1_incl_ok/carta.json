@@ -1,0 +1,10 @@
+{"processo":{"nome":"OU inclusivo bem formado"},
+ "papeis":[{"id":"com","nome":"Compras"}],
+ "elementos":[
+  {"id":"i","tipo":"inicio","nome":"Pedido aprovado","segue":"a0"},
+  {"id":"a0","nome":"Avaliar necessidades logísticas","papel":"com","segue":"o1"},
+  {"id":"o1","tipo":"inclusivo","nome":"Quais serviços?","papel":"com","segue":[{"para":"a5","rotulo":"Frete"},{"para":"a6","rotulo":"Seguro"}]},
+  {"id":"a5","nome":"Contratar frete","papel":"com","segue":"o2"},
+  {"id":"a6","nome":"Contratar seguro","papel":"com","segue":"o2"},
+  {"id":"o2","tipo":"inclusivo","papel":"com","segue":"f"},
+  {"id":"f","tipo":"fim","nome":"Serviços contratados"}]}

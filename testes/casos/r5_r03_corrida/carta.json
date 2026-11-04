@@ -1,0 +1,15 @@
+{
+  "processo": {"nome": "Proposta comercial", "volume": "80 por mês"},
+  "papeis": [{"id": "com", "nome": "Comercial"}, {"id": "cli", "nome": "Cliente", "tipo": "externo"}],
+  "elementos": [
+    {"id": "i", "tipo": "inicio", "nome": "Pedido de proposta recebido", "papel": "com", "segue": "a1"},
+    {"id": "a1", "nome": "Enviar proposta", "papel": "com", "sistema": [], "tempo": {"execucao": "1h"}, "segue": "c1"},
+    {"id": "c1", "tipo": "corrida", "nome": "O que vier primeiro", "papel": "com", "segue": [{"para": "e1", "percentual": 60}, {"para": "e2", "percentual": 30}, {"para": "a9", "percentual": 10}]},
+    {"id": "e1", "tipo": "evento", "gatilho": "mensagem", "nome": "Aceite recebido", "segue": "c2"},
+    {"id": "e2", "tipo": "evento", "gatilho": "tempo", "nome": "Aguardar 10 dias corridos", "segue": "c2"},
+    {"id": "a9", "nome": "Receber contraproposta", "papel": "com", "recebe": true, "sistema": [], "segue": "c2"},
+    {"id": "c2", "tipo": "corrida", "papel": "com", "segue": "a2"},
+    {"id": "a2", "nome": "Registrar resultado", "papel": "com", "sistema": [], "tempo": {"execucao": "10min"}, "segue": "f"},
+    {"id": "f", "tipo": "fim", "nome": "Proposta encerrada"}
+  ]
+}

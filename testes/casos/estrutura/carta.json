@@ -1,0 +1,248 @@
+{
+ "processo": {
+  "nome": "Estrutura difícil"
+ },
+ "papeis": [
+  {
+   "id": "sol",
+   "nome": "Solicitante"
+  },
+  {
+   "id": "ana",
+   "nome": "Analista"
+  },
+  {
+   "id": "ger",
+   "nome": "Gerente"
+  },
+  {
+   "id": "cli",
+   "nome": "Cliente",
+   "tipo": "externo"
+  }
+ ],
+ "elementos": [
+  {
+   "id": "i1",
+   "tipo": "inicio",
+   "nome": "Pedido recebido",
+   "papel": "sol",
+   "gatilho": "mensagem",
+   "segue": "a1"
+  },
+  {
+   "id": "i2",
+   "tipo": "inicio",
+   "nome": "Todo dia 5",
+   "papel": "ana",
+   "gatilho": "tempo",
+   "segue": "a2"
+  },
+  {
+   "id": "a1",
+   "nome": "Registrar pedido",
+   "papel": "sol",
+   "sistema": [],
+   "segue": "a2"
+  },
+  {
+   "id": "a2",
+   "nome": "Analisar pedido",
+   "papel": "ana",
+   "tempo": {
+    "execucao": "1h",
+    "espera": "1d"
+   },
+   "segue": "d1"
+  },
+  {
+   "id": "d1",
+   "tipo": "decisao",
+   "nome": "Pedido completo?",
+   "papel": "ana",
+   "segue": [
+    {
+     "para": "d2",
+     "rotulo": "Sim",
+     "percentual": 70
+    },
+    {
+     "para": "a3",
+     "rotulo": "Não",
+     "percentual": 30
+    }
+   ]
+  },
+  {
+   "id": "d2",
+   "tipo": "decisao",
+   "nome": "Valor acima de R$ 10 mil?",
+   "papel": "ana",
+   "segue": [
+    {
+     "para": "a4",
+     "rotulo": "Sim",
+     "percentual": 20
+    },
+    {
+     "para": "p1",
+     "rotulo": "Não",
+     "percentual": 80
+    }
+   ]
+  },
+  {
+   "id": "a3",
+   "nome": "Pedir complemento ao cliente",
+   "papel": "ana",
+   "segue": "g1"
+  },
+  {
+   "id": "g1",
+   "tipo": "decisao",
+   "nome": "O que chega primeiro?",
+   "papel": "ana",
+   "segue": [
+    {
+     "para": "e1",
+     "rotulo": "Resposta"
+    },
+    {
+     "para": "e2",
+     "rotulo": "Prazo"
+    }
+   ]
+  },
+  {
+   "id": "e1",
+   "tipo": "evento",
+   "gatilho": "mensagem",
+   "nome": "Complemento recebido",
+   "papel": "ana",
+   "segue": "a2"
+  },
+  {
+   "id": "e2",
+   "tipo": "evento",
+   "gatilho": "tempo",
+   "nome": "5 dias sem resposta",
+   "papel": "ana",
+   "segue": "fx"
+  },
+  {
+   "id": "fx",
+   "tipo": "fim",
+   "nome": "Pedido cancelado",
+   "papel": "ana"
+  },
+  {
+   "id": "a4",
+   "nome": "Aprovar pedido",
+   "papel": "ger",
+   "segue": "d3"
+  },
+  {
+   "id": "d3",
+   "tipo": "decisao",
+   "nome": "Aprovado?",
+   "papel": "ger",
+   "segue": [
+    {
+     "para": "p1",
+     "rotulo": "Sim"
+    },
+    {
+     "para": "d4",
+     "rotulo": "Não"
+    }
+   ]
+  },
+  {
+   "id": "d4",
+   "tipo": "decisao",
+   "nome": "Cabe recurso?",
+   "papel": "ger",
+   "segue": [
+    {
+     "para": "a2",
+     "rotulo": "Sim"
+    },
+    {
+     "para": "fr",
+     "rotulo": "Não"
+    }
+   ]
+  },
+  {
+   "id": "fr",
+   "tipo": "fim",
+   "nome": "Pedido reprovado",
+   "papel": "ger"
+  },
+  {
+   "id": "p1",
+   "tipo": "paralelo",
+   "papel": "ana",
+   "segue": [
+    "a5",
+    "a6"
+   ]
+  },
+  {
+   "id": "a5",
+   "nome": "Emitir contrato",
+   "papel": "ana",
+   "tempo": {
+    "execucao": "2h"
+   },
+   "segue": "p2"
+  },
+  {
+   "id": "a6",
+   "tipo": "subprocesso",
+   "nome": "Cadastrar cliente",
+   "papel": "sol",
+   "tempo": {
+    "execucao": "4h",
+    "espera": "2d"
+   },
+   "segue": "p2"
+  },
+  {
+   "id": "p2",
+   "tipo": "paralelo",
+   "papel": "ana",
+   "segue": "a7"
+  },
+  {
+   "id": "a7",
+   "nome": "Assinar contrato",
+   "papel": "cli",
+   "segue": "d5"
+  },
+  {
+   "id": "d5",
+   "tipo": "decisao",
+   "nome": "Assinado sem ressalvas?",
+   "papel": "cli",
+   "segue": [
+    {
+     "para": "fo",
+     "rotulo": "Sim",
+     "percentual": 90
+    },
+    {
+     "para": "p1",
+     "rotulo": "Não",
+     "percentual": 10
+    }
+   ]
+  },
+  {
+   "id": "fo",
+   "tipo": "fim",
+   "nome": "Contrato assinado",
+   "papel": "cli"
+  }
+ ]
+}

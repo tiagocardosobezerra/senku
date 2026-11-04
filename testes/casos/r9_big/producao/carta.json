@@ -1,0 +1,59 @@
+{
+ "processo": {
+  "nome": "Produzir equipamento",
+  "nivel": "subprocesso"
+ },
+ "papeis": [
+  {
+   "id": "eng",
+   "nome": "Engenharia de Aplicação"
+  },
+  {
+   "id": "fab",
+   "nome": "Fábrica"
+  }
+ ],
+ "elementos": [
+  {
+   "id": "i",
+   "tipo": "inicio",
+   "nome": "Pedido liberado",
+   "papel": "eng",
+   "segue": "x1"
+  },
+  {
+   "id": "x1",
+   "nome": "Detalhar projeto",
+   "papel": "eng",
+   "segue": "x2",
+   "tempo": {
+    "execucao": "1d",
+    "espera": "2d"
+   }
+  },
+  {
+   "id": "x2",
+   "nome": "Fabricar equipamento",
+   "papel": "fab",
+   "segue": "x3",
+   "tempo": {
+    "execucao": "3d",
+    "espera": "5d"
+   }
+  },
+  {
+   "id": "x3",
+   "nome": "Testar equipamento",
+   "papel": "fab",
+   "segue": "fim",
+   "tempo": {
+    "execucao": "4h"
+   }
+  },
+  {
+   "id": "fim",
+   "tipo": "fim",
+   "nome": "Equipamento pronto"
+  }
+ ]
+}

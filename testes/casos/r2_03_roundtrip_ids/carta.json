@@ -1,0 +1,94 @@
+{
+ "processo": {
+  "nome": "Gestão de reembolso — fase 1 «piloto» 🚀 & <teste>",
+  "codigo": "RH/01 #a"
+ },
+ "papeis": [
+  {
+   "id": "colaborador",
+   "nome": "Colaborador(a) de qualquer área da empresa que solicita reembolso de despesas"
+  },
+  {
+   "id": "rh",
+   "nome": "Analista de RH (Folha)"
+  },
+  {
+   "id": "日本",
+   "nome": "日本チーム"
+  }
+ ],
+ "elementos": [
+  {
+   "id": "início",
+   "tipo": "inicio",
+   "nome": "Despesa realizada pelo colaborador em viagem a serviço da companhia",
+   "papel": "colaborador",
+   "segue": "ação 1"
+  },
+  {
+   "id": "ação 1",
+   "nome": "Preencher o formulário eletrônico de solicitação de reembolso com todos os comprovantes digitalizados em PDF",
+   "papel": "colaborador",
+   "segue": "acao_1",
+   "tempo": {
+    "execucao": "20min"
+   }
+  },
+  {
+   "id": "acao_1",
+   "nome": "Conferir comprovantes",
+   "papel": "rh",
+   "segue": "d 1",
+   "descricao": "Linha 1 Linha 2   bell"
+  },
+  {
+   "id": "d 1",
+   "tipo": "decisao",
+   "nome": "Os comprovantes apresentados estão completos, legíveis e dentro da política vigente de despesas?",
+   "papel": "rh",
+   "segue": [
+    {
+     "para": "ação 1",
+     "rotulo": "Não, faltam documentos ou estão ilegíveis",
+     "percentual": 25
+    },
+    {
+     "para": "x",
+     "rotulo": "Sim, tudo certo",
+     "percentual": 75
+    }
+   ]
+  },
+  {
+   "id": "x",
+   "nome": "Pagar via 日本 sistema ✓",
+   "papel": "日本",
+   "segue": "fim"
+  },
+  {
+   "id": "fim",
+   "tipo": "fim",
+   "nome": "Reembolso pago"
+  }
+ ],
+ "dores": [
+  {
+   "id": "D1",
+   "descricao": "Muita devolução",
+   "elementos": [
+    "ação 1",
+    "d 1"
+   ]
+  }
+ ],
+ "riscos": [
+  {
+   "id": "K1",
+   "descricao": "Fraude",
+   "elementos": [
+    "acao_1"
+   ],
+   "controle": "Dupla conferência"
+  }
+ ]
+}

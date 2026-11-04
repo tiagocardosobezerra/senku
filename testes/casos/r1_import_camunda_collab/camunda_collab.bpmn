@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Defs" targetNamespace="http://bpmn.io/schema/bpmn">
+  <bpmn:message id="Msg_Pedido" name="Pedido"/>
+  <bpmn:collaboration id="Collab">
+    <bpmn:participant id="P_Cliente" name="Cliente" processRef="Proc_Cliente"/>
+    <bpmn:participant id="P_Empresa" name="Atendimento de pedidos" processRef="Proc_Empresa"/>
+    <bpmn:participant id="P_Banco" name="Banco"/>
+    <bpmn:messageFlow id="MF1" name="Pedido" sourceRef="C_Enviar" targetRef="E_Start"/>
+    <bpmn:messageFlow id="MF2" name="Confirmação" sourceRef="E_Confirmar" targetRef="C_Receber"/>
+    <bpmn:messageFlow id="MF3" sourceRef="E_Cobrar" targetRef="P_Banco"/>
+  </bpmn:collaboration>
+  <bpmn:process id="Proc_Cliente" isExecutable="false">
+    <bpmn:startEvent id="C_S"><bpmn:outgoing>cf1</bpmn:outgoing></bpmn:startEvent>
+    <bpmn:sendTask id="C_Enviar" name="Enviar pedido"/>
+    <bpmn:receiveTask id="C_Receber" name="Receber confirmação"/>
+    <bpmn:endEvent id="C_E"/>
+    <bpmn:sequenceFlow id="cf1" sourceRef="C_S" targetRef="C_Enviar"/>
+    <bpmn:sequenceFlow id="cf2" sourceRef="C_Enviar" targetRef="C_Receber"/>
+    <bpmn:sequenceFlow id="cf3" sourceRef="C_Receber" targetRef="C_E"/>
+  </bpmn:process>
+  <bpmn:process id="Proc_Empresa" isExecutable="true">
+    <bpmn:laneSet id="LS">
+      <bpmn:lane id="L_Comercial" name="Comercial">
+        <bpmn:childLaneSet id="CLS">
+          <bpmn:lane id="L_Vendas" name="Vendas">
+            <bpmn:flowNodeRef>E_Start</bpmn:flowNodeRef><bpmn:flowNodeRef>E_Analisar</bpmn:flowNodeRef>
+            <bpmn:flowNodeRef>GW_Ok</bpmn:flowNodeRef><bpmn:flowNodeRef>E_Confirmar</bpmn:flowNodeRef>
+            <bpmn:flowNodeRef>B_Timer</bpmn:flowNodeRef><bpmn:flowNodeRef>E_Escalar</bpmn:flowNodeRef>
+            <bpmn:flowNodeRef>EBG</bpmn:flowNodeRef><bpmn:flowNodeRef>Ev_Resp</bpmn:flowNodeRef><bpmn:flowNodeRef>Ev_Prazo</bpmn:flowNodeRef>
+            <bpmn:flowNodeRef>End_Ok</bpmn:flowNodeRef><bpmn:flowNodeRef>End_Canc</bpmn:flowNodeRef>
+            <bpmn:flowNodeRef>LinkThrow</bpmn:flowNodeRef>
+          </bpmn:lane>
+          <bpmn:lane id="L_Fin" name="Financeiro">
+            <bpmn:flowNodeRef>E_Cobrar</bpmn:flowNodeRef><bpmn:flowNodeRef>Sub_Fat</bpmn:flowNodeRef><bpmn:flowNodeRef>LinkCatch</bpmn:flowNodeRef>
+            <bpmn:flowNodeRef>B_Msg</bpmn:flowNodeRef><bpmn:flowNodeRef>E_Notif</bpmn:flowNodeRef><bpmn:flowNodeRef>Throw_Msg</bpmn:flowNodeRef>
+          </bpmn:lane>
+        </bpmn:childLaneSet>
+      </bpmn:lane>
+    </bpmn:laneSet>
+    <bpmn:startEvent id="E_Start" name="Pedido recebido"><bpmn:messageEventDefinition messageRef="Msg_Pedido"/></bpmn:startEvent>
+    <bpmn:userTask id="E_Analisar" name="Analisar pedido">
+      <bpmn:documentation>Conferir estoque e crédito</bpmn:documentation>
+      <bpmn:multiInstanceLoopCharacteristics isSequential="true"/>
+    </bpmn:userTask>
+    <bpmn:boundaryEvent id="B_Timer" name="48h sem análise" attachedToRef="E_Analisar"><bpmn:timerEventDefinition><bpmn:timeDuration>PT48H</bpmn:timeDuration></bpmn:timerEventDefinition></bpmn:boundaryEvent>
+    <bpmn:task id="E_Escalar" name="Escalar para supervisor"/>
+    <bpmn:exclusiveGateway id="GW_Ok" name="Pedido ok?" default="sf_nok"/>
+    <bpmn:task id="E_Confirmar" name="Confirmar pedido"/>
+    <bpmn:serviceTask id="E_Cobrar" name="Emitir cobrança"/>
+    <bpmn:boundaryEvent id="B_Msg" name="Cliente cancela" attachedToRef="E_Cobrar" cancelActivity="false"><bpmn:messageEventDefinition/></bpmn:boundaryEvent>
+    <bpmn:task id="E_Notif" name="Registrar cancelamento"/>
+    <bpmn:intermediateThrowEvent id="Throw_Msg" name="Avisar cliente"><bpmn:messageEventDefinition/></bpmn:intermediateThrowEvent>
+    <bpmn:subProcess id="Sub_Fat" name="Faturar">
+      <bpmn:startEvent id="SS"/><bpmn:task id="ST" name="Emitir NF"/><bpmn:endEvent id="SE"/>
+      <bpmn:sequenceFlow id="s1" sourceRef="SS" targetRef="ST"/><bpmn:sequenceFlow id="s2" sourceRef="ST" targetRef="SE"/>
+    </bpmn:subProcess>
+    <bpmn:intermediateThrowEvent id="LinkThrow" name="Ir para faturamento"><bpmn:linkEventDefinition name="FAT"/></bpmn:intermediateThrowEvent>
+    <bpmn:intermediateCatchEvent id="LinkCatch" name="Faturamento"><bpmn:linkEventDefinition name="FAT"/></bpmn:intermediateCatchEvent>
+    <bpmn:eventBasedGateway id="EBG"/>
+    <bpmn:intermediateCatchEvent id="Ev_Resp" name="Pagamento recebido"><bpmn:messageEventDefinition/></bpmn:intermediateCatchEvent>
+    <bpmn:intermediateCatchEvent id="Ev_Prazo" name="5 dias"><bpmn:timerEventDefinition/></bpmn:intermediateCatchEvent>
+    <bpmn:endEvent id="End_Ok" name="Pedido concluído"/>
+    <bpmn:endEvent id="End_Canc" name="Pedido cancelado"><bpmn:terminateEventDefinition/></bpmn:endEvent>
+    <bpmn:dataObjectReference id="DOR" name="Nota fiscal" dataObjectRef="DO"/><bpmn:dataObject id="DO"/>
+    <bpmn:textAnnotation id="TA"><bpmn:text>Prazo legal: 5 dias úteis</bpmn:text></bpmn:textAnnotation>
+    <bpmn:association id="As1" sourceRef="E_Cobrar" targetRef="TA"/>
+    <bpmn:sequenceFlow id="f1" sourceRef="E_Start" targetRef="E_Analisar"/>
+    <bpmn:sequenceFlow id="f2" sourceRef="E_Analisar" targetRef="GW_Ok"/>
+    <bpmn:sequenceFlow id="sf_ok" name="Sim" sourceRef="GW_Ok" targetRef="E_Confirmar"><bpmn:conditionExpression>${ok}</bpmn:conditionExpression></bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="sf_nok" sourceRef="GW_Ok" targetRef="End_Canc"/>
+    <bpmn:sequenceFlow id="f3" sourceRef="E_Confirmar" targetRef="LinkThrow"/>
+    <bpmn:sequenceFlow id="f4" sourceRef="LinkCatch" targetRef="Sub_Fat"/>
+    <bpmn:sequenceFlow id="f5" sourceRef="Sub_Fat" targetRef="E_Cobrar"/>
+    <bpmn:sequenceFlow id="f6" sourceRef="E_Cobrar" targetRef="EBG"/>
+    <bpmn:sequenceFlow id="f7" sourceRef="EBG" targetRef="Ev_Resp"/>
+    <bpmn:sequenceFlow id="f8" sourceRef="EBG" targetRef="Ev_Prazo"/>
+    <bpmn:sequenceFlow id="f9" sourceRef="Ev_Resp" targetRef="End_Ok"/>
+    <bpmn:sequenceFlow id="f10" sourceRef="Ev_Prazo" targetRef="End_Canc"/>
+    <bpmn:sequenceFlow id="f11" sourceRef="B_Timer" targetRef="E_Escalar"/>
+    <bpmn:sequenceFlow id="f12" sourceRef="E_Escalar" targetRef="GW_Ok"/>
+    <bpmn:sequenceFlow id="f13" sourceRef="B_Msg" targetRef="E_Notif"/>
+    <bpmn:sequenceFlow id="f14" sourceRef="E_Notif" targetRef="Throw_Msg"/>
+    <bpmn:sequenceFlow id="f15" sourceRef="Throw_Msg" targetRef="End_Canc"/>
+  </bpmn:process>
+</bpmn:definitions>

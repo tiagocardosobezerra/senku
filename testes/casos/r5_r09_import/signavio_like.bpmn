@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="sid-defs" targetNamespace="http://www.signavio.com">
+  <collaboration id="sid-collab">
+    <participant id="sid-p-main" name="Empresa" processRef="sid-proc"/>
+    <participant id="sid-p-cli" name="Cliente"/>
+    <participant id="sid-p-banco" name="Banco"/>
+    <messageFlow id="m1" sourceRef="sid-p-cli" targetRef="sid-start"/>
+    <messageFlow id="m2" sourceRef="sid-t2" targetRef="sid-p-banco"/>
+    <messageFlow id="m3" sourceRef="sid-p-banco" targetRef="sid-b1"/>
+  </collaboration>
+  <process id="sid-proc" isExecutable="false">
+    <laneSet id="ls1">
+      <lane id="sid-l1" name="Atendimento"><flowNodeRef>sid-start</flowNodeRef><flowNodeRef>sid-t1</flowNodeRef><flowNodeRef>sid-g1</flowNodeRef><flowNodeRef>sid-end1</flowNodeRef></lane>
+      <lane id="sid-l2" name="Financeiro"><flowNodeRef>sid-t2</flowNodeRef><flowNodeRef>sid-b1</flowNodeRef><flowNodeRef>sid-b2</flowNodeRef><flowNodeRef>sid-t3</flowNodeRef><flowNodeRef>sid-end2</flowNodeRef><flowNodeRef>sid-end3</flowNodeRef></lane>
+    </laneSet>
+    <startEvent id="sid-start" name="Pedido recebido"><outgoing>s1</outgoing><messageEventDefinition/></startEvent>
+    <userTask id="sid-t1" name="Validar pedido"><incoming>s1</incoming><outgoing>s2</outgoing></userTask>
+    <exclusiveGateway id="sid-g1" name="Pedido válido?" default="s4"><incoming>s2</incoming><outgoing>s3</outgoing><outgoing>s4</outgoing></exclusiveGateway>
+    <sendTask id="sid-t2" name="Solicitar pagamento"><incoming>s3</incoming><outgoing>s5</outgoing></sendTask>
+    <receiveTask id="sid-t3" name="Aguardar retorno do banco"><incoming>s5</incoming><outgoing>s6</outgoing></receiveTask>
+    <boundaryEvent id="sid-b1" attachedToRef="sid-t3" name="Recusa do banco"><outgoing>s7</outgoing><messageEventDefinition/></boundaryEvent>
+    <boundaryEvent id="sid-b2" attachedToRef="sid-t3" name="5 dias" cancelActivity="true"><outgoing>s8</outgoing><timerEventDefinition><timeDuration>P5D</timeDuration></timerEventDefinition></boundaryEvent>
+    <endEvent id="sid-end1" name="Pedido recusado"><incoming>s4</incoming></endEvent>
+    <endEvent id="sid-end2" name="Pago"><incoming>s6</incoming></endEvent>
+    <endEvent id="sid-end3" name="Pagamento falhou"><incoming>s7</incoming><incoming>s8</incoming></endEvent>
+    <sequenceFlow id="s1" sourceRef="sid-start" targetRef="sid-t1"/>
+    <sequenceFlow id="s2" sourceRef="sid-t1" targetRef="sid-g1"/>
+    <sequenceFlow id="s3" name="Sim" sourceRef="sid-g1" targetRef="sid-t2"><conditionExpression xsi:type="tFormalExpression">${valido}</conditionExpression></sequenceFlow>
+    <sequenceFlow id="s4" sourceRef="sid-g1" targetRef="sid-end1"/>
+    <sequenceFlow id="s5" sourceRef="sid-t2" targetRef="sid-t3"/>
+    <sequenceFlow id="s6" sourceRef="sid-t3" targetRef="sid-end2"/>
+    <sequenceFlow id="s7" sourceRef="sid-b1" targetRef="sid-end3"/>
+    <sequenceFlow id="s8" sourceRef="sid-b2" targetRef="sid-end3"/>
+  </process>
+</definitions>

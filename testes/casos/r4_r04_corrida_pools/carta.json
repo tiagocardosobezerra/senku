@@ -1,0 +1,15 @@
+{"processo": {"nome": "Proposta comercial", "codigo": "COM-01"},
+ "papeis": [{"id": "cli", "nome": "Cliente", "tipo": "externo"}, {"id": "ven", "nome": "Vendedor"}, {"id": "fin", "nome": "Financeiro"}],
+ "elementos": [
+  {"id": "i", "tipo": "inicio", "gatilho": "mensagem", "nome": "Pedido de proposta recebido", "segue": "a1"},
+  {"id": "a1", "nome": "Elaborar proposta", "papel": "ven", "sistema": [], "tempo": {"execucao": "2h", "espera": "1d"}, "segue": "a2"},
+  {"id": "a2", "nome": "Enviar proposta", "papel": "ven", "sistema": [], "tempo": {"execucao": "10min"}, "segue": "c1"},
+  {"id": "c1", "tipo": "corrida", "nome": "O que vier primeiro", "papel": "ven",
+   "segue": [{"para": "e1", "percentual": 60}, {"para": "e2", "percentual": 25}, {"para": "e3", "percentual": 15}]},
+  {"id": "e1", "tipo": "evento", "gatilho": "mensagem", "nome": "Aceite recebido", "tempo": {"espera": "3d"}, "segue": "a3"},
+  {"id": "e2", "tipo": "evento", "gatilho": "mensagem", "nome": "Recusa recebida", "tempo": {"espera": "2d"}, "segue": "f2"},
+  {"id": "e3", "tipo": "evento", "gatilho": "tempo", "nome": "Aguardar 10 dias corridos", "segue": "f3"},
+  {"id": "a3", "nome": "Faturar pedido", "papel": "fin", "sistema": [], "tempo": {"execucao": "30min"}, "segue": "f"},
+  {"id": "f", "tipo": "fim", "nome": "Pedido faturado"},
+  {"id": "f2", "tipo": "fim", "nome": "Proposta recusada"},
+  {"id": "f3", "tipo": "fim", "nome": "Proposta expirada"}]}

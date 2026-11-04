@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.20.0">
+  <bpmn:collaboration id="Collab">
+    <bpmn:participant id="Part_Compras" name="Compras" processRef="Proc_Compras"/>
+    <bpmn:participant id="Part_Forn" name="Fornecedor" processRef="Proc_Forn"/>
+    <bpmn:messageFlow id="MF1" sourceRef="Task_Cotar" targetRef="Start_Forn"/>
+    <bpmn:messageFlow id="MF2" sourceRef="Task_Enviar" targetRef="Catch_Cot"/>
+  </bpmn:collaboration>
+  <bpmn:process id="Proc_Compras" name="Compra direta" isExecutable="true">
+    <bpmn:startEvent id="Start_1" name="Necessidade identificada"><bpmn:outgoing>F1</bpmn:outgoing></bpmn:startEvent>
+    <bpmn:sendTask id="Task_Cotar" name="Solicitar cotação" camunda:type="external" camunda:topic="cot"><bpmn:incoming>F1</bpmn:incoming><bpmn:outgoing>F2</bpmn:outgoing></bpmn:sendTask>
+    <bpmn:eventBasedGateway id="EBG"><bpmn:incoming>F2</bpmn:incoming><bpmn:outgoing>F3</bpmn:outgoing><bpmn:outgoing>F4</bpmn:outgoing></bpmn:eventBasedGateway>
+    <bpmn:intermediateCatchEvent id="Catch_Cot" name="Cotação recebida"><bpmn:incoming>F3</bpmn:incoming><bpmn:outgoing>F5</bpmn:outgoing><bpmn:messageEventDefinition messageRef="Msg1"/></bpmn:intermediateCatchEvent>
+    <bpmn:intermediateCatchEvent id="Timer_1" name="3 dias"><bpmn:incoming>F4</bpmn:incoming><bpmn:outgoing>F6</bpmn:outgoing><bpmn:timerEventDefinition><bpmn:timeDuration xsi:type="bpmn:tFormalExpression">P3D</bpmn:timeDuration></bpmn:timerEventDefinition></bpmn:intermediateCatchEvent>
+    <bpmn:exclusiveGateway id="GW_Valor"><bpmn:incoming>F5</bpmn:incoming><bpmn:outgoing>F7</bpmn:outgoing><bpmn:outgoing>F8</bpmn:outgoing></bpmn:exclusiveGateway>
+    <bpmn:userTask id="Task_Aprovar" name="Aprovar compra" camunda:assignee="gestor"><bpmn:incoming>F7</bpmn:incoming><bpmn:outgoing>F9</bpmn:outgoing></bpmn:userTask>
+    <bpmn:serviceTask id="Task_Pedido" name="Emitir pedido" camunda:class="x.Y"><bpmn:incoming>F8</bpmn:incoming><bpmn:incoming>F9</bpmn:incoming><bpmn:outgoing>F10</bpmn:outgoing></bpmn:serviceTask>
+    <bpmn:endEvent id="End_ok" name="Pedido emitido"><bpmn:incoming>F10</bpmn:incoming></bpmn:endEvent>
+    <bpmn:endEvent id="End_to"><bpmn:incoming>F6</bpmn:incoming></bpmn:endEvent>
+    <bpmn:sequenceFlow id="F1" sourceRef="Start_1" targetRef="Task_Cotar"/>
+    <bpmn:sequenceFlow id="F2" sourceRef="Task_Cotar" targetRef="EBG"/>
+    <bpmn:sequenceFlow id="F3" sourceRef="EBG" targetRef="Catch_Cot"/>
+    <bpmn:sequenceFlow id="F4" sourceRef="EBG" targetRef="Timer_1"/>
+    <bpmn:sequenceFlow id="F5" sourceRef="Catch_Cot" targetRef="GW_Valor"/>
+    <bpmn:sequenceFlow id="F6" sourceRef="Timer_1" targetRef="End_to"/>
+    <bpmn:sequenceFlow id="F7" sourceRef="GW_Valor" targetRef="Task_Aprovar"><bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${valor &gt; 5000}</bpmn:conditionExpression></bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="F8" sourceRef="GW_Valor" targetRef="Task_Pedido"><bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${valor &lt;= 5000}</bpmn:conditionExpression></bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="F9" sourceRef="Task_Aprovar" targetRef="Task_Pedido"/>
+    <bpmn:sequenceFlow id="F10" sourceRef="Task_Pedido" targetRef="End_ok"/>
+  </bpmn:process>
+  <bpmn:process id="Proc_Forn" name="Fornecedor" isExecutable="false">
+    <bpmn:startEvent id="Start_Forn" name="Pedido de cotação recebido"><bpmn:outgoing>G1</bpmn:outgoing><bpmn:messageEventDefinition/></bpmn:startEvent>
+    <bpmn:task id="Task_Calcular" name="Calcular preço"><bpmn:incoming>G1</bpmn:incoming><bpmn:outgoing>G2</bpmn:outgoing></bpmn:task>
+    <bpmn:sendTask id="Task_Enviar" name="Enviar cotação"><bpmn:incoming>G2</bpmn:incoming><bpmn:outgoing>G3</bpmn:outgoing></bpmn:sendTask>
+    <bpmn:endEvent id="End_Forn"><bpmn:incoming>G3</bpmn:incoming></bpmn:endEvent>
+    <bpmn:sequenceFlow id="G1" sourceRef="Start_Forn" targetRef="Task_Calcular"/>
+    <bpmn:sequenceFlow id="G2" sourceRef="Task_Calcular" targetRef="Task_Enviar"/>
+    <bpmn:sequenceFlow id="G3" sourceRef="Task_Enviar" targetRef="End_Forn"/>
+  </bpmn:process>
+  <bpmn:message id="Msg1" name="Cotação"/>
+</bpmn:definitions>

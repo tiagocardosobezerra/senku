@@ -1,0 +1,704 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:senku="http://senku/carta" id="Definicoes.Processo_CRE-02" targetNamespace="http://senku/processos" exporter="Senku" exporterVersion="2">
+  <bpmn:message id="Msg.inicio" name="Pedido de crédito recebido"/>
+  <bpmn:collaboration id="Colaboracao.Processo_CRE-02">
+    <bpmn:participant id="Pool.Processo_CRE-02" name="CRE-02 · Concessão de limite de crédito para cliente PJ" processRef="Processo_CRE-02"/>
+  </bpmn:collaboration>
+  <bpmn:process id="Processo_CRE-02" name="CRE-02 · Concessão de limite de crédito para cliente PJ" isExecutable="false">
+    <bpmn:documentation>Liberar limite de crédito para clientes pessoa jurídica com risco aceitável, no menor prazo, dentro da política de crédito e das alçadas.</bpmn:documentation>
+    <bpmn:extensionElements><senku:carta>{&quot;formato&quot;:&quot;senku/1&quot;,&quot;processo&quot;:{&quot;codigo&quot;:&quot;CRE-02&quot;,&quot;nome&quot;:&quot;Concessão de limite de crédito para cliente PJ&quot;,&quot;cenario&quot;:&quot;as-is&quot;,&quot;versao&quot;:&quot;0.4&quot;,&quot;objetivo&quot;:&quot;Liberar limite de crédito para clientes pessoa jurídica com risco aceitável, no menor prazo, dentro da política de crédito e das alçadas.&quot;,&quot;dono&quot;:&quot;Gerente de Crédito e Cobrança&quot;,&quot;area&quot;:&quot;Financeiro&quot;,&quot;macroprocesso&quot;:&quot;Gestão de receitas&quot;,&quot;nivel&quot;:&quot;processo&quot;,&quot;gatilho&quot;:&quot;Vendedor recebe pedido de cliente novo ou pedido de aumento de limite&quot;,&quot;resultado&quot;:&quot;Limite cadastrado no ERP e contrato assinado, ou recusa comunicada ao cliente&quot;,&quot;frequencia&quot;:&quot;contínuo&quot;,&quot;volume&quot;:&quot;cerca de 260 propostas por mês (70% clientes novos)&quot;,&quot;prazo_informado&quot;:&quot;de 5 a 20 dias úteis; o comercial reclama dos casos que vão a comitê&quot;,&quot;escopo&quot;:{&quot;inicio&quot;:&quot;Vendedor registra a proposta de crédito&quot;,&quot;fim&quot;:&quot;Limite liberado no ERP, ou cliente informado da recusa ou da expiração&quot;,&quot;inclui&quot;:[&quot;clientes novos&quot;,&quot;aumento de limite de clientes ativos&quot;],&quot;nao_inclui&quot;:[&quot;renovação anual automática (CRE-03)&quot;,&quot;cobrança e bloqueio por atraso (CRE-05)&quot;,&quot;venda à vista&quot;]},&quot;normas&quot;:[&quot;Política de Crédito POL-FIN-07 rev. 3&quot;,&quot;Matriz de alçadas de crédito 2026&quot;,&quot;Procedimento KYC / PLD (Lei 9.613/1998)&quot;],&quot;premissas&quot;:[&quot;Tempos e percentuais estimados nas entrevistas de 21 e 22/10/2026&quot;,&quot;Score do bureau consultado por integração automática do ERP&quot;]},&quot;sipoc&quot;:{&quot;fornecedores&quot;:[&quot;Cliente PJ&quot;,&quot;Vendedor&quot;,&quot;Bureau de crédito&quot;,&quot;Receita Federal (consulta CNPJ)&quot;],&quot;entradas&quot;:[&quot;Proposta de crédito&quot;,&quot;Contrato social e balanço&quot;,&quot;Score e restrições do bureau&quot;,&quot;Política e alçadas&quot;],&quot;saidas&quot;:[&quot;Parecer de crédito&quot;,&quot;Contrato de crédito assinado&quot;,&quot;Limite cadastrado no ERP&quot;,&quot;Comunicação de recusa&quot;],&quot;clientes&quot;:[&quot;Cliente PJ&quot;,&quot;Área Comercial&quot;,&quot;Faturamento&quot;]},&quot;papeis&quot;:[{&quot;id&quot;:&quot;cliente&quot;,&quot;nome&quot;:&quot;Cliente PJ&quot;,&quot;tipo&quot;:&quot;externo&quot;},{&quot;id&quot;:&quot;vendedor&quot;,&quot;nome&quot;:&quot;Vendedor&quot;,&quot;tipo&quot;:&quot;interno&quot;},{&quot;id&quot;:&quot;cadastro&quot;,&quot;nome&quot;:&quot;Cadastro&quot;,&quot;tipo&quot;:&quot;interno&quot;},{&quot;id&quot;:&quot;erp&quot;,&quot;nome&quot;:&quot;ERP (automático)&quot;,&quot;tipo&quot;:&quot;sistema&quot;},{&quot;id&quot;:&quot;analista&quot;,&quot;nome&quot;:&quot;Analista de Crédito&quot;,&quot;tipo&quot;:&quot;interno&quot;},{&quot;id&quot;:&quot;comite&quot;,&quot;nome&quot;:&quot;Comitê de Crédito&quot;,&quot;tipo&quot;:&quot;interno&quot;},{&quot;id&quot;:&quot;juridico&quot;,&quot;nome&quot;:&quot;Jurídico&quot;,&quot;tipo&quot;:&quot;interno&quot;}],&quot;sistemas&quot;:[{&quot;id&quot;:&quot;crm&quot;,&quot;nome&quot;:&quot;CRM&quot;,&quot;descricao&quot;:&quot;Salesforce&quot;},{&quot;id&quot;:&quot;sis_erp&quot;,&quot;nome&quot;:&quot;ERP&quot;,&quot;descricao&quot;:&quot;TOTVS Protheus&quot;},{&quot;id&quot;:&quot;bureau&quot;,&quot;nome&quot;:&quot;Bureau&quot;,&quot;descricao&quot;:&quot;Serasa Experian, via integração&quot;},{&quot;id&quot;:&quot;email&quot;,&quot;nome&quot;:&quot;E-mail&quot;},{&quot;id&quot;:&quot;planilha&quot;,&quot;nome&quot;:&quot;Planilha de análise&quot;},{&quot;id&quot;:&quot;docusign&quot;,&quot;nome&quot;:&quot;DocuSign&quot;}],&quot;regras&quot;:[{&quot;id&quot;:&quot;R1&quot;,&quot;texto&quot;:&quot;Sem contrato social atualizado, dois últimos balanços e cartão CNPJ ativo, a proposta não segue.&quot;,&quot;fonte&quot;:&quot;POL-FIN-07, item 3.1&quot;},{&quot;id&quot;:&quot;R2&quot;,&quot;texto&quot;:&quot;Sócio em lista restritiva ou PEP sem diligência reforçada: recusa obrigatória.&quot;,&quot;fonte&quot;:&quot;Procedimento KYC/PLD&quot;},{&quot;id&quot;:&quot;R3&quot;,&quot;texto&quot;:&quot;Score ≥ 700 e limite até R$ 50 mil: aprovação automática. Score &lt; 400 ou protesto ativo: recusa. Demais: análise manual.&quot;,&quot;fonte&quot;:&quot;POL-FIN-07, item 4&quot;},{&quot;id&quot;:&quot;R4&quot;,&quot;texto&quot;:&quot;Liquidez corrente mínima de 1,0 e endividamento até 70% do patrimônio líquido.&quot;,&quot;fonte&quot;:&quot;POL-FIN-07, item 5.2&quot;},{&quot;id&quot;:&quot;R5&quot;,&quot;texto&quot;:&quot;Analista aprova até R$ 200 mil; gerente até R$ 500 mil; acima disso, comitê.&quot;,&quot;fonte&quot;:&quot;Matriz de alçadas 2026&quot;},{&quot;id&quot;:&quot;R6&quot;,&quot;texto&quot;:&quot;Contrato não assinado em 10 dias corridos expira; nova proposta reinicia a análise.&quot;,&quot;fonte&quot;:&quot;POL-FIN-07, item 7&quot;},{&quot;id&quot;:&quot;R7&quot;,&quot;texto&quot;:&quot;A recusa não informa o motivo detalhado de score; o vendedor oferece venda à vista ou com garantia.&quot;,&quot;fonte&quot;:&quot;Jurídico&quot;}],&quot;indicadores&quot;:[{&quot;nome&quot;:&quot;Prazo de concessão&quot;,&quot;formula&quot;:&quot;data de desbloqueio - data da proposta (dias úteis), mediana&quot;,&quot;meta&quot;:&quot;≤ 5 dias úteis&quot;,&quot;polaridade&quot;:&quot;menor é melhor&quot;,&quot;periodicidade&quot;:&quot;mensal&quot;,&quot;fonte&quot;:&quot;CRM + ERP&quot;,&quot;dono&quot;:&quot;Gerente de Crédito e Cobrança&quot;,&quot;atual&quot;:&quot;9 dias úteis (mediana set/2026)&quot;},{&quot;nome&quot;:&quot;Taxa de aprovação automática&quot;,&quot;formula&quot;:&quot;propostas aprovadas sem análise manual / propostas analisadas&quot;,&quot;meta&quot;:&quot;≥ 50%&quot;,&quot;polaridade&quot;:&quot;maior é melhor&quot;,&quot;periodicidade&quot;:&quot;mensal&quot;,&quot;fonte&quot;:&quot;ERP&quot;,&quot;dono&quot;:&quot;Gerente de Crédito e Cobrança&quot;,&quot;atual&quot;:&quot;40%&quot;},{&quot;nome&quot;:&quot;Inadimplência da safra&quot;,&quot;formula&quot;:&quot;valor vencido &gt; 60 dias / limite liberado, por mês de concessão&quot;,&quot;meta&quot;:&quot;≤ 2,5%&quot;,&quot;polaridade&quot;:&quot;menor é melhor&quot;,&quot;periodicidade&quot;:&quot;mensal&quot;,&quot;fonte&quot;:&quot;ERP&quot;,&quot;dono&quot;:&quot;Gerente de Crédito e Cobrança&quot;,&quot;atual&quot;:&quot;2,1%&quot;},{&quot;nome&quot;:&quot;Retrabalho de documentação&quot;,&quot;formula&quot;:&quot;propostas devolvidas por documento / propostas recebidas&quot;,&quot;meta&quot;:&quot;≤ 15%&quot;,&quot;polaridade&quot;:&quot;menor é melhor&quot;,&quot;periodicidade&quot;:&quot;mensal&quot;,&quot;fonte&quot;:&quot;CRM&quot;,&quot;dono&quot;:&quot;Coordenador Comercial&quot;,&quot;atual&quot;:&quot;35%&quot;}],&quot;dores&quot;:[{&quot;id&quot;:&quot;D1&quot;,&quot;descricao&quot;:&quot;35% das propostas voltam por documento faltando; o cliente manda aos poucos por e-mail.&quot;,&quot;elementos&quot;:[&quot;a2&quot;,&quot;c1&quot;,&quot;a3&quot;],&quot;impacto&quot;:&quot;alto&quot;,&quot;frequencia&quot;:&quot;35%&quot;},{&quot;id&quot;:&quot;D2&quot;,&quot;descricao&quot;:&quot;Proposta acima da alçada espera a reunião quinzenal do comitê (até 15 dias).&quot;,&quot;elementos&quot;:[&quot;e1&quot;,&quot;a6&quot;],&quot;impacto&quot;:&quot;alto&quot;,&quot;frequencia&quot;:&quot;15% do total&quot;},{&quot;id&quot;:&quot;D3&quot;,&quot;descricao&quot;:&quot;Análise manual em planilha fora do ERP: parecer não fica no histórico do cliente.&quot;,&quot;elementos&quot;:[&quot;a4&quot;],&quot;impacto&quot;:&quot;médio&quot;}],&quot;riscos&quot;:[{&quot;id&quot;:&quot;K1&quot;,&quot;descricao&quot;:&quot;Liberar limite sem contrato assinado&quot;,&quot;elementos&quot;:[&quot;a8&quot;,&quot;a9&quot;],&quot;controle&quot;:&quot;Limite cadastrado bloqueado; desbloqueio só após o paralelo (contrato + cadastro)&quot;,&quot;tipo_controle&quot;:&quot;preventivo&quot;,&quot;probabilidade&quot;:&quot;baixa&quot;,&quot;impacto&quot;:&quot;alto&quot;},{&quot;id&quot;:&quot;K2&quot;,&quot;descricao&quot;:&quot;Conceder crédito a empresa com sócio sancionado (PLD)&quot;,&quot;elementos&quot;:[&quot;s1&quot;],&quot;controle&quot;:&quot;Checagem KYC obrigatória antes do bureau (R2)&quot;,&quot;tipo_controle&quot;:&quot;preventivo&quot;,&quot;probabilidade&quot;:&quot;baixa&quot;,&quot;impacto&quot;:&quot;muito alto&quot;},{&quot;id&quot;:&quot;K3&quot;,&quot;descricao&quot;:&quot;Analista aprovar acima da própria alçada&quot;,&quot;elementos&quot;:[&quot;d3&quot;],&quot;controle&quot;:&quot;Alçada parametrizada no ERP por usuário&quot;,&quot;tipo_controle&quot;:&quot;preventivo&quot;,&quot;probabilidade&quot;:&quot;média&quot;,&quot;impacto&quot;:&quot;médio&quot;},{&quot;id&quot;:&quot;K4&quot;,&quot;descricao&quot;:&quot;Limite liberado diferente do aprovado&quot;,&quot;elementos&quot;:[&quot;a8&quot;],&quot;controle&quot;:&quot;&quot;,&quot;tipo_controle&quot;:&quot;&quot;,&quot;probabilidade&quot;:&quot;média&quot;,&quot;impacto&quot;:&quot;alto&quot;}],&quot;melhorias&quot;:[{&quot;id&quot;:&quot;M1&quot;,&quot;descricao&quot;:&quot;Portal do cliente com checklist e upload obrigatório de documentos&quot;,&quot;resolve&quot;:[&quot;D1&quot;],&quot;elementos&quot;:[&quot;a2&quot;,&quot;c1&quot;],&quot;impacto&quot;:&quot;alto&quot;,&quot;esforco&quot;:&quot;médio&quot;,&quot;responsavel&quot;:&quot;Coordenador Comercial&quot;,&quot;prazo&quot;:&quot;31/01/2027&quot;,&quot;status&quot;:&quot;em andamento&quot;},{&quot;id&quot;:&quot;M2&quot;,&quot;descricao&quot;:&quot;Comitê virtual assíncrono (aprovação no ERP em até 48h) para limites entre R$ 500 mil e R$ 1 milhão&quot;,&quot;resolve&quot;:[&quot;D2&quot;],&quot;elementos&quot;:[&quot;e1&quot;,&quot;a6&quot;],&quot;impacto&quot;:&quot;alto&quot;,&quot;esforco&quot;:&quot;baixo&quot;,&quot;responsavel&quot;:&quot;Gerente de Crédito e Cobrança&quot;,&quot;prazo&quot;:&quot;15/12/2026&quot;,&quot;status&quot;:&quot;aprovada&quot;},{&quot;id&quot;:&quot;M3&quot;,&quot;descricao&quot;:&quot;Parecer de crédito em formulário do ERP, anexado ao cadastro do cliente&quot;,&quot;resolve&quot;:[&quot;D3&quot;],&quot;elementos&quot;:[&quot;a4&quot;],&quot;impacto&quot;:&quot;médio&quot;,&quot;esforco&quot;:&quot;médio&quot;,&quot;responsavel&quot;:&quot;TI - ERP&quot;,&quot;prazo&quot;:&quot;31/03/2027&quot;,&quot;status&quot;:&quot;proposta&quot;}],&quot;glossario&quot;:[{&quot;termo&quot;:&quot;KYC&quot;,&quot;definicao&quot;:&quot;Know Your Customer: identificação e verificação de quem é o cliente e seus sócios.&quot;},{&quot;termo&quot;:&quot;PLD&quot;,&quot;definicao&quot;:&quot;Prevenção à lavagem de dinheiro (Lei 9.613/1998).&quot;},{&quot;termo&quot;:&quot;PEP&quot;,&quot;definicao&quot;:&quot;Pessoa exposta politicamente.&quot;},{&quot;termo&quot;:&quot;Alçada&quot;,&quot;definicao&quot;:&quot;Valor máximo que cada cargo pode aprovar sozinho.&quot;}],&quot;pendencias&quot;:[{&quot;pergunta&quot;:&quot;Quem confere se o limite cadastrado no ERP é igual ao aprovado (K4 sem controle)?&quot;,&quot;para&quot;:&quot;Gerente de Crédito e Cobrança&quot;},{&quot;pergunta&quot;:&quot;A faixa do gerente (R$ 200 a 500 mil) passa pelo analista ou vai direto? O fluxo atual manda tudo acima da alçada do analista ao comitê.&quot;,&quot;para&quot;:&quot;Gerente de Crédito e Cobrança&quot;}]}</senku:carta></bpmn:extensionElements>
+    <bpmn:laneSet id="Raias.Processo_CRE-02">
+      <bpmn:lane id="Raia_cliente" name="Cliente PJ">
+        <bpmn:flowNodeRef>c1</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>c2</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>d6</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="Raia_vendedor" name="Vendedor">
+        <bpmn:flowNodeRef>inicio</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>a1</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>a2</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>a2b</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>fim_ok</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>a12</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>fim_rec</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="Raia_cadastro" name="Cadastro">
+        <bpmn:flowNodeRef>a3</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>d1</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>s1</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>d0</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>a8</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>p2</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>a9</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>a10</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="Raia_erp" name="ERP (automático)">
+        <bpmn:flowNodeRef>x1</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>x2</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>d2</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="Raia_analista" name="Analista de Crédito">
+        <bpmn:flowNodeRef>a4</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>a4_1</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>d3</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>d4</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>a5</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>j0</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>p1</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="Raia_comite" name="Comitê de Crédito">
+        <bpmn:flowNodeRef>e1</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>a6</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>d5</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="Raia_juridico" name="Jurídico">
+        <bpmn:flowNodeRef>a7</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>a13</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>fim_exp</bpmn:flowNodeRef>
+      </bpmn:lane>
+    </bpmn:laneSet>
+    <bpmn:startEvent id="inicio" name="Pedido de crédito recebido">
+      <bpmn:extensionElements><senku:dados>{&quot;id&quot;:&quot;inicio&quot;,&quot;tipo&quot;:&quot;inicio&quot;,&quot;gatilho&quot;:&quot;mensagem&quot;,&quot;nome&quot;:&quot;Pedido de crédito recebido&quot;,&quot;papel&quot;:&quot;vendedor&quot;}</senku:dados></bpmn:extensionElements>
+      <bpmn:outgoing>Fluxo_f1</bpmn:outgoing>
+      <bpmn:messageEventDefinition id="inicio.def" messageRef="Msg.inicio"/>
+    </bpmn:startEvent>
+    <bpmn:userTask id="a1" name="Registrar proposta de crédito">
+      <bpmn:documentation>Abre a proposta no CRM com CNPJ, limite pedido, prazo de pagamento e previsão de compra mensal.&#10;Sistema: CRM&#10;Tempo: execução 20min&#10;Valor: NAV-N</bpmn:documentation>
+      <bpmn:extensionElements><senku:dados>{&quot;id&quot;:&quot;a1&quot;,&quot;nome&quot;:&quot;Registrar proposta de crédito&quot;,&quot;papel&quot;:&quot;vendedor&quot;,&quot;sistema&quot;:&quot;crm&quot;,&quot;descricao&quot;:&quot;Abre a proposta no CRM com CNPJ, limite pedido, prazo de pagamento e previsão de compra mensal.&quot;,&quot;saidas&quot;:[&quot;Proposta de crédito&quot;],&quot;tempo&quot;:{&quot;execucao&quot;:&quot;20min&quot;},&quot;valor&quot;:&quot;NAV-N&quot;}</senku:dados></bpmn:extensionElements>
+      <bpmn:incoming>Fluxo_f1</bpmn:incoming>
+      <bpmn:outgoing>Fluxo_f2</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:userTask id="a2" name="Solicitar documentos ao cliente">
+      <bpmn:documentation>Pede contrato social, dois últimos balanços e cartão CNPJ.&#10;Sistema: E-mail&#10;Tempo: execução 10min&#10;Valor: NAV-N</bpmn:documentation>
+      <bpmn:extensionElements><senku:dados>{&quot;id&quot;:&quot;a2&quot;,&quot;nome&quot;:&quot;Solicitar documentos ao cliente&quot;,&quot;papel&quot;:&quot;vendedor&quot;,&quot;sistema&quot;:&quot;email&quot;,&quot;descricao&quot;:&quot;Pede contrato social, dois últimos balanços e cartão CNPJ.&quot;,&quot;tempo&quot;:{&quot;execucao&quot;:&quot;10min&quot;},&quot;valor&quot;:&quot;NAV-N&quot;}</senku:dados></bpmn:extensionElements>
+      <bpmn:incoming>Fluxo_f2</bpmn:incoming>
+      <bpmn:outgoing>Fluxo_f3</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:userTask id="c1" name="Enviar documentos">
+      <bpmn:documentation>Sistema: E-mail&#10;Tempo: execução 30min, espera 3d&#10;Valor: NAV-N</bpmn:documentation>
+      <bpmn:extensionElements><senku:dados>{&quot;id&quot;:&quot;c1&quot;,&quot;nome&quot;:&quot;Enviar documentos&quot;,&quot;papel&quot;:&quot;cliente&quot;,&quot;sistema&quot;:&quot;email&quot;,&quot;tempo&quot;:{&quot;execucao&quot;:&quot;30min&quot;,&quot;espera&quot;:&quot;3d&quot;},&quot;valor&quot;:&quot;NAV-N&quot;}</senku:dados></bpmn:extensionElements>
+      <bpmn:incoming>Fluxo_f3</bpmn:incoming>
+      <bpmn:incoming>Fluxo_f8</bpmn:incoming>
+      <bpmn:outgoing>Fluxo_f4</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:userTask id="a3" name="Conferir documentação">
+      <bpmn:documentation>Sistema: CRM&#10;Tempo: execução 25min, espera 1d&#10;Regra R1: Sem contrato social atualizado, dois últimos balanços e cartão CNPJ ativo, a proposta não segue.&#10;Valor: NAV-N</bpmn:documentation>
+      <bpmn:extensionElements><senku:dados>{&quot;id&quot;:&quot;a3&quot;,&quot;nome&quot;:&quot;Conferir documentação&quot;,&quot;papel&quot;:&quot;cadastro&quot;,&quot;sistema&quot;:&quot;crm&quot;,&quot;regras&quot;:[&quot;R1&quot;],&quot;como&quot;:[&quot;Conferir CNPJ ativo na Receita&quot;,&quot;Conferir se o signatário consta no contrato social&quot;,&quot;Conferir balanço assinado por contador&quot;],&quot;tempo&quot;:{&quot;execucao&quot;:&quot;25min&quot;,&quot;espera&quot;:&quot;1d&quot;},&quot;valor&quot;:&quot;NAV-N&quot;}</senku:dados></bpmn:extensionElements>
+      <bpmn:incoming>Fluxo_f4</bpmn:incoming>
+      <bpmn:outgoing>Fluxo_f5</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:exclusiveGateway id="d1" name="Documentação completa?">
+      <bpmn:extensionElements><senku:dados>{&quot;id&quot;:&quot;d1&quot;,&quot;tipo&quot;:&quot;decisao&quot;,&quot;nome&quot;:&quot;Documentação completa?&quot;,&quot;papel&quot;:&quot;cadastro&quot;}</senku:dados></bpmn:extensionElements>
+      <bpmn:incoming>Fluxo_f5</bpmn:incoming>
+      <bpmn:outgoing>Fluxo_f6</bpmn:outgoing>
+      <bpmn:outgoing>Fluxo_f7</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:userTask id="a2b" name="Cobrar documentos pendentes">
+      <bpmn:documentation>Sistema: E-mail&#10;Tempo: execução 10min, espera 1d&#10;Valor: NAV</bpmn:documentation>
+      <bpmn:extensionElements><senku:dados>{&quot;id&quot;:&quot;a2b&quot;,&quot;nome&quot;:&quot;Cobrar documentos pendentes&quot;,&quot;papel&quot;:&quot;vendedor&quot;,&quot;sistema&quot;:&quot;email&quot;,&quot;tempo&quot;:{&quot;execucao&quot;:&quot;10min&quot;,&quot;espera&quot;:&quot;1d&quot;},&quot;valor&quot;:&quot;NAV&quot;}</senku:dados></bpmn:extensionElements>
+      <bpmn:incoming>Fluxo_f7</bpmn:incoming>
+      <bpmn:outgoing>Fluxo_f8</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:subProcess id="s1" name="Verificar KYC e PLD" triggeredByEvent="false">
+      <bpmn:documentation>Checagem de sócios em listas restritivas e PEP (mapeado em CRE-02.1).&#10;Sistema: ERP&#10;Tempo: execução 15min, espera 2h30&#10;Regra R2: Sócio em lista restritiva ou PEP sem diligência reforçada: recusa obrigatória.&#10;Valor: NAV-N</bpmn:documentation>
+      <bpmn:extensionElements><senku:dados>{&quot;id&quot;:&quot;s1&quot;,&quot;tipo&quot;:&quot;subprocesso&quot;,&quot;nome&quot;:&quot;Verificar KYC e PLD&quot;,&quot;papel&quot;:&quot;cadastro&quot;,&quot;sistema&quot;:[&quot;sis_erp&quot;],&quot;regras&quot;:[&quot;R2&quot;],&quot;descricao&quot;:&quot;Checagem de sócios em listas restritivas e PEP (mapeado em CRE-02.1).&quot;,&quot;tempo&quot;:{&quot;execucao&quot;:&quot;15min&quot;,&quot;espera&quot;:&quot;2h30&quot;},&quot;valor&quot;:&quot;NAV-N&quot;,&quot;detalhe&quot;:&quot;kyc/carta.json&quot;}</senku:dados></bpmn:extensionElements>
+      <bpmn:incoming>Fluxo_f6</bpmn:incoming>
+      <bpmn:outgoing>Fluxo_f9</bpmn:outgoing>
+    </bpmn:subProcess>
+    <bpmn:exclusiveGateway id="d0" name="Sócios sem restrição de PLD?">
+      <bpmn:extensionElements><senku:dados>{&quot;id&quot;:&quot;d0&quot;,&quot;tipo&quot;:&quot;decisao&quot;,&quot;nome&quot;:&quot;Sócios sem restrição de PLD?&quot;,&quot;papel&quot;:&quot;cadastro&quot;}</senku:dados></bpmn:extensionElements>
+      <bpmn:incoming>Fluxo_f9</bpmn:incoming>
+      <bpmn:outgoing>Fluxo_f10</bpmn:outgoing>
+      <bpmn:outgoing>Fluxo_f11</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:serviceTask id="x1" name="Consultar score no bureau">
+      <bpmn:documentation>Integração busca score, protestos, ações e cheques sem fundo.&#10;Sistema: ERP, Bureau&#10;Tempo: execução 1min&#10;Valor: NAV-N</bpmn:documentation>
+      <bpmn:extensionElements><senku:dados>{&quot;id&quot;:&quot;x1&quot;,&quot;nome&quot;:&quot;Consultar score no bureau&quot;,&quot;papel&quot;:&quot;erp&quot;,&quot;sistema&quot;:[&quot;sis_erp&quot;,&quot;bureau&quot;],&quot;automatizada&quot;:true,&quot;descricao&quot;:&quot;Integração busca score, protestos, ações e cheques sem fundo.&quot;,&quot;tempo&quot;:{&quot;execucao&quot;:&quot;1min&quot;},&quot;valor&quot;:&quot;NAV-N&quot;}</senku:dados></bpmn:extensionElements>
+      <bpmn:incoming>Fluxo_f10</bpmn:incoming>
+      <bpmn:outgoing>Fluxo_f12</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:serviceTask id="x2" name="Calcular limite sugerido">
+      <bpmn:documentation>Sistema: ERP&#10;Tempo: execução 1min&#10;Regra R3: Score ≥ 700 e limite até R$ 50 mil: aprovação automática. Score &lt; 400 ou protesto ativo: recusa. Demais: análise manual.&#10;Valor: VA</bpmn:documentation>
+      <bpmn:extensionElements><senku:dados>{&quot;id&quot;:&quot;x2&quot;,&quot;nome&quot;:&quot;Calcular limite sugerido&quot;,&quot;papel&quot;:&quot;erp&quot;,&quot;sistema&quot;:&quot;sis_erp&quot;,&quot;automatizada&quot;:true,&quot;regras&quot;:[&quot;R3&quot;],&quot;tempo&quot;:{&quot;execucao&quot;:&quot;1min&quot;},&quot;valor&quot;:&quot;VA&quot;}</senku:dados></bpmn:extensionElements>
+      <bpmn:incoming>Fluxo_f12</bpmn:incoming>
+      <bpmn:outgoing>Fluxo_f13</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:exclusiveGateway id="d2" name="Qual faixa de risco?">
+      <bpmn:documentation>Regra R3: Score ≥ 700 e limite até R$ 50 mil: aprovação automática. Score &lt; 400 ou protesto ativo: recusa. Demais: análise manual.</bpmn:documentation>
+      <bpmn:extensionElements><senku:dados>{&quot;id&quot;:&quot;d2&quot;,&quot;tipo&quot;:&quot;decisao&quot;,&quot;nome&quot;:&quot;Qual faixa de risco?&quot;,&quot;papel&quot;:&quot;erp&quot;,&quot;regras&quot;:[&quot;R3&quot;]}</senku:dados></bpmn:extensionElements>
+      <bpmn:incoming>Fluxo_f13</bpmn:incoming>
+      <bpmn:outgoing>Fluxo_f14</bpmn:outgoing>
+      <bpmn:outgoing>Fluxo_f15</bpmn:outgoing>
+      <bpmn:outgoing>Fluxo_f16</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:userTask id="a4" name="Analisar crédito">
+      <bpmn:documentation>Analisa balanço (liquidez, endividamento), histórico de pagamento e referências comerciais; registra parecer.&#10;Sistema: Planilha de análise, Bureau&#10;Tempo: execução 2h, espera 3d&#10;Regra R4: Liquidez corrente mínima de 1,0 e endividamento até 70% do patrimônio líquido.&#10;Valor: VA</bpmn:documentation>
+      <bpmn:extensionElements><senku:dados>{&quot;id&quot;:&quot;a4&quot;,&quot;nome&quot;:&quot;Analisar crédito&quot;,&quot;papel&quot;:&quot;analista&quot;,&quot;sistema&quot;:[&quot;planilha&quot;,&quot;bureau&quot;],&quot;regras&quot;:[&quot;R4&quot;],&quot;descricao&quot;:&quot;Analisa balanço (liquidez, endividamento), histórico de pagamento e referências comerciais; registra parecer.&quot;,&quot;saidas&quot;:[&quot;Parecer de crédito&quot;],&quot;tempo&quot;:{&quot;execucao&quot;:&quot;2h&quot;,&quot;espera&quot;:&quot;3d&quot;},&quot;valor&quot;:&quot;VA&quot;,&quot;raci&quot;:{&quot;A&quot;:&quot;analista&quot;,&quot;C&quot;:[&quot;vendedor&quot;]},&quot;bordas&quot;:[{&quot;gatilho&quot;:&quot;tempo&quot;,&quot;nome&quot;:&quot;Prazo de análise (5 dias úteis) estourado&quot;,&quot;tempo&quot;:&quot;5d&quot;,&quot;percentual&quot;:8,&quot;segue&quot;:&quot;a5&quot;}]}</senku:dados></bpmn:extensionElements>
+      <bpmn:incoming>Fluxo_f15</bpmn:incoming>
+      <bpmn:incoming>Fluxo_f28</bpmn:incoming>
+      <bpmn:outgoing>Fluxo_f17</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:boundaryEvent id="a4_1" name="Prazo de análise (5 dias úteis) estourado" attachedToRef="a4">
+      <bpmn:documentation>Tempo: espera 5d</bpmn:documentation>
+      <bpmn:outgoing>Fluxo_f19</bpmn:outgoing>
+      <bpmn:timerEventDefinition id="a4_1.def"><bpmn:timeDuration xsi:type="bpmn:tFormalExpression">P7D</bpmn:timeDuration></bpmn:timerEventDefinition>
+    </bpmn:boundaryEvent>
+    <bpmn:exclusiveGateway id="d3" name="Limite dentro da alçada do analista?">
+      <bpmn:documentation>Regra R5: Analista aprova até R$ 200 mil; gerente até R$ 500 mil; acima disso, comitê.</bpmn:documentation>
+      <bpmn:extensionElements><senku:dados>{&quot;id&quot;:&quot;d3&quot;,&quot;tipo&quot;:&quot;decisao&quot;,&quot;nome&quot;:&quot;Limite dentro da alçada do analista?&quot;,&quot;papel&quot;:&quot;analista&quot;,&quot;regras&quot;:[&quot;R5&quot;]}</senku:dados></bpmn:extensionElements>
+      <bpmn:incoming>Fluxo_f17</bpmn:incoming>
+      <bpmn:outgoing>Fluxo_f20</bpmn:outgoing>
+      <bpmn:outgoing>Fluxo_f21</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:exclusiveGateway id="d4" name="Parecer favorável?">
+      <bpmn:extensionElements><senku:dados>{&quot;id&quot;:&quot;d4&quot;,&quot;tipo&quot;:&quot;decisao&quot;,&quot;nome&quot;:&quot;Parecer favorável?&quot;,&quot;papel&quot;:&quot;analista&quot;}</senku:dados></bpmn:extensionElements>
+      <bpmn:incoming>Fluxo_f20</bpmn:incoming>
+      <bpmn:outgoing>Fluxo_f22</bpmn:outgoing>
+      <bpmn:outgoing>Fluxo_f23</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:userTask id="a5" name="Preparar dossiê para o comitê">
+      <bpmn:documentation>Sistema: Planilha de análise&#10;Tempo: execução 1h&#10;Valor: NAV-N</bpmn:documentation>
+      <bpmn:extensionElements><senku:dados>{&quot;id&quot;:&quot;a5&quot;,&quot;nome&quot;:&quot;Preparar dossiê para o comitê&quot;,&quot;papel&quot;:&quot;analista&quot;,&quot;sistema&quot;:&quot;planilha&quot;,&quot;tempo&quot;:{&quot;execucao&quot;:&quot;1h&quot;},&quot;valor&quot;:&quot;NAV-N&quot;}</senku:dados></bpmn:extensionElements>
+      <bpmn:incoming>Fluxo_f19</bpmn:incoming>
+      <bpmn:incoming>Fluxo_f21</bpmn:incoming>
+      <bpmn:outgoing>Fluxo_f24</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:intermediateCatchEvent id="e1" name="Aguardar reunião quinzenal do comitê">
+      <bpmn:documentation>Tempo: espera 5d</bpmn:documentation>
+      <bpmn:extensionElements><senku:dados>{&quot;id&quot;:&quot;e1&quot;,&quot;tipo&quot;:&quot;evento&quot;,&quot;gatilho&quot;:&quot;tempo&quot;,&quot;nome&quot;:&quot;Aguardar reunião quinzenal do comitê&quot;,&quot;papel&quot;:&quot;comite&quot;,&quot;tempo&quot;:{&quot;espera&quot;:&quot;5d&quot;}}</senku:dados></bpmn:extensionElements>
+      <bpmn:incoming>Fluxo_f24</bpmn:incoming>
+      <bpmn:outgoing>Fluxo_f25</bpmn:outgoing>
+      <bpmn:timerEventDefinition id="e1.def"><bpmn:timeDuration xsi:type="bpmn:tFormalExpression">P7D</bpmn:timeDuration></bpmn:timerEventDefinition>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:task id="a6" name="Deliberar sobre o limite">
+      <bpmn:documentation>Tempo: execução 15min&#10;Regra R5: Analista aprova até R$ 200 mil; gerente até R$ 500 mil; acima disso, comitê.&#10;Valor: NAV-N</bpmn:documentation>
+      <bpmn:extensionElements><senku:dados>{&quot;id&quot;:&quot;a6&quot;,&quot;nome&quot;:&quot;Deliberar sobre o limite&quot;,&quot;papel&quot;:&quot;comite&quot;,&quot;regras&quot;:[&quot;R5&quot;],&quot;saidas&quot;:[&quot;Ata do comitê&quot;],&quot;tempo&quot;:{&quot;execucao&quot;:&quot;15min&quot;},&quot;valor&quot;:&quot;NAV-N&quot;,&quot;raci&quot;:{&quot;A&quot;:&quot;comite&quot;,&quot;C&quot;:[&quot;analista&quot;],&quot;I&quot;:[&quot;vendedor&quot;]}}</senku:dados></bpmn:extensionElements>
+      <bpmn:incoming>Fluxo_f25</bpmn:incoming>
+      <bpmn:outgoing>Fluxo_f26</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:exclusiveGateway id="d5" name="Comitê aprovou?">
+      <bpmn:extensionElements><senku:dados>{&quot;id&quot;:&quot;d5&quot;,&quot;tipo&quot;:&quot;decisao&quot;,&quot;nome&quot;:&quot;Comitê aprovou?&quot;,&quot;papel&quot;:&quot;comite&quot;}</senku:dados></bpmn:extensionElements>
+      <bpmn:incoming>Fluxo_f26</bpmn:incoming>
+      <bpmn:outgoing>Fluxo_f27</bpmn:outgoing>
+      <bpmn:outgoing>Fluxo_f28</bpmn:outgoing>
+      <bpmn:outgoing>Fluxo_f29</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:exclusiveGateway id="j0">
+      <bpmn:extensionElements><senku:dados>{&quot;id&quot;:&quot;j0&quot;,&quot;tipo&quot;:&quot;decisao&quot;,&quot;papel&quot;:&quot;analista&quot;}</senku:dados></bpmn:extensionElements>
+      <bpmn:incoming>Fluxo_f14</bpmn:incoming>
+      <bpmn:incoming>Fluxo_f22</bpmn:incoming>
+      <bpmn:incoming>Fluxo_f27</bpmn:incoming>
+      <bpmn:outgoing>Fluxo_f30</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:parallelGateway id="p1">
+      <bpmn:extensionElements><senku:dados>{&quot;id&quot;:&quot;p1&quot;,&quot;tipo&quot;:&quot;paralelo&quot;,&quot;papel&quot;:&quot;analista&quot;}</senku:dados></bpmn:extensionElements>
+      <bpmn:incoming>Fluxo_f30</bpmn:incoming>
+      <bpmn:outgoing>Fluxo_f31</bpmn:outgoing>
+      <bpmn:outgoing>Fluxo_f32</bpmn:outgoing>
+    </bpmn:parallelGateway>
+    <bpmn:userTask id="a7" name="Emitir contrato de crédito">
+      <bpmn:documentation>Sistema: DocuSign&#10;Tempo: execução 40min, espera 2d&#10;Regra R6: Contrato não assinado em 10 dias corridos expira; nova proposta reinicia a análise.&#10;Valor: NAV-N</bpmn:documentation>
+      <bpmn:extensionElements><senku:dados>{&quot;id&quot;:&quot;a7&quot;,&quot;nome&quot;:&quot;Emitir contrato de crédito&quot;,&quot;papel&quot;:&quot;juridico&quot;,&quot;sistema&quot;:&quot;docusign&quot;,&quot;regras&quot;:[&quot;R6&quot;],&quot;tempo&quot;:{&quot;execucao&quot;:&quot;40min&quot;,&quot;espera&quot;:&quot;2d&quot;},&quot;valor&quot;:&quot;NAV-N&quot;}</senku:dados></bpmn:extensionElements>
+      <bpmn:incoming>Fluxo_f31</bpmn:incoming>
+      <bpmn:outgoing>Fluxo_f33</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:userTask id="c2" name="Assinar contrato">
+      <bpmn:documentation>Sistema: DocuSign&#10;Tempo: execução 10min, espera 3d&#10;Valor: NAV-N</bpmn:documentation>
+      <bpmn:extensionElements><senku:dados>{&quot;id&quot;:&quot;c2&quot;,&quot;nome&quot;:&quot;Assinar contrato&quot;,&quot;papel&quot;:&quot;cliente&quot;,&quot;sistema&quot;:&quot;docusign&quot;,&quot;tempo&quot;:{&quot;execucao&quot;:&quot;10min&quot;,&quot;espera&quot;:&quot;3d&quot;},&quot;valor&quot;:&quot;NAV-N&quot;}</senku:dados></bpmn:extensionElements>
+      <bpmn:incoming>Fluxo_f33</bpmn:incoming>
+      <bpmn:outgoing>Fluxo_f34</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:exclusiveGateway id="d6" name="Assinou em até 10 dias?">
+      <bpmn:documentation>Regra R6: Contrato não assinado em 10 dias corridos expira; nova proposta reinicia a análise.</bpmn:documentation>
+      <bpmn:extensionElements><senku:dados>{&quot;id&quot;:&quot;d6&quot;,&quot;tipo&quot;:&quot;decisao&quot;,&quot;nome&quot;:&quot;Assinou em até 10 dias?&quot;,&quot;papel&quot;:&quot;cliente&quot;,&quot;regras&quot;:[&quot;R6&quot;]}</senku:dados></bpmn:extensionElements>
+      <bpmn:incoming>Fluxo_f34</bpmn:incoming>
+      <bpmn:outgoing>Fluxo_f35</bpmn:outgoing>
+      <bpmn:outgoing>Fluxo_f36</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:userTask id="a8" name="Cadastrar limite no ERP">
+      <bpmn:documentation>Cadastra limite, prazo e garantias; limite fica bloqueado até o contrato assinado.&#10;Sistema: ERP&#10;Tempo: execução 15min, espera 1d&#10;Valor: VA</bpmn:documentation>
+      <bpmn:extensionElements><senku:dados>{&quot;id&quot;:&quot;a8&quot;,&quot;nome&quot;:&quot;Cadastrar limite no ERP&quot;,&quot;papel&quot;:&quot;cadastro&quot;,&quot;sistema&quot;:&quot;sis_erp&quot;,&quot;descricao&quot;:&quot;Cadastra limite, prazo e garantias; limite fica bloqueado até o contrato assinado.&quot;,&quot;tempo&quot;:{&quot;execucao&quot;:&quot;15min&quot;,&quot;espera&quot;:&quot;1d&quot;},&quot;valor&quot;:&quot;VA&quot;}</senku:dados></bpmn:extensionElements>
+      <bpmn:incoming>Fluxo_f32</bpmn:incoming>
+      <bpmn:outgoing>Fluxo_f37</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:parallelGateway id="p2">
+      <bpmn:extensionElements><senku:dados>{&quot;id&quot;:&quot;p2&quot;,&quot;tipo&quot;:&quot;paralelo&quot;,&quot;papel&quot;:&quot;cadastro&quot;}</senku:dados></bpmn:extensionElements>
+      <bpmn:incoming>Fluxo_f35</bpmn:incoming>
+      <bpmn:incoming>Fluxo_f37</bpmn:incoming>
+      <bpmn:outgoing>Fluxo_f38</bpmn:outgoing>
+    </bpmn:parallelGateway>
+    <bpmn:userTask id="a9" name="Desbloquear limite">
+      <bpmn:documentation>Sistema: ERP&#10;Tempo: execução 5min, espera 4h&#10;Valor: VA</bpmn:documentation>
+      <bpmn:extensionElements><senku:dados>{&quot;id&quot;:&quot;a9&quot;,&quot;nome&quot;:&quot;Desbloquear limite&quot;,&quot;papel&quot;:&quot;cadastro&quot;,&quot;sistema&quot;:&quot;sis_erp&quot;,&quot;tempo&quot;:{&quot;execucao&quot;:&quot;5min&quot;,&quot;espera&quot;:&quot;4h&quot;},&quot;valor&quot;:&quot;VA&quot;}</senku:dados></bpmn:extensionElements>
+      <bpmn:incoming>Fluxo_f38</bpmn:incoming>
+      <bpmn:outgoing>Fluxo_f39</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:userTask id="a10" name="Avisar vendedor da liberação">
+      <bpmn:documentation>Sistema: E-mail&#10;Tempo: execução 5min&#10;Valor: NAV-N</bpmn:documentation>
+      <bpmn:extensionElements><senku:dados>{&quot;id&quot;:&quot;a10&quot;,&quot;nome&quot;:&quot;Avisar vendedor da liberação&quot;,&quot;papel&quot;:&quot;cadastro&quot;,&quot;sistema&quot;:&quot;email&quot;,&quot;tempo&quot;:{&quot;execucao&quot;:&quot;5min&quot;},&quot;valor&quot;:&quot;NAV-N&quot;}</senku:dados></bpmn:extensionElements>
+      <bpmn:incoming>Fluxo_f39</bpmn:incoming>
+      <bpmn:outgoing>Fluxo_f40</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:endEvent id="fim_ok" name="Crédito liberado">
+      <bpmn:extensionElements><senku:dados>{&quot;id&quot;:&quot;fim_ok&quot;,&quot;tipo&quot;:&quot;fim&quot;,&quot;nome&quot;:&quot;Crédito liberado&quot;,&quot;papel&quot;:&quot;vendedor&quot;}</senku:dados></bpmn:extensionElements>
+      <bpmn:incoming>Fluxo_f40</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:userTask id="a12" name="Comunicar recusa ao cliente">
+      <bpmn:documentation>Sistema: E-mail&#10;Tempo: execução 15min, espera 1d&#10;Regra R7: A recusa não informa o motivo detalhado de score; o vendedor oferece venda à vista ou com garantia.&#10;Valor: NAV-N</bpmn:documentation>
+      <bpmn:extensionElements><senku:dados>{&quot;id&quot;:&quot;a12&quot;,&quot;nome&quot;:&quot;Comunicar recusa ao cliente&quot;,&quot;papel&quot;:&quot;vendedor&quot;,&quot;sistema&quot;:&quot;email&quot;,&quot;regras&quot;:[&quot;R7&quot;],&quot;tempo&quot;:{&quot;execucao&quot;:&quot;15min&quot;,&quot;espera&quot;:&quot;1d&quot;},&quot;valor&quot;:&quot;NAV-N&quot;}</senku:dados></bpmn:extensionElements>
+      <bpmn:incoming>Fluxo_f11</bpmn:incoming>
+      <bpmn:incoming>Fluxo_f16</bpmn:incoming>
+      <bpmn:incoming>Fluxo_f23</bpmn:incoming>
+      <bpmn:incoming>Fluxo_f29</bpmn:incoming>
+      <bpmn:outgoing>Fluxo_f41</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:endEvent id="fim_rec" name="Crédito recusado">
+      <bpmn:extensionElements><senku:dados>{&quot;id&quot;:&quot;fim_rec&quot;,&quot;tipo&quot;:&quot;fim&quot;,&quot;nome&quot;:&quot;Crédito recusado&quot;,&quot;papel&quot;:&quot;vendedor&quot;}</senku:dados></bpmn:extensionElements>
+      <bpmn:incoming>Fluxo_f41</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:userTask id="a13" name="Cancelar proposta">
+      <bpmn:documentation>Sistema: CRM&#10;Tempo: execução 10min&#10;Valor: NAV</bpmn:documentation>
+      <bpmn:extensionElements><senku:dados>{&quot;id&quot;:&quot;a13&quot;,&quot;nome&quot;:&quot;Cancelar proposta&quot;,&quot;papel&quot;:&quot;juridico&quot;,&quot;sistema&quot;:&quot;crm&quot;,&quot;tempo&quot;:{&quot;execucao&quot;:&quot;10min&quot;},&quot;valor&quot;:&quot;NAV&quot;}</senku:dados></bpmn:extensionElements>
+      <bpmn:incoming>Fluxo_f36</bpmn:incoming>
+      <bpmn:outgoing>Fluxo_f42</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:endEvent id="fim_exp" name="Proposta expirada">
+      <bpmn:extensionElements><senku:dados>{&quot;id&quot;:&quot;fim_exp&quot;,&quot;tipo&quot;:&quot;fim&quot;,&quot;nome&quot;:&quot;Proposta expirada&quot;,&quot;papel&quot;:&quot;juridico&quot;,&quot;encerra&quot;:true}</senku:dados></bpmn:extensionElements>
+      <bpmn:incoming>Fluxo_f42</bpmn:incoming>
+      <bpmn:terminateEventDefinition id="fim_exp.def"/>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Fluxo_f1" sourceRef="inicio" targetRef="a1"/>
+    <bpmn:sequenceFlow id="Fluxo_f2" sourceRef="a1" targetRef="a2"/>
+    <bpmn:sequenceFlow id="Fluxo_f3" sourceRef="a2" targetRef="c1"/>
+    <bpmn:sequenceFlow id="Fluxo_f4" sourceRef="c1" targetRef="a3"/>
+    <bpmn:sequenceFlow id="Fluxo_f5" sourceRef="a3" targetRef="d1"/>
+    <bpmn:sequenceFlow id="Fluxo_f6" sourceRef="d1" targetRef="s1" name="Sim">
+      <bpmn:documentation>65% dos casos</bpmn:documentation>
+      <bpmn:extensionElements><senku:dados>{&quot;percentual&quot;:65.0}</senku:dados></bpmn:extensionElements>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Fluxo_f7" sourceRef="d1" targetRef="a2b" name="Não">
+      <bpmn:documentation>35% dos casos</bpmn:documentation>
+      <bpmn:extensionElements><senku:dados>{&quot;percentual&quot;:35.0}</senku:dados></bpmn:extensionElements>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Fluxo_f8" sourceRef="a2b" targetRef="c1"/>
+    <bpmn:sequenceFlow id="Fluxo_f9" sourceRef="s1" targetRef="d0"/>
+    <bpmn:sequenceFlow id="Fluxo_f10" sourceRef="d0" targetRef="x1" name="Sim">
+      <bpmn:documentation>98% dos casos</bpmn:documentation>
+      <bpmn:extensionElements><senku:dados>{&quot;percentual&quot;:98.0}</senku:dados></bpmn:extensionElements>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Fluxo_f11" sourceRef="d0" targetRef="a12" name="Não">
+      <bpmn:documentation>2% dos casos</bpmn:documentation>
+      <bpmn:extensionElements><senku:dados>{&quot;percentual&quot;:2.0}</senku:dados></bpmn:extensionElements>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Fluxo_f12" sourceRef="x1" targetRef="x2"/>
+    <bpmn:sequenceFlow id="Fluxo_f13" sourceRef="x2" targetRef="d2"/>
+    <bpmn:sequenceFlow id="Fluxo_f14" sourceRef="d2" targetRef="j0" name="Baixo e até R$ 50 mil">
+      <bpmn:documentation>40% dos casos</bpmn:documentation>
+      <bpmn:extensionElements><senku:dados>{&quot;percentual&quot;:40.0}</senku:dados></bpmn:extensionElements>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Fluxo_f15" sourceRef="d2" targetRef="a4" name="Médio, ou acima de R$ 50 mil">
+      <bpmn:documentation>50% dos casos</bpmn:documentation>
+      <bpmn:extensionElements><senku:dados>{&quot;percentual&quot;:50.0}</senku:dados></bpmn:extensionElements>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Fluxo_f16" sourceRef="d2" targetRef="a12" name="Alto">
+      <bpmn:documentation>10% dos casos</bpmn:documentation>
+      <bpmn:extensionElements><senku:dados>{&quot;percentual&quot;:10.0}</senku:dados></bpmn:extensionElements>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Fluxo_f17" sourceRef="a4" targetRef="d3"/>
+    <bpmn:sequenceFlow id="Fluxo_f19" sourceRef="a4_1" targetRef="a5"/>
+    <bpmn:sequenceFlow id="Fluxo_f20" sourceRef="d3" targetRef="d4" name="Sim">
+      <bpmn:documentation>70% dos casos</bpmn:documentation>
+      <bpmn:extensionElements><senku:dados>{&quot;percentual&quot;:70.0}</senku:dados></bpmn:extensionElements>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Fluxo_f21" sourceRef="d3" targetRef="a5" name="Não">
+      <bpmn:documentation>30% dos casos</bpmn:documentation>
+      <bpmn:extensionElements><senku:dados>{&quot;percentual&quot;:30.0}</senku:dados></bpmn:extensionElements>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Fluxo_f22" sourceRef="d4" targetRef="j0" name="Sim">
+      <bpmn:documentation>80% dos casos</bpmn:documentation>
+      <bpmn:extensionElements><senku:dados>{&quot;percentual&quot;:80.0}</senku:dados></bpmn:extensionElements>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Fluxo_f23" sourceRef="d4" targetRef="a12" name="Não">
+      <bpmn:documentation>20% dos casos</bpmn:documentation>
+      <bpmn:extensionElements><senku:dados>{&quot;percentual&quot;:20.0}</senku:dados></bpmn:extensionElements>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Fluxo_f24" sourceRef="a5" targetRef="e1"/>
+    <bpmn:sequenceFlow id="Fluxo_f25" sourceRef="e1" targetRef="a6"/>
+    <bpmn:sequenceFlow id="Fluxo_f26" sourceRef="a6" targetRef="d5"/>
+    <bpmn:sequenceFlow id="Fluxo_f27" sourceRef="d5" targetRef="j0" name="Aprovado">
+      <bpmn:documentation>60% dos casos</bpmn:documentation>
+      <bpmn:extensionElements><senku:dados>{&quot;percentual&quot;:60.0}</senku:dados></bpmn:extensionElements>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Fluxo_f28" sourceRef="d5" targetRef="a4" name="Pede nova análise">
+      <bpmn:documentation>15% dos casos</bpmn:documentation>
+      <bpmn:extensionElements><senku:dados>{&quot;percentual&quot;:15.0}</senku:dados></bpmn:extensionElements>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Fluxo_f29" sourceRef="d5" targetRef="a12" name="Recusado">
+      <bpmn:documentation>25% dos casos</bpmn:documentation>
+      <bpmn:extensionElements><senku:dados>{&quot;percentual&quot;:25.0}</senku:dados></bpmn:extensionElements>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Fluxo_f30" sourceRef="j0" targetRef="p1"/>
+    <bpmn:sequenceFlow id="Fluxo_f31" sourceRef="p1" targetRef="a7"/>
+    <bpmn:sequenceFlow id="Fluxo_f32" sourceRef="p1" targetRef="a8"/>
+    <bpmn:sequenceFlow id="Fluxo_f33" sourceRef="a7" targetRef="c2"/>
+    <bpmn:sequenceFlow id="Fluxo_f34" sourceRef="c2" targetRef="d6"/>
+    <bpmn:sequenceFlow id="Fluxo_f35" sourceRef="d6" targetRef="p2" name="Sim">
+      <bpmn:documentation>90% dos casos</bpmn:documentation>
+      <bpmn:extensionElements><senku:dados>{&quot;percentual&quot;:90.0}</senku:dados></bpmn:extensionElements>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Fluxo_f36" sourceRef="d6" targetRef="a13" name="Não">
+      <bpmn:documentation>10% dos casos</bpmn:documentation>
+      <bpmn:extensionElements><senku:dados>{&quot;percentual&quot;:10.0}</senku:dados></bpmn:extensionElements>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Fluxo_f37" sourceRef="a8" targetRef="p2"/>
+    <bpmn:sequenceFlow id="Fluxo_f38" sourceRef="p2" targetRef="a9"/>
+    <bpmn:sequenceFlow id="Fluxo_f39" sourceRef="a9" targetRef="a10"/>
+    <bpmn:sequenceFlow id="Fluxo_f40" sourceRef="a10" targetRef="fim_ok"/>
+    <bpmn:sequenceFlow id="Fluxo_f41" sourceRef="a12" targetRef="fim_rec"/>
+    <bpmn:sequenceFlow id="Fluxo_f42" sourceRef="a13" targetRef="fim_exp"/>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="Diagrama.Processo_CRE-02">
+    <bpmndi:BPMNPlane id="Plano.Processo_CRE-02" bpmnElement="Colaboracao.Processo_CRE-02">
+      <bpmndi:BPMNShape id="Pool.Processo_CRE-02.di" bpmnElement="Pool.Processo_CRE-02" isHorizontal="true"><dc:Bounds x="20" y="20" width="5000" height="960"/></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Raia_cliente.di" bpmnElement="Raia_cliente" isHorizontal="true"><dc:Bounds x="50" y="20" width="4970" height="120"/></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Raia_vendedor.di" bpmnElement="Raia_vendedor" isHorizontal="true"><dc:Bounds x="50" y="140" width="4970" height="120"/></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Raia_cadastro.di" bpmnElement="Raia_cadastro" isHorizontal="true"><dc:Bounds x="50" y="260" width="4970" height="120"/></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Raia_erp.di" bpmnElement="Raia_erp" isHorizontal="true"><dc:Bounds x="50" y="380" width="4970" height="120"/></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Raia_analista.di" bpmnElement="Raia_analista" isHorizontal="true"><dc:Bounds x="50" y="500" width="4970" height="240"/></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Raia_comite.di" bpmnElement="Raia_comite" isHorizontal="true"><dc:Bounds x="50" y="740" width="4970" height="120"/></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Raia_juridico.di" bpmnElement="Raia_juridico" isHorizontal="true"><dc:Bounds x="50" y="860" width="4970" height="120"/></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="inicio.di" bpmnElement="inicio"><dc:Bounds x="155" y="180" width="40" height="40"/>
+<bpmndi:BPMNLabel><dc:Bounds x="125" y="224" width="100" height="27"/></bpmndi:BPMNLabel>
+</bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="a1.di" bpmnElement="a1"><dc:Bounds x="300" y="165" width="130" height="70"/>
+</bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="a2.di" bpmnElement="a2"><dc:Bounds x="490" y="165" width="130" height="70"/>
+</bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="c1.di" bpmnElement="c1"><dc:Bounds x="680" y="45" width="130" height="70"/>
+</bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="a3.di" bpmnElement="a3"><dc:Bounds x="870" y="285" width="130" height="70"/>
+</bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="d1.di" bpmnElement="d1" isMarkerVisible="true"><dc:Bounds x="1100" y="295" width="50" height="50"/>
+<bpmndi:BPMNLabel><dc:Bounds x="1030" y="261" width="100" height="27"/></bpmndi:BPMNLabel>
+</bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="a2b.di" bpmnElement="a2b"><dc:Bounds x="1250" y="165" width="130" height="70"/>
+</bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="s1.di" bpmnElement="s1" isExpanded="false"><dc:Bounds x="1250" y="285" width="130" height="70"/>
+</bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="d0.di" bpmnElement="d0" isMarkerVisible="true"><dc:Bounds x="1480" y="295" width="50" height="50"/>
+<bpmndi:BPMNLabel><dc:Bounds x="1410" y="261" width="100" height="27"/></bpmndi:BPMNLabel>
+</bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="x1.di" bpmnElement="x1"><dc:Bounds x="1630" y="405" width="130" height="70"/>
+</bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="x2.di" bpmnElement="x2"><dc:Bounds x="1820" y="405" width="130" height="70"/>
+</bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="d2.di" bpmnElement="d2" isMarkerVisible="true"><dc:Bounds x="2050" y="415" width="50" height="50"/>
+<bpmndi:BPMNLabel><dc:Bounds x="1980" y="381" width="100" height="27"/></bpmndi:BPMNLabel>
+</bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="a4.di" bpmnElement="a4"><dc:Bounds x="2200" y="525" width="130" height="70"/>
+</bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="a4_1.di" bpmnElement="a4_1"><dc:Bounds x="2303" y="583" width="24" height="24"/>
+<bpmndi:BPMNLabel><dc:Bounds x="2265" y="611" width="100" height="27"/></bpmndi:BPMNLabel>
+</bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="d3.di" bpmnElement="d3" isMarkerVisible="true"><dc:Bounds x="2430" y="535" width="50" height="50"/>
+<bpmndi:BPMNLabel><dc:Bounds x="2360" y="501" width="100" height="27"/></bpmndi:BPMNLabel>
+</bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="d4.di" bpmnElement="d4" isMarkerVisible="true"><dc:Bounds x="2620" y="535" width="50" height="50"/>
+<bpmndi:BPMNLabel><dc:Bounds x="2550" y="501" width="100" height="27"/></bpmndi:BPMNLabel>
+</bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="a5.di" bpmnElement="a5"><dc:Bounds x="2580" y="645" width="130" height="70"/>
+</bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="e1.di" bpmnElement="e1"><dc:Bounds x="2815" y="780" width="40" height="40"/>
+<bpmndi:BPMNLabel><dc:Bounds x="2785" y="824" width="100" height="27"/></bpmndi:BPMNLabel>
+</bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="a6.di" bpmnElement="a6"><dc:Bounds x="2960" y="765" width="130" height="70"/>
+</bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="d5.di" bpmnElement="d5" isMarkerVisible="true"><dc:Bounds x="3190" y="775" width="50" height="50"/>
+<bpmndi:BPMNLabel><dc:Bounds x="3120" y="741" width="100" height="27"/></bpmndi:BPMNLabel>
+</bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="j0.di" bpmnElement="j0" isMarkerVisible="true"><dc:Bounds x="3380" y="535" width="50" height="50"/>
+</bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="p1.di" bpmnElement="p1"><dc:Bounds x="3570" y="535" width="50" height="50"/>
+</bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="a7.di" bpmnElement="a7"><dc:Bounds x="3720" y="885" width="130" height="70"/>
+</bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="c2.di" bpmnElement="c2"><dc:Bounds x="3910" y="45" width="130" height="70"/>
+</bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="d6.di" bpmnElement="d6" isMarkerVisible="true"><dc:Bounds x="4140" y="55" width="50" height="50"/>
+<bpmndi:BPMNLabel><dc:Bounds x="4070" y="21" width="100" height="27"/></bpmndi:BPMNLabel>
+</bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="a8.di" bpmnElement="a8"><dc:Bounds x="3720" y="285" width="130" height="70"/>
+</bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="p2.di" bpmnElement="p2"><dc:Bounds x="4330" y="295" width="50" height="50"/>
+</bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="a9.di" bpmnElement="a9"><dc:Bounds x="4480" y="285" width="130" height="70"/>
+</bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="a10.di" bpmnElement="a10"><dc:Bounds x="4670" y="285" width="130" height="70"/>
+</bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="fim_ok.di" bpmnElement="fim_ok"><dc:Bounds x="4905" y="180" width="40" height="40"/>
+<bpmndi:BPMNLabel><dc:Bounds x="4875" y="224" width="100" height="27"/></bpmndi:BPMNLabel>
+</bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="a12.di" bpmnElement="a12"><dc:Bounds x="3340" y="165" width="130" height="70"/>
+</bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="fim_rec.di" bpmnElement="fim_rec"><dc:Bounds x="3575" y="180" width="40" height="40"/>
+<bpmndi:BPMNLabel><dc:Bounds x="3545" y="224" width="100" height="27"/></bpmndi:BPMNLabel>
+</bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="a13.di" bpmnElement="a13"><dc:Bounds x="4290" y="885" width="130" height="70"/>
+</bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="fim_exp.di" bpmnElement="fim_exp"><dc:Bounds x="4525" y="900" width="40" height="40"/>
+<bpmndi:BPMNLabel><dc:Bounds x="4495" y="944" width="100" height="27"/></bpmndi:BPMNLabel>
+</bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Fluxo_f1.di" bpmnElement="Fluxo_f1">
+        <di:waypoint x="195" y="200"/>
+        <di:waypoint x="300" y="200"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Fluxo_f2.di" bpmnElement="Fluxo_f2">
+        <di:waypoint x="430" y="200"/>
+        <di:waypoint x="490" y="200"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Fluxo_f3.di" bpmnElement="Fluxo_f3">
+        <di:waypoint x="620" y="200"/>
+        <di:waypoint x="650" y="200"/>
+        <di:waypoint x="650" y="148"/>
+        <di:waypoint x="765" y="148"/>
+        <di:waypoint x="765" y="115"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Fluxo_f4.di" bpmnElement="Fluxo_f4">
+        <di:waypoint x="810" y="80"/>
+        <di:waypoint x="840" y="80"/>
+        <di:waypoint x="840" y="268"/>
+        <di:waypoint x="915" y="268"/>
+        <di:waypoint x="915" y="285"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Fluxo_f5.di" bpmnElement="Fluxo_f5">
+        <di:waypoint x="1000" y="320"/>
+        <di:waypoint x="1100" y="320"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Fluxo_f6.di" bpmnElement="Fluxo_f6">
+        <di:waypoint x="1150" y="320"/>
+        <di:waypoint x="1250" y="320"/>
+        <bpmndi:BPMNLabel><dc:Bounds x="1154" y="302" width="30" height="14"/></bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Fluxo_f7.di" bpmnElement="Fluxo_f7">
+        <di:waypoint x="1125" y="295"/>
+        <di:waypoint x="1125" y="252"/>
+        <di:waypoint x="1335" y="252"/>
+        <di:waypoint x="1335" y="235"/>
+        <bpmndi:BPMNLabel><dc:Bounds x="1130" y="277" width="30" height="14"/></bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Fluxo_f8.di" bpmnElement="Fluxo_f8">
+        <di:waypoint x="1357" y="235"/>
+        <di:waypoint x="1357" y="275"/>
+        <di:waypoint x="657" y="275"/>
+        <di:waypoint x="657" y="132"/>
+        <di:waypoint x="745" y="132"/>
+        <di:waypoint x="745" y="115"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Fluxo_f9.di" bpmnElement="Fluxo_f9">
+        <di:waypoint x="1380" y="320"/>
+        <di:waypoint x="1480" y="320"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Fluxo_f10.di" bpmnElement="Fluxo_f10">
+        <di:waypoint x="1505" y="345"/>
+        <di:waypoint x="1505" y="388"/>
+        <di:waypoint x="1675" y="388"/>
+        <di:waypoint x="1675" y="405"/>
+        <bpmndi:BPMNLabel><dc:Bounds x="1510" y="346" width="30" height="14"/></bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Fluxo_f11.di" bpmnElement="Fluxo_f11">
+        <di:waypoint x="1505" y="295"/>
+        <di:waypoint x="1505" y="245"/>
+        <di:waypoint x="3425" y="245"/>
+        <di:waypoint x="3425" y="235"/>
+        <bpmndi:BPMNLabel><dc:Bounds x="1510" y="277" width="30" height="14"/></bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Fluxo_f12.di" bpmnElement="Fluxo_f12">
+        <di:waypoint x="1760" y="440"/>
+        <di:waypoint x="1820" y="440"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Fluxo_f13.di" bpmnElement="Fluxo_f13">
+        <di:waypoint x="1950" y="440"/>
+        <di:waypoint x="2050" y="440"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Fluxo_f14.di" bpmnElement="Fluxo_f14">
+        <di:waypoint x="2075" y="465"/>
+        <di:waypoint x="2075" y="508"/>
+        <di:waypoint x="3310" y="508"/>
+        <di:waypoint x="3310" y="560"/>
+        <di:waypoint x="3380" y="560"/>
+        <bpmndi:BPMNLabel><dc:Bounds x="2080" y="466" width="134" height="14"/></bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Fluxo_f15.di" bpmnElement="Fluxo_f15">
+        <di:waypoint x="2100" y="440"/>
+        <di:waypoint x="2170" y="440"/>
+        <di:waypoint x="2170" y="492"/>
+        <di:waypoint x="2245" y="492"/>
+        <di:waypoint x="2245" y="525"/>
+        <bpmndi:BPMNLabel><dc:Bounds x="2104" y="422" width="176" height="14"/></bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Fluxo_f16.di" bpmnElement="Fluxo_f16">
+        <di:waypoint x="2075" y="415"/>
+        <di:waypoint x="2075" y="372"/>
+        <di:waypoint x="3317" y="372"/>
+        <di:waypoint x="3317" y="282"/>
+        <di:waypoint x="3425" y="282"/>
+        <di:waypoint x="3425" y="235"/>
+        <bpmndi:BPMNLabel><dc:Bounds x="2080" y="397" width="32" height="14"/></bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Fluxo_f17.di" bpmnElement="Fluxo_f17">
+        <di:waypoint x="2330" y="560"/>
+        <di:waypoint x="2430" y="560"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Fluxo_f19.di" bpmnElement="Fluxo_f19">
+        <di:waypoint x="2315" y="607"/>
+        <di:waypoint x="2315" y="628"/>
+        <di:waypoint x="2625" y="628"/>
+        <di:waypoint x="2625" y="645"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Fluxo_f20.di" bpmnElement="Fluxo_f20">
+        <di:waypoint x="2480" y="560"/>
+        <di:waypoint x="2620" y="560"/>
+        <bpmndi:BPMNLabel><dc:Bounds x="2484" y="542" width="30" height="14"/></bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Fluxo_f21.di" bpmnElement="Fluxo_f21">
+        <di:waypoint x="2455" y="585"/>
+        <di:waypoint x="2455" y="628"/>
+        <di:waypoint x="2625" y="628"/>
+        <di:waypoint x="2625" y="645"/>
+        <bpmndi:BPMNLabel><dc:Bounds x="2460" y="586" width="30" height="14"/></bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Fluxo_f22.di" bpmnElement="Fluxo_f22">
+        <di:waypoint x="2670" y="560"/>
+        <di:waypoint x="3380" y="560"/>
+        <bpmndi:BPMNLabel><dc:Bounds x="2674" y="542" width="30" height="14"/></bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Fluxo_f23.di" bpmnElement="Fluxo_f23">
+        <di:waypoint x="2645" y="535"/>
+        <di:waypoint x="2645" y="515"/>
+        <di:waypoint x="3303" y="515"/>
+        <di:waypoint x="3303" y="238"/>
+        <di:waypoint x="3425" y="238"/>
+        <di:waypoint x="3425" y="235"/>
+        <bpmndi:BPMNLabel><dc:Bounds x="2650" y="517" width="30" height="14"/></bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Fluxo_f24.di" bpmnElement="Fluxo_f24">
+        <di:waypoint x="2710" y="680"/>
+        <di:waypoint x="2740" y="680"/>
+        <di:waypoint x="2740" y="748"/>
+        <di:waypoint x="2835" y="748"/>
+        <di:waypoint x="2835" y="780"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Fluxo_f25.di" bpmnElement="Fluxo_f25">
+        <di:waypoint x="2855" y="800"/>
+        <di:waypoint x="2960" y="800"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Fluxo_f26.di" bpmnElement="Fluxo_f26">
+        <di:waypoint x="3090" y="800"/>
+        <di:waypoint x="3190" y="800"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Fluxo_f27.di" bpmnElement="Fluxo_f27">
+        <di:waypoint x="3215" y="775"/>
+        <di:waypoint x="3215" y="732"/>
+        <di:waypoint x="3324" y="732"/>
+        <di:waypoint x="3324" y="635"/>
+        <di:waypoint x="3296" y="635"/>
+        <di:waypoint x="3296" y="560"/>
+        <di:waypoint x="3380" y="560"/>
+        <bpmndi:BPMNLabel><dc:Bounds x="3220" y="757" width="56" height="14"/></bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Fluxo_f28.di" bpmnElement="Fluxo_f28">
+        <di:waypoint x="3215" y="825"/>
+        <di:waypoint x="3215" y="868"/>
+        <di:waypoint x="2177" y="868"/>
+        <di:waypoint x="2177" y="485"/>
+        <di:waypoint x="2265" y="485"/>
+        <di:waypoint x="2265" y="525"/>
+        <bpmndi:BPMNLabel><dc:Bounds x="3220" y="826" width="110" height="14"/></bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Fluxo_f29.di" bpmnElement="Fluxo_f29">
+        <di:waypoint x="3240" y="800"/>
+        <di:waypoint x="3331" y="800"/>
+        <di:waypoint x="3331" y="268"/>
+        <di:waypoint x="3425" y="268"/>
+        <di:waypoint x="3425" y="235"/>
+        <bpmndi:BPMNLabel><dc:Bounds x="3244" y="782" width="56" height="14"/></bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Fluxo_f30.di" bpmnElement="Fluxo_f30">
+        <di:waypoint x="3430" y="560"/>
+        <di:waypoint x="3570" y="560"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Fluxo_f31.di" bpmnElement="Fluxo_f31">
+        <di:waypoint x="3595" y="585"/>
+        <di:waypoint x="3595" y="635"/>
+        <di:waypoint x="3690" y="635"/>
+        <di:waypoint x="3690" y="852"/>
+        <di:waypoint x="3765" y="852"/>
+        <di:waypoint x="3765" y="885"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Fluxo_f32.di" bpmnElement="Fluxo_f32">
+        <di:waypoint x="3595" y="535"/>
+        <di:waypoint x="3595" y="522"/>
+        <di:waypoint x="3697" y="522"/>
+        <di:waypoint x="3697" y="395"/>
+        <di:waypoint x="3805" y="395"/>
+        <di:waypoint x="3805" y="355"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Fluxo_f33.di" bpmnElement="Fluxo_f33">
+        <di:waypoint x="3850" y="920"/>
+        <di:waypoint x="3880" y="920"/>
+        <di:waypoint x="3880" y="155"/>
+        <di:waypoint x="3995" y="155"/>
+        <di:waypoint x="3995" y="115"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Fluxo_f34.di" bpmnElement="Fluxo_f34">
+        <di:waypoint x="4040" y="80"/>
+        <di:waypoint x="4140" y="80"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Fluxo_f35.di" bpmnElement="Fluxo_f35">
+        <di:waypoint x="4165" y="105"/>
+        <di:waypoint x="4165" y="125"/>
+        <di:waypoint x="4260" y="125"/>
+        <di:waypoint x="4260" y="252"/>
+        <di:waypoint x="4267" y="252"/>
+        <di:waypoint x="4267" y="320"/>
+        <di:waypoint x="4330" y="320"/>
+        <bpmndi:BPMNLabel><dc:Bounds x="4170" y="106" width="30" height="14"/></bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Fluxo_f36.di" bpmnElement="Fluxo_f36">
+        <di:waypoint x="4190" y="80"/>
+        <di:waypoint x="4253" y="80"/>
+        <di:waypoint x="4253" y="875"/>
+        <di:waypoint x="4335" y="875"/>
+        <di:waypoint x="4335" y="885"/>
+        <bpmndi:BPMNLabel><dc:Bounds x="4194" y="62" width="30" height="14"/></bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Fluxo_f37.di" bpmnElement="Fluxo_f37">
+        <di:waypoint x="3850" y="320"/>
+        <di:waypoint x="4330" y="320"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Fluxo_f38.di" bpmnElement="Fluxo_f38">
+        <di:waypoint x="4380" y="320"/>
+        <di:waypoint x="4480" y="320"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Fluxo_f39.di" bpmnElement="Fluxo_f39">
+        <di:waypoint x="4610" y="320"/>
+        <di:waypoint x="4670" y="320"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Fluxo_f40.di" bpmnElement="Fluxo_f40">
+        <di:waypoint x="4800" y="320"/>
+        <di:waypoint x="4830" y="320"/>
+        <di:waypoint x="4830" y="275"/>
+        <di:waypoint x="4925" y="275"/>
+        <di:waypoint x="4925" y="220"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Fluxo_f41.di" bpmnElement="Fluxo_f41">
+        <di:waypoint x="3470" y="200"/>
+        <di:waypoint x="3575" y="200"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Fluxo_f42.di" bpmnElement="Fluxo_f42">
+        <di:waypoint x="4420" y="920"/>
+        <di:waypoint x="4525" y="920"/>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

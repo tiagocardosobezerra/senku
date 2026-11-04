@@ -1,0 +1,80 @@
+{
+ "processo": {
+  "nome": "Proposta"
+ },
+ "papeis": [
+  {
+   "id": "sol",
+   "nome": "Solicitante"
+  },
+  {
+   "id": "ges",
+   "nome": "Gestor da área"
+  },
+  {
+   "id": "cmp",
+   "nome": "Comprador"
+  },
+  {
+   "id": "fin",
+   "nome": "Analista Financeiro"
+  },
+  {
+   "id": "for",
+   "nome": "Fornecedor",
+   "tipo": "externo"
+  }
+ ],
+ "elementos": [
+  {
+   "id": "i",
+   "tipo": "inicio",
+   "nome": "Proposta enviada",
+   "papel": "cmp",
+   "segue": "p1"
+  },
+  {
+   "id": "p1",
+   "tipo": "paralelo",
+   "segue": [
+    "e1",
+    "a1"
+   ]
+  },
+  {
+   "id": "e1",
+   "tipo": "evento",
+   "gatilho": "tempo",
+   "nome": "Aguardar 10 dias corridos",
+   "segue": "f2"
+  },
+  {
+   "id": "f2",
+   "tipo": "fim",
+   "nome": "Proposta expirada",
+   "encerra": true
+  },
+  {
+   "id": "a1",
+   "nome": "Analisar proposta",
+   "papel": "for",
+   "segue": "a2",
+   "tempo": {
+    "execucao": "2h",
+    "espera": "3d"
+   }
+  },
+  {
+   "id": "a2",
+   "nome": "Assinar contrato",
+   "papel": "for",
+   "segue": "f1"
+  },
+  {
+   "id": "f1",
+   "tipo": "fim",
+   "nome": "Contrato assinado",
+   "encerra": true
+  }
+ ]
+}

@@ -1,0 +1,57 @@
+{
+ "elementos": [
+  {
+   "id": "i",
+   "tipo": "inicio",
+   "nome": "Pedido recebido",
+   "papel": "x",
+   "segue": "a1"
+  },
+  {
+   "id": "a1",
+   "nome": "Executar a1",
+   "papel": "x",
+   "segue": "d"
+  },
+  {
+   "id": "d",
+   "tipo": "decisao",
+   "nome": "Ok?",
+   "papel": "x",
+   "segue": [
+    {
+     "para": "f",
+     "rotulo": "Sim"
+    },
+    {
+     "para": "f2",
+     "rotulo": "Não"
+    }
+   ]
+  },
+  {
+   "id": "f",
+   "tipo": "fim",
+   "nome": "Concluído"
+  },
+  {
+   "id": "f2",
+   "tipo": "fim",
+   "nome": "Cancelado",
+   "encerra": true
+  }
+ ],
+ "processo": {
+  "nome": "fim_terminal_in_xor"
+ },
+ "papeis": [
+  {
+   "id": "x",
+   "nome": "Analista"
+  },
+  {
+   "id": "y",
+   "nome": "Gestor"
+  }
+ ]
+}

@@ -1,0 +1,125 @@
+{
+ "processo": {
+  "nome": "Proposta comercial"
+ },
+ "papeis": [
+  {
+   "id": "ve",
+   "nome": "Vendedor"
+  },
+  {
+   "id": "ge",
+   "nome": "Gerente"
+  },
+  {
+   "id": "ju",
+   "nome": "Jurídico"
+  }
+ ],
+ "elementos": [
+  {
+   "id": "i",
+   "tipo": "inicio",
+   "nome": "Oportunidade qualificada",
+   "papel": "ve",
+   "segue": "p1"
+  },
+  {
+   "id": "p1",
+   "tipo": "paralelo",
+   "segue": [
+    "a1",
+    "e1"
+   ]
+  },
+  {
+   "id": "a1",
+   "nome": "Negociar proposta",
+   "papel": "ve",
+   "tempo": {
+    "execucao": "2h",
+    "espera": "3d"
+   },
+   "segue": "a0"
+  },
+  {
+   "id": "a0",
+   "nome": "Avaliar desconto",
+   "papel": "ve",
+   "tempo": {
+    "execucao": "30min"
+   },
+   "segue": "d1"
+  },
+  {
+   "id": "d1",
+   "tipo": "decisao",
+   "nome": "Desconto acima da alçada?",
+   "papel": "ve",
+   "segue": [
+    {
+     "para": "a2",
+     "rotulo": "Não",
+     "percentual": 70
+    },
+    {
+     "para": "a3",
+     "rotulo": "Sim",
+     "percentual": 30
+    }
+   ]
+  },
+  {
+   "id": "e1",
+   "tipo": "evento",
+   "gatilho": "tempo",
+   "nome": "Aguardar 30 dias corridos",
+   "segue": "fx"
+  },
+  {
+   "id": "fx",
+   "tipo": "fim",
+   "nome": "Proposta expirada",
+   "encerra": true
+  },
+  {
+   "id": "a2",
+   "nome": "Emitir contrato",
+   "papel": "ju",
+   "tempo": {
+    "execucao": "1h"
+   },
+   "segue": "fo"
+  },
+  {
+   "id": "a3",
+   "nome": "Aprovar desconto",
+   "papel": "ju",
+   "tempo": {
+    "execucao": "15min"
+   },
+   "segue": "a2b"
+  },
+  {
+   "id": "a2b",
+   "nome": "Revisar cláusulas",
+   "papel": "ju",
+   "tempo": {
+    "execucao": "15min"
+   },
+   "segue": "fo2"
+  },
+  {
+   "id": "fo",
+   "tipo": "fim",
+   "nome": "Contrato emitido",
+   "encerra": true
+  },
+  {
+   "id": "fo2",
+   "tipo": "fim",
+   "nome": "Contrato emitido com desconto",
+   "encerra": true
+  }
+ ]
+}

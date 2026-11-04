@@ -1,0 +1,15 @@
+{
+  "processo": {"nome": "Faturamento de pedido", "volume": "1.200 pedidos por mês", "dono": "Gerente Financeiro"},
+  "papeis": [{"id": "fat", "nome": "Faturista"}, {"id": "log", "nome": "Logística"}],
+  "elementos": [
+    {"id": "i", "tipo": "inicio", "nome": "Pedido recebido", "papel": "fat", "segue": "a1"},
+    {"id": "a1", "nome": "Conferir pedido", "papel": "fat", "sistema": [], "tempo": {"execucao": "10min"}, "segue": "o1"},
+    {"id": "o1", "tipo": "inclusivo", "nome": "Quais serviços?", "papel": "fat",
+     "segue": [{"para": "a2", "rotulo": "Frete"}, {"para": "a3", "rotulo": "Seguro"}]},
+    {"id": "a2", "nome": "Contratar frete", "papel": "log", "sistema": [], "tempo": {"execucao": "30min", "espera": "1d"}, "segue": "o2"},
+    {"id": "a3", "nome": "Contratar seguro", "papel": "fat", "sistema": [], "tempo": {"execucao": "20min", "espera": "1d"}, "segue": "o2"},
+    {"id": "o2", "tipo": "inclusivo", "papel": "fat", "segue": "a4"},
+    {"id": "a4", "nome": "Emitir nota fiscal", "papel": "fat", "sistema": [], "tempo": {"execucao": "15min", "espera": "5d"}, "segue": "f"},
+    {"id": "f", "tipo": "fim", "nome": "Pedido faturado"}
+  ]
+}

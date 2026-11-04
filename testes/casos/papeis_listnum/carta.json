@@ -1,0 +1,1 @@
+{"processo": {"nome": "T"}, "papeis": [1, null], "elementos": [{"id": "i", "tipo": "inicio", "segue": "f"}, {"id": "f", "tipo": "fim"}]}

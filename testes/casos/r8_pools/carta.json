@@ -1,0 +1,20 @@
+{"processo": {"nome": "Cotação com fornecedor"},
+ "papeis": [{"id": "comp", "nome": "Comprador"}, {"id": "forn", "nome": "Fornecedor", "tipo": "externo"}, {"id": "cli", "nome": "Cliente interno", "tipo": "externo"}],
+ "elementos": [
+  {"id": "i", "tipo": "inicio", "nome": "Necessidade informada", "papel": "cli", "segue": "c1"},
+  {"id": "c1", "nome": "Enviar requisição", "papel": "cli", "segue": "a1"},
+  {"id": "a1", "nome": "Solicitar cotação", "papel": "comp", "envia": true, "segue": "cr"},
+  {"id": "cr", "tipo": "corrida", "nome": "O que vier primeiro", "papel": "comp", "segue": [{"para": "e1", "percentual": 80}, {"para": "e2", "percentual": 20}]},
+  {"id": "e1", "tipo": "evento", "gatilho": "mensagem", "nome": "Cotação recebida", "tempo": {"espera": "3dc"}, "segue": "a2"},
+  {"id": "e2", "tipo": "evento", "gatilho": "tempo", "nome": "Aguardar 5 dias corridos", "segue": "a3"},
+  {"id": "a3", "nome": "Cobrar fornecedor", "papel": "comp", "segue": "f2"},
+  {"id": "a2", "nome": "Analisar cotação", "papel": "comp", "segue": "p1"},
+  {"id": "p1", "tipo": "paralelo", "segue": ["a4", "a5"]},
+  {"id": "a4", "nome": "Emitir pedido", "papel": "comp", "segue": "p2"},
+  {"id": "a5", "nome": "Confirmar entrega", "papel": "forn", "segue": "p2"},
+  {"id": "p2", "tipo": "paralelo", "segue": "a6"},
+  {"id": "a6", "nome": "Avisar cliente interno", "papel": "comp", "segue": "c2"},
+  {"id": "c2", "nome": "Receber aviso", "papel": "cli", "segue": "f"},
+  {"id": "f", "tipo": "fim", "nome": "Compra concluída", "papel": "cli"},
+  {"id": "f2", "tipo": "fim", "nome": "Cotação cobrada"}
+ ]}

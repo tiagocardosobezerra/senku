@@ -1,0 +1,12 @@
+{"processo":{"nome":"Venda consultiva"},
+ "papeis":[{"id":"v","nome":"Vendedor"},{"id":"c","nome":"Cliente","tipo":"externo"}],
+ "elementos":[
+  {"id":"i","tipo":"inicio","nome":"Lead recebido","segue":"a1"},
+  {"id":"a1","nome":"Elaborar proposta","papel":"v","sistema":["crm"],"tempo":{"execucao":"2h","espera":"1d"},"segue":"a2"},
+  {"id":"a2","nome":"Avaliar proposta","papel":"c","tempo":{"execucao":"1h","espera":"5d"},"segue":"d1"},
+  {"id":"d1","tipo":"decisao","nome":"Cliente aceitou?","papel":"c","segue":[
+     {"para":"a3","rotulo":"Sim","percentual":20},{"para":"f2","rotulo":"Não","percentual":80}]},
+  {"id":"a3","nome":"Emitir contrato","papel":"v","sistema":["crm"],"tempo":{"execucao":"1h","espera":"10d"},"segue":"f1"},
+  {"id":"f1","tipo":"fim","nome":"Venda fechada"},
+  {"id":"f2","tipo":"fim","nome":"Proposta recusada"}],
+ "sistemas":[{"id":"crm","nome":"CRM"}]}

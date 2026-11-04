@@ -1,0 +1,9 @@
+{"processo": {"nome": "Docs P2"},
+ "papeis": [{"id": "an", "nome": "Analista"}, {"id": "cli", "nome": "Cliente", "tipo": "externo"}],
+ "elementos": [
+  {"id": "i", "tipo": "inicio", "nome": "Pedido recebido", "papel": "an", "segue": "a1"},
+  {"id": "a1", "nome": "Analisar documentos", "papel": "an", "sistema": [], "segue": "a3",
+   "bordas": [{"gatilho": "mensagem", "nome": "Documento faltando", "percentual": 20, "segue": "a2"}]},
+  {"id": "a2", "nome": "Reenviar documentos", "papel": "cli", "segue": "a1"},
+  {"id": "a3", "nome": "Aprovar cadastro", "papel": "an", "sistema": [], "segue": "f"},
+  {"id": "f", "tipo": "fim", "nome": "Cadastro aprovado"}]}

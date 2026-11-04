@@ -1,0 +1,163 @@
+{
+  "formato": "senku/1",
+  "processo": {
+    "codigo": "",
+    "nome": "Empresa",
+    "cenario": "as-is",
+    "versao": "0.1",
+    "objetivo": "",
+    "dono": "",
+    "area": "",
+    "macroprocesso": "",
+    "nivel": "processo",
+    "gatilho": "",
+    "resultado": "",
+    "frequencia": "",
+    "volume": "",
+    "prazo_informado": "",
+    "escopo": {
+      "inicio": "",
+      "fim": "",
+      "inclui": [],
+      "nao_inclui": []
+    },
+    "normas": [],
+    "premissas": [
+      "Importado de signavio_like.bpmn: confira papéis, regras e tempos com o dono do processo"
+    ]
+  },
+  "participantes": [],
+  "sipoc": {
+    "fornecedores": [],
+    "entradas": [],
+    "saidas": [],
+    "clientes": []
+  },
+  "papeis": [
+    {
+      "id": "sid-l1",
+      "nome": "Atendimento",
+      "tipo": "interno"
+    },
+    {
+      "id": "sid-l2",
+      "nome": "Financeiro",
+      "tipo": "interno"
+    },
+    {
+      "id": "Banco",
+      "nome": "Banco",
+      "tipo": "externo"
+    }
+  ],
+  "sistemas": [],
+  "elementos": [
+    {
+      "id": "sid-start",
+      "tipo": "inicio",
+      "nome": "Pedido recebido",
+      "papel": "sid-l1",
+      "gatilho": "mensagem",
+      "segue": "sid-t1"
+    },
+    {
+      "id": "sid-t1",
+      "tipo": "atividade",
+      "nome": "Validar pedido",
+      "papel": "sid-l1",
+      "segue": "sid-g1"
+    },
+    {
+      "id": "sid-g1",
+      "tipo": "decisao",
+      "nome": "Pedido válido?",
+      "papel": "sid-l1",
+      "segue": [
+        {
+          "para": "sid-t2",
+          "condicao": "${valido}",
+          "rotulo": "Sim"
+        },
+        {
+          "para": "sid-end1",
+          "rotulo": "Senão"
+        }
+      ]
+    },
+    {
+      "id": "sid-t2",
+      "tipo": "atividade",
+      "nome": "Solicitar pagamento",
+      "papel": "sid-l2",
+      "envia": true,
+      "segue": "sid-t3"
+    },
+    {
+      "id": "sid-t3",
+      "tipo": "atividade",
+      "nome": "Aguardar retorno do banco",
+      "papel": "sid-l2",
+      "recebe": true,
+      "segue": "sid-end2",
+      "bordas": [
+        {
+          "id": "sid-b1",
+          "nome": "Recusa do banco",
+          "gatilho": "mensagem",
+          "segue": [
+            {
+              "para": "sid-end3"
+            }
+          ]
+        },
+        {
+          "id": "sid-b2",
+          "nome": "5 dias",
+          "gatilho": "tempo",
+          "segue": [
+            {
+              "para": "sid-end3"
+            }
+          ],
+          "tempo": "5dc"
+        }
+      ]
+    },
+    {
+      "id": "sid-end1",
+      "tipo": "fim",
+      "nome": "Pedido recusado",
+      "papel": "sid-l1"
+    },
+    {
+      "id": "sid-end2",
+      "tipo": "fim",
+      "nome": "Pago",
+      "papel": "sid-l2"
+    },
+    {
+      "id": "sid-end3",
+      "tipo": "fim",
+      "nome": "Pagamento falhou",
+      "papel": "sid-l2"
+    }
+  ],
+  "regras": [],
+  "indicadores": [],
+  "dores": [],
+  "riscos": [],
+  "melhorias": [],
+  "glossario": [],
+  "pendencias": [
+    {
+      "pergunta": "Mensagem de \"Cliente\" para \"Pedido recebido\" no mapa original: confira se a troca está nas atividades da carta."
+    },
+    {
+      "pergunta": "Mensagem de \"Solicitar pagamento\" para \"Banco\" no mapa original: confira se a troca está nas atividades da carta."
+    },
+    {
+      "pergunta": "Mensagem de \"Banco\" para \"Recusa do banco\" no mapa original: confira se a troca está nas atividades da carta."
+    }
+  ],
+  "historico": []
+}

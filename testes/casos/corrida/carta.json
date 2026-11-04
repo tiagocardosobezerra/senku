@@ -1,0 +1,13 @@
+{"processo": {"nome": "Proposta com prazo"},
+ "papeis": [{"id": "com", "nome": "Comercial"}, {"id": "cli", "nome": "Cliente", "tipo": "externo"}],
+ "elementos": [
+  {"id": "i", "tipo": "inicio", "nome": "Proposta aprovada", "papel": "com", "segue": "a1"},
+  {"id": "a1", "nome": "Enviar proposta ao cliente", "papel": "com", "tempo": {"execucao": "30min"}, "segue": "c"},
+  {"id": "c", "tipo": "corrida", "nome": "O que vier primeiro", "papel": "com",
+   "segue": [{"para": "e1", "percentual": 70}, {"para": "e2", "percentual": 30}]},
+  {"id": "e1", "tipo": "evento", "gatilho": "mensagem", "nome": "Aceite do cliente recebido", "papel": "com", "tempo": {"espera": "3d"}, "segue": "a2"},
+  {"id": "e2", "tipo": "evento", "gatilho": "tempo", "nome": "Aguardar 10 dias corridos", "papel": "com", "segue": "a3"},
+  {"id": "a2", "nome": "Emitir contrato", "papel": "com", "tempo": {"execucao": "1h"}, "segue": "f1"},
+  {"id": "a3", "nome": "Arquivar proposta", "papel": "com", "tempo": {"execucao": "10min"}, "segue": "f2"},
+  {"id": "f1", "tipo": "fim", "nome": "Contrato emitido"},
+  {"id": "f2", "tipo": "fim", "nome": "Proposta expirada"}]}

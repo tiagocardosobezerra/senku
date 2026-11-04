@@ -1,0 +1,12 @@
+{"processo": {"nome": "Abertura de conta PJ", "volume": "400 por mês"},
+ "papeis": [{"id": "com", "nome": "Comercial"}, {"id": "cad", "nome": "Cadastro"}],
+ "elementos": [
+  {"id": "i", "tipo": "inicio", "nome": "Proposta assinada", "segue": "a1"},
+  {"id": "a1", "nome": "Enviar documentos", "papel": "com", "tempo": {"execucao": "20min"}, "segue": "a2"},
+  {"id": "a2", "nome": "Conferir documentos", "papel": "cad", "tempo": {"execucao": "30min", "espera": "1d"}, "segue": "d1"},
+  {"id": "d1", "tipo": "decisao", "nome": "Documentação completa?", "papel": "cad",
+   "segue": [{"para": "a3", "rotulo": "Sim", "percentual": 40}, {"para": "a4", "rotulo": "Não", "percentual": 60}]},
+  {"id": "a4", "nome": "Solicitar complemento", "papel": "com", "tempo": {"execucao": "15min", "espera": "2d"}, "segue": "a2"},
+  {"id": "a3", "nome": "Abrir conta", "papel": "cad", "tempo": {"execucao": "40min"}, "segue": "f"},
+  {"id": "f", "tipo": "fim", "nome": "Conta aberta"}
+ ]}

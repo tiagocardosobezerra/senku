@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" xmlns:signavio="http://www.signavio.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="sid-defs" targetNamespace="http://www.signavio.com" exporter="Signavio Process Editor" exporterVersion="17.4.0">
+  <collaboration id="sid-collab">
+    <participant id="sid-p-emp" name="Empresa" processRef="sid-proc"/>
+    <participant id="sid-p-cli" name="Cliente"/>
+    <messageFlow id="sid-mf1" sourceRef="sid-p-cli" targetRef="sid-start"/>
+    <messageFlow id="sid-mf2" sourceRef="sid-send" targetRef="sid-p-cli"/>
+  </collaboration>
+  <process id="sid-proc" name="Atendimento de reclamação" isExecutable="false">
+    <laneSet id="sid-ls">
+      <lane id="sid-lane-sac" name="SAC">
+        <childLaneSet id="sid-cls">
+          <lane id="sid-lane-n1" name="Atendente N1">
+            <flowNodeRef>sid-start</flowNodeRef>
+            <flowNodeRef>sid-t1</flowNodeRef>
+            <flowNodeRef>sid-gw1</flowNodeRef>
+          </lane>
+          <lane id="sid-lane-n2" name="Especialista N2">
+            <flowNodeRef>sid-sub</flowNodeRef>
+            <flowNodeRef>sid-b1</flowNodeRef>
+            <flowNodeRef>sid-esc</flowNodeRef>
+          </lane>
+        </childLaneSet>
+      </lane>
+      <lane id="sid-lane-qual" name="Qualidade">
+        <flowNodeRef>sid-mi</flowNodeRef>
+        <flowNodeRef>sid-gw2</flowNodeRef>
+        <flowNodeRef>sid-send</flowNodeRef>
+        <flowNodeRef>sid-end1</flowNodeRef>
+        <flowNodeRef>sid-end2</flowNodeRef>
+      </lane>
+    </laneSet>
+    <startEvent id="sid-start" name="Reclamação recebida">
+      <outgoing>sid-f1</outgoing>
+      <messageEventDefinition/>
+    </startEvent>
+    <userTask id="sid-t1" name="Registrar reclamação">
+      <documentation>Registrar no CRM com protocolo.</documentation>
+      <incoming>sid-f1</incoming>
+      <outgoing>sid-f2</outgoing>
+    </userTask>
+    <exclusiveGateway id="sid-gw1" name="Resolve no N1?" default="sid-f4">
+      <incoming>sid-f2</incoming>
+      <outgoing>sid-f3</outgoing>
+      <outgoing>sid-f4</outgoing>
+    </exclusiveGateway>
+    <subProcess id="sid-sub" name="Investigar causa">
+      <incoming>sid-f4</incoming>
+      <outgoing>sid-f5</outgoing>
+      <startEvent id="sid-sub-s"><outgoing>sid-sf1</outgoing></startEvent>
+      <task id="sid-sub-t1" name="Coletar evidências"><incoming>sid-sf1</incoming><outgoing>sid-sf2</outgoing></task>
+      <task id="sid-sub-t2" name="Analisar evidências"><incoming>sid-sf2</incoming><outgoing>sid-sf3</outgoing></task>
+      <endEvent id="sid-sub-e"><incoming>sid-sf3</incoming></endEvent>
+      <sequenceFlow id="sid-sf1" sourceRef="sid-sub-s" targetRef="sid-sub-t1"/>
+      <sequenceFlow id="sid-sf2" sourceRef="sid-sub-t1" targetRef="sid-sub-t2"/>
+      <sequenceFlow id="sid-sf3" sourceRef="sid-sub-t2" targetRef="sid-sub-e"/>
+    </subProcess>
+    <boundaryEvent id="sid-b1" name="SLA de 5 dias" attachedToRef="sid-sub" cancelActivity="false">
+      <outgoing>sid-f6</outgoing>
+      <timerEventDefinition><timeDuration xsi:type="tFormalExpression">P5D</timeDuration></timerEventDefinition>
+    </boundaryEvent>
+    <intermediateThrowEvent id="sid-esc" name="Escalar à gerência">
+      <incoming>sid-f6</incoming>
+      <outgoing>sid-f6b</outgoing>
+      <escalationEventDefinition/>
+    </intermediateThrowEvent>
+    <endEvent id="sid-end2" name="Gerência avisada"><incoming>sid-f6b</incoming></endEvent>
+    <userTask id="sid-mi" name="Revisar respostas">
+      <incoming>sid-f3</incoming>
+      <incoming>sid-f5</incoming>
+      <outgoing>sid-f7</outgoing>
+      <multiInstanceLoopCharacteristics isSequential="false"/>
+    </userTask>
+    <exclusiveGateway id="sid-gw2" name="Resposta ok?">
+      <incoming>sid-f7</incoming>
+      <outgoing>sid-f8</outgoing>
+      <outgoing>sid-f9</outgoing>
+    </exclusiveGateway>
+    <sendTask id="sid-send" name="Responder cliente">
+      <incoming>sid-f8</incoming>
+      <outgoing>sid-f10</outgoing>
+    </sendTask>
+    <endEvent id="sid-end1" name="Reclamação respondida"><incoming>sid-f10</incoming></endEvent>
+    <sequenceFlow id="sid-f1" sourceRef="sid-start" targetRef="sid-t1"/>
+    <sequenceFlow id="sid-f2" sourceRef="sid-t1" targetRef="sid-gw1"/>
+    <sequenceFlow id="sid-f3" name="Sim" sourceRef="sid-gw1" targetRef="sid-mi">
+      <conditionExpression xsi:type="tFormalExpression">${simples}</conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="sid-f4" name="Não" sourceRef="sid-gw1" targetRef="sid-sub"/>
+    <sequenceFlow id="sid-f5" sourceRef="sid-sub" targetRef="sid-mi"/>
+    <sequenceFlow id="sid-f6" sourceRef="sid-b1" targetRef="sid-esc"/>
+    <sequenceFlow id="sid-f6b" sourceRef="sid-esc" targetRef="sid-end2"/>
+    <sequenceFlow id="sid-f7" sourceRef="sid-mi" targetRef="sid-gw2"/>
+    <sequenceFlow id="sid-f8" name="Sim" sourceRef="sid-gw2" targetRef="sid-send"/>
+    <sequenceFlow id="sid-f9" name="Não" sourceRef="sid-gw2" targetRef="sid-t1"/>
+    <sequenceFlow id="sid-f10" sourceRef="sid-send" targetRef="sid-end1"/>
+  </process>
+  <bpmndi:BPMNDiagram id="sid-dia">
+    <bpmndi:BPMNPlane id="sid-plane" bpmnElement="sid-collab">
+      <bpmndi:BPMNShape id="sid-start_gui" bpmnElement="sid-start"><omgdc:Bounds x="100" y="100" width="30" height="30"/></bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</definitions>

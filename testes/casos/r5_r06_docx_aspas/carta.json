@@ -1,0 +1,9 @@
+{
+  "processo": {"nome": "Compra \"urgente\" de materiais"},
+  "papeis": [{"id": "c", "nome": "Comprador"}],
+  "elementos": [
+    {"id": "i", "tipo": "inicio", "nome": "Pedido recebido", "papel": "c", "segue": "a1"},
+    {"id": "a1", "nome": "Emitir pedido", "papel": "c", "segue": "f"},
+    {"id": "f", "tipo": "fim", "nome": "Pedido emitido"}
+  ]
+}

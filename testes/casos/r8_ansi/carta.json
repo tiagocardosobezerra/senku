@@ -1,0 +1,1 @@
+{"processo":{"nome":"Cotação"},"papeis":[{"id":"x","nome":"Analista"}],"elementos":[{"id":"i","tipo":"inicio","nome":"Início","segue":"a"},{"id":"a","nome":"Emitir cotação","papel":"x","segue":"f"},{"id":"f","tipo":"fim","nome":"Fim"}]}

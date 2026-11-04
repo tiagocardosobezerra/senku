@@ -1,0 +1,11 @@
+{"processo": {"nome": "Paralelo P3"},
+ "papeis": [{"id": "an", "nome": "Analista"}, {"id": "cli", "nome": "Cliente", "tipo": "externo"}, {"id": "forn", "nome": "Fornecedor", "tipo": "externo"}],
+ "elementos": [
+  {"id": "i", "tipo": "inicio", "nome": "Pedido do cliente recebido", "papel": "cli", "segue": "p1"},
+  {"id": "p1", "tipo": "paralelo", "papel": "an", "segue": ["a1", "a2"]},
+  {"id": "a1", "nome": "Cotar com fornecedor", "papel": "forn", "segue": "p2"},
+  {"id": "a2", "nome": "Conferir cadastro", "papel": "an", "sistema": [], "segue": "p2"},
+  {"id": "p2", "tipo": "paralelo", "papel": "an", "segue": "a3"},
+  {"id": "a3", "nome": "Enviar orçamento", "papel": "an", "sistema": [], "segue": "a4"},
+  {"id": "a4", "nome": "Receber orçamento", "papel": "cli", "segue": "f"},
+  {"id": "f", "tipo": "fim", "nome": "Orçamento entregue", "papel": "cli"}]}

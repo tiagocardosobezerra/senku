@@ -1,0 +1,209 @@
+{
+  "formato": "senku/1",
+  "processo": {
+    "codigo": "",
+    "nome": "Empresa XYZ",
+    "cenario": "as-is",
+    "versao": "0.1",
+    "objetivo": "",
+    "dono": "",
+    "area": "",
+    "macroprocesso": "",
+    "nivel": "processo",
+    "gatilho": "",
+    "resultado": "",
+    "frequencia": "",
+    "volume": "",
+    "prazo_informado": "",
+    "escopo": {
+      "inicio": "",
+      "fim": "",
+      "inclui": [],
+      "nao_inclui": []
+    },
+    "normas": [],
+    "premissas": [
+      "Importado de signavio.bpmn: confira papéis, regras e tempos com o dono do processo"
+    ]
+  },
+  "participantes": [],
+  "sipoc": {
+    "fornecedores": [],
+    "entradas": [],
+    "saidas": [],
+    "clientes": []
+  },
+  "papeis": [
+    {
+      "id": "sid-l1",
+      "nome": "Atendimento",
+      "tipo": "interno"
+    },
+    {
+      "id": "sid-l2",
+      "nome": "Backoffice",
+      "tipo": "interno"
+    },
+    {
+      "id": "Cliente",
+      "nome": "Cliente",
+      "tipo": "externo"
+    }
+  ],
+  "sistemas": [],
+  "elementos": [
+    {
+      "id": "sid-start",
+      "tipo": "inicio",
+      "nome": "Pedido recebido",
+      "papel": "sid-l1",
+      "gatilho": "mensagem",
+      "segue": "sid-t1"
+    },
+    {
+      "id": "sid-start2",
+      "tipo": "inicio",
+      "nome": "Todo dia 5",
+      "papel": "sid-l2",
+      "gatilho": "tempo",
+      "segue": "sid-sp"
+    },
+    {
+      "id": "sid-t1",
+      "tipo": "atividade",
+      "nome": "Analisar pedido",
+      "papel": "sid-l1",
+      "descricao": "(repete até concluir)",
+      "segue": "sid-ebg",
+      "bordas": [
+        {
+          "id": "sid-b1",
+          "nome": "2 dias",
+          "gatilho": "tempo",
+          "segue": [
+            {
+              "para": "sid-esc"
+            }
+          ],
+          "tempo": "2dc",
+          "interrompe": false
+        }
+      ]
+    },
+    {
+      "id": "sid-esc",
+      "tipo": "evento",
+      "nome": "Escalar",
+      "papel": "sid-l2"
+    },
+    {
+      "id": "sid-ebg",
+      "tipo": "corrida",
+      "nome": "",
+      "papel": "sid-l1",
+      "segue": [
+        {
+          "para": "sid-rt",
+          "rotulo": "Receber documentos"
+        },
+        {
+          "para": "sid-tim",
+          "rotulo": "5 dias"
+        }
+      ]
+    },
+    {
+      "id": "sid-rt",
+      "tipo": "atividade",
+      "nome": "Receber documentos",
+      "papel": "sid-l1",
+      "descricao": "(recebe mensagem)",
+      "segue": "sid-sp"
+    },
+    {
+      "id": "sid-tim",
+      "tipo": "evento",
+      "nome": "5 dias",
+      "papel": "sid-l1",
+      "gatilho": "tempo",
+      "tempo": {
+        "espera": "5dc"
+      },
+      "segue": "sid-x1"
+    },
+    {
+      "id": "sid-sp",
+      "tipo": "subprocesso",
+      "nome": "Processar pedido",
+      "papel": "sid-l2",
+      "segue": "sid-ca",
+      "bordas": [
+        {
+          "id": "sid-b2",
+          "nome": "Falha",
+          "gatilho": "erro",
+          "segue": [
+            {
+              "para": "sid-x1"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sid-ca",
+      "tipo": "subprocesso",
+      "nome": "Faturar",
+      "papel": "sid-l2",
+      "segue": "sid-send"
+    },
+    {
+      "id": "sid-send",
+      "tipo": "atividade",
+      "nome": "Enviar confirmação",
+      "papel": "sid-l1",
+      "descricao": "(envia mensagem)",
+      "segue": "sid-end1"
+    },
+    {
+      "id": "sid-x1",
+      "tipo": "decisao",
+      "nome": "Cliente respondeu?",
+      "papel": "sid-l2",
+      "segue": [
+        {
+          "para": "sid-end2",
+          "rotulo": "Senão"
+        }
+      ]
+    },
+    {
+      "id": "sid-end1",
+      "tipo": "fim",
+      "nome": "Pedido concluído",
+      "papel": "sid-l2"
+    },
+    {
+      "id": "sid-end2",
+      "tipo": "fim",
+      "nome": "Pedido cancelado",
+      "papel": "sid-l2",
+      "encerra": true
+    }
+  ],
+  "regras": [],
+  "indicadores": [],
+  "dores": [],
+  "riscos": [],
+  "melhorias": [],
+  "glossario": [],
+  "pendencias": [
+    {
+      "pergunta": "Mensagem de \"Cliente\" para \"Pedido recebido\" no mapa original: confira se a troca está nas atividades da carta."
+    },
+    {
+      "pergunta": "Mensagem de \"Enviar confirmação\" para \"Cliente\" no mapa original: confira se a troca está nas atividades da carta."
+    }
+  ],
+  "historico": []
+}

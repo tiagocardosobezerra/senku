@@ -1,0 +1,8 @@
+{"processo": {"nome": "Abrir conta", "volume": "100 por mês"},
+ "papeis": [{"id": "at", "nome": "Atendente"}, {"id": "an", "nome": "Analista de cadastro"}],
+ "elementos": [
+  {"id": "s", "tipo": "inicio", "nome": "Pedido recebido", "segue": "a1"},
+  {"id": "a1", "nome": "Registrar pedido", "papel": "at", "sistema": [], "tempo": {"execucao": "1h"}, "segue": "sp"},
+  {"id": "sp", "tipo": "subprocesso", "nome": "Checar documentos", "papel": "an", "detalhe": "filho/carta.json", "tempo": {"execucao": "1h"}, "segue": "d"},
+  {"id": "d", "tipo": "decisao", "nome": "Cadastro completo?", "papel": "an", "segue": [{"para": "f", "rotulo": "Sim", "percentual": 50}, {"para": "sp", "rotulo": "Não", "percentual": 50}]},
+  {"id": "f", "tipo": "fim", "nome": "Conta aberta"}]}

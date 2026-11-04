@@ -1,0 +1,12 @@
+{"processo": {"nome": "Conferência com prazo"},
+ "papeis": [{"id": "an", "nome": "Analista"}, {"id": "sup", "nome": "Supervisor"}],
+ "elementos": [
+  {"id": "i", "tipo": "inicio", "nome": "Nota recebida", "segue": "a1"},
+  {"id": "a1", "nome": "Conferir nota fiscal", "papel": "an",
+   "bordas": [{"gatilho": "tempo", "nome": "Prazo de 2 dias estourado", "tempo": "2d", "percentual": 10, "segue": "a3"}],
+   "segue": "d1"},
+  {"id": "d1", "tipo": "decisao", "nome": "Nota correta?", "papel": "an",
+   "segue": [{"para": "a2", "rotulo": "Sim", "percentual": 80}, {"para": "a1", "rotulo": "Não", "percentual": 20}]},
+  {"id": "a2", "nome": "Lançar nota fiscal", "papel": "an", "segue": "f"},
+  {"id": "a3", "nome": "Cobrar conferência", "papel": "sup", "segue": "a1"},
+  {"id": "f", "tipo": "fim", "nome": "Nota lançada"}]}

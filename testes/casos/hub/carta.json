@@ -1,0 +1,116 @@
+{
+ "processo": {
+  "nome": "Hub"
+ },
+ "papeis": [
+  {
+   "id": "x",
+   "nome": "Service desk"
+  },
+  {
+   "id": "y",
+   "nome": "Suporte campo"
+  },
+  {
+   "id": "w",
+   "nome": "Desenvolvimento"
+  }
+ ],
+ "elementos": [
+  {
+   "id": "i",
+   "tipo": "inicio",
+   "nome": "Chamado aberto",
+   "papel": "x",
+   "segue": "a1"
+  },
+  {
+   "id": "a1",
+   "nome": "Classificar chamado",
+   "papel": "x",
+   "segue": "d"
+  },
+  {
+   "id": "d",
+   "tipo": "decisao",
+   "nome": "Qual o tipo de chamado?",
+   "papel": "x",
+   "segue": [
+    {
+     "para": "b1",
+     "rotulo": "Hardware"
+    },
+    {
+     "para": "b2",
+     "rotulo": "Software"
+    },
+    {
+     "para": "b3",
+     "rotulo": "Acesso"
+    },
+    {
+     "para": "b4",
+     "rotulo": "Dúvida"
+    },
+    {
+     "para": "z",
+     "rotulo": "Duplicado"
+    }
+   ]
+  },
+  {
+   "id": "b1",
+   "nome": "Trocar equipamento",
+   "papel": "y",
+   "segue": "b1b"
+  },
+  {
+   "id": "b1b",
+   "nome": "Testar equipamento",
+   "papel": "y",
+   "segue": "m"
+  },
+  {
+   "id": "b2",
+   "nome": "Corrigir software",
+   "papel": "w",
+   "segue": "m"
+  },
+  {
+   "id": "b3",
+   "nome": "Conceder acesso",
+   "papel": "x",
+   "segue": "m"
+  },
+  {
+   "id": "b4",
+   "nome": "Responder dúvida",
+   "papel": "x",
+   "segue": "m"
+  },
+  {
+   "id": "m",
+   "tipo": "decisao",
+   "papel": "x",
+   "segue": "a9"
+  },
+  {
+   "id": "a9",
+   "nome": "Encerrar chamado",
+   "papel": "x",
+   "segue": "f"
+  },
+  {
+   "id": "z",
+   "tipo": "fim",
+   "nome": "Chamado descartado",
+   "papel": "x"
+  },
+  {
+   "id": "f",
+   "tipo": "fim",
+   "nome": "Chamado resolvido",
+   "papel": "x"
+  }
+ ]
+}

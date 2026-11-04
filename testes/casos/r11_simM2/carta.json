@@ -1,0 +1,97 @@
+{
+ "processo": {
+  "nome": "simM2",
+  "volume": "100 por mês"
+ },
+ "papeis": [
+  {
+   "id": "a",
+   "nome": "Analista"
+  },
+  {
+   "id": "g",
+   "nome": "Gestor"
+  }
+ ],
+ "elementos": [
+  {
+   "id": "i1",
+   "tipo": "inicio",
+   "nome": "Pedido por e-mail",
+   "papel": "a",
+   "segue": "a"
+  },
+  {
+   "id": "i2",
+   "tipo": "inicio",
+   "nome": "Pedido pelo portal",
+   "papel": "g",
+   "segue": "b"
+  },
+  {
+   "id": "a",
+   "nome": "Digitar pedido",
+   "papel": "a",
+   "segue": "c",
+   "tempo": {
+    "execucao": "1h"
+   }
+  },
+  {
+   "id": "b",
+   "nome": "Revisar pedido do portal",
+   "papel": "g",
+   "segue": "c",
+   "tempo": {
+    "execucao": "9h"
+   }
+  },
+  {
+   "id": "c",
+   "nome": "Registrar pedido",
+   "papel": "a",
+   "segue": "p1",
+   "tempo": {
+    "execucao": "1h"
+   }
+  },
+  {
+   "id": "p1",
+   "tipo": "paralelo",
+   "papel": "a",
+   "segue": [
+    "x",
+    "y"
+   ]
+  },
+  {
+   "id": "x",
+   "nome": "Separar",
+   "papel": "a",
+   "segue": "p2",
+   "tempo": {
+    "execucao": "1h"
+   }
+  },
+  {
+   "id": "y",
+   "nome": "Faturar",
+   "papel": "g",
+   "segue": "p2",
+   "tempo": {
+    "execucao": "1h"
+   }
+  },
+  {
+   "id": "p2",
+   "tipo": "paralelo",
+   "papel": "a",
+   "segue": "f"
+  },
+  {
+   "id": "f",
+   "tipo": "fim",
+   "nome": "Pedido atendido"
+  }
+ ]
+}

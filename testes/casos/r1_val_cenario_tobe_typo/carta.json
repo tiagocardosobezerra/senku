@@ -1,0 +1,36 @@
+{
+ "processo": {
+  "nome": "T",
+  "cenario": "TO BE"
+ },
+ "elementos": [
+  {
+   "id": "i",
+   "tipo": "inicio",
+   "nome": "Pedido recebido",
+   "papel": "x",
+   "segue": "a1"
+  },
+  {
+   "id": "a1",
+   "nome": "Executar a1",
+   "papel": "x",
+   "segue": "f"
+  },
+  {
+   "id": "f",
+   "tipo": "fim",
+   "nome": "Concluído"
+  }
+ ],
+ "papeis": [
+  {
+   "id": "x",
+   "nome": "Analista"
+  },
+  {
+   "id": "y",
+   "nome": "Gestor"
+  }
+ ]
+}

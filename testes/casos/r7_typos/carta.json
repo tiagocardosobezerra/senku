@@ -1,0 +1,9 @@
+{"processo":{"nome":"Typos"},
+ "papeis":[{"id":"an","nome":"Analista"},{"id":"ge","nome":"Gerente"}],
+ "regras":[{"id":"R1","texto":"x"}],
+ "elementos":[
+  {"id":"i","tipo":"inicio","nome":"Pedido recebido","papel":"an","segue":"a1 "},
+  {"id":"a1","nome":"Analisar pedido","papel":"Analistas","regras":["r1"],"segue":"D1"},
+  {"id":"d1","tipo":"decisão","nome":"Aprovado?","papel":"ge","segue":[{"para":"a2","rotulo":"Sim"},{"para":"f","rotulo":"sim "}]},
+  {"id":"a2","nome":"Emitir contrato","papel":"an","sistema":"SAP","segue":"f"},
+  {"id":"f","tipo":"Fim","nome":"Fim"}]}

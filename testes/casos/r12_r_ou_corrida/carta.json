@@ -1,0 +1,16 @@
+{"processo": {"nome": "OU com corrida", "volume": "100 por mês"},
+ "papeis": [{"id": "com", "nome": "Comercial"}, {"id": "fin", "nome": "Financeiro"}],
+ "elementos": [
+  {"id": "s", "tipo": "inicio", "nome": "Pedido recebido", "segue": "a1"},
+  {"id": "a1", "nome": "Registrar pedido", "papel": "com", "sistema": [], "tempo": {"execucao": "1h"}, "segue": "o1"},
+  {"id": "o1", "tipo": "inclusivo", "nome": "O que precisa?", "papel": "com", "segue": [{"para": "a2", "rotulo": "Faturamento", "percentual": 100}, {"para": "a3", "rotulo": "Garantia", "percentual": 50}]},
+  {"id": "a2", "nome": "Emitir boleto", "papel": "fin", "sistema": [], "tempo": {"execucao": "1h"}, "segue": "o2"},
+  {"id": "a3", "nome": "Enviar termo de garantia", "papel": "com", "sistema": [], "envia": true, "tempo": {"execucao": "1h"}, "segue": "c1"},
+  {"id": "c1", "tipo": "corrida", "nome": "O que vier primeiro", "papel": "com", "segue": [{"para": "e1", "percentual": 80}, {"para": "e2", "percentual": 20}]},
+  {"id": "e1", "tipo": "evento", "gatilho": "mensagem", "nome": "Termo assinado", "tempo": {"espera": "2d"}, "segue": "a4"},
+  {"id": "e2", "tipo": "evento", "gatilho": "tempo", "nome": "Aguardar 5 dias corridos", "tempo": {"espera": "5dc"}, "segue": "fx"},
+  {"id": "fx", "tipo": "fim", "nome": "Garantia não contratada"},
+  {"id": "a4", "nome": "Arquivar termo", "papel": "com", "sistema": [], "tempo": {"execucao": "1h"}, "segue": "o2"},
+  {"id": "o2", "tipo": "inclusivo", "papel": "com", "segue": "a5"},
+  {"id": "a5", "nome": "Entregar pedido", "papel": "com", "sistema": [], "tempo": {"execucao": "1h"}, "segue": "f"},
+  {"id": "f", "tipo": "fim", "nome": "Pedido entregue"}]}

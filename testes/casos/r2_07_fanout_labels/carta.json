@@ -1,0 +1,122 @@
+{
+ "processo": {
+  "nome": "Triagem"
+ },
+ "papeis": [
+  {
+   "id": "sol",
+   "nome": "Solicitante"
+  },
+  {
+   "id": "ges",
+   "nome": "Gestor da área"
+  },
+  {
+   "id": "cmp",
+   "nome": "Comprador"
+  },
+  {
+   "id": "fin",
+   "nome": "Analista Financeiro"
+  },
+  {
+   "id": "for",
+   "nome": "Fornecedor",
+   "tipo": "externo"
+  }
+ ],
+ "elementos": [
+  {
+   "id": "i",
+   "tipo": "inicio",
+   "nome": "Demanda recebida",
+   "papel": "cmp",
+   "segue": "a0"
+  },
+  {
+   "id": "a0",
+   "nome": "Classificar demanda",
+   "papel": "cmp",
+   "segue": "d"
+  },
+  {
+   "id": "d",
+   "tipo": "decisao",
+   "nome": "Tipo da demanda?",
+   "papel": "cmp",
+   "segue": [
+    {
+     "para": "a1",
+     "rotulo": "Compra direta",
+     "percentual": 40
+    },
+    {
+     "para": "a2",
+     "rotulo": "Cotação simples",
+     "percentual": 25
+    },
+    {
+     "para": "a3",
+     "rotulo": "Licitação",
+     "percentual": 15
+    },
+    {
+     "para": "a4",
+     "rotulo": "Contrato guarda-chuva",
+     "percentual": 15
+    },
+    {
+     "para": "a5",
+     "rotulo": "Devolver ao solicitante",
+     "percentual": 5
+    }
+   ]
+  },
+  {
+   "id": "a1",
+   "nome": "Emitir pedido",
+   "papel": "cmp",
+   "segue": "m"
+  },
+  {
+   "id": "a2",
+   "nome": "Cotar com 3 fornecedores",
+   "papel": "for",
+   "segue": "m"
+  },
+  {
+   "id": "a3",
+   "nome": "Abrir licitação",
+   "papel": "ges",
+   "segue": "m"
+  },
+  {
+   "id": "a4",
+   "nome": "Acionar contrato",
+   "papel": "fin",
+   "segue": "m"
+  },
+  {
+   "id": "a5",
+   "nome": "Corrigir demanda",
+   "papel": "sol",
+   "segue": "a0"
+  },
+  {
+   "id": "m",
+   "tipo": "decisao",
+   "segue": "a6"
+  },
+  {
+   "id": "a6",
+   "nome": "Registrar no ERP",
+   "papel": "cmp",
+   "segue": "f"
+  },
+  {
+   "id": "f",
+   "tipo": "fim",
+   "nome": "Demanda atendida"
+  }
+ ]
+}

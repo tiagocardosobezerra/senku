@@ -1,0 +1,8 @@
+{"processo": {"nome": "Checar documentos"},
+ "papeis": [{"id": "an", "nome": "Analista de Cadastro"}, {"id": "jur", "nome": "Jurídico"}],
+ "elementos": [
+  {"id": "s", "tipo": "inicio", "nome": "Documentos recebidos", "segue": "a1"},
+  {"id": "a1", "nome": "Conferir documentos", "papel": "an", "sistema": [], "tempo": {"execucao": "1h"}, "segue": "d1"},
+  {"id": "d1", "tipo": "decisao", "nome": "Documentos ok?", "papel": "an", "segue": [{"para": "f", "rotulo": "Sim", "percentual": 50}, {"para": "a2", "rotulo": "Não", "percentual": 50}]},
+  {"id": "a2", "nome": "Parecer jurídico", "papel": "jur", "sistema": [], "tempo": {"execucao": "2h"}, "segue": "f2"},
+  {"id": "f", "tipo": "fim", "nome": "Documentos aprovados"}, {"id": "f2", "tipo": "fim", "nome": "Documentos com parecer"}]}

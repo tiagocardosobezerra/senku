@@ -1,0 +1,44 @@
+{
+ "regras": [
+  {
+   "id": "R1",
+   "texto": "Alçada"
+  }
+ ],
+ "elementos": [
+  {
+   "id": "i",
+   "tipo": "inicio",
+   "nome": "Pedido recebido",
+   "papel": "x",
+   "segue": "a1"
+  },
+  {
+   "id": "a1",
+   "nome": "Executar a1",
+   "papel": "x",
+   "segue": "f",
+   "regras": [
+    1
+   ]
+  },
+  {
+   "id": "f",
+   "tipo": "fim",
+   "nome": "Concluído"
+  }
+ ],
+ "processo": {
+  "nome": "regra_numeric_ref"
+ },
+ "papeis": [
+  {
+   "id": "x",
+   "nome": "Analista"
+  },
+  {
+   "id": "y",
+   "nome": "Gestor"
+  }
+ ]
+}

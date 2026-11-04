@@ -1,0 +1,7 @@
+{"processo": {"nome": "Borda com percentual em texto"},
+ "papeis": [{"id": "a", "nome": "Analista"}],
+ "elementos": [
+  {"id": "i", "tipo": "inicio", "nome": "Pedido recebido", "papel": "a", "segue": "t1"},
+  {"id": "t1", "nome": "Analisar pedido", "papel": "a", "segue": "f",
+   "bordas": [{"gatilho": "erro", "nome": "Sistema caiu", "percentual": "10%", "segue": "t1"}]},
+  {"id": "f", "tipo": "fim", "nome": "Pedido analisado"}]}

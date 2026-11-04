@@ -1,0 +1,13 @@
+{"processo": {"nome": "Atendimento com prazo"},
+ "papeis": [{"id": "at", "nome": "Atendente"}, {"id": "sup", "nome": "Supervisor"}],
+ "elementos": [
+  {"id": "i", "tipo": "inicio", "nome": "Chamado aberto", "papel": "at", "segue": "a1"},
+  {"id": "a1", "nome": "Analisar chamado", "papel": "at", "tempo": {"execucao": "30min", "espera": "4h"},
+   "bordas": [{"gatilho": "tempo", "nome": "Prazo de 8h estourado", "tempo": "8h", "percentual": 15, "segue": "a3"},
+              {"gatilho": "mensagem", "nome": "Cliente pediu urgência", "interrompe": false, "percentual": 10, "segue": "a4"}],
+   "segue": "a2"},
+  {"id": "a2", "nome": "Resolver chamado", "papel": "at", "tempo": {"execucao": "1h"}, "segue": "f"},
+  {"id": "a3", "nome": "Escalar para supervisor", "papel": "sup", "tempo": {"execucao": "20min"}, "segue": "a2"},
+  {"id": "a4", "nome": "Avisar supervisor", "papel": "sup", "tempo": {"execucao": "5min"}, "segue": "f2"},
+  {"id": "f", "tipo": "fim", "nome": "Chamado encerrado"},
+  {"id": "f2", "tipo": "fim", "nome": "Supervisor avisado"}]}

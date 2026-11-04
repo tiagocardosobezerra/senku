@@ -1,0 +1,782 @@
+{
+ "processo": {
+  "nome": "Processo grande"
+ },
+ "papeis": [
+  {
+   "id": "r0",
+   "nome": "Solicitante"
+  },
+  {
+   "id": "r1",
+   "nome": "Gestor"
+  },
+  {
+   "id": "r2",
+   "nome": "Compras"
+  },
+  {
+   "id": "r3",
+   "nome": "Jurídico"
+  },
+  {
+   "id": "r4",
+   "nome": "Fiscal"
+  },
+  {
+   "id": "r5",
+   "nome": "Contas a Pagar"
+  },
+  {
+   "id": "r6",
+   "nome": "Tesouraria"
+  },
+  {
+   "id": "r7",
+   "nome": "Almoxarifado"
+  },
+  {
+   "id": "r8",
+   "nome": "Controladoria"
+  },
+  {
+   "id": "r9",
+   "nome": "Diretoria"
+  }
+ ],
+ "elementos": [
+  {
+   "id": "i",
+   "tipo": "inicio",
+   "nome": "Início",
+   "papel": "r0",
+   "segue": "a1"
+  },
+  {
+   "id": "a1",
+   "nome": "Validar pedido 1",
+   "papel": "r6",
+   "tempo": {
+    "execucao": "88min",
+    "espera": "0d"
+   },
+   "segue": "a2"
+  },
+  {
+   "id": "a2",
+   "nome": "Conferir nota fiscal 2",
+   "papel": "r5",
+   "tempo": {
+    "execucao": "79min",
+    "espera": "0d"
+   },
+   "segue": "a3"
+  },
+  {
+   "id": "a3",
+   "nome": "Separar contrato 3",
+   "papel": "r0",
+   "tempo": {
+    "execucao": "16min",
+    "espera": "3d"
+   },
+   "segue": "a4"
+  },
+  {
+   "id": "a4",
+   "nome": "Lançar nota fiscal 4",
+   "papel": "r3",
+   "tempo": {
+    "execucao": "16min",
+    "espera": "3d"
+   },
+   "segue": "d4"
+  },
+  {
+   "id": "d4",
+   "tipo": "decisao",
+   "nome": "Ok 4?",
+   "papel": "r3",
+   "segue": [
+    {
+     "para": "a5",
+     "rotulo": "Sim",
+     "percentual": 80
+    },
+    {
+     "para": "a1",
+     "rotulo": "Não",
+     "percentual": 20
+    }
+   ]
+  },
+  {
+   "id": "a5",
+   "nome": "Pagar nota fiscal 5",
+   "papel": "r3",
+   "tempo": {
+    "execucao": "85min",
+    "espera": "0d"
+   },
+   "segue": "a6"
+  },
+  {
+   "id": "a6",
+   "nome": "Pagar cotação 6",
+   "papel": "r0",
+   "tempo": {
+    "execucao": "33min",
+    "espera": "0d"
+   },
+   "segue": "p6"
+  },
+  {
+   "id": "p6",
+   "tipo": "paralelo",
+   "segue": [
+    "a7",
+    "b6"
+   ]
+  },
+  {
+   "id": "b6",
+   "nome": "Informar área 6",
+   "papel": "r8",
+   "segue": "j6"
+  },
+  {
+   "id": "j6",
+   "tipo": "paralelo",
+   "segue": "a8"
+  },
+  {
+   "id": "a7",
+   "nome": "Executar etapa 7",
+   "papel": "r2",
+   "segue": "j6"
+  },
+  {
+   "id": "a8",
+   "nome": "Enviar cotação 8",
+   "papel": "r2",
+   "tempo": {
+    "execucao": "74min",
+    "espera": "0d"
+   },
+   "segue": "a9"
+  },
+  {
+   "id": "a9",
+   "nome": "Pagar pagamento 9",
+   "papel": "r8",
+   "tempo": {
+    "execucao": "28min",
+    "espera": "0d"
+   },
+   "segue": "a10"
+  },
+  {
+   "id": "a10",
+   "nome": "Pagar contrato 10",
+   "papel": "r5",
+   "tempo": {
+    "execucao": "17min",
+    "espera": "0d"
+   },
+   "segue": "a11"
+  },
+  {
+   "id": "a11",
+   "nome": "Pagar requisição 11",
+   "papel": "r9",
+   "tempo": {
+    "execucao": "31min",
+    "espera": "3d"
+   },
+   "segue": "a12"
+  },
+  {
+   "id": "a12",
+   "nome": "Arquivar cotação 12",
+   "papel": "r5",
+   "tempo": {
+    "execucao": "64min",
+    "espera": "3d"
+   },
+   "segue": "a13"
+  },
+  {
+   "id": "a13",
+   "nome": "Validar pagamento 13",
+   "papel": "r3",
+   "tempo": {
+    "execucao": "28min",
+    "espera": "1d"
+   },
+   "segue": "d13"
+  },
+  {
+   "id": "d13",
+   "tipo": "decisao",
+   "nome": "Ok 13?",
+   "papel": "r3",
+   "segue": [
+    {
+     "para": "a14",
+     "rotulo": "Sim",
+     "percentual": 80
+    },
+    {
+     "para": "a8",
+     "rotulo": "Não",
+     "percentual": 20
+    }
+   ]
+  },
+  {
+   "id": "a14",
+   "nome": "Pagar pagamento 14",
+   "papel": "r8",
+   "tempo": {
+    "execucao": "68min",
+    "espera": "2d"
+   },
+   "segue": "a15"
+  },
+  {
+   "id": "a15",
+   "nome": "Notificar documento 15",
+   "papel": "r4",
+   "tempo": {
+    "execucao": "82min",
+    "espera": "0d"
+   },
+   "segue": "a16"
+  },
+  {
+   "id": "a16",
+   "nome": "Conferir cotação 16",
+   "papel": "r2",
+   "tempo": {
+    "execucao": "48min",
+    "espera": "1d"
+   },
+   "segue": "a17"
+  },
+  {
+   "id": "a17",
+   "nome": "Aprovar cotação 17",
+   "papel": "r0",
+   "tempo": {
+    "execucao": "90min",
+    "espera": "0d"
+   },
+   "segue": "p17"
+  },
+  {
+   "id": "p17",
+   "tipo": "paralelo",
+   "segue": [
+    "a18",
+    "b17"
+   ]
+  },
+  {
+   "id": "b17",
+   "nome": "Informar área 17",
+   "papel": "r8",
+   "segue": "j17"
+  },
+  {
+   "id": "j17",
+   "tipo": "paralelo",
+   "segue": "a19"
+  },
+  {
+   "id": "a18",
+   "nome": "Executar etapa 18",
+   "papel": "r9",
+   "segue": "j17"
+  },
+  {
+   "id": "a19",
+   "nome": "Validar material 19",
+   "papel": "r5",
+   "tempo": {
+    "execucao": "81min",
+    "espera": "3d"
+   },
+   "segue": "a20"
+  },
+  {
+   "id": "a20",
+   "nome": "Pagar documento 20",
+   "papel": "r1",
+   "tempo": {
+    "execucao": "16min",
+    "espera": "2d"
+   },
+   "segue": "a21"
+  },
+  {
+   "id": "a21",
+   "nome": "Aprovar nota fiscal 21",
+   "papel": "r0",
+   "tempo": {
+    "execucao": "44min",
+    "espera": "3d"
+   },
+   "segue": "a22"
+  },
+  {
+   "id": "a22",
+   "nome": "Enviar cotação 22",
+   "papel": "r5",
+   "tempo": {
+    "execucao": "7min",
+    "espera": "3d"
+   },
+   "segue": "d22"
+  },
+  {
+   "id": "d22",
+   "tipo": "decisao",
+   "nome": "Ok 22?",
+   "papel": "r5",
+   "segue": [
+    {
+     "para": "a23",
+     "rotulo": "Sim",
+     "percentual": 80
+    },
+    {
+     "para": "a19",
+     "rotulo": "Não",
+     "percentual": 20
+    }
+   ]
+  },
+  {
+   "id": "a23",
+   "nome": "Registrar nota fiscal 23",
+   "papel": "r7",
+   "tempo": {
+    "execucao": "12min",
+    "espera": "1d"
+   },
+   "segue": "a24"
+  },
+  {
+   "id": "a24",
+   "nome": "Enviar pedido 24",
+   "papel": "r3",
+   "tempo": {
+    "execucao": "55min",
+    "espera": "3d"
+   },
+   "segue": "a25"
+  },
+  {
+   "id": "a25",
+   "nome": "Aprovar nota fiscal 25",
+   "papel": "r2",
+   "tempo": {
+    "execucao": "62min",
+    "espera": "3d"
+   },
+   "segue": "a26"
+  },
+  {
+   "id": "a26",
+   "nome": "Separar pagamento 26",
+   "papel": "r2",
+   "tempo": {
+    "execucao": "60min",
+    "espera": "2d"
+   },
+   "segue": "a27"
+  },
+  {
+   "id": "a27",
+   "nome": "Notificar cotação 27",
+   "papel": "r5",
+   "tempo": {
+    "execucao": "53min",
+    "espera": "1d"
+   },
+   "segue": "a28"
+  },
+  {
+   "id": "a28",
+   "nome": "Registrar nota fiscal 28",
+   "papel": "r2",
+   "tempo": {
+    "execucao": "24min",
+    "espera": "1d"
+   },
+   "segue": "p28"
+  },
+  {
+   "id": "p28",
+   "tipo": "paralelo",
+   "segue": [
+    "a29",
+    "b28"
+   ]
+  },
+  {
+   "id": "b28",
+   "nome": "Informar área 28",
+   "papel": "r3",
+   "segue": "j28"
+  },
+  {
+   "id": "j28",
+   "tipo": "paralelo",
+   "segue": "a30"
+  },
+  {
+   "id": "a29",
+   "nome": "Executar etapa 29",
+   "papel": "r0",
+   "segue": "j28"
+  },
+  {
+   "id": "a30",
+   "nome": "Aprovar pedido 30",
+   "papel": "r4",
+   "tempo": {
+    "execucao": "41min",
+    "espera": "0d"
+   },
+   "segue": "a31"
+  },
+  {
+   "id": "a31",
+   "nome": "Registrar cotação 31",
+   "papel": "r8",
+   "tempo": {
+    "execucao": "52min",
+    "espera": "2d"
+   },
+   "segue": "d31"
+  },
+  {
+   "id": "d31",
+   "tipo": "decisao",
+   "nome": "Ok 31?",
+   "papel": "r8",
+   "segue": [
+    {
+     "para": "a32",
+     "rotulo": "Sim",
+     "percentual": 80
+    },
+    {
+     "para": "a27",
+     "rotulo": "Não",
+     "percentual": 20
+    }
+   ]
+  },
+  {
+   "id": "a32",
+   "nome": "Notificar requisição 32",
+   "papel": "r7",
+   "tempo": {
+    "execucao": "76min",
+    "espera": "3d"
+   },
+   "segue": "a33"
+  },
+  {
+   "id": "a33",
+   "nome": "Lançar cotação 33",
+   "papel": "r6",
+   "tempo": {
+    "execucao": "18min",
+    "espera": "3d"
+   },
+   "segue": "a34"
+  },
+  {
+   "id": "a34",
+   "nome": "Arquivar cotação 34",
+   "papel": "r0",
+   "tempo": {
+    "execucao": "29min",
+    "espera": "0d"
+   },
+   "segue": "a35"
+  },
+  {
+   "id": "a35",
+   "nome": "Emitir documento 35",
+   "papel": "r2",
+   "tempo": {
+    "execucao": "19min",
+    "espera": "2d"
+   },
+   "segue": "a36"
+  },
+  {
+   "id": "a36",
+   "nome": "Pagar requisição 36",
+   "papel": "r1",
+   "tempo": {
+    "execucao": "5min",
+    "espera": "1d"
+   },
+   "segue": "a37"
+  },
+  {
+   "id": "a37",
+   "nome": "Separar nota fiscal 37",
+   "papel": "r5",
+   "tempo": {
+    "execucao": "83min",
+    "espera": "0d"
+   },
+   "segue": "a38"
+  },
+  {
+   "id": "a38",
+   "nome": "Conferir contrato 38",
+   "papel": "r9",
+   "tempo": {
+    "execucao": "53min",
+    "espera": "1d"
+   },
+   "segue": "a39"
+  },
+  {
+   "id": "a39",
+   "nome": "Arquivar pagamento 39",
+   "papel": "r5",
+   "tempo": {
+    "execucao": "82min",
+    "espera": "2d"
+   },
+   "segue": "p39"
+  },
+  {
+   "id": "p39",
+   "tipo": "paralelo",
+   "segue": [
+    "a40",
+    "b39"
+   ]
+  },
+  {
+   "id": "b39",
+   "nome": "Informar área 39",
+   "papel": "r7",
+   "segue": "j39"
+  },
+  {
+   "id": "j39",
+   "tipo": "paralelo",
+   "segue": "a41"
+  },
+  {
+   "id": "a40",
+   "nome": "Executar etapa 40",
+   "papel": "r1",
+   "segue": "j39"
+  },
+  {
+   "id": "a41",
+   "nome": "Conferir documento 41",
+   "papel": "r7",
+   "tempo": {
+    "execucao": "66min",
+    "espera": "3d"
+   },
+   "segue": "a42"
+  },
+  {
+   "id": "a42",
+   "nome": "Enviar nota fiscal 42",
+   "papel": "r2",
+   "tempo": {
+    "execucao": "18min",
+    "espera": "2d"
+   },
+   "segue": "a43"
+  },
+  {
+   "id": "a43",
+   "nome": "Notificar pagamento 43",
+   "papel": "r7",
+   "tempo": {
+    "execucao": "25min",
+    "espera": "0d"
+   },
+   "segue": "a44"
+  },
+  {
+   "id": "a44",
+   "nome": "Emitir material 44",
+   "papel": "r2",
+   "tempo": {
+    "execucao": "74min",
+    "espera": "0d"
+   },
+   "segue": "a45"
+  },
+  {
+   "id": "a45",
+   "nome": "Separar pagamento 45",
+   "papel": "r1",
+   "tempo": {
+    "execucao": "38min",
+    "espera": "2d"
+   },
+   "segue": "a46"
+  },
+  {
+   "id": "a46",
+   "nome": "Registrar material 46",
+   "papel": "r3",
+   "tempo": {
+    "execucao": "73min",
+    "espera": "2d"
+   },
+   "segue": "a47"
+  },
+  {
+   "id": "a47",
+   "nome": "Arquivar contrato 47",
+   "papel": "r9",
+   "tempo": {
+    "execucao": "29min",
+    "espera": "1d"
+   },
+   "segue": "a48"
+  },
+  {
+   "id": "a48",
+   "nome": "Lançar contrato 48",
+   "papel": "r3",
+   "tempo": {
+    "execucao": "71min",
+    "espera": "3d"
+   },
+   "segue": "a49"
+  },
+  {
+   "id": "a49",
+   "nome": "Validar requisição 49",
+   "papel": "r0",
+   "tempo": {
+    "execucao": "40min",
+    "espera": "3d"
+   },
+   "segue": "d49"
+  },
+  {
+   "id": "d49",
+   "tipo": "decisao",
+   "nome": "Ok 49?",
+   "papel": "r0",
+   "segue": [
+    {
+     "para": "a50",
+     "rotulo": "Sim",
+     "percentual": 80
+    },
+    {
+     "para": "a46",
+     "rotulo": "Não",
+     "percentual": 20
+    }
+   ]
+  },
+  {
+   "id": "a50",
+   "nome": "Emitir material 50",
+   "papel": "r7",
+   "tempo": {
+    "execucao": "49min",
+    "espera": "2d"
+   },
+   "segue": "p50"
+  },
+  {
+   "id": "p50",
+   "tipo": "paralelo",
+   "segue": [
+    "a51",
+    "b50"
+   ]
+  },
+  {
+   "id": "b50",
+   "nome": "Informar área 50",
+   "papel": "r1",
+   "segue": "j50"
+  },
+  {
+   "id": "j50",
+   "tipo": "paralelo",
+   "segue": "a52"
+  },
+  {
+   "id": "a51",
+   "nome": "Executar etapa 51",
+   "papel": "r3",
+   "segue": "j50"
+  },
+  {
+   "id": "a52",
+   "nome": "Conferir contrato 52",
+   "papel": "r7",
+   "tempo": {
+    "execucao": "30min",
+    "espera": "2d"
+   },
+   "segue": "a53"
+  },
+  {
+   "id": "a53",
+   "nome": "Emitir documento 53",
+   "papel": "r9",
+   "tempo": {
+    "execucao": "83min",
+    "espera": "0d"
+   },
+   "segue": "a54"
+  },
+  {
+   "id": "a54",
+   "nome": "Aprovar material 54",
+   "papel": "r1",
+   "tempo": {
+    "execucao": "89min",
+    "espera": "0d"
+   },
+   "segue": "a55"
+  },
+  {
+   "id": "a55",
+   "nome": "Lançar contrato 55",
+   "papel": "r7",
+   "tempo": {
+    "execucao": "27min",
+    "espera": "3d"
+   },
+   "segue": "a56"
+  },
+  {
+   "id": "a56",
+   "nome": "Encerrar processo",
+   "papel": "r9",
+   "segue": "f"
+  },
+  {
+   "id": "f",
+   "tipo": "fim",
+   "nome": "Concluído"
+  }
+ ]
+}

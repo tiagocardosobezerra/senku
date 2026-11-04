@@ -1,0 +1,61 @@
+{
+ "processo": {
+  "nome": "Processo <b>&\"teste\"</b> 🚀 ação",
+  "codigo": "X/1",
+  "versao": 2,
+  "dono": "Diretor(a) & Cia"
+ },
+ "papeis": [
+  {
+   "id": "ç1",
+   "nome": "Área de Gestão de Riscos, Controles Internos e Compliance Corporativo"
+  },
+  {
+   "id": "c 1",
+   "nome": "Cliente 🧑"
+  }
+ ],
+ "elementos": [
+  {
+   "id": "início",
+   "tipo": "inicio",
+   "nome": "Pedido \"urgente\" <recebido>",
+   "segue": "ação 1"
+  },
+  {
+   "id": "ação 1",
+   "nome": "Verificar documentação complementar exigida pela resolução normativa do Banco Central documentação complementar exigida pela resolução normativa do Banco Central documentação complementar exigida pela resolução normativa do Banco Central ",
+   "papel": "ç1",
+   "segue": "acao_1"
+  },
+  {
+   "id": "acao_1",
+   "nome": "Enviar e-mail <script>alert(1)</script> | pipe ] ] }",
+   "papel": "c 1",
+   "segue": "d"
+  },
+  {
+   "id": "d",
+   "tipo": "decisao",
+   "nome": "Está tudo ok & conforme a política vigente de crédito e cobrança?",
+   "papel": "ç1",
+   "segue": [
+    {
+     "para": "fim",
+     "rotulo": "Sim — aprovado sem ressalvas pela alçada competente",
+     "percentual": "99,5%"
+    },
+    {
+     "para": "ação 1",
+     "rotulo": "Não | refazer",
+     "percentual": 0.5
+    }
+   ]
+  },
+  {
+   "id": "fim",
+   "tipo": "fim",
+   "nome": "=HYPERLINK(\"http://x\")"
+  }
+ ]
+}

@@ -1,0 +1,119 @@
+{
+ "processo": {
+  "nome": "par_loops",
+  "volume": "100 casos por mês",
+  "dono": "Gerente"
+ },
+ "papeis": [
+  {
+   "id": "a",
+   "nome": "Analista"
+  },
+  {
+   "id": "b",
+   "nome": "Supervisor"
+  },
+  {
+   "id": "c",
+   "nome": "Cliente",
+   "tipo": "externo"
+  }
+ ],
+ "elementos": [
+  {
+   "id": "i",
+   "tipo": "inicio",
+   "nome": "Pedido recebido",
+   "papel": "a",
+   "segue": "p1"
+  },
+  {
+   "id": "p1",
+   "tipo": "paralelo",
+   "papel": "a",
+   "segue": [
+    "x1",
+    "y1"
+   ]
+  },
+  {
+   "id": "x1",
+   "nome": "Conferir documentos",
+   "papel": "a",
+   "segue": "dx",
+   "sistema": [],
+   "tempo": {
+    "execucao": "1h",
+    "espera": "2d"
+   }
+  },
+  {
+   "id": "dx",
+   "tipo": "decisao",
+   "nome": "Documentos ok?",
+   "papel": "a",
+   "segue": [
+    {
+     "para": "p2",
+     "rotulo": "Sim",
+     "percentual": 50
+    },
+    {
+     "para": "x1",
+     "rotulo": "Não",
+     "percentual": 50
+    }
+   ]
+  },
+  {
+   "id": "y1",
+   "nome": "Verificar crédito",
+   "papel": "b",
+   "segue": "dy",
+   "sistema": [],
+   "tempo": {
+    "execucao": "1h",
+    "espera": "2d"
+   }
+  },
+  {
+   "id": "dy",
+   "tipo": "decisao",
+   "nome": "Crédito ok?",
+   "papel": "b",
+   "segue": [
+    {
+     "para": "p2",
+     "rotulo": "Sim",
+     "percentual": 50
+    },
+    {
+     "para": "y1",
+     "rotulo": "Não",
+     "percentual": 50
+    }
+   ]
+  },
+  {
+   "id": "p2",
+   "tipo": "paralelo",
+   "papel": "a",
+   "segue": "a9"
+  },
+  {
+   "id": "a9",
+   "nome": "Emitir contrato",
+   "papel": "a",
+   "segue": "f",
+   "sistema": [],
+   "tempo": {
+    "execucao": "1h"
+   }
+  },
+  {
+   "id": "f",
+   "tipo": "fim",
+   "nome": "Contrato emitido"
+  }
+ ]
+}

@@ -1,0 +1,11 @@
+{"processo": {"nome": "Análise com SLA"},
+ "papeis": [{"id": "an", "nome": "Analista"}, {"id": "sup", "nome": "Supervisor"}],
+ "elementos": [
+  {"id": "i", "tipo": "inicio", "nome": "Pedido recebido", "segue": "a1"},
+  {"id": "a1", "nome": "Analisar pedido", "papel": "an", "sistema": [], "tempo": {"execucao": "1h", "espera": "1d"},
+   "bordas": [{"gatilho": "tempo", "nome": "Prazo de 48h estourado", "tempo": "48h", "percentual": 50, "segue": "a3"}],
+   "segue": "a2"},
+  {"id": "a2", "nome": "Concluir pedido", "papel": "an", "sistema": [], "tempo": {"execucao": "1h"}, "segue": "f"},
+  {"id": "a3", "nome": "Escalar pedido", "papel": "sup", "sistema": [], "tempo": {"execucao": "1h"}, "segue": "f2"},
+  {"id": "f", "tipo": "fim", "nome": "Pedido concluído"},
+  {"id": "f2", "tipo": "fim", "nome": "Pedido escalado"}]}

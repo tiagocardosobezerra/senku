@@ -1,0 +1,52 @@
+{
+ "processo": {
+  "nome": "v26_borders_sum"
+ },
+ "papeis": [
+  {
+   "id": "a",
+   "nome": "Analista"
+  }
+ ],
+ "elementos": [
+  {
+   "id": "i",
+   "tipo": "inicio",
+   "nome": "Pedido recebido",
+   "papel": "a",
+   "segue": "t1"
+  },
+  {
+   "id": "t1",
+   "nome": "Analisar pedido",
+   "papel": "a",
+   "sistema": [],
+   "segue": "f",
+   "bordas": [
+    {
+     "gatilho": "tempo",
+     "nome": "Prazo",
+     "tempo": "2h",
+     "percentual": 70,
+     "segue": "f2"
+    },
+    {
+     "gatilho": "erro",
+     "nome": "Erro",
+     "percentual": 60,
+     "segue": "f2"
+    }
+   ]
+  },
+  {
+   "id": "f",
+   "tipo": "fim",
+   "nome": "Pedido pronto"
+  },
+  {
+   "id": "f2",
+   "tipo": "fim",
+   "nome": "Pedido falhou"
+  }
+ ]
+}

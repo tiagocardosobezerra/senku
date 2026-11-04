@@ -1,0 +1,56 @@
+{
+ "processo": {
+  "nome": "v17_nonint_rejoin"
+ },
+ "papeis": [
+  {
+   "id": "a",
+   "nome": "Analista"
+  }
+ ],
+ "elementos": [
+  {
+   "id": "i",
+   "tipo": "inicio",
+   "nome": "Pedido recebido",
+   "papel": "a",
+   "segue": "t1"
+  },
+  {
+   "id": "t1",
+   "nome": "Analisar pedido",
+   "papel": "a",
+   "sistema": [],
+   "segue": "t2",
+   "bordas": [
+    {
+     "gatilho": "tempo",
+     "nome": "Lembrete 1h",
+     "tempo": "1h",
+     "interrompe": false,
+     "percentual": 30,
+     "segue": "t3"
+    }
+   ]
+  },
+  {
+   "id": "t3",
+   "nome": "Avisar gestor",
+   "papel": "a",
+   "sistema": [],
+   "segue": "t2"
+  },
+  {
+   "id": "t2",
+   "nome": "Emitir nota fiscal",
+   "papel": "a",
+   "sistema": [],
+   "segue": "f"
+  },
+  {
+   "id": "f",
+   "tipo": "fim",
+   "nome": "Nota emitida"
+  }
+ ]
+}

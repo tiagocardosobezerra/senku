@@ -1,0 +1,97 @@
+{
+ "processo": {
+  "nome": "simB",
+  "volume": "1.200 pedidos por mês"
+ },
+ "papeis": [
+  {
+   "id": "a",
+   "nome": "Analista"
+  },
+  {
+   "id": "g",
+   "nome": "Gestor"
+  }
+ ],
+ "elementos": [
+  {
+   "id": "i",
+   "tipo": "inicio",
+   "nome": "Inicio",
+   "papel": "a",
+   "segue": "x"
+  },
+  {
+   "id": "x",
+   "nome": "Analisar pedido",
+   "papel": "a",
+   "segue": "d",
+   "tempo": {
+    "execucao": "10h"
+   },
+   "bordas": [
+    {
+     "gatilho": "tempo",
+     "nome": "Prazo 4h estourado",
+     "tempo": "4h",
+     "percentual": 20,
+     "segue": "esc"
+    },
+    {
+     "gatilho": "tempo",
+     "nome": "Lembrete 2h",
+     "tempo": "2h",
+     "percentual": 50,
+     "interrompe": false,
+     "segue": "lem"
+    }
+   ]
+  },
+  {
+   "id": "lem",
+   "nome": "Enviar lembrete",
+   "papel": "g",
+   "segue": "fl",
+   "tempo": {
+    "execucao": "1h"
+   }
+  },
+  {
+   "id": "fl",
+   "tipo": "fim",
+   "nome": "Lembrete enviado"
+  },
+  {
+   "id": "esc",
+   "nome": "Escalar pedido",
+   "papel": "g",
+   "segue": "f",
+   "tempo": {
+    "execucao": "1h"
+   }
+  },
+  {
+   "id": "d",
+   "tipo": "decisao",
+   "nome": "Pedido ok?",
+   "papel": "a",
+   "segue": [
+    {
+     "para": "f",
+     "rotulo": "Sim",
+     "percentual": 60
+    },
+    {
+     "para": "x",
+     "rotulo": "Não",
+     "percentual": 40
+    }
+   ]
+  },
+  {
+   "id": "f",
+   "tipo": "fim",
+   "nome": "Pedido tratado"
+  }
+ ]
+}

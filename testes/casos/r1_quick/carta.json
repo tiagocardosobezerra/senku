@@ -1,0 +1,1 @@
+{"papeis":[{"id":"x","nome":"Atendente"}],"elementos":[{"id":"i","tipo":"inicio","nome":"Chamado aberto","segue":"a1"},{"id":"a1","nome":"Atender chamado","papel":"x","segue":"f"},{"id":"f","tipo":"fim","nome":"Chamado encerrado"}]}

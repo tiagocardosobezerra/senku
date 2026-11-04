@@ -1,0 +1,8 @@
+{"processo":{"nome":"Cobrança com prazo"},
+ "papeis":[{"id":"f","nome":"Financeiro"}],
+ "elementos":[
+  {"id":"i","tipo":"inicio","nome":"Fatura vencida","segue":"a1"},
+  {"id":"a1","nome":"Enviar lembrete","papel":"f","sistema":[],"tempo":{"execucao":"10min"},"segue":"e1"},
+  {"id":"e1","tipo":"evento","gatilho":"tempo","nome":"Aguardar 10 dias corridos","segue":"a2"},
+  {"id":"a2","nome":"Protestar título","papel":"f","sistema":[],"tempo":{"execucao":"30min"},"segue":"fim"},
+  {"id":"fim","tipo":"fim","nome":"Título protestado"}]}

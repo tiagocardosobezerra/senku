@@ -1,0 +1,1 @@
+{"processo": {"nome": "Teste"}, "papeis": [{"id": "a", "nome": "Analista"}], "elementos": [{"id": "início", "tipo": "inicio", "segue": "ação 1"}, {"id": "ação 1", "nome": "Fazer x", "papel": "a", "segue": "ação_1"}, {"id": "ação_1", "nome": "Fazer y", "papel": "a", "segue": "fim"}, {"id": "fim", "tipo": "fim"}]}

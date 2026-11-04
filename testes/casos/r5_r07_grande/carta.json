@@ -1,0 +1,692 @@
+{
+ "processo": {
+  "nome": "Compras corporativas",
+  "volume": "1.500 requisições por mês"
+ },
+ "papeis": [
+  {
+   "id": "sol",
+   "nome": "Solicitante"
+  },
+  {
+   "id": "ges",
+   "nome": "Gestor da área"
+  },
+  {
+   "id": "com",
+   "nome": "Comprador"
+  },
+  {
+   "id": "fis",
+   "nome": "Fiscal"
+  },
+  {
+   "id": "jur",
+   "nome": "Jurídico"
+  },
+  {
+   "id": "fin",
+   "nome": "Financeiro"
+  },
+  {
+   "id": "alm",
+   "nome": "Almoxarifado"
+  },
+  {
+   "id": "ti",
+   "nome": "TI"
+  },
+  {
+   "id": "dir",
+   "nome": "Diretoria"
+  },
+  {
+   "id": "for",
+   "nome": "Fornecedor",
+   "tipo": "externo"
+  }
+ ],
+ "elementos": [
+  {
+   "id": "ini",
+   "tipo": "inicio",
+   "nome": "Necessidade identificada",
+   "papel": "sol",
+   "segue": "a1"
+  },
+  {
+   "id": "a1",
+   "nome": "Registrar requisição",
+   "papel": "sol",
+   "segue": "a2",
+   "sistema": [],
+   "tempo": {
+    "execucao": "30min",
+    "espera": "1d"
+   }
+  },
+  {
+   "id": "a2",
+   "nome": "Analisar requisição",
+   "papel": "ges",
+   "segue": "d1",
+   "sistema": [],
+   "tempo": {
+    "execucao": "30min",
+    "espera": "1d"
+   }
+  },
+  {
+   "id": "d1",
+   "tipo": "decisao",
+   "nome": "Requisição aprovada?",
+   "papel": "ges",
+   "segue": [
+    {
+     "para": "d2",
+     "rotulo": "Sim",
+     "percentual": 80
+    },
+    {
+     "para": "a3",
+     "rotulo": "Não",
+     "percentual": 15
+    },
+    {
+     "para": "f_canc",
+     "rotulo": "Cancelar",
+     "percentual": 5
+    }
+   ]
+  },
+  {
+   "id": "a3",
+   "nome": "Corrigir requisição",
+   "papel": "sol",
+   "segue": "a2",
+   "sistema": [],
+   "tempo": {
+    "execucao": "30min",
+    "espera": "1d"
+   }
+  },
+  {
+   "id": "d2",
+   "tipo": "decisao",
+   "nome": "Valor acima de 50 mil?",
+   "papel": "ges",
+   "segue": [
+    {
+     "para": "a4",
+     "rotulo": "Sim",
+     "percentual": 20
+    },
+    {
+     "para": "j1",
+     "rotulo": "Não",
+     "percentual": 80
+    }
+   ]
+  },
+  {
+   "id": "a4",
+   "nome": "Aprovar na diretoria",
+   "papel": "dir",
+   "segue": "d3",
+   "sistema": [],
+   "tempo": {
+    "execucao": "30min",
+    "espera": "1d"
+   }
+  },
+  {
+   "id": "d3",
+   "tipo": "decisao",
+   "nome": "Diretoria aprovou?",
+   "papel": "dir",
+   "segue": [
+    {
+     "para": "j1",
+     "rotulo": "Sim",
+     "percentual": 90
+    },
+    {
+     "para": "f_canc",
+     "rotulo": "Não",
+     "percentual": 10
+    }
+   ]
+  },
+  {
+   "id": "j1",
+   "tipo": "decisao",
+   "papel": "com",
+   "segue": "d4"
+  },
+  {
+   "id": "d4",
+   "tipo": "decisao",
+   "nome": "Item de TI?",
+   "papel": "com",
+   "segue": [
+    {
+     "para": "a5",
+     "rotulo": "Sim",
+     "percentual": 30
+    },
+    {
+     "para": "j2",
+     "rotulo": "Não",
+     "percentual": 70
+    }
+   ]
+  },
+  {
+   "id": "a5",
+   "nome": "Emitir parecer técnico",
+   "papel": "ti",
+   "segue": "d5",
+   "sistema": [],
+   "tempo": {
+    "execucao": "30min",
+    "espera": "1d"
+   }
+  },
+  {
+   "id": "d5",
+   "tipo": "decisao",
+   "nome": "Parecer favorável?",
+   "papel": "ti",
+   "segue": [
+    {
+     "para": "j2",
+     "rotulo": "Sim",
+     "percentual": 85
+    },
+    {
+     "para": "a6",
+     "rotulo": "Não",
+     "percentual": 15
+    }
+   ]
+  },
+  {
+   "id": "a6",
+   "nome": "Ajustar especificação",
+   "papel": "sol",
+   "segue": "a5",
+   "sistema": [],
+   "tempo": {
+    "execucao": "30min",
+    "espera": "1d"
+   }
+  },
+  {
+   "id": "j2",
+   "tipo": "decisao",
+   "papel": "com",
+   "segue": "p1"
+  },
+  {
+   "id": "p1",
+   "tipo": "paralelo",
+   "papel": "com",
+   "segue": [
+    "a7",
+    "a8",
+    "a9"
+   ]
+  },
+  {
+   "id": "a7",
+   "nome": "Cotar com fornecedores",
+   "papel": "com",
+   "segue": "a10",
+   "sistema": [],
+   "tempo": {
+    "execucao": "30min",
+    "espera": "1d"
+   },
+   "bordas": [
+    {
+     "gatilho": "tempo",
+     "nome": "Prazo de 5 dias estourado",
+     "tempo": "5d",
+     "percentual": 10,
+     "segue": "a11"
+    }
+   ]
+  },
+  {
+   "id": "a8",
+   "nome": "Verificar orçamento",
+   "papel": "fin",
+   "segue": "p2",
+   "sistema": [],
+   "tempo": {
+    "execucao": "30min",
+    "espera": "1d"
+   }
+  },
+  {
+   "id": "a9",
+   "nome": "Consultar cadastro do fornecedor",
+   "papel": "fis",
+   "segue": "d6",
+   "sistema": [],
+   "tempo": {
+    "execucao": "30min",
+    "espera": "1d"
+   }
+  },
+  {
+   "id": "d6",
+   "tipo": "decisao",
+   "nome": "Fornecedor regular?",
+   "papel": "fis",
+   "segue": [
+    {
+     "para": "j6",
+     "rotulo": "Sim",
+     "percentual": 90
+    },
+    {
+     "para": "a12",
+     "rotulo": "Não",
+     "percentual": 10
+    }
+   ]
+  },
+  {
+   "id": "a12",
+   "nome": "Solicitar certidões",
+   "papel": "fis",
+   "segue": "e1",
+   "sistema": [],
+   "tempo": {
+    "execucao": "30min",
+    "espera": "1d"
+   }
+  },
+  {
+   "id": "e1",
+   "tipo": "evento",
+   "gatilho": "mensagem",
+   "nome": "Certidões recebidas",
+   "papel": "fis",
+   "segue": "j6"
+  },
+  {
+   "id": "j6",
+   "tipo": "decisao",
+   "papel": "fis",
+   "segue": "p2"
+  },
+  {
+   "id": "a10",
+   "nome": "Comparar propostas",
+   "papel": "com",
+   "segue": "p2",
+   "sistema": [],
+   "tempo": {
+    "execucao": "30min",
+    "espera": "1d"
+   }
+  },
+  {
+   "id": "a11",
+   "nome": "Escalar ao gestor",
+   "papel": "ges",
+   "segue": "a10",
+   "sistema": [],
+   "tempo": {
+    "execucao": "30min",
+    "espera": "1d"
+   }
+  },
+  {
+   "id": "p2",
+   "tipo": "paralelo",
+   "papel": "com",
+   "segue": "d7"
+  },
+  {
+   "id": "d7",
+   "tipo": "decisao",
+   "nome": "Precisa de contrato?",
+   "papel": "com",
+   "segue": [
+    {
+     "para": "a13",
+     "rotulo": "Sim",
+     "percentual": 40
+    },
+    {
+     "para": "j3",
+     "rotulo": "Não",
+     "percentual": 60
+    }
+   ]
+  },
+  {
+   "id": "a13",
+   "nome": "Elaborar minuta",
+   "papel": "jur",
+   "segue": "a14",
+   "sistema": [],
+   "tempo": {
+    "execucao": "30min",
+    "espera": "1d"
+   }
+  },
+  {
+   "id": "a14",
+   "nome": "Revisar minuta",
+   "papel": "jur",
+   "segue": "d8",
+   "sistema": [],
+   "tempo": {
+    "execucao": "30min",
+    "espera": "1d"
+   }
+  },
+  {
+   "id": "d8",
+   "tipo": "decisao",
+   "nome": "Minuta aprovada?",
+   "papel": "jur",
+   "segue": [
+    {
+     "para": "a15",
+     "rotulo": "Sim",
+     "percentual": 70
+    },
+    {
+     "para": "a13",
+     "rotulo": "Não",
+     "percentual": 30
+    }
+   ]
+  },
+  {
+   "id": "a15",
+   "nome": "Assinar contrato",
+   "papel": "for",
+   "segue": "a16",
+   "sistema": [],
+   "tempo": {
+    "execucao": "30min",
+    "espera": "1d"
+   }
+  },
+  {
+   "id": "a16",
+   "nome": "Assinar contrato pela empresa",
+   "papel": "dir",
+   "segue": "j3",
+   "sistema": [],
+   "tempo": {
+    "execucao": "30min",
+    "espera": "1d"
+   }
+  },
+  {
+   "id": "j3",
+   "tipo": "decisao",
+   "papel": "com",
+   "segue": "a17"
+  },
+  {
+   "id": "a17",
+   "nome": "Emitir pedido de compra",
+   "papel": "com",
+   "segue": "a18",
+   "sistema": [],
+   "tempo": {
+    "execucao": "30min",
+    "espera": "1d"
+   }
+  },
+  {
+   "id": "a18",
+   "nome": "Enviar pedido ao fornecedor",
+   "papel": "com",
+   "segue": "c1",
+   "sistema": [],
+   "tempo": {
+    "execucao": "30min",
+    "espera": "1d"
+   }
+  },
+  {
+   "id": "c1",
+   "tipo": "corrida",
+   "nome": "O que vier primeiro",
+   "papel": "com",
+   "segue": [
+    {
+     "para": "e2",
+     "percentual": 85
+    },
+    {
+     "para": "e3",
+     "percentual": 15
+    }
+   ]
+  },
+  {
+   "id": "e2",
+   "tipo": "evento",
+   "gatilho": "mensagem",
+   "nome": "Confirmação recebida",
+   "segue": "a19"
+  },
+  {
+   "id": "e3",
+   "tipo": "evento",
+   "gatilho": "tempo",
+   "nome": "Aguardar 3 dias corridos",
+   "segue": "a20"
+  },
+  {
+   "id": "a20",
+   "nome": "Cobrar fornecedor",
+   "papel": "com",
+   "segue": "a18",
+   "sistema": [],
+   "tempo": {
+    "execucao": "30min",
+    "espera": "1d"
+   }
+  },
+  {
+   "id": "a19",
+   "nome": "Entregar material",
+   "papel": "for",
+   "segue": "a21",
+   "sistema": [],
+   "tempo": {
+    "execucao": "30min",
+    "espera": "1d"
+   }
+  },
+  {
+   "id": "a21",
+   "nome": "Conferir material",
+   "papel": "alm",
+   "segue": "d9",
+   "sistema": [],
+   "tempo": {
+    "execucao": "30min",
+    "espera": "1d"
+   }
+  },
+  {
+   "id": "d9",
+   "tipo": "decisao",
+   "nome": "Material conforme?",
+   "papel": "alm",
+   "segue": [
+    {
+     "para": "p3",
+     "rotulo": "Sim",
+     "percentual": 92
+    },
+    {
+     "para": "a22",
+     "rotulo": "Não",
+     "percentual": 8
+    }
+   ]
+  },
+  {
+   "id": "a22",
+   "nome": "Devolver material",
+   "papel": "alm",
+   "segue": "a23",
+   "sistema": [],
+   "tempo": {
+    "execucao": "30min",
+    "espera": "1d"
+   }
+  },
+  {
+   "id": "a23",
+   "nome": "Registrar devolução",
+   "papel": "alm",
+   "segue": "a19",
+   "sistema": [],
+   "tempo": {
+    "execucao": "30min",
+    "espera": "1d"
+   }
+  },
+  {
+   "id": "p3",
+   "tipo": "paralelo",
+   "papel": "alm",
+   "segue": [
+    "a24",
+    "a25"
+   ]
+  },
+  {
+   "id": "a24",
+   "nome": "Dar entrada no estoque",
+   "papel": "alm",
+   "segue": "p4",
+   "sistema": [],
+   "tempo": {
+    "execucao": "30min",
+    "espera": "1d"
+   }
+  },
+  {
+   "id": "a25",
+   "nome": "Lançar nota fiscal",
+   "papel": "fis",
+   "segue": "d10",
+   "sistema": [],
+   "tempo": {
+    "execucao": "30min",
+    "espera": "1d"
+   }
+  },
+  {
+   "id": "d10",
+   "tipo": "decisao",
+   "nome": "Nota correta?",
+   "papel": "fis",
+   "segue": [
+    {
+     "para": "a26",
+     "rotulo": "Sim",
+     "percentual": 88
+    },
+    {
+     "para": "a27",
+     "rotulo": "Não",
+     "percentual": 12
+    }
+   ]
+  },
+  {
+   "id": "a27",
+   "nome": "Solicitar carta de correção",
+   "papel": "fis",
+   "segue": "e4",
+   "sistema": [],
+   "tempo": {
+    "execucao": "30min",
+    "espera": "1d"
+   }
+  },
+  {
+   "id": "e4",
+   "tipo": "evento",
+   "gatilho": "mensagem",
+   "nome": "Carta de correção recebida",
+   "segue": "a25"
+  },
+  {
+   "id": "a26",
+   "nome": "Programar pagamento",
+   "papel": "fin",
+   "segue": "p4",
+   "sistema": [],
+   "tempo": {
+    "execucao": "30min",
+    "espera": "1d"
+   }
+  },
+  {
+   "id": "p4",
+   "tipo": "paralelo",
+   "papel": "fin",
+   "segue": "a28"
+  },
+  {
+   "id": "a28",
+   "nome": "Pagar fornecedor",
+   "papel": "fin",
+   "segue": "a29",
+   "sistema": [],
+   "tempo": {
+    "execucao": "30min",
+    "espera": "1d"
+   }
+  },
+  {
+   "id": "a29",
+   "nome": "Arquivar processo",
+   "papel": "com",
+   "segue": "a30",
+   "sistema": [],
+   "tempo": {
+    "execucao": "30min",
+    "espera": "1d"
+   }
+  },
+  {
+   "id": "a30",
+   "nome": "Avaliar fornecedor",
+   "papel": "com",
+   "segue": "f_ok",
+   "sistema": [],
+   "tempo": {
+    "execucao": "30min",
+    "espera": "1d"
+   }
+  },
+  {
+   "id": "f_ok",
+   "tipo": "fim",
+   "nome": "Material entregue e pago"
+  },
+  {
+   "id": "f_canc",
+   "tipo": "fim",
+   "nome": "Requisição cancelada"
+  }
+ ]
+}

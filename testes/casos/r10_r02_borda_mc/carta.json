@@ -1,0 +1,15 @@
+{"processo": {"nome": "Analise com prazo em paralelo", "volume": "100 por mês"},
+ "papeis": [{"id": "an", "nome": "Analista"}, {"id": "ge", "nome": "Gerente"}, {"id": "cad", "nome": "Cadastro"}],
+ "elementos": [
+  {"id": "i", "tipo": "inicio", "nome": "Pedido recebido", "papel": "an", "segue": "p1"},
+  {"id": "p1", "tipo": "paralelo", "segue": ["a1", "b1"]},
+  {"id": "a1", "nome": "Analisar pedido", "papel": "an", "tempo": {"execucao": "1h", "espera": "4d"}, "segue": "d1",
+   "bordas": [{"gatilho": "tempo", "nome": "Prazo de 2 dias estourado", "tempo": "2d", "percentual": 40, "segue": "a3"}]},
+  {"id": "a3", "nome": "Escalar ao gerente", "papel": "ge", "tempo": {"execucao": "30min"}, "segue": "d1"},
+  {"id": "d1", "tipo": "decisao", "nome": "Pedido ok?", "papel": "an", "segue": [{"para": "p2", "rotulo": "Sim", "percentual": 80}, {"para": "a4", "rotulo": "Não", "percentual": 20}]},
+  {"id": "a4", "nome": "Corrigir pedido", "papel": "an", "tempo": {"execucao": "30min"}, "segue": "a1"},
+  {"id": "b1", "nome": "Cadastrar cliente", "papel": "cad", "tempo": {"execucao": "30min", "espera": "1d"}, "segue": "p2"},
+  {"id": "p2", "tipo": "paralelo", "segue": "a2"},
+  {"id": "a2", "nome": "Liberar pedido", "papel": "cad", "tempo": {"execucao": "10min"}, "segue": "f1"},
+  {"id": "f1", "tipo": "fim", "nome": "Pedido liberado"}
+ ]}

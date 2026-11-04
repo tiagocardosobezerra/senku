@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:senku="http://senku/carta" id="Definicoes.Processo_senku" targetNamespace="http://senku/processos" exporter="Senku" exporterVersion="2">
+  <bpmn:message id="Msg.i" name="Sinistro aberto"/>
+  <bpmn:message id="Msg.a2_2" name="Segurado desistiu"/>
+  <bpmn:collaboration id="Colaboracao.Processo_senku">
+    <bpmn:participant id="Pool.Processo_senku" name="Análise de sinistro" processRef="Processo_senku"/>
+    <bpmn:participant id="PoolExt.1" name="Segurado"/>
+    <bpmn:messageFlow id="MsgFlow.1" name="Enviar documentos" sourceRef="PoolExt.1" targetRef="i"/>
+  </bpmn:collaboration>
+  <bpmn:process id="Processo_senku" name="Análise de sinistro" isExecutable="false">
+    <bpmn:extensionElements><senku:carta>{&quot;processo&quot;:{&quot;nome&quot;:&quot;Análise de sinistro&quot;,&quot;volume&quot;:&quot;300 por mês&quot;},&quot;papeis&quot;:[{&quot;id&quot;:&quot;an&quot;,&quot;nome&quot;:&quot;Analista&quot;},{&quot;id&quot;:&quot;sup&quot;,&quot;nome&quot;:&quot;Supervisor&quot;}]}</senku:carta></bpmn:extensionElements>
+    <bpmn:laneSet id="Raias.Processo_senku">
+      <bpmn:lane id="Raia_an" name="Analista">
+        <bpmn:flowNodeRef>i</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>a2</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>a2_1</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>a2_2</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>a2_3</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>a2_4</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>a2_5</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>a2_6</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>d1</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>a6</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>f1</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>f2</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="Raia_sup" name="Supervisor">
+        <bpmn:flowNodeRef>a3</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>a4</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>a5</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>f3</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>f4</bpmn:flowNodeRef>
+      </bpmn:lane>
+    </bpmn:laneSet>
+    <bpmn:startEvent id="i" name="Sinistro aberto">
+      <bpmn:extensionElements><senku:dados>{&quot;id&quot;:&quot;i&quot;,&quot;tipo&quot;:&quot;inicio&quot;,&quot;nome&quot;:&quot;Sinistro aberto&quot;,&quot;gatilho&quot;:&quot;mensagem&quot;,&quot;papel&quot;:&quot;an&quot;}</senku:dados></bpmn:extensionElements>
+      <bpmn:outgoing>Fluxo_f1</bpmn:outgoing>
+      <bpmn:messageEventDefinition id="i.def" messageRef="Msg.i"/>
+    </bpmn:startEvent>
+    <bpmn:task id="a2" name="Analisar sinistro">
+      <bpmn:documentation>Tempo: execucao 2h, espera 3d</bpmn:documentation>
+      <bpmn:extensionElements><senku:dados>{&quot;id&quot;:&quot;a2&quot;,&quot;nome&quot;:&quot;Analisar sinistro&quot;,&quot;papel&quot;:&quot;an&quot;,&quot;sistema&quot;:[],&quot;tempo&quot;:{&quot;execucao&quot;:&quot;2h&quot;,&quot;espera&quot;:&quot;3d&quot;},&quot;bordas&quot;:[{&quot;gatilho&quot;:&quot;tempo&quot;,&quot;nome&quot;:&quot;Prazo de 48h estourado&quot;,&quot;tempo&quot;:&quot;48hc&quot;,&quot;percentual&quot;:10,&quot;segue&quot;:&quot;a3&quot;},{&quot;gatilho&quot;:&quot;mensagem&quot;,&quot;nome&quot;:&quot;Segurado desistiu&quot;,&quot;percentual&quot;:5,&quot;segue&quot;:&quot;f2&quot;},{&quot;gatilho&quot;:&quot;erro&quot;,&quot;nome&quot;:&quot;Fraude detectada&quot;,&quot;percentual&quot;:2,&quot;segue&quot;:&quot;a5&quot;},{&quot;gatilho&quot;:&quot;tempo&quot;,&quot;nome&quot;:&quot;Lembrete de 24h&quot;,&quot;tempo&quot;:&quot;24hc&quot;,&quot;interrompe&quot;:false,&quot;percentual&quot;:30,&quot;segue&quot;:&quot;a4&quot;},{&quot;gatilho&quot;:&quot;sinal&quot;,&quot;nome&quot;:&quot;Catástrofe declarada&quot;,&quot;percentual&quot;:1,&quot;segue&quot;:&quot;a2&quot;},{&quot;gatilho&quot;:&quot;condicao&quot;,&quot;nome&quot;:&quot;Valor revisto acima de 100 mil&quot;,&quot;percentual&quot;:3,&quot;segue&quot;:&quot;a3&quot;}]}</senku:dados></bpmn:extensionElements>
+      <bpmn:incoming>Fluxo_f1</bpmn:incoming>
+      <bpmn:incoming>Fluxo_f12</bpmn:incoming>
+      <bpmn:incoming>Fluxo_f15</bpmn:incoming>
+      <bpmn:outgoing>Fluxo_f2</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:boundaryEvent id="a2_1" name="Prazo de 48h estourado" attachedToRef="a2">
+      <bpmn:documentation>Tempo: espera 48hc</bpmn:documentation>
+      <bpmn:outgoing>Fluxo_f4</bpmn:outgoing>
+      <bpmn:timerEventDefinition id="a2_1.def"><bpmn:timeDuration xsi:type="bpmn:tFormalExpression">P2D</bpmn:timeDuration></bpmn:timerEventDefinition>
+    </bpmn:boundaryEvent>
+    <bpmn:boundaryEvent id="a2_2" name="Segurado desistiu" attachedToRef="a2">
+      <bpmn:outgoing>Fluxo_f6</bpmn:outgoing>
+      <bpmn:messageEventDefinition id="a2_2.def" messageRef="Msg.a2_2"/>
+    </bpmn:boundaryEvent>
+    <bpmn:boundaryEvent id="a2_3" name="Fraude detectada" attachedToRef="a2">
+      <bpmn:outgoing>Fluxo_f8</bpmn:outgoing>
+      <bpmn:errorEventDefinition id="a2_3.def"/>
+    </bpmn:boundaryEvent>
+    <bpmn:boundaryEvent id="a2_4" name="Lembrete de 24h" attachedToRef="a2" cancelActivity="false">
+      <bpmn:documentation>Tempo: espera 24hc</bpmn:documentation>
+      <bpmn:outgoing>Fluxo_f10</bpmn:outgoing>
+      <bpmn:timerEventDefinition id="a2_4.def"><bpmn:timeDuration xsi:type="bpmn:tFormalExpression">P1D</bpmn:timeDuration></bpmn:timerEventDefinition>
+    </bpmn:boundaryEvent>
+    <bpmn:boundaryEvent id="a2_5" name="Catástrofe declarada" attachedToRef="a2">
+      <bpmn:outgoing>Fluxo_f12</bpmn:outgoing>
+      <bpmn:signalEventDefinition id="a2_5.def"/>
+    </bpmn:boundaryEvent>
+    <bpmn:boundaryEvent id="a2_6" name="Valor revisto acima de 100 mil" attachedToRef="a2">
+      <bpmn:outgoing>Fluxo_f14</bpmn:outgoing>
+      <bpmn:conditionalEventDefinition id="a2_6.def"><bpmn:condition xsi:type="bpmn:tFormalExpression"/></bpmn:conditionalEventDefinition>
+    </bpmn:boundaryEvent>
+    <bpmn:task id="a3" name="Escalar ao supervisor">
+      <bpmn:documentation>Tempo: execucao 30min</bpmn:documentation>
+      <bpmn:extensionElements><senku:dados>{&quot;id&quot;:&quot;a3&quot;,&quot;nome&quot;:&quot;Escalar ao supervisor&quot;,&quot;papel&quot;:&quot;sup&quot;,&quot;sistema&quot;:[],&quot;tempo&quot;:{&quot;execucao&quot;:&quot;30min&quot;}}</senku:dados></bpmn:extensionElements>
+      <bpmn:incoming>Fluxo_f4</bpmn:incoming>
+      <bpmn:incoming>Fluxo_f14</bpmn:incoming>
+      <bpmn:outgoing>Fluxo_f15</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="a4" name="Avisar analista">
+      <bpmn:documentation>Tempo: execucao 5min</bpmn:documentation>
+      <bpmn:extensionElements><senku:dados>{&quot;id&quot;:&quot;a4&quot;,&quot;nome&quot;:&quot;Avisar analista&quot;,&quot;papel&quot;:&quot;sup&quot;,&quot;sistema&quot;:[],&quot;tempo&quot;:{&quot;execucao&quot;:&quot;5min&quot;}}</senku:dados></bpmn:extensionElements>
+      <bpmn:incoming>Fluxo_f10</bpmn:incoming>
+      <bpmn:outgoing>Fluxo_f16</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="a5" name="Abrir investigação">
+      <bpmn:documentation>Tempo: execucao 1h</bpmn:documentation>
+      <bpmn:extensionElements><senku:dados>{&quot;id&quot;:&quot;a5&quot;,&quot;nome&quot;:&quot;Abrir investigação&quot;,&quot;papel&quot;:&quot;sup&quot;,&quot;sistema&quot;:[],&quot;tempo&quot;:{&quot;execucao&quot;:&quot;1h&quot;}}</senku:dados></bpmn:extensionElements>
+      <bpmn:incoming>Fluxo_f8</bpmn:incoming>
+      <bpmn:outgoing>Fluxo_f17</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:exclusiveGateway id="d1" name="Sinistro coberto?">
+      <bpmn:extensionElements><senku:dados>{&quot;id&quot;:&quot;d1&quot;,&quot;tipo&quot;:&quot;decisao&quot;,&quot;nome&quot;:&quot;Sinistro coberto?&quot;,&quot;papel&quot;:&quot;an&quot;}</senku:dados></bpmn:extensionElements>
+      <bpmn:incoming>Fluxo_f2</bpmn:incoming>
+      <bpmn:outgoing>Fluxo_f18</bpmn:outgoing>
+      <bpmn:outgoing>Fluxo_f19</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:task id="a6" name="Pagar indenização">
+      <bpmn:documentation>Tempo: execucao 30min</bpmn:documentation>
+      <bpmn:extensionElements><senku:dados>{&quot;id&quot;:&quot;a6&quot;,&quot;nome&quot;:&quot;Pagar indenização&quot;,&quot;papel&quot;:&quot;an&quot;,&quot;sistema&quot;:[],&quot;tempo&quot;:{&quot;execucao&quot;:&quot;30min&quot;}}</senku:dados></bpmn:extensionElements>
+      <bpmn:incoming>Fluxo_f18</bpmn:incoming>
+      <bpmn:outgoing>Fluxo_f20</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:endEvent id="f1" name="Indenização paga">
+      <bpmn:extensionElements><senku:dados>{&quot;id&quot;:&quot;f1&quot;,&quot;tipo&quot;:&quot;fim&quot;,&quot;nome&quot;:&quot;Indenização paga&quot;}</senku:dados></bpmn:extensionElements>
+      <bpmn:incoming>Fluxo_f20</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:endEvent id="f2" name="Sinistro encerrado sem pagamento">
+      <bpmn:extensionElements><senku:dados>{&quot;id&quot;:&quot;f2&quot;,&quot;tipo&quot;:&quot;fim&quot;,&quot;nome&quot;:&quot;Sinistro encerrado sem pagamento&quot;}</senku:dados></bpmn:extensionElements>
+      <bpmn:incoming>Fluxo_f6</bpmn:incoming>
+      <bpmn:incoming>Fluxo_f19</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:endEvent id="f3" name="Lembrete enviado">
+      <bpmn:extensionElements><senku:dados>{&quot;id&quot;:&quot;f3&quot;,&quot;tipo&quot;:&quot;fim&quot;,&quot;nome&quot;:&quot;Lembrete enviado&quot;}</senku:dados></bpmn:extensionElements>
+      <bpmn:incoming>Fluxo_f16</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:endEvent id="f4" name="Investigação aberta">
+      <bpmn:extensionElements><senku:dados>{&quot;id&quot;:&quot;f4&quot;,&quot;tipo&quot;:&quot;fim&quot;,&quot;nome&quot;:&quot;Investigação aberta&quot;,&quot;encerra&quot;:true}</senku:dados></bpmn:extensionElements>
+      <bpmn:incoming>Fluxo_f17</bpmn:incoming>
+      <bpmn:terminateEventDefinition id="f4.def"/>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Fluxo_f1" sourceRef="i" targetRef="a2"/>
+    <bpmn:sequenceFlow id="Fluxo_f2" sourceRef="a2" targetRef="d1"/>
+    <bpmn:sequenceFlow id="Fluxo_f4" sourceRef="a2_1" targetRef="a3"/>
+    <bpmn:sequenceFlow id="Fluxo_f6" sourceRef="a2_2" targetRef="f2"/>
+    <bpmn:sequenceFlow id="Fluxo_f8" sourceRef="a2_3" targetRef="a5"/>
+    <bpmn:sequenceFlow id="Fluxo_f10" sourceRef="a2_4" targetRef="a4"/>
+    <bpmn:sequenceFlow id="Fluxo_f12" sourceRef="a2_5" targetRef="a2"/>
+    <bpmn:sequenceFlow id="Fluxo_f14" sourceRef="a2_6" targetRef="a3"/>
+    <bpmn:sequenceFlow id="Fluxo_f15" sourceRef="a3" targetRef="a2"/>
+    <bpmn:sequenceFlow id="Fluxo_f16" sourceRef="a4" targetRef="f3"/>
+    <bpmn:sequenceFlow id="Fluxo_f17" sourceRef="a5" targetRef="f4"/>
+    <bpmn:sequenceFlow id="Fluxo_f18" sourceRef="d1" targetRef="a6" name="Sim">
+      <bpmn:documentation>80% dos casos</bpmn:documentation>
+      <bpmn:extensionElements><senku:dados>{&quot;percentual&quot;:80.0}</senku:dados></bpmn:extensionElements>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Fluxo_f19" sourceRef="d1" targetRef="f2" name="Não">
+      <bpmn:documentation>20% dos casos</bpmn:documentation>
+      <bpmn:extensionElements><senku:dados>{&quot;percentual&quot;:20.0}</senku:dados></bpmn:extensionElements>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Fluxo_f20" sourceRef="a6" targetRef="f1"/>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="Diagrama.Processo_senku">
+    <bpmndi:BPMNPlane id="Plano.Processo_senku" bpmnElement="Colaboracao.Processo_senku">
+      <bpmndi:BPMNShape id="Pool.Processo_senku.di" bpmnElement="Pool.Processo_senku" isHorizontal="true"><dc:Bounds x="20" y="120" width="1010" height="600"/></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Raia_an.di" bpmnElement="Raia_an" isHorizontal="true"><dc:Bounds x="50" y="120" width="980" height="240"/></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Raia_sup.di" bpmnElement="Raia_sup" isHorizontal="true"><dc:Bounds x="50" y="360" width="980" height="360"/></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="i.di" bpmnElement="i"><dc:Bounds x="155" y="160" width="40" height="40"/>
+<bpmndi:BPMNLabel><dc:Bounds x="125" y="204" width="100" height="27"/></bpmndi:BPMNLabel>
+</bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="a2.di" bpmnElement="a2"><dc:Bounds x="300" y="145" width="130" height="70"/>
+</bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="a2_1.di" bpmnElement="a2_1"><dc:Bounds x="403" y="203" width="24" height="24"/>
+<bpmndi:BPMNLabel><dc:Bounds x="365" y="231" width="100" height="27"/></bpmndi:BPMNLabel>
+</bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="a2_2.di" bpmnElement="a2_2"><dc:Bounds x="383" y="203" width="24" height="24"/>
+<bpmndi:BPMNLabel><dc:Bounds x="345" y="231" width="100" height="27"/></bpmndi:BPMNLabel>
+</bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="a2_3.di" bpmnElement="a2_3"><dc:Bounds x="363" y="203" width="24" height="24"/>
+<bpmndi:BPMNLabel><dc:Bounds x="325" y="231" width="100" height="27"/></bpmndi:BPMNLabel>
+</bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="a2_4.di" bpmnElement="a2_4"><dc:Bounds x="343" y="203" width="24" height="24"/>
+<bpmndi:BPMNLabel><dc:Bounds x="305" y="231" width="100" height="27"/></bpmndi:BPMNLabel>
+</bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="a2_5.di" bpmnElement="a2_5"><dc:Bounds x="323" y="203" width="24" height="24"/>
+<bpmndi:BPMNLabel><dc:Bounds x="285" y="231" width="100" height="27"/></bpmndi:BPMNLabel>
+</bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="a2_6.di" bpmnElement="a2_6"><dc:Bounds x="303" y="203" width="24" height="24"/>
+<bpmndi:BPMNLabel><dc:Bounds x="265" y="231" width="100" height="27"/></bpmndi:BPMNLabel>
+</bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="a3.di" bpmnElement="a3"><dc:Bounds x="490" y="385" width="130" height="70"/>
+</bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="a4.di" bpmnElement="a4"><dc:Bounds x="490" y="505" width="130" height="70"/>
+</bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="a5.di" bpmnElement="a5"><dc:Bounds x="490" y="625" width="130" height="70"/>
+</bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="d1.di" bpmnElement="d1" isMarkerVisible="true"><dc:Bounds x="530" y="155" width="50" height="50"/>
+<bpmndi:BPMNLabel><dc:Bounds x="460" y="121" width="100" height="27"/></bpmndi:BPMNLabel>
+</bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="a6.di" bpmnElement="a6"><dc:Bounds x="680" y="145" width="130" height="70"/>
+</bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="f1.di" bpmnElement="f1"><dc:Bounds x="915" y="160" width="40" height="40"/>
+<bpmndi:BPMNLabel><dc:Bounds x="885" y="204" width="100" height="27"/></bpmndi:BPMNLabel>
+</bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="f2.di" bpmnElement="f2"><dc:Bounds x="725" y="280" width="40" height="40"/>
+<bpmndi:BPMNLabel><dc:Bounds x="695" y="324" width="100" height="27"/></bpmndi:BPMNLabel>
+</bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="f3.di" bpmnElement="f3"><dc:Bounds x="725" y="520" width="40" height="40"/>
+<bpmndi:BPMNLabel><dc:Bounds x="695" y="564" width="100" height="27"/></bpmndi:BPMNLabel>
+</bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="f4.di" bpmnElement="f4"><dc:Bounds x="725" y="640" width="40" height="40"/>
+<bpmndi:BPMNLabel><dc:Bounds x="695" y="684" width="100" height="27"/></bpmndi:BPMNLabel>
+</bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Fluxo_f1.di" bpmnElement="Fluxo_f1">
+        <di:waypoint x="195" y="180"/>
+        <di:waypoint x="300" y="180"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Fluxo_f2.di" bpmnElement="Fluxo_f2">
+        <di:waypoint x="430" y="180"/>
+        <di:waypoint x="530" y="180"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Fluxo_f4.di" bpmnElement="Fluxo_f4">
+        <di:waypoint x="415" y="227"/>
+        <di:waypoint x="415" y="241"/>
+        <di:waypoint x="460" y="241"/>
+        <di:waypoint x="460" y="368"/>
+        <di:waypoint x="535" y="368"/>
+        <di:waypoint x="535" y="385"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Fluxo_f6.di" bpmnElement="Fluxo_f6">
+        <di:waypoint x="395" y="227"/>
+        <di:waypoint x="395" y="248"/>
+        <di:waypoint x="745" y="248"/>
+        <di:waypoint x="745" y="280"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Fluxo_f8.di" bpmnElement="Fluxo_f8">
+        <di:waypoint x="375" y="227"/>
+        <di:waypoint x="375" y="269"/>
+        <di:waypoint x="467" y="269"/>
+        <di:waypoint x="467" y="608"/>
+        <di:waypoint x="535" y="608"/>
+        <di:waypoint x="535" y="625"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Fluxo_f10.di" bpmnElement="Fluxo_f10">
+        <di:waypoint x="355" y="227"/>
+        <di:waypoint x="355" y="255"/>
+        <di:waypoint x="453" y="255"/>
+        <di:waypoint x="453" y="488"/>
+        <di:waypoint x="535" y="488"/>
+        <di:waypoint x="535" y="505"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Fluxo_f12.di" bpmnElement="Fluxo_f12">
+        <di:waypoint x="335" y="227"/>
+        <di:waypoint x="335" y="269"/>
+        <di:waypoint x="270" y="269"/>
+        <di:waypoint x="270" y="128"/>
+        <di:waypoint x="365" y="128"/>
+        <di:waypoint x="365" y="145"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Fluxo_f14.di" bpmnElement="Fluxo_f14">
+        <di:waypoint x="315" y="227"/>
+        <di:waypoint x="315" y="262"/>
+        <di:waypoint x="474" y="262"/>
+        <di:waypoint x="474" y="352"/>
+        <di:waypoint x="535" y="352"/>
+        <di:waypoint x="535" y="385"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Fluxo_f15.di" bpmnElement="Fluxo_f15">
+        <di:waypoint x="597" y="455"/>
+        <di:waypoint x="597" y="472"/>
+        <di:waypoint x="277" y="472"/>
+        <di:waypoint x="277" y="128"/>
+        <di:waypoint x="365" y="128"/>
+        <di:waypoint x="365" y="145"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Fluxo_f16.di" bpmnElement="Fluxo_f16">
+        <di:waypoint x="620" y="540"/>
+        <di:waypoint x="725" y="540"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Fluxo_f17.di" bpmnElement="Fluxo_f17">
+        <di:waypoint x="620" y="660"/>
+        <di:waypoint x="725" y="660"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Fluxo_f18.di" bpmnElement="Fluxo_f18">
+        <di:waypoint x="580" y="180"/>
+        <di:waypoint x="680" y="180"/>
+        <bpmndi:BPMNLabel><dc:Bounds x="584" y="162" width="30" height="14"/></bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Fluxo_f19.di" bpmnElement="Fluxo_f19">
+        <di:waypoint x="555" y="205"/>
+        <di:waypoint x="555" y="248"/>
+        <di:waypoint x="745" y="248"/>
+        <di:waypoint x="745" y="280"/>
+        <bpmndi:BPMNLabel><dc:Bounds x="560" y="206" width="30" height="14"/></bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Fluxo_f20.di" bpmnElement="Fluxo_f20">
+        <di:waypoint x="810" y="180"/>
+        <di:waypoint x="915" y="180"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="PoolExt.1.di" bpmnElement="PoolExt.1" isHorizontal="true"><dc:Bounds x="20" y="20" width="1010" height="60"/></bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="MsgFlow.1.di" bpmnElement="MsgFlow.1"><di:waypoint x="187" y="80"/><di:waypoint x="187" y="160"/></bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" id="Bz" targetNamespace="http://www.bizagi.com/definitions">
+  <collaboration id="C1"><participant id="Pp" name="Reembolso de despesas" processRef="P1"/></collaboration>
+  <process id="P1" name="Reembolso">
+    <laneSet id="ls"><lane id="La" name="Colaborador"><flowNodeRef>s</flowNodeRef><flowNodeRef>t1</flowNodeRef></lane>
+      <lane id="Lb" name="Gestor"><flowNodeRef>t2</flowNodeRef><flowNodeRef>g</flowNodeRef></lane>
+      <lane id="Lc" name="Financeiro"><flowNodeRef>t3</flowNodeRef><flowNodeRef>e1</flowNodeRef><flowNodeRef>e2</flowNodeRef></lane></laneSet>
+    <startEvent id="s" name="Despesa realizada"/>
+    <task id="t1" name="Lançar relatório de despesas"/>
+    <task id="t2" name="Aprovar despesas"/>
+    <exclusiveGateway id="g" name="Aprovado?"/>
+    <task id="t3" name="Reembolsar colaborador"/>
+    <endEvent id="e1" name="Reembolso pago"/>
+    <endEvent id="e2" name="Reembolso negado"/>
+    <sequenceFlow id="a" sourceRef="s" targetRef="t1"/>
+    <sequenceFlow id="b" sourceRef="t1" targetRef="t2"/>
+    <sequenceFlow id="c" sourceRef="t2" targetRef="g"/>
+    <sequenceFlow id="d" name="Sim" sourceRef="g" targetRef="t3"/>
+    <sequenceFlow id="e" name="Não" sourceRef="g" targetRef="e2"/>
+    <sequenceFlow id="f" sourceRef="t3" targetRef="e1"/>
+  </process>
+</definitions>

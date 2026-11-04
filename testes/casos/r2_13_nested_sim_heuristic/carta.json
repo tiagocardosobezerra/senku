@@ -1,0 +1,135 @@
+{
+ "processo": {
+  "nome": "Crédito"
+ },
+ "papeis": [
+  {
+   "id": "sol",
+   "nome": "Solicitante"
+  },
+  {
+   "id": "ges",
+   "nome": "Gestor da área"
+  },
+  {
+   "id": "cmp",
+   "nome": "Comprador"
+  },
+  {
+   "id": "fin",
+   "nome": "Analista Financeiro"
+  },
+  {
+   "id": "for",
+   "nome": "Fornecedor",
+   "tipo": "externo"
+  }
+ ],
+ "elementos": [
+  {
+   "id": "i",
+   "tipo": "inicio",
+   "nome": "Pedido de crédito",
+   "papel": "sol",
+   "segue": "a1"
+  },
+  {
+   "id": "a1",
+   "nome": "Analisar cadastro",
+   "papel": "fin",
+   "segue": "d1"
+  },
+  {
+   "id": "d1",
+   "tipo": "decisao",
+   "nome": "Cadastro ok?",
+   "papel": "fin",
+   "segue": [
+    {
+     "para": "d2",
+     "rotulo": "Sim"
+    },
+    {
+     "para": "a9",
+     "rotulo": "Não"
+    }
+   ]
+  },
+  {
+   "id": "d2",
+   "tipo": "decisao",
+   "nome": "Score > 700?",
+   "papel": "fin",
+   "segue": [
+    {
+     "para": "d3",
+     "rotulo": "Sim"
+    },
+    {
+     "para": "a3",
+     "rotulo": "Não"
+    }
+   ]
+  },
+  {
+   "id": "d3",
+   "tipo": "decisao",
+   "nome": "Valor > 100k?",
+   "papel": "fin",
+   "segue": [
+    {
+     "para": "a4",
+     "rotulo": "Sim"
+    },
+    {
+     "para": "m1",
+     "rotulo": "Não"
+    }
+   ]
+  },
+  {
+   "id": "a3",
+   "nome": "Pedir garantia",
+   "papel": "cmp",
+   "segue": "m2"
+  },
+  {
+   "id": "a4",
+   "nome": "Aprovar no comitê",
+   "papel": "ges",
+   "segue": "m1"
+  },
+  {
+   "id": "m1",
+   "tipo": "decisao",
+   "segue": "m2"
+  },
+  {
+   "id": "m2",
+   "tipo": "decisao",
+   "segue": "a5"
+  },
+  {
+   "id": "a5",
+   "nome": "Liberar limite",
+   "papel": "fin",
+   "segue": "f1"
+  },
+  {
+   "id": "a9",
+   "nome": "Comunicar recusa",
+   "papel": "sol",
+   "segue": "f2"
+  },
+  {
+   "id": "f1",
+   "tipo": "fim",
+   "nome": "Limite liberado"
+  },
+  {
+   "id": "f2",
+   "tipo": "fim",
+   "nome": "Crédito negado"
+  }
+ ]
+}

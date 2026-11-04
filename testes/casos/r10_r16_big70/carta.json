@@ -1,0 +1,912 @@
+{
+ "formato": 1,
+ "processo": {
+  "nome": "Concessão de crédito — estresse",
+  "codigo": "EST-01",
+  "volume": "Em 2025 foram 3.600 solicitações no ano",
+  "dono": "Gerente"
+ },
+ "papeis": [
+  {
+   "id": "sol",
+   "nome": "Solicitante"
+  },
+  {
+   "id": "ate",
+   "nome": "Atendimento"
+  },
+  {
+   "id": "an",
+   "nome": "Analista de Crédito"
+  },
+  {
+   "id": "ge",
+   "nome": "Gerente"
+  },
+  {
+   "id": "dir",
+   "nome": "Diretoria"
+  },
+  {
+   "id": "jur",
+   "nome": "Jurídico"
+  },
+  {
+   "id": "fin",
+   "nome": "Financeiro"
+  },
+  {
+   "id": "ti",
+   "nome": "TI"
+  },
+  {
+   "id": "cli",
+   "nome": "Cliente",
+   "tipo": "externo"
+  },
+  {
+   "id": "forn",
+   "nome": "Fornecedor",
+   "tipo": "externo"
+  }
+ ],
+ "sistemas": [
+  {
+   "id": "erp",
+   "nome": "ERP"
+  }
+ ],
+ "elementos": [
+  {
+   "id": "ini",
+   "tipo": "inicio",
+   "nome": "Solicitação recebida",
+   "papel": "sol",
+   "gatilho": "mensagem",
+   "segue": "a1"
+  },
+  {
+   "id": "a1",
+   "nome": "Registrar solicitação",
+   "papel": "sol",
+   "tempo": {
+    "execucao": "30min"
+   },
+   "segue": "x0",
+   "sistema": [
+    "erp"
+   ]
+  },
+  {
+   "id": "a2",
+   "nome": "Triar solicitação",
+   "papel": "ate",
+   "tempo": {
+    "execucao": "30min",
+    "espera": "4h"
+   },
+   "segue": "d1",
+   "sistema": [
+    "erp"
+   ]
+  },
+  {
+   "id": "d1",
+   "tipo": "decisao",
+   "segue": [
+    {
+     "para": "a3",
+     "rotulo": "Completa",
+     "percentual": 70
+    },
+    {
+     "para": "a2b",
+     "rotulo": "Incompleta",
+     "percentual": 25
+    },
+    {
+     "para": "a2c",
+     "rotulo": "Fora do escopo",
+     "percentual": 5
+    }
+   ],
+   "nome": "Solicitação completa?",
+   "papel": "ate"
+  },
+  {
+   "id": "a2b",
+   "nome": "Pedir complemento ao solicitante",
+   "papel": "ate",
+   "tempo": {
+    "execucao": "30min"
+   },
+   "segue": "e1",
+   "sistema": [
+    "erp"
+   ]
+  },
+  {
+   "id": "e1",
+   "tipo": "corrida",
+   "segue": [
+    {
+     "para": "e1m",
+     "percentual": 80
+    },
+    {
+     "para": "e1t",
+     "percentual": 20
+    }
+   ],
+   "nome": "O que vier primeiro",
+   "papel": "ate"
+  },
+  {
+   "id": "e1m",
+   "tipo": "evento",
+   "gatilho": "mensagem",
+   "nome": "Complemento recebido",
+   "segue": "a2",
+   "tempo": {
+    "espera": "2d"
+   }
+  },
+  {
+   "id": "e1t",
+   "tipo": "evento",
+   "gatilho": "tempo",
+   "nome": "Aguardar 5 dias corridos",
+   "segue": "a2c"
+  },
+  {
+   "id": "a2c",
+   "nome": "Arquivar solicitação",
+   "papel": "ate",
+   "tempo": {
+    "execucao": "30min"
+   },
+   "segue": "fim_arq",
+   "sistema": [
+    "erp"
+   ]
+  },
+  {
+   "id": "fim_arq",
+   "tipo": "fim",
+   "nome": "Solicitação arquivada"
+  },
+  {
+   "id": "a3",
+   "nome": "Analisar crédito",
+   "papel": "an",
+   "tempo": {
+    "execucao": "2h",
+    "espera": "1d"
+   },
+   "segue": "d2",
+   "sistema": [
+    "erp"
+   ],
+   "bordas": [
+    {
+     "gatilho": "tempo",
+     "nome": "Prazo de 3 dias estourado",
+     "tempo": "3d",
+     "percentual": 10,
+     "segue": "a4"
+    },
+    {
+     "gatilho": "mensagem",
+     "nome": "Cliente desistiu",
+     "percentual": 5,
+     "segue": "a2c"
+    },
+    {
+     "gatilho": "tempo",
+     "nome": "Lembrete de 1 dia",
+     "tempo": "1d",
+     "percentual": 30,
+     "interrompe": false,
+     "segue": "a3r"
+    }
+   ]
+  },
+  {
+   "id": "a3r",
+   "nome": "Cobrar analista",
+   "papel": "ge",
+   "tempo": {
+    "execucao": "5min"
+   },
+   "segue": "fim_lem",
+   "sistema": [
+    "erp"
+   ]
+  },
+  {
+   "id": "fim_lem",
+   "tipo": "fim",
+   "nome": "Lembrete enviado"
+  },
+  {
+   "id": "a4",
+   "nome": "Escalar ao gerente",
+   "papel": "ge",
+   "tempo": {
+    "execucao": "15min"
+   },
+   "segue": "d2",
+   "sistema": [
+    "erp"
+   ]
+  },
+  {
+   "id": "d2",
+   "tipo": "decisao",
+   "segue": [
+    {
+     "para": "d3",
+     "rotulo": "Favorável",
+     "percentual": 75
+    },
+    {
+     "para": "a5",
+     "rotulo": "Desfavorável",
+     "percentual": 25
+    }
+   ],
+   "nome": "Parecer favorável?",
+   "papel": "an"
+  },
+  {
+   "id": "d3",
+   "tipo": "decisao",
+   "segue": [
+    {
+     "para": "o1",
+     "rotulo": "Até R$ 100 mil",
+     "percentual": 60
+    },
+    {
+     "para": "a6",
+     "rotulo": "Acima de R$ 100 mil",
+     "percentual": 40
+    }
+   ],
+   "nome": "Valor acima de R$ 100 mil?",
+   "papel": "an"
+  },
+  {
+   "id": "a5",
+   "nome": "Comunicar recusa",
+   "papel": "ate",
+   "tempo": {
+    "execucao": "30min"
+   },
+   "segue": "fim_rec",
+   "sistema": [
+    "erp"
+   ]
+  },
+  {
+   "id": "fim_rec",
+   "tipo": "fim",
+   "nome": "Crédito recusado"
+  },
+  {
+   "id": "a6",
+   "nome": "Aprovar na diretoria",
+   "papel": "dir",
+   "tempo": {
+    "execucao": "20min",
+    "espera": "3d"
+   },
+   "segue": "d4",
+   "sistema": [
+    "erp"
+   ]
+  },
+  {
+   "id": "d4",
+   "tipo": "decisao",
+   "segue": [
+    {
+     "para": "o1",
+     "rotulo": "Aprovado",
+     "percentual": 70
+    },
+    {
+     "para": "a3",
+     "rotulo": "Reanalisar",
+     "percentual": 20
+    },
+    {
+     "para": "a5",
+     "rotulo": "Recusado",
+     "percentual": 10
+    }
+   ],
+   "nome": "Diretoria aprovou?",
+   "papel": "dir"
+  },
+  {
+   "id": "o1",
+   "tipo": "inclusivo",
+   "segue": [
+    {
+     "para": "b1",
+     "rotulo": "Precisa garantia",
+     "percentual": 40
+    },
+    {
+     "para": "b2",
+     "rotulo": "Precisa seguro",
+     "percentual": 30
+    },
+    {
+     "para": "p1",
+     "rotulo": "Sempre",
+     "percentual": 100
+    }
+   ],
+   "nome": "Quais exigências?",
+   "papel": "an"
+  },
+  {
+   "id": "b1",
+   "nome": "Registrar garantia",
+   "papel": "jur",
+   "tempo": {
+    "execucao": "1h",
+    "espera": "2d"
+   },
+   "segue": "o2",
+   "sistema": [
+    "erp"
+   ]
+  },
+  {
+   "id": "b2",
+   "nome": "Contratar seguro",
+   "papel": "forn",
+   "tempo": {
+    "execucao": "1h",
+    "espera": "3d"
+   },
+   "segue": "o2",
+   "sistema": [
+    "erp"
+   ]
+  },
+  {
+   "id": "p1",
+   "tipo": "paralelo",
+   "segue": [
+    "c1",
+    "c2",
+    "c3"
+   ],
+   "papel": "an"
+  },
+  {
+   "id": "c1",
+   "nome": "Emitir contrato",
+   "papel": "jur",
+   "tempo": {
+    "execucao": "40min",
+    "espera": "1d"
+   },
+   "segue": "c1b",
+   "sistema": [
+    "erp"
+   ]
+  },
+  {
+   "id": "c1b",
+   "nome": "Assinar contrato",
+   "papel": "cli",
+   "tempo": {
+    "execucao": "10min",
+    "espera": "2d"
+   },
+   "segue": "p2",
+   "sistema": [
+    "erp"
+   ],
+   "bordas": [
+    {
+     "gatilho": "tempo",
+     "nome": "Prazo de 10 dias corridos",
+     "tempo": "10dc",
+     "percentual": 10,
+     "segue": "c1x"
+    }
+   ]
+  },
+  {
+   "id": "c1x",
+   "nome": "Cancelar contrato",
+   "papel": "jur",
+   "tempo": {
+    "execucao": "10min"
+   },
+   "segue": "fim_can",
+   "sistema": [
+    "erp"
+   ]
+  },
+  {
+   "id": "fim_can",
+   "tipo": "fim",
+   "nome": "Contrato cancelado",
+   "encerra": true
+  },
+  {
+   "id": "c2",
+   "nome": "Cadastrar limite",
+   "papel": "fin",
+   "tempo": {
+    "execucao": "30min",
+    "espera": "4h"
+   },
+   "segue": "c2d",
+   "sistema": [
+    "erp"
+   ]
+  },
+  {
+   "id": "c2d",
+   "tipo": "decisao",
+   "segue": [
+    {
+     "para": "p2",
+     "rotulo": "Sim",
+     "percentual": 90
+    },
+    {
+     "para": "c2e",
+     "rotulo": "Não",
+     "percentual": 10
+    }
+   ],
+   "nome": "Cadastro ok?",
+   "papel": "fin"
+  },
+  {
+   "id": "c2e",
+   "nome": "Corrigir cadastro",
+   "papel": "ti",
+   "tempo": {
+    "execucao": "1h"
+   },
+   "segue": "c2",
+   "sistema": [
+    "erp"
+   ],
+   "bordas": [
+    {
+     "gatilho": "erro",
+     "nome": "Falha no sistema",
+     "percentual": 5,
+     "segue": "c2"
+    }
+   ]
+  },
+  {
+   "id": "c3",
+   "nome": "Configurar acesso",
+   "papel": "ti",
+   "tempo": {
+    "execucao": "15min",
+    "espera": "1d"
+   },
+   "segue": "p2",
+   "sistema": [
+    "erp"
+   ],
+   "automatizada": true
+  },
+  {
+   "id": "p2",
+   "tipo": "paralelo",
+   "segue": "o2",
+   "papel": "an"
+  },
+  {
+   "id": "o2",
+   "tipo": "inclusivo",
+   "segue": "a7",
+   "papel": "an"
+  },
+  {
+   "id": "a7",
+   "nome": "Liberar crédito",
+   "papel": "fin",
+   "tempo": {
+    "execucao": "30min"
+   },
+   "segue": "a8",
+   "sistema": [
+    "erp"
+   ]
+  },
+  {
+   "id": "a8",
+   "nome": "Notificar cliente",
+   "papel": "ate",
+   "tempo": {
+    "execucao": "5min"
+   },
+   "segue": "fim_ok",
+   "sistema": [
+    "erp"
+   ],
+   "envia": true
+  },
+  {
+   "id": "fim_ok",
+   "tipo": "fim",
+   "nome": "Crédito liberado"
+  },
+  {
+   "id": "x0",
+   "nome": "Conferir item 0",
+   "papel": "sol",
+   "tempo": {
+    "execucao": "10min"
+   },
+   "segue": "x1",
+   "sistema": [
+    "erp"
+   ]
+  },
+  {
+   "id": "x1",
+   "nome": "Conferir item 1",
+   "papel": "ate",
+   "tempo": {
+    "execucao": "10min"
+   },
+   "segue": "x2",
+   "sistema": [
+    "erp"
+   ]
+  },
+  {
+   "id": "x2",
+   "nome": "Conferir item 2",
+   "papel": "an",
+   "tempo": {
+    "execucao": "10min"
+   },
+   "segue": "x3",
+   "sistema": [
+    "erp"
+   ]
+  },
+  {
+   "id": "x3",
+   "nome": "Conferir item 3",
+   "papel": "ge",
+   "tempo": {
+    "execucao": "10min"
+   },
+   "segue": "x4",
+   "sistema": [
+    "erp"
+   ]
+  },
+  {
+   "id": "x4",
+   "nome": "Conferir item 4",
+   "papel": "dir",
+   "tempo": {
+    "execucao": "10min"
+   },
+   "segue": "x5",
+   "sistema": [
+    "erp"
+   ]
+  },
+  {
+   "id": "x5",
+   "nome": "Conferir item 5",
+   "papel": "jur",
+   "tempo": {
+    "execucao": "10min"
+   },
+   "segue": "x6",
+   "sistema": [
+    "erp"
+   ]
+  },
+  {
+   "id": "x6",
+   "nome": "Conferir item 6",
+   "papel": "fin",
+   "tempo": {
+    "execucao": "10min"
+   },
+   "segue": "x7",
+   "sistema": [
+    "erp"
+   ]
+  },
+  {
+   "id": "x7",
+   "nome": "Conferir item 7",
+   "papel": "ti",
+   "tempo": {
+    "execucao": "10min"
+   },
+   "segue": "x8",
+   "sistema": [
+    "erp"
+   ]
+  },
+  {
+   "id": "x8",
+   "nome": "Conferir item 8",
+   "papel": "sol",
+   "tempo": {
+    "execucao": "10min"
+   },
+   "segue": "x9",
+   "sistema": [
+    "erp"
+   ]
+  },
+  {
+   "id": "x9",
+   "nome": "Conferir item 9",
+   "papel": "ate",
+   "tempo": {
+    "execucao": "10min"
+   },
+   "segue": "x10",
+   "sistema": [
+    "erp"
+   ]
+  },
+  {
+   "id": "x10",
+   "nome": "Conferir item 10",
+   "papel": "an",
+   "tempo": {
+    "execucao": "10min"
+   },
+   "segue": "x11",
+   "sistema": [
+    "erp"
+   ]
+  },
+  {
+   "id": "x11",
+   "nome": "Conferir item 11",
+   "papel": "ge",
+   "tempo": {
+    "execucao": "10min"
+   },
+   "segue": "x12",
+   "sistema": [
+    "erp"
+   ]
+  },
+  {
+   "id": "x12",
+   "nome": "Conferir item 12",
+   "papel": "dir",
+   "tempo": {
+    "execucao": "10min"
+   },
+   "segue": "x13",
+   "sistema": [
+    "erp"
+   ]
+  },
+  {
+   "id": "x13",
+   "nome": "Conferir item 13",
+   "papel": "jur",
+   "tempo": {
+    "execucao": "10min"
+   },
+   "segue": "x14",
+   "sistema": [
+    "erp"
+   ]
+  },
+  {
+   "id": "x14",
+   "nome": "Conferir item 14",
+   "papel": "fin",
+   "tempo": {
+    "execucao": "10min"
+   },
+   "segue": "x15",
+   "sistema": [
+    "erp"
+   ]
+  },
+  {
+   "id": "x15",
+   "nome": "Conferir item 15",
+   "papel": "ti",
+   "tempo": {
+    "execucao": "10min"
+   },
+   "segue": "x16",
+   "sistema": [
+    "erp"
+   ]
+  },
+  {
+   "id": "x16",
+   "nome": "Conferir item 16",
+   "papel": "sol",
+   "tempo": {
+    "execucao": "10min"
+   },
+   "segue": "x17",
+   "sistema": [
+    "erp"
+   ]
+  },
+  {
+   "id": "x17",
+   "nome": "Conferir item 17",
+   "papel": "ate",
+   "tempo": {
+    "execucao": "10min"
+   },
+   "segue": "x18",
+   "sistema": [
+    "erp"
+   ]
+  },
+  {
+   "id": "x18",
+   "nome": "Conferir item 18",
+   "papel": "an",
+   "tempo": {
+    "execucao": "10min"
+   },
+   "segue": "x19",
+   "sistema": [
+    "erp"
+   ]
+  },
+  {
+   "id": "x19",
+   "nome": "Conferir item 19",
+   "papel": "ge",
+   "tempo": {
+    "execucao": "10min"
+   },
+   "segue": "x20",
+   "sistema": [
+    "erp"
+   ]
+  },
+  {
+   "id": "x20",
+   "nome": "Conferir item 20",
+   "papel": "dir",
+   "tempo": {
+    "execucao": "10min"
+   },
+   "segue": "x21",
+   "sistema": [
+    "erp"
+   ]
+  },
+  {
+   "id": "x21",
+   "nome": "Conferir item 21",
+   "papel": "jur",
+   "tempo": {
+    "execucao": "10min"
+   },
+   "segue": "x22",
+   "sistema": [
+    "erp"
+   ]
+  },
+  {
+   "id": "x22",
+   "nome": "Conferir item 22",
+   "papel": "fin",
+   "tempo": {
+    "execucao": "10min"
+   },
+   "segue": "x23",
+   "sistema": [
+    "erp"
+   ]
+  },
+  {
+   "id": "x23",
+   "nome": "Conferir item 23",
+   "papel": "ti",
+   "tempo": {
+    "execucao": "10min"
+   },
+   "segue": "x24",
+   "sistema": [
+    "erp"
+   ]
+  },
+  {
+   "id": "x24",
+   "nome": "Conferir item 24",
+   "papel": "sol",
+   "tempo": {
+    "execucao": "10min"
+   },
+   "segue": "x25",
+   "sistema": [
+    "erp"
+   ]
+  },
+  {
+   "id": "x25",
+   "nome": "Conferir item 25",
+   "papel": "ate",
+   "tempo": {
+    "execucao": "10min"
+   },
+   "segue": "x26",
+   "sistema": [
+    "erp"
+   ]
+  },
+  {
+   "id": "x26",
+   "nome": "Conferir item 26",
+   "papel": "an",
+   "tempo": {
+    "execucao": "10min"
+   },
+   "segue": "x27",
+   "sistema": [
+    "erp"
+   ]
+  },
+  {
+   "id": "x27",
+   "nome": "Conferir item 27",
+   "papel": "ge",
+   "tempo": {
+    "execucao": "10min"
+   },
+   "segue": "x28",
+   "sistema": [
+    "erp"
+   ]
+  },
+  {
+   "id": "x28",
+   "nome": "Conferir item 28",
+   "papel": "dir",
+   "tempo": {
+    "execucao": "10min"
+   },
+   "segue": "x29",
+   "sistema": [
+    "erp"
+   ]
+  },
+  {
+   "id": "x29",
+   "nome": "Conferir item 29",
+   "papel": "jur",
+   "tempo": {
+    "execucao": "10min"
+   },
+   "segue": "a2",
+   "sistema": [
+    "erp"
+   ]
+  }
+ ]
+}

@@ -1,0 +1,14 @@
+{"processo": {"nome": "Assinatura com prazo", "volume": "100 por mês"},
+ "papeis": [{"id": "com", "nome": "Comercial"}, {"id": "cli", "nome": "Cliente", "tipo": "externo"}, {"id": "cad", "nome": "Cadastro"}],
+ "elementos": [
+  {"id": "i", "tipo": "inicio", "nome": "Proposta aceita", "papel": "com", "segue": "p1"},
+  {"id": "p1", "tipo": "paralelo", "segue": ["a1", "b1"]},
+  {"id": "a1", "nome": "Assinar contrato", "papel": "cli", "tempo": {"execucao": "10min", "espera": "1d"}, "segue": "p2",
+   "bordas": [{"gatilho": "tempo", "nome": "Prazo de 20 dias estourado", "tempo": "20d", "percentual": 50, "segue": "a9"}]},
+  {"id": "b1", "nome": "Cadastrar cliente", "papel": "cad", "tempo": {"execucao": "30min", "espera": "1d"}, "segue": "p2"},
+  {"id": "p2", "tipo": "paralelo", "segue": "a2"},
+  {"id": "a2", "nome": "Liberar acesso", "papel": "cad", "tempo": {"execucao": "10min"}, "segue": "f1"},
+  {"id": "f1", "tipo": "fim", "nome": "Acesso liberado"},
+  {"id": "a9", "nome": "Cancelar proposta", "papel": "com", "tempo": {"execucao": "10min"}, "segue": "f2"},
+  {"id": "f2", "tipo": "fim", "nome": "Proposta cancelada", "encerra": true}
+ ]}

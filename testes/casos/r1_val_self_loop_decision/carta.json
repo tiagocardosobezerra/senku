@@ -1,0 +1,51 @@
+{
+ "elementos": [
+  {
+   "id": "i",
+   "tipo": "inicio",
+   "nome": "Pedido recebido",
+   "papel": "x",
+   "segue": "a1"
+  },
+  {
+   "id": "a1",
+   "nome": "Executar a1",
+   "papel": "x",
+   "segue": "d"
+  },
+  {
+   "id": "d",
+   "tipo": "decisao",
+   "nome": "Ok?",
+   "papel": "x",
+   "segue": [
+    {
+     "para": "d",
+     "rotulo": "Não"
+    },
+    {
+     "para": "f",
+     "rotulo": "Sim"
+    }
+   ]
+  },
+  {
+   "id": "f",
+   "tipo": "fim",
+   "nome": "Concluído"
+  }
+ ],
+ "processo": {
+  "nome": "self_loop_decision"
+ },
+ "papeis": [
+  {
+   "id": "x",
+   "nome": "Analista"
+  },
+  {
+   "id": "y",
+   "nome": "Gestor"
+  }
+ ]
+}

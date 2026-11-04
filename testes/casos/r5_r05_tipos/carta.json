@@ -1,0 +1,171 @@
+{
+ "processo": {
+  "nome": "Teste <&> \"aspas\" 'simples' ‮RTL‬ 🚀 emoji",
+  "codigo": 123,
+  "dono": [
+   "Gerente",
+   "Diretor"
+  ],
+  "escopo": {
+   "inicio": 5,
+   "inclui": "tudo"
+  },
+  "volume": 120
+ },
+ "papeis": [
+  {
+   "id": "p1",
+   "nome": "Analista <b>negrito</b>"
+  },
+  {
+   "id": 2,
+   "nome": "Gestor\u0007bell"
+  },
+  "Cliente"
+ ],
+ "sistemas": [
+  "SAP",
+  {
+   "id": "x",
+   "nome": "Excel & VBA"
+  }
+ ],
+ "regras": {
+  "R1": "texto"
+ },
+ "elementos": [
+  {
+   "id": "i",
+   "tipo": "Início",
+   "nome": "Começo \u0000 nulo",
+   "papel": "p1",
+   "segue": "a1"
+  },
+  {
+   "id": "a1",
+   "tipo": "TAREFA",
+   "nome": [
+    "Analisar",
+    "pedido"
+   ],
+   "papel": 2,
+   "segue": [
+    "a2"
+   ],
+   "tempo": "2h",
+   "sistema": "SAP",
+   "percentual": 50
+  },
+  {
+   "id": "a2",
+   "nome": "Aprovar </text><script>alert(1)</script>",
+   "papel": "p1",
+   "segue": [
+    {
+     "para": "d1",
+     "rotulo": 1
+    }
+   ],
+   "tempo": {
+    "execucao": [
+     "1h"
+    ],
+    "espera": {
+     "x": 1
+    }
+   },
+   "valor": "va",
+   "raci": {
+    "A": "Gestor",
+    "C": "p9"
+   }
+  },
+  {
+   "id": "d1",
+   "tipo": "xor",
+   "nome": "Ok",
+   "papel": "p1",
+   "segue": [
+    {
+     "para": "f",
+     "rotulo": "Sim",
+     "percentual": "85%"
+    },
+    {
+     "para": "a1",
+     "rotulo": "Não",
+     "percentual": "15,0"
+    }
+   ]
+  },
+  {
+   "id": "f",
+   "tipo": "end",
+   "nome": "Fim ]]> cdata",
+   "encerra": "talvez"
+  },
+  {
+   "id": "a1",
+   "nome": "Duplicado",
+   "segue": "f"
+  },
+  {
+   "id": "z",
+   "tipo": "atividade",
+   "nome": "Lançar NF",
+   "segue": 42
+  },
+  {
+   "id": "b",
+   "nome": "Atividade com borda",
+   "bordas": {
+    "gatilho": "tempo"
+   },
+   "segue": "f"
+  },
+  {
+   "id": "b2",
+   "nome": "Atividade com borda ruim",
+   "bordas": [
+    {
+     "gatilho": "explosao",
+     "segue": "f"
+    },
+    "texto",
+    {
+     "gatilho": "tempo",
+     "tempo": "abc",
+     "segue": [
+      "f",
+      "a1"
+     ]
+    }
+   ],
+   "segue": "f"
+  }
+ ],
+ "indicadores": "lead time",
+ "dores": [
+  {
+   "id": "D1",
+   "descricao": "x",
+   "elementos": "a1"
+  },
+  5
+ ],
+ "riscos": [
+  {
+   "id": "K1",
+   "descricao": "y",
+   "probabilidade": 5,
+   "impacto": "altíssimo"
+  }
+ ],
+ "melhorias": [
+  {
+   "id": "M1",
+   "resolve": "D1",
+   "prazo": "ontem"
+  }
+ ]
+}

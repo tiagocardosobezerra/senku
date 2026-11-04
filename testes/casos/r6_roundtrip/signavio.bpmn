@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" xmlns:signavio="http://www.signavio.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="sid-defs" targetNamespace="http://www.signavio.com/bpmn20" exporter="Signavio Process Editor" exporterVersion="17.0.0">
+  <message id="sid-msg-1" name="Pedido"/>
+  <collaboration id="sid-collab">
+    <participant id="sid-p-cliente" name="Cliente"/>
+    <participant id="sid-p-empresa" name="Atendimento de pedidos" processRef="sid-proc"/>
+    <messageFlow id="sid-mf1" name="Pedido" sourceRef="sid-p-cliente" targetRef="sid-start"/>
+    <messageFlow id="sid-mf2" name="Confirmação" sourceRef="sid-throw" targetRef="sid-p-cliente"/>
+  </collaboration>
+  <process id="sid-proc" name="Atendimento de pedidos" isExecutable="false">
+    <laneSet id="sid-ls">
+      <lane id="sid-lane-vendas" name="Vendas">
+        <childLaneSet id="sid-cls">
+          <lane id="sid-lane-vi" name="Vendas internas">
+            <flowNodeRef>sid-start</flowNodeRef>
+            <flowNodeRef>sid-t1</flowNodeRef>
+            <flowNodeRef>sid-xor1</flowNodeRef>
+            <flowNodeRef>sid-ebg</flowNodeRef>
+            <flowNodeRef>sid-msgcatch</flowNodeRef>
+            <flowNodeRef>sid-timer</flowNodeRef>
+            <flowNodeRef>sid-throw</flowNodeRef>
+            <flowNodeRef>sid-linkthrow</flowNodeRef>
+          </lane>
+          <lane id="sid-lane-ve" name="Vendas externas">
+            <flowNodeRef>sid-t2</flowNodeRef>
+            <flowNodeRef>sid-bnd</flowNodeRef>
+            <flowNodeRef>sid-end-cancel</flowNodeRef>
+          </lane>
+        </childLaneSet>
+      </lane>
+      <lane id="sid-lane-fin" name="Financeiro">
+        <flowNodeRef>sid-sub</flowNodeRef>
+        <flowNodeRef>sid-or1</flowNodeRef>
+        <flowNodeRef>sid-t3</flowNodeRef>
+        <flowNodeRef>sid-t4</flowNodeRef>
+        <flowNodeRef>sid-or2</flowNodeRef>
+        <flowNodeRef>sid-linkcatch</flowNodeRef>
+        <flowNodeRef>sid-call</flowNodeRef>
+        <flowNodeRef>sid-end</flowNodeRef>
+        <flowNodeRef>sid-subbnd</flowNodeRef>
+      </lane>
+    </laneSet>
+    <startEvent id="sid-start" name="Pedido&#10;recebido">
+      <outgoing>sid-f1</outgoing>
+      <messageEventDefinition id="sid-med1" messageRef="sid-msg-1"/>
+    </startEvent>
+    <task id="sid-t1" name="Analisar&#10;pedido">
+      <documentation>Confere itens e preços.</documentation>
+      <extensionElements><signavio:signavioMetaData metaKey="bgcolor" metaValue="#ffffcc"/></extensionElements>
+      <incoming>sid-f1</incoming>
+      <outgoing>sid-f2</outgoing>
+    </task>
+    <exclusiveGateway id="sid-xor1" name="Pedido OK?" gatewayDirection="Diverging" default="sid-f4">
+      <incoming>sid-f2</incoming>
+      <outgoing>sid-f3</outgoing>
+      <outgoing>sid-f4</outgoing>
+    </exclusiveGateway>
+    <userTask id="sid-t2" name="Negociar com cliente">
+      <incoming>sid-f4</incoming>
+      <outgoing>sid-f5</outgoing>
+    </userTask>
+    <boundaryEvent id="sid-bnd" name="48h sem resposta" attachedToRef="sid-t2" cancelActivity="true">
+      <outgoing>sid-f6</outgoing>
+      <timerEventDefinition id="sid-ted1"><timeDuration xsi:type="tFormalExpression">PT48H</timeDuration></timerEventDefinition>
+    </boundaryEvent>
+    <endEvent id="sid-end-cancel" name="Pedido cancelado">
+      <incoming>sid-f6</incoming>
+    </endEvent>
+    <intermediateThrowEvent id="sid-throw" name="Confirmação enviada">
+      <incoming>sid-f3</incoming>
+      <incoming>sid-f5</incoming>
+      <outgoing>sid-f7</outgoing>
+      <messageEventDefinition id="sid-med2"/>
+    </intermediateThrowEvent>
+    <eventBasedGateway id="sid-ebg" name="">
+      <incoming>sid-f7</incoming>
+      <outgoing>sid-f8</outgoing>
+      <outgoing>sid-f9</outgoing>
+    </eventBasedGateway>
+    <intermediateCatchEvent id="sid-msgcatch" name="Pagamento recebido">
+      <incoming>sid-f8</incoming>
+      <outgoing>sid-f10</outgoing>
+      <messageEventDefinition id="sid-med3"/>
+    </intermediateCatchEvent>
+    <intermediateCatchEvent id="sid-timer" name="5 dias">
+      <incoming>sid-f9</incoming>
+      <outgoing>sid-f11</outgoing>
+      <timerEventDefinition id="sid-ted2"><timeDuration xsi:type="tFormalExpression">P5D</timeDuration></timerEventDefinition>
+    </intermediateCatchEvent>
+    <intermediateThrowEvent id="sid-linkthrow" name="Para cobrança">
+      <incoming>sid-f11</incoming>
+      <linkEventDefinition id="sid-led1" name="cobranca"/>
+    </intermediateThrowEvent>
+    <intermediateCatchEvent id="sid-linkcatch" name="Cobrança">
+      <outgoing>sid-f12</outgoing>
+      <linkEventDefinition id="sid-led2" name="cobranca"/>
+    </intermediateCatchEvent>
+    <callActivity id="sid-call" name="Cobrar cliente" calledElement="COB-01">
+      <incoming>sid-f12</incoming>
+      <outgoing>sid-f13</outgoing>
+    </callActivity>
+    <subProcess id="sid-sub" name="Faturar">
+      <incoming>sid-f10</incoming>
+      <outgoing>sid-f14</outgoing>
+      <startEvent id="sid-sub-s"><outgoing>sid-sf1</outgoing></startEvent>
+      <task id="sid-sub-t" name="Emitir NF"><incoming>sid-sf1</incoming><outgoing>sid-sf2</outgoing></task>
+      <endEvent id="sid-sub-e"><incoming>sid-sf2</incoming></endEvent>
+      <sequenceFlow id="sid-sf1" sourceRef="sid-sub-s" targetRef="sid-sub-t"/>
+      <sequenceFlow id="sid-sf2" sourceRef="sid-sub-t" targetRef="sid-sub-e"/>
+    </subProcess>
+    <boundaryEvent id="sid-subbnd" name="Erro fiscal" attachedToRef="sid-sub">
+      <outgoing>sid-f15</outgoing>
+      <errorEventDefinition id="sid-eed"/>
+    </boundaryEvent>
+    <inclusiveGateway id="sid-or1" name="O que enviar?">
+      <incoming>sid-f14</incoming>
+      <incoming>sid-f13</incoming>
+      <incoming>sid-f15</incoming>
+      <outgoing>sid-f16</outgoing>
+      <outgoing>sid-f17</outgoing>
+    </inclusiveGateway>
+    <task id="sid-t3" name="Enviar boleto"><incoming>sid-f16</incoming><outgoing>sid-f18</outgoing></task>
+    <task id="sid-t4" name="Enviar NF por e-mail"><incoming>sid-f17</incoming><outgoing>sid-f19</outgoing></task>
+    <inclusiveGateway id="sid-or2"><incoming>sid-f18</incoming><incoming>sid-f19</incoming><outgoing>sid-f20</outgoing></inclusiveGateway>
+    <endEvent id="sid-end" name="Pedido concluído"><incoming>sid-f20</incoming></endEvent>
+    <sequenceFlow id="sid-f1" sourceRef="sid-start" targetRef="sid-t1"/>
+    <sequenceFlow id="sid-f2" sourceRef="sid-t1" targetRef="sid-xor1"/>
+    <sequenceFlow id="sid-f3" name="sim" sourceRef="sid-xor1" targetRef="sid-throw"><conditionExpression xsi:type="tFormalExpression">ok == true</conditionExpression></sequenceFlow>
+    <sequenceFlow id="sid-f4" sourceRef="sid-xor1" targetRef="sid-t2"/>
+    <sequenceFlow id="sid-f5" sourceRef="sid-t2" targetRef="sid-throw"/>
+    <sequenceFlow id="sid-f6" sourceRef="sid-bnd" targetRef="sid-end-cancel"/>
+    <sequenceFlow id="sid-f7" sourceRef="sid-throw" targetRef="sid-ebg"/>
+    <sequenceFlow id="sid-f8" sourceRef="sid-ebg" targetRef="sid-msgcatch"/>
+    <sequenceFlow id="sid-f9" sourceRef="sid-ebg" targetRef="sid-timer"/>
+    <sequenceFlow id="sid-f10" sourceRef="sid-msgcatch" targetRef="sid-sub"/>
+    <sequenceFlow id="sid-f11" sourceRef="sid-timer" targetRef="sid-linkthrow"/>
+    <sequenceFlow id="sid-f12" sourceRef="sid-linkcatch" targetRef="sid-call"/>
+    <sequenceFlow id="sid-f13" sourceRef="sid-call" targetRef="sid-or1"/>
+    <sequenceFlow id="sid-f14" sourceRef="sid-sub" targetRef="sid-or1"/>
+    <sequenceFlow id="sid-f15" sourceRef="sid-subbnd" targetRef="sid-or1"/>
+    <sequenceFlow id="sid-f16" name="boleto" sourceRef="sid-or1" targetRef="sid-t3"/>
+    <sequenceFlow id="sid-f17" name="nf" sourceRef="sid-or1" targetRef="sid-t4"/>
+    <sequenceFlow id="sid-f18" sourceRef="sid-t3" targetRef="sid-or2"/>
+    <sequenceFlow id="sid-f19" sourceRef="sid-t4" targetRef="sid-or2"/>
+    <sequenceFlow id="sid-f20" sourceRef="sid-or2" targetRef="sid-end"/>
+  </process>
+  <bpmndi:BPMNDiagram id="sid-diag"><bpmndi:BPMNPlane id="sid-plane" bpmnElement="sid-collab"/></bpmndi:BPMNDiagram>
+</definitions>

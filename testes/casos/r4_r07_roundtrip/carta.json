@@ -1,0 +1,156 @@
+{
+  "formato": "senku/1",
+  "processo": {
+    "nome": "Proposta comercial",
+    "codigo": "COM-01"
+  },
+  "participantes": [],
+  "sipoc": {
+    "fornecedores": [],
+    "entradas": [],
+    "saidas": [],
+    "clientes": []
+  },
+  "papeis": [
+    {
+      "id": "cli",
+      "nome": "Cliente",
+      "tipo": "externo"
+    },
+    {
+      "id": "ven",
+      "nome": "Vendedor"
+    },
+    {
+      "id": "fin",
+      "nome": "Financeiro"
+    }
+  ],
+  "sistemas": [],
+  "elementos": [
+    {
+      "id": "i",
+      "tipo": "inicio",
+      "nome": "Pedido de proposta recebido",
+      "papel": "ven",
+      "gatilho": "mensagem",
+      "segue": "a1"
+    },
+    {
+      "id": "a1",
+      "tipo": "atividade",
+      "nome": "Elaborar proposta",
+      "papel": "ven",
+      "segue": "a2",
+      "sistema": [],
+      "tempo": {
+        "execucao": "2h",
+        "espera": "1d"
+      }
+    },
+    {
+      "id": "a2",
+      "tipo": "atividade",
+      "nome": "Enviar proposta",
+      "papel": "ven",
+      "segue": "c1",
+      "sistema": [],
+      "tempo": {
+        "execucao": "10min"
+      }
+    },
+    {
+      "id": "c1",
+      "tipo": "corrida",
+      "nome": "O que vier primeiro",
+      "papel": "ven",
+      "segue": [
+        {
+          "para": "e1",
+          "rotulo": "Aceite recebido",
+          "percentual": 60.0
+        },
+        {
+          "para": "e2",
+          "rotulo": "Recusa recebida",
+          "percentual": 25.0
+        },
+        {
+          "para": "e3",
+          "rotulo": "Aguardar 10 dias corridos",
+          "percentual": 15.0
+        }
+      ]
+    },
+    {
+      "id": "e1",
+      "tipo": "evento",
+      "nome": "Aceite recebido",
+      "papel": "ven",
+      "gatilho": "mensagem",
+      "segue": "a3",
+      "tempo": {
+        "espera": "3d"
+      }
+    },
+    {
+      "id": "e2",
+      "tipo": "evento",
+      "nome": "Recusa recebida",
+      "papel": "ven",
+      "gatilho": "mensagem",
+      "segue": "f2",
+      "tempo": {
+        "espera": "2d"
+      }
+    },
+    {
+      "id": "e3",
+      "tipo": "evento",
+      "nome": "Aguardar 10 dias corridos",
+      "papel": "ven",
+      "gatilho": "tempo",
+      "tempo": {
+        "espera": "10dc"
+      },
+      "segue": "f3"
+    },
+    {
+      "id": "a3",
+      "tipo": "atividade",
+      "nome": "Faturar pedido",
+      "papel": "fin",
+      "segue": "f",
+      "sistema": [],
+      "tempo": {
+        "execucao": "30min"
+      }
+    },
+    {
+      "id": "f",
+      "tipo": "fim",
+      "nome": "Pedido faturado",
+      "papel": "fin"
+    },
+    {
+      "id": "f2",
+      "tipo": "fim",
+      "nome": "Proposta recusada",
+      "papel": "ven"
+    },
+    {
+      "id": "f3",
+      "tipo": "fim",
+      "nome": "Proposta expirada",
+      "papel": "ven"
+    }
+  ],
+  "regras": [],
+  "indicadores": [],
+  "dores": [],
+  "riscos": [],
+  "melhorias": [],
+  "glossario": [],
+  "pendencias": [],
+  "historico": []
+}

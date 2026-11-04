@@ -1,0 +1,530 @@
+{
+ "processo": {
+  "nome": "Mapa gigante"
+ },
+ "papeis": [
+  {
+   "id": "p0",
+   "nome": "Solicitante"
+  },
+  {
+   "id": "p1",
+   "nome": "Gestor imediato da área solicitante"
+  },
+  {
+   "id": "p2",
+   "nome": "Compras"
+  },
+  {
+   "id": "p3",
+   "nome": "Fiscal"
+  },
+  {
+   "id": "p4",
+   "nome": "Contas a pagar"
+  },
+  {
+   "id": "p5",
+   "nome": "Tesouraria"
+  },
+  {
+   "id": "p6",
+   "nome": "Jurídico"
+  },
+  {
+   "id": "p7",
+   "nome": "Diretoria"
+  },
+  {
+   "id": "p8",
+   "nome": "Almoxarifado"
+  },
+  {
+   "id": "p9",
+   "nome": "Fornecedor",
+   "tipo": "externo"
+  }
+ ],
+ "elementos": [
+  {
+   "id": "i",
+   "tipo": "inicio",
+   "nome": "Necessidade identificada",
+   "papel": "p0",
+   "segue": "a0"
+  },
+  {
+   "id": "a0",
+   "nome": "Registrar e conferir a solicitação número 0 com todos os anexos obrigatórios exigidos pela política",
+   "papel": "p0",
+   "segue": "a1"
+  },
+  {
+   "id": "a1",
+   "nome": "Analisar item 1",
+   "papel": "p3",
+   "segue": "a2"
+  },
+  {
+   "id": "a2",
+   "nome": "Analisar item 2",
+   "papel": "p6",
+   "segue": "a3"
+  },
+  {
+   "id": "a3",
+   "nome": "Analisar item 3",
+   "papel": "p9",
+   "segue": "a4"
+  },
+  {
+   "id": "a4",
+   "nome": "Analisar item 4",
+   "papel": "p2",
+   "segue": "a5"
+  },
+  {
+   "id": "a5",
+   "nome": "Analisar item 5",
+   "papel": "p5",
+   "segue": "d5"
+  },
+  {
+   "id": "d5",
+   "tipo": "decisao",
+   "nome": "Item 5 está ok?",
+   "papel": "p5",
+   "segue": [
+    {
+     "para": "a6",
+     "rotulo": "Sim",
+     "percentual": 80
+    },
+    {
+     "para": "a2",
+     "rotulo": "Não, devolver para correção",
+     "percentual": 20
+    }
+   ]
+  },
+  {
+   "id": "a6",
+   "nome": "Analisar item 6",
+   "papel": "p8",
+   "segue": "a7"
+  },
+  {
+   "id": "a7",
+   "nome": "Registrar e conferir a solicitação número 7 com todos os anexos obrigatórios exigidos pela política",
+   "papel": "p1",
+   "segue": "a8"
+  },
+  {
+   "id": "a8",
+   "nome": "Analisar item 8",
+   "papel": "p4",
+   "segue": "a9"
+  },
+  {
+   "id": "a9",
+   "nome": "Analisar item 9",
+   "papel": "p7",
+   "segue": "a10"
+  },
+  {
+   "id": "a10",
+   "nome": "Analisar item 10",
+   "papel": "p0",
+   "segue": "a11"
+  },
+  {
+   "id": "a11",
+   "nome": "Analisar item 11",
+   "papel": "p3",
+   "segue": "a12"
+  },
+  {
+   "id": "a12",
+   "nome": "Analisar item 12",
+   "papel": "p6",
+   "segue": "a13"
+  },
+  {
+   "id": "a13",
+   "nome": "Analisar item 13",
+   "papel": "p9",
+   "segue": "a14"
+  },
+  {
+   "id": "a14",
+   "nome": "Registrar e conferir a solicitação número 14 com todos os anexos obrigatórios exigidos pela política",
+   "papel": "p2",
+   "segue": "a15"
+  },
+  {
+   "id": "a15",
+   "nome": "Analisar item 15",
+   "papel": "p5",
+   "segue": "d15"
+  },
+  {
+   "id": "d15",
+   "tipo": "decisao",
+   "nome": "Item 15 está ok?",
+   "papel": "p5",
+   "segue": [
+    {
+     "para": "a16",
+     "rotulo": "Sim",
+     "percentual": 80
+    },
+    {
+     "para": "a12",
+     "rotulo": "Não, devolver para correção",
+     "percentual": 20
+    }
+   ]
+  },
+  {
+   "id": "a16",
+   "nome": "Analisar item 16",
+   "papel": "p8",
+   "segue": "a17"
+  },
+  {
+   "id": "a17",
+   "nome": "Analisar item 17",
+   "papel": "p1",
+   "segue": "a18"
+  },
+  {
+   "id": "a18",
+   "nome": "Analisar item 18",
+   "papel": "p4",
+   "segue": "a19"
+  },
+  {
+   "id": "a19",
+   "nome": "Analisar item 19",
+   "papel": "p7",
+   "segue": "a20"
+  },
+  {
+   "id": "a20",
+   "nome": "Analisar item 20",
+   "papel": "p0",
+   "segue": "a21"
+  },
+  {
+   "id": "a21",
+   "nome": "Registrar e conferir a solicitação número 21 com todos os anexos obrigatórios exigidos pela política",
+   "papel": "p3",
+   "segue": "a22"
+  },
+  {
+   "id": "a22",
+   "nome": "Analisar item 22",
+   "papel": "p6",
+   "segue": "a23"
+  },
+  {
+   "id": "a23",
+   "nome": "Analisar item 23",
+   "papel": "p9",
+   "segue": "a24"
+  },
+  {
+   "id": "a24",
+   "nome": "Analisar item 24",
+   "papel": "p2",
+   "segue": "a25"
+  },
+  {
+   "id": "a25",
+   "nome": "Analisar item 25",
+   "papel": "p5",
+   "segue": "d25"
+  },
+  {
+   "id": "d25",
+   "tipo": "decisao",
+   "nome": "Item 25 está ok?",
+   "papel": "p5",
+   "segue": [
+    {
+     "para": "a26",
+     "rotulo": "Sim",
+     "percentual": 80
+    },
+    {
+     "para": "a22",
+     "rotulo": "Não, devolver para correção",
+     "percentual": 20
+    }
+   ]
+  },
+  {
+   "id": "a26",
+   "nome": "Analisar item 26",
+   "papel": "p8",
+   "segue": "a27"
+  },
+  {
+   "id": "a27",
+   "nome": "Analisar item 27",
+   "papel": "p1",
+   "segue": "a28"
+  },
+  {
+   "id": "a28",
+   "nome": "Registrar e conferir a solicitação número 28 com todos os anexos obrigatórios exigidos pela política",
+   "papel": "p4",
+   "segue": "a29"
+  },
+  {
+   "id": "a29",
+   "nome": "Analisar item 29",
+   "papel": "p7",
+   "segue": "a30"
+  },
+  {
+   "id": "a30",
+   "nome": "Analisar item 30",
+   "papel": "p0",
+   "segue": "a31"
+  },
+  {
+   "id": "a31",
+   "nome": "Analisar item 31",
+   "papel": "p3",
+   "segue": "a32"
+  },
+  {
+   "id": "a32",
+   "nome": "Analisar item 32",
+   "papel": "p6",
+   "segue": "a33"
+  },
+  {
+   "id": "a33",
+   "nome": "Analisar item 33",
+   "papel": "p9",
+   "segue": "a34"
+  },
+  {
+   "id": "a34",
+   "nome": "Analisar item 34",
+   "papel": "p2",
+   "segue": "a35"
+  },
+  {
+   "id": "a35",
+   "nome": "Registrar e conferir a solicitação número 35 com todos os anexos obrigatórios exigidos pela política",
+   "papel": "p5",
+   "segue": "d35"
+  },
+  {
+   "id": "d35",
+   "tipo": "decisao",
+   "nome": "Item 35 está ok?",
+   "papel": "p5",
+   "segue": [
+    {
+     "para": "a36",
+     "rotulo": "Sim",
+     "percentual": 80
+    },
+    {
+     "para": "a32",
+     "rotulo": "Não, devolver para correção",
+     "percentual": 20
+    }
+   ]
+  },
+  {
+   "id": "a36",
+   "nome": "Analisar item 36",
+   "papel": "p8",
+   "segue": "a37"
+  },
+  {
+   "id": "a37",
+   "nome": "Analisar item 37",
+   "papel": "p1",
+   "segue": "a38"
+  },
+  {
+   "id": "a38",
+   "nome": "Analisar item 38",
+   "papel": "p4",
+   "segue": "a39"
+  },
+  {
+   "id": "a39",
+   "nome": "Analisar item 39",
+   "papel": "p7",
+   "segue": "a40"
+  },
+  {
+   "id": "a40",
+   "nome": "Analisar item 40",
+   "papel": "p0",
+   "segue": "a41"
+  },
+  {
+   "id": "a41",
+   "nome": "Analisar item 41",
+   "papel": "p3",
+   "segue": "a42"
+  },
+  {
+   "id": "a42",
+   "nome": "Registrar e conferir a solicitação número 42 com todos os anexos obrigatórios exigidos pela política",
+   "papel": "p6",
+   "segue": "a43"
+  },
+  {
+   "id": "a43",
+   "nome": "Analisar item 43",
+   "papel": "p9",
+   "segue": "a44"
+  },
+  {
+   "id": "a44",
+   "nome": "Analisar item 44",
+   "papel": "p2",
+   "segue": "a45"
+  },
+  {
+   "id": "a45",
+   "nome": "Analisar item 45",
+   "papel": "p5",
+   "segue": "d45"
+  },
+  {
+   "id": "d45",
+   "tipo": "decisao",
+   "nome": "Item 45 está ok?",
+   "papel": "p5",
+   "segue": [
+    {
+     "para": "a46",
+     "rotulo": "Sim",
+     "percentual": 80
+    },
+    {
+     "para": "a42",
+     "rotulo": "Não, devolver para correção",
+     "percentual": 20
+    }
+   ]
+  },
+  {
+   "id": "a46",
+   "nome": "Analisar item 46",
+   "papel": "p8",
+   "segue": "a47"
+  },
+  {
+   "id": "a47",
+   "nome": "Analisar item 47",
+   "papel": "p1",
+   "segue": "a48"
+  },
+  {
+   "id": "a48",
+   "nome": "Analisar item 48",
+   "papel": "p4",
+   "segue": "a49"
+  },
+  {
+   "id": "a49",
+   "nome": "Registrar e conferir a solicitação número 49 com todos os anexos obrigatórios exigidos pela política",
+   "papel": "p7",
+   "segue": "a50"
+  },
+  {
+   "id": "a50",
+   "nome": "Analisar item 50",
+   "papel": "p0",
+   "segue": "a51"
+  },
+  {
+   "id": "a51",
+   "nome": "Analisar item 51",
+   "papel": "p3",
+   "segue": "a52"
+  },
+  {
+   "id": "a52",
+   "nome": "Analisar item 52",
+   "papel": "p6",
+   "segue": "a53"
+  },
+  {
+   "id": "a53",
+   "nome": "Analisar item 53",
+   "papel": "p9",
+   "segue": "a54"
+  },
+  {
+   "id": "a54",
+   "nome": "Analisar item 54",
+   "papel": "p2",
+   "segue": "a55"
+  },
+  {
+   "id": "a55",
+   "nome": "Analisar item 55",
+   "papel": "p5",
+   "segue": "d55"
+  },
+  {
+   "id": "d55",
+   "tipo": "decisao",
+   "nome": "Item 55 está ok?",
+   "papel": "p5",
+   "segue": [
+    {
+     "para": "a56",
+     "rotulo": "Sim",
+     "percentual": 80
+    },
+    {
+     "para": "a52",
+     "rotulo": "Não, devolver para correção",
+     "percentual": 20
+    }
+   ]
+  },
+  {
+   "id": "a56",
+   "nome": "Registrar e conferir a solicitação número 56 com todos os anexos obrigatórios exigidos pela política",
+   "papel": "p8",
+   "segue": "a57"
+  },
+  {
+   "id": "a57",
+   "nome": "Analisar item 57",
+   "papel": "p1",
+   "segue": "a58"
+  },
+  {
+   "id": "a58",
+   "nome": "Analisar item 58",
+   "papel": "p4",
+   "segue": "a59"
+  },
+  {
+   "id": "a59",
+   "nome": "Analisar item 59",
+   "papel": "p7",
+   "segue": "fim"
+  },
+  {
+   "id": "fim",
+   "tipo": "fim",
+   "nome": "Concluído"
+  }
+ ]
+}

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" id="D" targetNamespace="x">
+  <process id="P" name="Faturamento">
+    <laneSet><lane id="L1" name="Faturista"><flowNodeRef>S</flowNodeRef><flowNodeRef>G</flowNodeRef><flowNodeRef>A</flowNodeRef><flowNodeRef>B</flowNodeRef><flowNodeRef>T1</flowNodeRef><flowNodeRef>T2</flowNodeRef><flowNodeRef>C</flowNodeRef><flowNodeRef>X</flowNodeRef><flowNodeRef>E</flowNodeRef></lane></laneSet>
+    <startEvent id="S" name="Pedido aprovado"/>
+    <exclusiveGateway id="G" name="Cliente novo?"/>
+    <task id="A" name="Cadastrar cliente"/>
+    <task id="B" name="Atualizar cadastro"/>
+    <intermediateThrowEvent id="T1" name="Para faturar"><linkEventDefinition name="FAT"/></intermediateThrowEvent>
+    <intermediateThrowEvent id="T2" name="Para faturar"><linkEventDefinition name="FAT"/></intermediateThrowEvent>
+    <intermediateCatchEvent id="C" name="Faturar"><linkEventDefinition name="FAT"/></intermediateCatchEvent>
+    <task id="X" name="Emitir nota fiscal"/>
+    <endEvent id="E" name="Nota emitida"/>
+    <sequenceFlow id="f1" sourceRef="S" targetRef="G"/>
+    <sequenceFlow id="f2" name="Sim" sourceRef="G" targetRef="A"/>
+    <sequenceFlow id="f3" name="Não" sourceRef="G" targetRef="B"/>
+    <sequenceFlow id="f4" sourceRef="A" targetRef="T1"/>
+    <sequenceFlow id="f5" sourceRef="B" targetRef="T2"/>
+    <sequenceFlow id="f6" sourceRef="C" targetRef="X"/>
+    <sequenceFlow id="f7" sourceRef="X" targetRef="E"/>
+  </process>
+</definitions>

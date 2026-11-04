@@ -1,0 +1,62 @@
+{
+ "processo": {
+  "nome": "v20_corrida_envia"
+ },
+ "papeis": [
+  {
+   "id": "a",
+   "nome": "Analista"
+  }
+ ],
+ "elementos": [
+  {
+   "id": "i",
+   "tipo": "inicio",
+   "nome": "Pedido recebido",
+   "papel": "a",
+   "segue": "t1"
+  },
+  {
+   "id": "t1",
+   "nome": "Analisar pedido",
+   "papel": "a",
+   "sistema": [],
+   "segue": "c"
+  },
+  {
+   "id": "c",
+   "tipo": "corrida",
+   "papel": "a",
+   "segue": [
+    {
+     "para": "e1",
+     "percentual": 50
+    },
+    {
+     "para": "e2",
+     "percentual": 50
+    }
+   ]
+  },
+  {
+   "id": "e1",
+   "tipo": "evento",
+   "gatilho": "mensagem",
+   "envia": true,
+   "nome": "Aviso enviado",
+   "segue": "f"
+  },
+  {
+   "id": "e2",
+   "tipo": "evento",
+   "gatilho": "tempo",
+   "nome": "Aguardar 2 dias",
+   "segue": "f"
+  },
+  {
+   "id": "f",
+   "tipo": "fim",
+   "nome": "Pedido pronto"
+  }
+ ]
+}

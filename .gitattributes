@@ -1,0 +1,7 @@
+# Fim de linha LF em todo checkout: os testes comparam texto e o aceite guarda
+# hash; um checkout com CRLF no Windows mudaria o conteúdo sem mudar nada.
+* text=auto eol=lf
+# Binários ficam byte a byte.
+*.zip binary
+*.png binary
+*.docx binary

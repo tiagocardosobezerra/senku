@@ -1,0 +1,19 @@
+{"processo":{"nome":"Abertura de conta PJ","codigo":"ABC-1"},
+ "papeis":[{"id":"cli","nome":"Cliente","tipo":"externo"},{"id":"at","nome":"Atendente"},{"id":"bk","nome":"Backoffice"}],
+ "elementos":[
+  {"id":"i","tipo":"inicio","nome":"Cliente pede conta","papel":"cli","segue":"c1"},
+  {"id":"c1","nome":"Preencher formulário","papel":"cli","segue":"a1","tempo":{"execucao":"20min"}},
+  {"id":"a1","nome":"Conferir formulário","papel":"at","segue":"a2","tempo":{"execucao":"10min"}},
+  {"id":"a2","nome":"Pedir documentos","papel":"at","envia":true,"segue":"cr","tempo":{"execucao":"5min"}},
+  {"id":"cr","tipo":"corrida","nome":"O que vier primeiro","papel":"at","segue":[{"para":"m","percentual":80},{"para":"t","percentual":20}]},
+  {"id":"m","tipo":"evento","gatilho":"mensagem","nome":"Documentos recebidos","papel":"at","tempo":{"espera":"2d"},"segue":"a3"},
+  {"id":"t","tipo":"evento","gatilho":"tempo","nome":"Aguardar 10 dias corridos","papel":"at","segue":"fx"},
+  {"id":"fx","tipo":"fim","nome":"Pedido arquivado"},
+  {"id":"a3","nome":"Validar documentos","papel":"bk","segue":"w","tempo":{"execucao":"30min"}},
+  {"id":"w","tipo":"evento","gatilho":"tempo","nome":"Aguardar 1 dia","segue":"c2"},
+  {"id":"c2","nome":"Assinar termo de abertura","papel":"cli","segue":"t2","tempo":{"execucao":"10min","espera":"1d"}},
+  {"id":"t2","tipo":"evento","gatilho":"tempo","nome":"Aguardar 2 horas","papel":"bk","segue":"a4"},
+  {"id":"a4","nome":"Abrir conta no core","papel":"bk","segue":"c3","tempo":{"execucao":"15min"}},
+  {"id":"c3","nome":"Receber dados de acesso","papel":"cli","segue":"f"},
+  {"id":"f","tipo":"fim","nome":"Conta aberta","papel":"cli"}
+ ]}

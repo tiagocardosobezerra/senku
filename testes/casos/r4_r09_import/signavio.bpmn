@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" xmlns:signavio="http://www.signavio.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="sid-defs" targetNamespace="http://www.signavio.com" exporter="Signavio Process Editor" exporterVersion="17.1.0">
+  <message id="sid-msg1" name="Pedido"/>
+  <collaboration id="sid-collab">
+    <participant id="sid-pool-cli" name="Cliente"/>
+    <participant id="sid-pool-emp" name="Empresa XYZ" processRef="sid-proc"/>
+    <messageFlow id="sid-mf1" sourceRef="sid-pool-cli" targetRef="sid-start" messageRef="sid-msg1"/>
+    <messageFlow id="sid-mf2" sourceRef="sid-send" targetRef="sid-pool-cli"/>
+  </collaboration>
+  <process id="sid-proc" isExecutable="false">
+    <extensionElements><signavio:signavioDiagramMetaData metaKey="revisionid" metaValue="abc"/></extensionElements>
+    <laneSet id="sid-ls">
+      <lane id="sid-lane-top" name="Empresa">
+        <childLaneSet id="sid-cls">
+          <lane id="sid-l1" name="Atendimento">
+            <flowNodeRef>sid-start</flowNodeRef><flowNodeRef>sid-t1</flowNodeRef><flowNodeRef>sid-ebg</flowNodeRef>
+            <flowNodeRef>sid-rt</flowNodeRef><flowNodeRef>sid-tim</flowNodeRef><flowNodeRef>sid-send</flowNodeRef>
+            <flowNodeRef>sid-b1</flowNodeRef><flowNodeRef>sid-b2</flowNodeRef>
+          </lane>
+          <lane id="sid-l2" name="Backoffice">
+            <flowNodeRef>sid-sp</flowNodeRef><flowNodeRef>sid-ca</flowNodeRef><flowNodeRef>sid-x1</flowNodeRef>
+            <flowNodeRef>sid-end1</flowNodeRef><flowNodeRef>sid-end2</flowNodeRef><flowNodeRef>sid-esc</flowNodeRef>
+            <flowNodeRef>sid-start2</flowNodeRef>
+          </lane>
+        </childLaneSet>
+      </lane>
+    </laneSet>
+    <startEvent id="sid-start" name="Pedido recebido"><outgoing>sid-f1</outgoing><messageEventDefinition messageRef="sid-msg1"/></startEvent>
+    <startEvent id="sid-start2" name="Todo dia 5"><outgoing>sid-f9</outgoing><timerEventDefinition><timeCycle>R/2026-01-05T08:00:00/P1M</timeCycle></timerEventDefinition></startEvent>
+    <userTask id="sid-t1" name="Analisar pedido"><incoming>sid-f1</incoming><outgoing>sid-f2</outgoing>
+      <standardLoopCharacteristics/></userTask>
+    <boundaryEvent id="sid-b1" name="2 dias" attachedToRef="sid-t1" cancelActivity="false"><outgoing>sid-f3</outgoing><timerEventDefinition><timeDuration>P2D</timeDuration></timerEventDefinition></boundaryEvent>
+    <boundaryEvent id="sid-b2" name="Falha" attachedToRef="sid-sp"><outgoing>sid-f10</outgoing><escalationEventDefinition/></boundaryEvent>
+    <intermediateThrowEvent id="sid-esc" name="Escalar"><incoming>sid-f3</incoming><escalationEventDefinition/></intermediateThrowEvent>
+    <eventBasedGateway id="sid-ebg" name=""><incoming>sid-f2</incoming><outgoing>sid-f4</outgoing><outgoing>sid-f5</outgoing></eventBasedGateway>
+    <receiveTask id="sid-rt" name="Receber documentos"><incoming>sid-f4</incoming><outgoing>sid-f6</outgoing></receiveTask>
+    <intermediateCatchEvent id="sid-tim" name="5 dias"><incoming>sid-f5</incoming><outgoing>sid-f7</outgoing><timerEventDefinition><timeDuration>P5D</timeDuration></timerEventDefinition></intermediateCatchEvent>
+    <subProcess id="sid-sp" name="Processar pedido"><incoming>sid-f6</incoming><incoming>sid-f9</incoming><outgoing>sid-f8</outgoing>
+      <startEvent id="sid-sps"/><task id="sid-spt" name="Lançar no ERP"/><endEvent id="sid-spe"/>
+      <sequenceFlow id="sid-spf1" sourceRef="sid-sps" targetRef="sid-spt"/><sequenceFlow id="sid-spf2" sourceRef="sid-spt" targetRef="sid-spe"/>
+    </subProcess>
+    <callActivity id="sid-ca" name="Faturar" calledElement="FAT-01"><incoming>sid-f8</incoming><outgoing>sid-f11</outgoing></callActivity>
+    <sendTask id="sid-send" name="Enviar confirmação" messageRef="sid-msg1"><incoming>sid-f11</incoming><outgoing>sid-f12</outgoing></sendTask>
+    <exclusiveGateway id="sid-x1" name="Cliente respondeu?" default="sid-f13"><incoming>sid-f7</incoming><incoming>sid-f10</incoming><outgoing>sid-f13</outgoing></exclusiveGateway>
+    <endEvent id="sid-end1" name="Pedido concluído"><incoming>sid-f12</incoming></endEvent>
+    <endEvent id="sid-end2" name="Pedido cancelado"><incoming>sid-f13</incoming><terminateEventDefinition/></endEvent>
+    <sequenceFlow id="sid-f1" sourceRef="sid-start" targetRef="sid-t1"/>
+    <sequenceFlow id="sid-f2" sourceRef="sid-t1" targetRef="sid-ebg"/>
+    <sequenceFlow id="sid-f3" sourceRef="sid-b1" targetRef="sid-esc"/>
+    <sequenceFlow id="sid-f4" sourceRef="sid-ebg" targetRef="sid-rt"/>
+    <sequenceFlow id="sid-f5" sourceRef="sid-ebg" targetRef="sid-tim"/>
+    <sequenceFlow id="sid-f6" sourceRef="sid-rt" targetRef="sid-sp"/>
+    <sequenceFlow id="sid-f7" sourceRef="sid-tim" targetRef="sid-x1"/>
+    <sequenceFlow id="sid-f8" sourceRef="sid-sp" targetRef="sid-ca"/>
+    <sequenceFlow id="sid-f9" sourceRef="sid-start2" targetRef="sid-sp"/>
+    <sequenceFlow id="sid-f10" sourceRef="sid-b2" targetRef="sid-x1"/>
+    <sequenceFlow id="sid-f11" sourceRef="sid-ca" targetRef="sid-send"/>
+    <sequenceFlow id="sid-f12" sourceRef="sid-send" targetRef="sid-end1"/>
+    <sequenceFlow id="sid-f13" sourceRef="sid-x1" targetRef="sid-end2"/>
+  </process>
+</definitions>

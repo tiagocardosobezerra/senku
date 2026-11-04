@@ -1,0 +1,163 @@
+{
+  "formato": "senku/1",
+  "processo": {
+    "codigo": "",
+    "nome": "Empresa XYZ",
+    "cenario": "as-is",
+    "versao": "0.1",
+    "objetivo": "",
+    "dono": "",
+    "area": "",
+    "macroprocesso": "",
+    "nivel": "processo",
+    "gatilho": "",
+    "resultado": "",
+    "frequencia": "",
+    "volume": "",
+    "prazo_informado": "",
+    "escopo": {
+      "inicio": "",
+      "fim": "",
+      "inclui": [],
+      "nao_inclui": []
+    },
+    "normas": [],
+    "premissas": [
+      "Importado de camunda.bpmn: confira papéis, regras e tempos com o dono do processo"
+    ]
+  },
+  "participantes": [],
+  "sipoc": {
+    "fornecedores": [],
+    "entradas": [],
+    "saidas": [],
+    "clientes": []
+  },
+  "papeis": [
+    {
+      "id": "L_Comercial",
+      "nome": "Comercial",
+      "tipo": "interno"
+    },
+    {
+      "id": "L_Vendedor",
+      "nome": "Vendedor",
+      "tipo": "interno"
+    },
+    {
+      "id": "L_Supervisor",
+      "nome": "Supervisor",
+      "tipo": "interno"
+    },
+    {
+      "id": "L_Financeiro",
+      "nome": "Financeiro",
+      "tipo": "interno"
+    },
+    {
+      "id": "Proc_Cliente",
+      "nome": "Cliente",
+      "tipo": "externo"
+    },
+    {
+      "id": "Banco",
+      "nome": "Banco",
+      "tipo": "externo"
+    }
+  ],
+  "sistemas": [],
+  "elementos": [
+    {
+      "id": "SE_Pedido",
+      "tipo": "inicio",
+      "nome": "Pedido recebido",
+      "papel": "L_Vendedor",
+      "gatilho": "mensagem",
+      "segue": "T_Analisar"
+    },
+    {
+      "id": "T_Analisar",
+      "tipo": "atividade",
+      "nome": "Analisar pedido",
+      "papel": "L_Vendedor",
+      "descricao": "Verifica estoque e preço",
+      "segue": "GW_Ok"
+    },
+    {
+      "id": "BE_Timer",
+      "tipo": "evento",
+      "nome": "48h sem análise",
+      "papel": "L_Vendedor",
+      "gatilho": "tempo",
+      "segue": "T_Escalar"
+    },
+    {
+      "id": "T_Escalar",
+      "tipo": "atividade",
+      "nome": "Escalar para supervisor",
+      "papel": "L_Supervisor",
+      "segue": "EE_Rej"
+    },
+    {
+      "id": "GW_Ok",
+      "tipo": "decisao",
+      "nome": "Pedido viável?",
+      "papel": "L_Supervisor",
+      "segue": [
+        {
+          "para": "SP_Faturar",
+          "rotulo": "Sim",
+          "condicao": "${viavel}"
+        },
+        {
+          "para": "EE_Rej"
+        }
+      ]
+    },
+    {
+      "id": "SP_Faturar",
+      "tipo": "subprocesso",
+      "nome": "Faturar pedido",
+      "papel": "L_Financeiro",
+      "segue": "T_Cobrar"
+    },
+    {
+      "id": "T_Cobrar",
+      "tipo": "atividade",
+      "nome": "Cobrar via banco",
+      "papel": "L_Financeiro",
+      "segue": "T_Notificar"
+    },
+    {
+      "id": "T_Notificar",
+      "tipo": "atividade",
+      "nome": "Notificar cliente",
+      "papel": "L_Supervisor",
+      "segue": "EE_Ok"
+    },
+    {
+      "id": "EE_Ok",
+      "tipo": "fim",
+      "nome": "Pedido atendido",
+      "papel": "L_Supervisor"
+    },
+    {
+      "id": "EE_Rej",
+      "tipo": "fim",
+      "nome": "Pedido recusado",
+      "papel": "L_Supervisor"
+    }
+  ],
+  "regras": [],
+  "indicadores": [],
+  "dores": [],
+  "riscos": [],
+  "melhorias": [],
+  "glossario": [],
+  "pendencias": [
+    {
+      "pergunta": "O mapa original tem 3 fluxo(s) de mensagem entre pools: confira se a troca com os papéis externos está nas atividades."
+    }
+  ],
+  "historico": []
+}

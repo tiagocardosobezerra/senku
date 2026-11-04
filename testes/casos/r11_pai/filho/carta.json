@@ -1,0 +1,105 @@
+{
+ "processo": {
+  "nome": "Filho",
+  "volume": "100 por mês"
+ },
+ "papeis": [
+  {
+   "id": "a",
+   "nome": "Analista"
+  },
+  {
+   "id": "g",
+   "nome": "Gestor"
+  }
+ ],
+ "elementos": [
+  {
+   "id": "i",
+   "tipo": "inicio",
+   "nome": "Inicio",
+   "papel": "a",
+   "segue": "p1"
+  },
+  {
+   "id": "p1",
+   "tipo": "paralelo",
+   "papel": "a",
+   "segue": [
+    "x",
+    "y"
+   ]
+  },
+  {
+   "id": "x",
+   "nome": "Aguardar assinatura",
+   "papel": "a",
+   "segue": "dx",
+   "tempo": {
+    "execucao": "1h"
+   }
+  },
+  {
+   "id": "dx",
+   "tipo": "decisao",
+   "nome": "Assinou?",
+   "papel": "a",
+   "segue": [
+    {
+     "para": "p2",
+     "rotulo": "Sim",
+     "percentual": 50
+    },
+    {
+     "para": "fexp",
+     "rotulo": "Não",
+     "percentual": 50
+    }
+   ]
+  },
+  {
+   "id": "fexp",
+   "tipo": "fim",
+   "nome": "Proposta expirada",
+   "encerra": true
+  },
+  {
+   "id": "y",
+   "nome": "Preparar contrato",
+   "papel": "g",
+   "segue": "y2",
+   "tempo": {
+    "execucao": "2h"
+   }
+  },
+  {
+   "id": "y2",
+   "nome": "Revisar contrato",
+   "papel": "g",
+   "segue": "p2",
+   "tempo": {
+    "execucao": "3h"
+   }
+  },
+  {
+   "id": "p2",
+   "tipo": "paralelo",
+   "papel": "a",
+   "segue": "z"
+  },
+  {
+   "id": "z",
+   "nome": "Arquivar",
+   "papel": "a",
+   "segue": "f",
+   "tempo": {
+    "execucao": "10h"
+   }
+  },
+  {
+   "id": "f",
+   "tipo": "fim",
+   "nome": "Contrato arquivado"
+  }
+ ]
+}

@@ -1,0 +1,850 @@
+{
+ "processo": {
+  "nome": "Processo grande 11",
+  "volume": "1.500 pedidos por mês",
+  "dono": "Diretor"
+ },
+ "papeis": [
+  {
+   "id": "r0",
+   "nome": "Área 0 — Coordenação ç"
+  },
+  {
+   "id": "r1",
+   "nome": "Área 1 — Coordenação ç"
+  },
+  {
+   "id": "r2",
+   "nome": "Área 2 — Coordenação ç"
+  },
+  {
+   "id": "r3",
+   "nome": "Área 3 — Coordenação ç"
+  },
+  {
+   "id": "r4",
+   "nome": "Área 4 — Coordenação ç"
+  },
+  {
+   "id": "r5",
+   "nome": "Área 5 — Coordenação ç"
+  },
+  {
+   "id": "r6",
+   "nome": "Área 6 — Coordenação ç"
+  },
+  {
+   "id": "r7",
+   "nome": "Área 7 — Coordenação ç"
+  },
+  {
+   "id": "r8",
+   "nome": "Área 8 — Coordenação ç"
+  },
+  {
+   "id": "r9",
+   "nome": "Área 9 — Coordenação ç"
+  }
+ ],
+ "elementos": [
+  {
+   "id": "ini",
+   "tipo": "inicio",
+   "nome": "Pedido recebido",
+   "papel": "r0",
+   "segue": "a1"
+  },
+  {
+   "id": "a1",
+   "nome": "Executar etapa 1 do pedido com conferência",
+   "papel": "r8",
+   "tempo": {
+    "execucao": "8h",
+    "espera": "1d"
+   },
+   "segue": "d0"
+  },
+  {
+   "id": "d0",
+   "tipo": "decisao",
+   "nome": "Conferência ok 0?",
+   "papel": "r8",
+   "segue": [
+    {
+     "para": "a3",
+     "rotulo": "Sim",
+     "percentual": 75
+    },
+    {
+     "para": "a2",
+     "rotulo": "Não",
+     "percentual": 25
+    }
+   ]
+  },
+  {
+   "id": "a2",
+   "nome": "Executar etapa 2 do pedido com conferência",
+   "papel": "r8",
+   "tempo": {
+    "execucao": "4h",
+    "espera": "0"
+   },
+   "segue": "a1"
+  },
+  {
+   "id": "a3",
+   "nome": "Executar etapa 3 do pedido com conferência",
+   "papel": "r8",
+   "tempo": {
+    "execucao": "8h",
+    "espera": "2h"
+   },
+   "segue": "a4"
+  },
+  {
+   "id": "a4",
+   "nome": "Executar etapa 4 do pedido com conferência",
+   "papel": "r2",
+   "tempo": {
+    "execucao": "2h",
+    "espera": "1d"
+   },
+   "bordas": [
+    {
+     "gatilho": "tempo",
+     "nome": "Prazo de 48h estourado",
+     "tempo": "48hc",
+     "percentual": 10,
+     "segue": "a5"
+    },
+    {
+     "gatilho": "mensagem",
+     "nome": "Cliente cancelou",
+     "percentual": 5,
+     "segue": "fe1"
+    }
+   ],
+   "segue": "a6"
+  },
+  {
+   "id": "a5",
+   "nome": "Executar etapa 5 do pedido com conferência",
+   "papel": "r4",
+   "tempo": {
+    "execucao": "3h",
+    "espera": "0"
+   },
+   "segue": "fe1"
+  },
+  {
+   "id": "fe1",
+   "tipo": "fim",
+   "nome": "Pedido escalado 1"
+  },
+  {
+   "id": "a6",
+   "nome": "Executar etapa 6 do pedido com conferência",
+   "papel": "r0",
+   "tempo": {
+    "execucao": "7h",
+    "espera": "1d"
+   },
+   "bordas": [
+    {
+     "gatilho": "tempo",
+     "nome": "Prazo de 48h estourado",
+     "tempo": "48hc",
+     "percentual": 10,
+     "segue": "a7"
+    },
+    {
+     "gatilho": "mensagem",
+     "nome": "Cliente cancelou",
+     "percentual": 5,
+     "segue": "fe2"
+    }
+   ],
+   "segue": "a8"
+  },
+  {
+   "id": "a7",
+   "nome": "Executar etapa 7 do pedido com conferência",
+   "papel": "r9",
+   "tempo": {
+    "execucao": "3h",
+    "espera": "2h"
+   },
+   "segue": "fe2"
+  },
+  {
+   "id": "fe2",
+   "tipo": "fim",
+   "nome": "Pedido escalado 2"
+  },
+  {
+   "id": "a8",
+   "nome": "Executar etapa 8 do pedido com conferência",
+   "papel": "r8",
+   "tempo": {
+    "execucao": "2h",
+    "espera": "0"
+   },
+   "segue": "a9"
+  },
+  {
+   "id": "a9",
+   "nome": "Executar etapa 9 do pedido com conferência",
+   "papel": "r3",
+   "tempo": {
+    "execucao": "4h",
+    "espera": "2h"
+   },
+   "segue": "a10"
+  },
+  {
+   "id": "a10",
+   "nome": "Executar etapa 10 do pedido com conferência",
+   "papel": "r7",
+   "tempo": {
+    "execucao": "6h",
+    "espera": "1d"
+   },
+   "segue": "a11"
+  },
+  {
+   "id": "a11",
+   "nome": "Executar etapa 11 do pedido com conferência",
+   "papel": "r3",
+   "tempo": {
+    "execucao": "4h",
+    "espera": "2h"
+   },
+   "bordas": [
+    {
+     "gatilho": "tempo",
+     "nome": "Prazo de 48h estourado",
+     "tempo": "48hc",
+     "percentual": 10,
+     "segue": "a12"
+    },
+    {
+     "gatilho": "mensagem",
+     "nome": "Cliente cancelou",
+     "percentual": 5,
+     "segue": "fe6"
+    }
+   ],
+   "segue": "o7"
+  },
+  {
+   "id": "a12",
+   "nome": "Executar etapa 12 do pedido com conferência",
+   "papel": "r4",
+   "tempo": {
+    "execucao": "8h",
+    "espera": "0"
+   },
+   "segue": "fe6"
+  },
+  {
+   "id": "fe6",
+   "tipo": "fim",
+   "nome": "Pedido escalado 6"
+  },
+  {
+   "id": "o7",
+   "tipo": "inclusivo",
+   "nome": "Quais itens?",
+   "papel": "r1",
+   "segue": [
+    {
+     "para": "a13",
+     "rotulo": "Item 0",
+     "percentual": 40
+    },
+    {
+     "para": "a14",
+     "rotulo": "Item 1",
+     "percentual": 90
+    },
+    {
+     "para": "a15",
+     "rotulo": "Item 2",
+     "percentual": 40
+    }
+   ]
+  },
+  {
+   "id": "a13",
+   "nome": "Executar etapa 13 do pedido com conferência",
+   "papel": "r4",
+   "tempo": {
+    "execucao": "7h",
+    "espera": "2h"
+   },
+   "segue": "oj7"
+  },
+  {
+   "id": "a14",
+   "nome": "Executar etapa 14 do pedido com conferência",
+   "papel": "r1",
+   "tempo": {
+    "execucao": "5h",
+    "espera": "1d"
+   },
+   "segue": "oj7"
+  },
+  {
+   "id": "a15",
+   "nome": "Executar etapa 15 do pedido com conferência",
+   "papel": "r3",
+   "tempo": {
+    "execucao": "5h",
+    "espera": "0"
+   },
+   "segue": "oj7"
+  },
+  {
+   "id": "oj7",
+   "tipo": "inclusivo",
+   "papel": "r7",
+   "segue": "a16"
+  },
+  {
+   "id": "a16",
+   "nome": "Executar etapa 16 do pedido com conferência",
+   "papel": "r1",
+   "tempo": {
+    "execucao": "5h",
+    "espera": "1d"
+   },
+   "segue": "d8"
+  },
+  {
+   "id": "d8",
+   "tipo": "decisao",
+   "nome": "Conferência ok 8?",
+   "papel": "r1",
+   "segue": [
+    {
+     "para": "a18",
+     "rotulo": "Sim",
+     "percentual": 75
+    },
+    {
+     "para": "a17",
+     "rotulo": "Não",
+     "percentual": 25
+    }
+   ]
+  },
+  {
+   "id": "a17",
+   "nome": "Executar etapa 17 do pedido com conferência",
+   "papel": "r1",
+   "tempo": {
+    "execucao": "1h",
+    "espera": "2h"
+   },
+   "segue": "a16"
+  },
+  {
+   "id": "a18",
+   "nome": "Executar etapa 18 do pedido com conferência",
+   "papel": "r0",
+   "tempo": {
+    "execucao": "4h",
+    "espera": "0"
+   },
+   "segue": "a19"
+  },
+  {
+   "id": "a19",
+   "nome": "Executar etapa 19 do pedido com conferência",
+   "papel": "r7",
+   "tempo": {
+    "execucao": "7h",
+    "espera": "2h"
+   },
+   "segue": "a20"
+  },
+  {
+   "id": "a20",
+   "nome": "Executar etapa 20 do pedido com conferência",
+   "papel": "r6",
+   "tempo": {
+    "execucao": "2h",
+    "espera": "2h"
+   },
+   "segue": "d10"
+  },
+  {
+   "id": "d10",
+   "tipo": "decisao",
+   "nome": "Conferência ok 10?",
+   "papel": "r6",
+   "segue": [
+    {
+     "para": "a22",
+     "rotulo": "Sim",
+     "percentual": 75
+    },
+    {
+     "para": "a21",
+     "rotulo": "Não",
+     "percentual": 25
+    }
+   ]
+  },
+  {
+   "id": "a21",
+   "nome": "Executar etapa 21 do pedido com conferência",
+   "papel": "r3",
+   "tempo": {
+    "execucao": "5h",
+    "espera": "1d"
+   },
+   "segue": "a20"
+  },
+  {
+   "id": "a22",
+   "nome": "Executar etapa 22 do pedido com conferência",
+   "papel": "r1",
+   "tempo": {
+    "execucao": "5h",
+    "espera": "1d"
+   },
+   "segue": "a23"
+  },
+  {
+   "id": "a23",
+   "nome": "Executar etapa 23 do pedido com conferência",
+   "papel": "r6",
+   "tempo": {
+    "execucao": "2h",
+    "espera": "0"
+   },
+   "segue": "d12"
+  },
+  {
+   "id": "d12",
+   "tipo": "decisao",
+   "nome": "Pedido válido 12?",
+   "papel": "r1",
+   "segue": [
+    {
+     "para": "a24",
+     "rotulo": "Sim",
+     "percentual": 70
+    },
+    {
+     "para": "a25",
+     "rotulo": "Não",
+     "percentual": 30
+    }
+   ]
+  },
+  {
+   "id": "a24",
+   "nome": "Executar etapa 24 do pedido com conferência",
+   "papel": "r0",
+   "tempo": {
+    "execucao": "1h",
+    "espera": "1d"
+   },
+   "segue": "a26"
+  },
+  {
+   "id": "a25",
+   "nome": "Executar etapa 25 do pedido com conferência",
+   "papel": "r7",
+   "tempo": {
+    "execucao": "3h",
+    "espera": "2h"
+   },
+   "segue": "a26"
+  },
+  {
+   "id": "a26",
+   "nome": "Executar etapa 26 do pedido com conferência",
+   "papel": "r8",
+   "tempo": {
+    "execucao": "4h",
+    "espera": "1d"
+   },
+   "segue": "a27"
+  },
+  {
+   "id": "a27",
+   "nome": "Executar etapa 27 do pedido com conferência",
+   "papel": "r3",
+   "tempo": {
+    "execucao": "3h",
+    "espera": "1d"
+   },
+   "bordas": [
+    {
+     "gatilho": "tempo",
+     "nome": "Prazo de 48h estourado",
+     "tempo": "48hc",
+     "percentual": 10,
+     "segue": "a28"
+    },
+    {
+     "gatilho": "mensagem",
+     "nome": "Cliente cancelou",
+     "percentual": 5,
+     "segue": "fe13"
+    }
+   ],
+   "segue": "a29"
+  },
+  {
+   "id": "a28",
+   "nome": "Executar etapa 28 do pedido com conferência",
+   "papel": "r6",
+   "tempo": {
+    "execucao": "2h",
+    "espera": "1d"
+   },
+   "segue": "fe13"
+  },
+  {
+   "id": "fe13",
+   "tipo": "fim",
+   "nome": "Pedido escalado 13"
+  },
+  {
+   "id": "a29",
+   "nome": "Executar etapa 29 do pedido com conferência",
+   "papel": "r3",
+   "tempo": {
+    "execucao": "1h",
+    "espera": "1d"
+   },
+   "segue": "d14"
+  },
+  {
+   "id": "d14",
+   "tipo": "decisao",
+   "nome": "Conferência ok 14?",
+   "papel": "r3",
+   "segue": [
+    {
+     "para": "a31",
+     "rotulo": "Sim",
+     "percentual": 75
+    },
+    {
+     "para": "a30",
+     "rotulo": "Não",
+     "percentual": 25
+    }
+   ]
+  },
+  {
+   "id": "a30",
+   "nome": "Executar etapa 30 do pedido com conferência",
+   "papel": "r9",
+   "tempo": {
+    "execucao": "5h",
+    "espera": "0"
+   },
+   "segue": "a29"
+  },
+  {
+   "id": "a31",
+   "nome": "Executar etapa 31 do pedido com conferência",
+   "papel": "r3",
+   "tempo": {
+    "execucao": "3h",
+    "espera": "1d"
+   },
+   "segue": "a32"
+  },
+  {
+   "id": "a32",
+   "nome": "Executar etapa 32 do pedido com conferência",
+   "papel": "r9",
+   "tempo": {
+    "execucao": "2h",
+    "espera": "0"
+   },
+   "bordas": [
+    {
+     "gatilho": "tempo",
+     "nome": "Prazo de 48h estourado",
+     "tempo": "48hc",
+     "percentual": 10,
+     "segue": "a33"
+    },
+    {
+     "gatilho": "mensagem",
+     "nome": "Cliente cancelou",
+     "percentual": 5,
+     "segue": "fe15"
+    }
+   ],
+   "segue": "p16"
+  },
+  {
+   "id": "a33",
+   "nome": "Executar etapa 33 do pedido com conferência",
+   "papel": "r2",
+   "tempo": {
+    "execucao": "4h",
+    "espera": "1d"
+   },
+   "segue": "fe15"
+  },
+  {
+   "id": "fe15",
+   "tipo": "fim",
+   "nome": "Pedido escalado 15"
+  },
+  {
+   "id": "p16",
+   "tipo": "paralelo",
+   "papel": "r0",
+   "segue": [
+    "a34",
+    "a35",
+    "a36"
+   ]
+  },
+  {
+   "id": "a34",
+   "nome": "Executar etapa 34 do pedido com conferência",
+   "papel": "r4",
+   "tempo": {
+    "execucao": "7h",
+    "espera": "0"
+   },
+   "segue": "q16"
+  },
+  {
+   "id": "a35",
+   "nome": "Executar etapa 35 do pedido com conferência",
+   "papel": "r1",
+   "tempo": {
+    "execucao": "2h",
+    "espera": "0"
+   },
+   "segue": "q16"
+  },
+  {
+   "id": "a36",
+   "nome": "Executar etapa 36 do pedido com conferência",
+   "papel": "r9",
+   "tempo": {
+    "execucao": "4h",
+    "espera": "0"
+   },
+   "segue": "q16"
+  },
+  {
+   "id": "q16",
+   "tipo": "paralelo",
+   "papel": "r9",
+   "segue": "a37"
+  },
+  {
+   "id": "a37",
+   "nome": "Executar etapa 37 do pedido com conferência",
+   "papel": "r5",
+   "tempo": {
+    "execucao": "6h",
+    "espera": "2h"
+   },
+   "bordas": [
+    {
+     "gatilho": "tempo",
+     "nome": "Prazo de 48h estourado",
+     "tempo": "48hc",
+     "percentual": 10,
+     "segue": "a38"
+    },
+    {
+     "gatilho": "mensagem",
+     "nome": "Cliente cancelou",
+     "percentual": 5,
+     "segue": "fe17"
+    }
+   ],
+   "segue": "a39"
+  },
+  {
+   "id": "a38",
+   "nome": "Executar etapa 38 do pedido com conferência",
+   "papel": "r7",
+   "tempo": {
+    "execucao": "3h",
+    "espera": "2h"
+   },
+   "segue": "fe17"
+  },
+  {
+   "id": "fe17",
+   "tipo": "fim",
+   "nome": "Pedido escalado 17"
+  },
+  {
+   "id": "a39",
+   "nome": "Executar etapa 39 do pedido com conferência",
+   "papel": "r9",
+   "tempo": {
+    "execucao": "3h",
+    "espera": "1d"
+   },
+   "segue": "d18"
+  },
+  {
+   "id": "d18",
+   "tipo": "decisao",
+   "nome": "Conferência ok 18?",
+   "papel": "r9",
+   "segue": [
+    {
+     "para": "a41",
+     "rotulo": "Sim",
+     "percentual": 75
+    },
+    {
+     "para": "a40",
+     "rotulo": "Não",
+     "percentual": 25
+    }
+   ]
+  },
+  {
+   "id": "a40",
+   "nome": "Executar etapa 40 do pedido com conferência",
+   "papel": "r2",
+   "tempo": {
+    "execucao": "3h",
+    "espera": "1d"
+   },
+   "segue": "a39"
+  },
+  {
+   "id": "a41",
+   "nome": "Executar etapa 41 do pedido com conferência",
+   "papel": "r3",
+   "tempo": {
+    "execucao": "4h",
+    "espera": "2h"
+   },
+   "segue": "d19"
+  },
+  {
+   "id": "d19",
+   "tipo": "decisao",
+   "nome": "Pedido válido 19?",
+   "papel": "r2",
+   "segue": [
+    {
+     "para": "a42",
+     "rotulo": "Sim",
+     "percentual": 70
+    },
+    {
+     "para": "a43",
+     "rotulo": "Não",
+     "percentual": 30
+    }
+   ]
+  },
+  {
+   "id": "a42",
+   "nome": "Executar etapa 42 do pedido com conferência",
+   "papel": "r8",
+   "tempo": {
+    "execucao": "4h",
+    "espera": "2h"
+   },
+   "segue": "a44"
+  },
+  {
+   "id": "a43",
+   "nome": "Executar etapa 43 do pedido com conferência",
+   "papel": "r6",
+   "tempo": {
+    "execucao": "8h",
+    "espera": "2h"
+   },
+   "segue": "a44"
+  },
+  {
+   "id": "a44",
+   "nome": "Executar etapa 44 do pedido com conferência",
+   "papel": "r1",
+   "tempo": {
+    "execucao": "7h",
+    "espera": "0"
+   },
+   "segue": "a45"
+  },
+  {
+   "id": "a45",
+   "nome": "Executar etapa 45 do pedido com conferência",
+   "papel": "r1",
+   "tempo": {
+    "execucao": "1h",
+    "espera": "2h"
+   },
+   "segue": "p21"
+  },
+  {
+   "id": "p21",
+   "tipo": "paralelo",
+   "papel": "r3",
+   "segue": [
+    "a46",
+    "a47",
+    "a48"
+   ]
+  },
+  {
+   "id": "a46",
+   "nome": "Executar etapa 46 do pedido com conferência",
+   "papel": "r6",
+   "tempo": {
+    "execucao": "8h",
+    "espera": "1d"
+   },
+   "segue": "q21"
+  },
+  {
+   "id": "a47",
+   "nome": "Executar etapa 47 do pedido com conferência",
+   "papel": "r8",
+   "tempo": {
+    "execucao": "3h",
+    "espera": "2h"
+   },
+   "segue": "q21"
+  },
+  {
+   "id": "a48",
+   "nome": "Executar etapa 48 do pedido com conferência",
+   "papel": "r1",
+   "tempo": {
+    "execucao": "3h",
+    "espera": "0"
+   },
+   "segue": "q21"
+  },
+  {
+   "id": "q21",
+   "tipo": "paralelo",
+   "papel": "r6",
+   "segue": "fim"
+  },
+  {
+   "id": "fim",
+   "tipo": "fim",
+   "nome": "Pedido concluído"
+  }
+ ]
+}

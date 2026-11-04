@@ -1,0 +1,86 @@
+{
+ "elementos": [
+  {
+   "id": "i",
+   "tipo": "inicio",
+   "nome": "Pedido recebido",
+   "papel": "x",
+   "segue": "a1"
+  },
+  {
+   "id": "a1",
+   "nome": "Executar a1",
+   "papel": "x",
+   "segue": "p1"
+  },
+  {
+   "id": "p1",
+   "tipo": "paralelo",
+   "papel": "x",
+   "segue": [
+    "a2",
+    "a3"
+   ]
+  },
+  {
+   "id": "a2",
+   "nome": "Executar a2",
+   "papel": "x",
+   "segue": "p2"
+  },
+  {
+   "id": "a3",
+   "nome": "Executar a3",
+   "papel": "x",
+   "segue": "p2"
+  },
+  {
+   "id": "p2",
+   "tipo": "paralelo",
+   "papel": "x",
+   "segue": "a4"
+  },
+  {
+   "id": "a4",
+   "nome": "Executar a4",
+   "papel": "x",
+   "segue": "d"
+  },
+  {
+   "id": "d",
+   "tipo": "decisao",
+   "nome": "Completo?",
+   "papel": "x",
+   "segue": [
+    {
+     "para": "f",
+     "rotulo": "Sim",
+     "percentual": 70
+    },
+    {
+     "para": "a1",
+     "rotulo": "Não",
+     "percentual": 30
+    }
+   ]
+  },
+  {
+   "id": "f",
+   "tipo": "fim",
+   "nome": "Concluído"
+  }
+ ],
+ "processo": {
+  "nome": "parallel_in_loop"
+ },
+ "papeis": [
+  {
+   "id": "x",
+   "nome": "Analista"
+  },
+  {
+   "id": "y",
+   "nome": "Gestor"
+  }
+ ]
+}

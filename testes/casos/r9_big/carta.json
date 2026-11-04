@@ -1,0 +1,738 @@
+{
+ "processo": {
+  "codigo": "VEN-07",
+  "nome": "Venda de equipamento sob encomenda",
+  "dono": "Diretor Comercial",
+  "volume": "cerca de 80 propostas por mês",
+  "versao": "0.2"
+ },
+ "papeis": [
+  {
+   "id": "cli",
+   "nome": "Cliente",
+   "tipo": "externo"
+  },
+  {
+   "id": "atd",
+   "nome": "Atendimento",
+   "tipo": "interno"
+  },
+  {
+   "id": "com",
+   "nome": "Comercial",
+   "tipo": "interno"
+  },
+  {
+   "id": "eng",
+   "nome": "Engenharia de Aplicação",
+   "tipo": "interno"
+  },
+  {
+   "id": "cre",
+   "nome": "Análise de Crédito",
+   "tipo": "interno"
+  },
+  {
+   "id": "jur",
+   "nome": "Jurídico",
+   "tipo": "interno"
+  },
+  {
+   "id": "fin",
+   "nome": "Financeiro",
+   "tipo": "interno"
+  },
+  {
+   "id": "log",
+   "nome": "Logística",
+   "tipo": "interno"
+  },
+  {
+   "id": "erp",
+   "nome": "ERP",
+   "tipo": "sistema"
+  },
+  {
+   "id": "dir",
+   "nome": "Diretoria Comercial",
+   "tipo": "interno"
+  }
+ ],
+ "sistemas": [
+  {
+   "id": "crm",
+   "nome": "CRM"
+  },
+  {
+   "id": "erp",
+   "nome": "ERP"
+  }
+ ],
+ "elementos": [
+  {
+   "id": "i",
+   "tipo": "inicio",
+   "nome": "Solicitação de proposta recebida",
+   "papel": "cli",
+   "gatilho": "mensagem",
+   "segue": "c1"
+  },
+  {
+   "id": "c1",
+   "nome": "Enviar solicitação de proposta",
+   "papel": "cli",
+   "segue": "a1",
+   "tempo": {
+    "execucao": "30min"
+   },
+   "envia": true
+  },
+  {
+   "id": "a1",
+   "nome": "Registrar solicitação no CRM",
+   "papel": "atd",
+   "segue": "a2",
+   "tempo": {
+    "execucao": "15min",
+    "espera": "4h"
+   },
+   "sistema": [
+    "crm"
+   ]
+  },
+  {
+   "id": "a2",
+   "nome": "Classificar tipo de solicitação",
+   "papel": "atd",
+   "segue": "d1",
+   "tempo": {
+    "execucao": "10min"
+   },
+   "sistema": [
+    "crm"
+   ]
+  },
+  {
+   "id": "d1",
+   "tipo": "decisao",
+   "nome": "Solicitação padrão?",
+   "papel": "atd",
+   "segue": [
+    {
+     "para": "a3",
+     "rotulo": "Sim",
+     "percentual": 70
+    },
+    {
+     "para": "e1",
+     "rotulo": "Não",
+     "percentual": 30
+    }
+   ]
+  },
+  {
+   "id": "e1",
+   "nome": "Levantar requisitos técnicos",
+   "papel": "eng",
+   "segue": "e2",
+   "tempo": {
+    "execucao": "3h",
+    "espera": "2d"
+   },
+   "bordas": [
+    {
+     "gatilho": "tempo",
+     "nome": "Prazo de 5 dias estourado",
+     "tempo": "5d",
+     "percentual": 10,
+     "segue": "dr1"
+    },
+    {
+     "gatilho": "mensagem",
+     "nome": "Cliente pede alteração",
+     "percentual": 15,
+     "segue": "e5"
+    }
+   ]
+  },
+  {
+   "id": "e5",
+   "nome": "Registrar alteração pedida",
+   "papel": "eng",
+   "segue": "e1",
+   "tempo": {
+    "execucao": "20min"
+   }
+  },
+  {
+   "id": "dr1",
+   "nome": "Priorizar solicitação atrasada",
+   "papel": "dir",
+   "segue": "e2",
+   "tempo": {
+    "execucao": "30min",
+    "espera": "1d"
+   }
+  },
+  {
+   "id": "e2",
+   "nome": "Dimensionar solução",
+   "papel": "eng",
+   "segue": "e3",
+   "tempo": {
+    "execucao": "4h",
+    "espera": "1d"
+   }
+  },
+  {
+   "id": "e3",
+   "nome": "Validar dimensionamento",
+   "papel": "eng",
+   "segue": "d2",
+   "tempo": {
+    "execucao": "1h"
+   }
+  },
+  {
+   "id": "d2",
+   "tipo": "decisao",
+   "nome": "Dimensionamento correto?",
+   "papel": "eng",
+   "segue": [
+    {
+     "para": "m1",
+     "rotulo": "Sim",
+     "percentual": 60
+    },
+    {
+     "para": "e2",
+     "rotulo": "Não",
+     "percentual": 40
+    }
+   ]
+  },
+  {
+   "id": "a3",
+   "nome": "Selecionar produto do catálogo",
+   "papel": "com",
+   "segue": "m1",
+   "tempo": {
+    "execucao": "20min"
+   },
+   "sistema": [
+    "erp"
+   ]
+  },
+  {
+   "id": "m1",
+   "tipo": "decisao",
+   "papel": "com",
+   "segue": "a4"
+  },
+  {
+   "id": "a4",
+   "nome": "Calcular preço",
+   "papel": "com",
+   "segue": "d3",
+   "tempo": {
+    "execucao": "1h",
+    "espera": "1d"
+   },
+   "sistema": [
+    "erp"
+   ]
+  },
+  {
+   "id": "d3",
+   "tipo": "decisao",
+   "nome": "Desconto acima de 15%?",
+   "papel": "com",
+   "segue": [
+    {
+     "para": "dr2",
+     "rotulo": "Sim",
+     "percentual": 25
+    },
+    {
+     "para": "m2",
+     "rotulo": "Não",
+     "percentual": 75
+    }
+   ]
+  },
+  {
+   "id": "m2",
+   "tipo": "decisao",
+   "papel": "com",
+   "segue": "p1"
+  },
+  {
+   "id": "dr2",
+   "nome": "Aprovar desconto",
+   "papel": "dir",
+   "segue": "d4",
+   "tempo": {
+    "execucao": "15min",
+    "espera": "2d"
+   }
+  },
+  {
+   "id": "d4",
+   "tipo": "decisao",
+   "nome": "Desconto aprovado?",
+   "papel": "dir",
+   "segue": [
+    {
+     "para": "m2",
+     "rotulo": "Sim",
+     "percentual": 70
+    },
+    {
+     "para": "a4",
+     "rotulo": "Não",
+     "percentual": 30
+    }
+   ]
+  },
+  {
+   "id": "p1",
+   "tipo": "paralelo",
+   "papel": "com",
+   "segue": [
+    "cr1",
+    "j1",
+    "a5"
+   ]
+  },
+  {
+   "id": "cr1",
+   "nome": "Consultar bureau de crédito",
+   "papel": "erp",
+   "segue": "cr2",
+   "tempo": {
+    "execucao": "1min"
+   },
+   "automatizada": true
+  },
+  {
+   "id": "cr2",
+   "nome": "Analisar crédito do cliente",
+   "papel": "cre",
+   "segue": "d5",
+   "tempo": {
+    "execucao": "2h",
+    "espera": "2d"
+   },
+   "bordas": [
+    {
+     "gatilho": "erro",
+     "nome": "Bureau indisponível",
+     "percentual": 5,
+     "segue": "cr3"
+    }
+   ]
+  },
+  {
+   "id": "cr3",
+   "nome": "Analisar crédito manualmente",
+   "papel": "cre",
+   "segue": "d5",
+   "tempo": {
+    "execucao": "4h",
+    "espera": "1d"
+   }
+  },
+  {
+   "id": "d5",
+   "tipo": "decisao",
+   "nome": "Crédito aprovado?",
+   "papel": "cre",
+   "segue": [
+    {
+     "para": "p2",
+     "rotulo": "Sim",
+     "percentual": 85
+    },
+    {
+     "para": "cr4",
+     "rotulo": "Não",
+     "percentual": 15
+    }
+   ]
+  },
+  {
+   "id": "cr4",
+   "nome": "Comunicar recusa de crédito",
+   "papel": "com",
+   "segue": "fx1",
+   "tempo": {
+    "execucao": "15min"
+   }
+  },
+  {
+   "id": "fx1",
+   "tipo": "fim",
+   "nome": "Proposta recusada por crédito",
+   "encerra": true
+  },
+  {
+   "id": "j1",
+   "nome": "Elaborar minuta de contrato",
+   "papel": "jur",
+   "segue": "j2",
+   "tempo": {
+    "execucao": "2h",
+    "espera": "3d"
+   }
+  },
+  {
+   "id": "j2",
+   "nome": "Revisar minuta",
+   "papel": "jur",
+   "segue": "d6",
+   "tempo": {
+    "execucao": "1h"
+   }
+  },
+  {
+   "id": "d6",
+   "tipo": "decisao",
+   "nome": "Minuta conforme?",
+   "papel": "jur",
+   "segue": [
+    {
+     "para": "p2",
+     "rotulo": "Sim",
+     "percentual": 80
+    },
+    {
+     "para": "j1",
+     "rotulo": "Não",
+     "percentual": 20
+    }
+   ]
+  },
+  {
+   "id": "a5",
+   "nome": "Montar proposta comercial",
+   "papel": "com",
+   "segue": "p2",
+   "tempo": {
+    "execucao": "1h30"
+   }
+  },
+  {
+   "id": "p2",
+   "tipo": "paralelo",
+   "papel": "com",
+   "segue": "a6"
+  },
+  {
+   "id": "a6",
+   "nome": "Enviar proposta ao cliente",
+   "papel": "com",
+   "segue": "g1",
+   "tempo": {
+    "execucao": "15min"
+   },
+   "envia": true
+  },
+  {
+   "id": "g1",
+   "tipo": "corrida",
+   "nome": "O que vier primeiro",
+   "papel": "com",
+   "segue": [
+    {
+     "para": "ev1",
+     "percentual": 55
+    },
+    {
+     "para": "ev2",
+     "percentual": 25
+    },
+    {
+     "para": "ev3",
+     "percentual": 20
+    }
+   ]
+  },
+  {
+   "id": "ev1",
+   "tipo": "evento",
+   "gatilho": "mensagem",
+   "nome": "Aceite do cliente recebido",
+   "segue": "f1",
+   "tempo": {
+    "espera": "3dc"
+   }
+  },
+  {
+   "id": "ev2",
+   "tipo": "evento",
+   "gatilho": "mensagem",
+   "nome": "Contraproposta recebida",
+   "segue": "a4",
+   "tempo": {
+    "espera": "4dc"
+   }
+  },
+  {
+   "id": "ev3",
+   "tipo": "evento",
+   "gatilho": "tempo",
+   "nome": "Aguardar 10 dias corridos",
+   "segue": "fx2"
+  },
+  {
+   "id": "fx2",
+   "tipo": "fim",
+   "nome": "Proposta expirada"
+  },
+  {
+   "id": "f1",
+   "nome": "Assinar contrato",
+   "papel": "cli",
+   "segue": "f2",
+   "tempo": {
+    "execucao": "30min",
+    "espera": "2d"
+   }
+  },
+  {
+   "id": "f2",
+   "nome": "Cadastrar pedido no ERP",
+   "papel": "atd",
+   "segue": "f3",
+   "tempo": {
+    "execucao": "20min"
+   },
+   "sistema": [
+    "erp"
+   ]
+  },
+  {
+   "id": "f3",
+   "nome": "Emitir fatura de sinal",
+   "papel": "fin",
+   "segue": "f4",
+   "tempo": {
+    "execucao": "15min"
+   },
+   "sistema": [
+    "erp"
+   ]
+  },
+  {
+   "id": "f4",
+   "nome": "Pagar sinal",
+   "papel": "cli",
+   "segue": "f5",
+   "tempo": {
+    "execucao": "10min",
+    "espera": "3dc"
+   }
+  },
+  {
+   "id": "f5",
+   "nome": "Conciliar pagamento do sinal",
+   "papel": "fin",
+   "segue": "d7",
+   "tempo": {
+    "execucao": "10min",
+    "espera": "1d"
+   },
+   "sistema": [
+    "erp"
+   ]
+  },
+  {
+   "id": "d7",
+   "tipo": "decisao",
+   "nome": "Sinal pago em até 5 dias?",
+   "papel": "fin",
+   "segue": [
+    {
+     "para": "sp",
+     "rotulo": "Sim",
+     "percentual": 90
+    },
+    {
+     "para": "f6",
+     "rotulo": "Não",
+     "percentual": 10
+    }
+   ]
+  },
+  {
+   "id": "f6",
+   "nome": "Cobrar sinal do cliente",
+   "papel": "fin",
+   "segue": "f4",
+   "tempo": {
+    "execucao": "15min"
+   }
+  },
+  {
+   "id": "sp",
+   "tipo": "subprocesso",
+   "nome": "Produzir equipamento",
+   "papel": "eng",
+   "segue": "l1",
+   "tempo": {
+    "execucao": "2d",
+    "espera": "10d"
+   },
+   "detalhe": "producao/carta.json"
+  },
+  {
+   "id": "l1",
+   "nome": "Programar entrega",
+   "papel": "log",
+   "segue": "l2",
+   "tempo": {
+    "execucao": "30min",
+    "espera": "1d"
+   },
+   "sistema": [
+    "erp"
+   ]
+  },
+  {
+   "id": "l2",
+   "nome": "Contratar transportadora",
+   "papel": "log",
+   "segue": "l3",
+   "tempo": {
+    "execucao": "1h"
+   }
+  },
+  {
+   "id": "l3",
+   "nome": "Expedir equipamento",
+   "papel": "log",
+   "segue": "l4",
+   "tempo": {
+    "execucao": "2h",
+    "espera": "1d"
+   },
+   "sistema": [
+    "erp"
+   ]
+  },
+  {
+   "id": "l4",
+   "nome": "Receber equipamento",
+   "papel": "cli",
+   "segue": "d8",
+   "tempo": {
+    "execucao": "30min",
+    "espera": "3dc"
+   },
+   "recebe": true
+  },
+  {
+   "id": "d8",
+   "tipo": "decisao",
+   "nome": "Equipamento sem avaria?",
+   "papel": "cli",
+   "segue": [
+    {
+     "para": "l5",
+     "rotulo": "Sim",
+     "percentual": 95
+    },
+    {
+     "para": "l6",
+     "rotulo": "Não",
+     "percentual": 5
+    }
+   ]
+  },
+  {
+   "id": "l6",
+   "nome": "Registrar avaria",
+   "papel": "atd",
+   "segue": "l7",
+   "tempo": {
+    "execucao": "20min"
+   },
+   "sistema": [
+    "crm"
+   ]
+  },
+  {
+   "id": "l7",
+   "nome": "Acionar seguro de transporte",
+   "papel": "log",
+   "segue": "l3",
+   "tempo": {
+    "execucao": "1h",
+    "espera": "5d"
+   }
+  },
+  {
+   "id": "l5",
+   "nome": "Emitir nota fiscal",
+   "papel": "fin",
+   "segue": "l8",
+   "tempo": {
+    "execucao": "15min"
+   },
+   "sistema": [
+    "erp"
+   ]
+  },
+  {
+   "id": "l8",
+   "nome": "Faturar saldo",
+   "papel": "fin",
+   "segue": "l9",
+   "tempo": {
+    "execucao": "15min"
+   },
+   "sistema": [
+    "erp"
+   ]
+  },
+  {
+   "id": "l9",
+   "nome": "Pagar saldo",
+   "papel": "cli",
+   "segue": "l10",
+   "tempo": {
+    "execucao": "10min",
+    "espera": "20dc"
+   }
+  },
+  {
+   "id": "l10",
+   "nome": "Baixar título",
+   "papel": "fin",
+   "segue": "l11",
+   "tempo": {
+    "execucao": "10min"
+   },
+   "sistema": [
+    "erp"
+   ]
+  },
+  {
+   "id": "l11",
+   "nome": "Encerrar pedido no CRM",
+   "papel": "atd",
+   "segue": "fim",
+   "tempo": {
+    "execucao": "5min"
+   },
+   "sistema": [
+    "crm"
+   ]
+  },
+  {
+   "id": "fim",
+   "tipo": "fim",
+   "nome": "Pedido entregue e pago"
+  }
+ ]
+}

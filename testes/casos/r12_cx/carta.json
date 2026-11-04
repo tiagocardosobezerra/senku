@@ -1,0 +1,396 @@
+{
+ "processo": {
+  "nome": "Venda B2B",
+  "volume": "1.200 pedidos por mês",
+  "dono": "Gerente Comercial",
+  "prazo_informado": "5 dias úteis"
+ },
+ "papeis": [
+  {
+   "id": "r0",
+   "nome": "Atendimento"
+  },
+  {
+   "id": "r1",
+   "nome": "Comercial"
+  },
+  {
+   "id": "r2",
+   "nome": "Crédito"
+  },
+  {
+   "id": "r3",
+   "nome": "Jurídico"
+  },
+  {
+   "id": "r4",
+   "nome": "Financeiro"
+  },
+  {
+   "id": "r5",
+   "nome": "Logística"
+  },
+  {
+   "id": "r6",
+   "nome": "Fiscal"
+  },
+  {
+   "id": "r7",
+   "nome": "Diretoria"
+  },
+  {
+   "id": "r8",
+   "nome": "TI"
+  },
+  {
+   "id": "r9",
+   "nome": "Cliente",
+   "tipo": "externo"
+  }
+ ],
+ "elementos": [
+  {
+   "id": "s",
+   "tipo": "inicio",
+   "nome": "Pedido recebido",
+   "papel": "r9",
+   "segue": "a1",
+   "gatilho": "mensagem"
+  },
+  {
+   "id": "a1",
+   "nome": "Registrar pedido",
+   "papel": "r0",
+   "segue": "d1",
+   "sistema": [],
+   "tempo": {
+    "execucao": "1h"
+   },
+   "bordas": [
+    {
+     "gatilho": "tempo",
+     "nome": "Prazo de 4h estourado",
+     "tempo": "4h",
+     "percentual": 5,
+     "segue": "a1x"
+    },
+    {
+     "gatilho": "erro",
+     "nome": "Sistema fora do ar",
+     "percentual": 5,
+     "segue": "a1y"
+    }
+   ]
+  },
+  {
+   "id": "a1x",
+   "nome": "Avisar supervisor",
+   "papel": "r0",
+   "segue": "a1",
+   "sistema": [],
+   "tempo": {
+    "execucao": "1h"
+   }
+  },
+  {
+   "id": "a1y",
+   "nome": "Registrar em planilha",
+   "papel": "r0",
+   "segue": "d1",
+   "sistema": [],
+   "tempo": {
+    "execucao": "1h"
+   }
+  },
+  {
+   "id": "d1",
+   "tipo": "decisao",
+   "nome": "Cliente novo?",
+   "papel": "r1",
+   "segue": [
+    {
+     "para": "a2",
+     "rotulo": "Sim",
+     "percentual": 30
+    },
+    {
+     "para": "d2",
+     "rotulo": "Não",
+     "percentual": 70
+    }
+   ]
+  },
+  {
+   "id": "a2",
+   "nome": "Cadastrar cliente",
+   "papel": "r1",
+   "segue": "d2",
+   "sistema": [],
+   "tempo": {
+    "execucao": "1h"
+   }
+  },
+  {
+   "id": "d2",
+   "tipo": "decisao",
+   "nome": "Valor acima de R$ 50 mil?",
+   "papel": "r1",
+   "segue": [
+    {
+     "para": "p1",
+     "rotulo": "Sim",
+     "percentual": 20
+    },
+    {
+     "para": "a5",
+     "rotulo": "Não",
+     "percentual": 80
+    }
+   ]
+  },
+  {
+   "id": "p1",
+   "tipo": "paralelo",
+   "papel": "r1",
+   "segue": [
+    "a3",
+    "a4",
+    "a4b"
+   ]
+  },
+  {
+   "id": "a3",
+   "nome": "Analisar crédito",
+   "papel": "r2",
+   "segue": "m3",
+   "sistema": [],
+   "tempo": {
+    "execucao": "4h"
+   },
+   "bordas": [
+    {
+     "gatilho": "tempo",
+     "nome": "Prazo de 2 dias estourado",
+     "tempo": "2d",
+     "percentual": 10,
+     "segue": "a3x"
+    }
+   ]
+  },
+  {
+   "id": "a3x",
+   "nome": "Escalar análise",
+   "papel": "r7",
+   "segue": "m3",
+   "sistema": [],
+   "tempo": {
+    "execucao": "1h"
+   }
+  },
+  {
+   "id": "a4",
+   "nome": "Revisar contrato",
+   "papel": "r3",
+   "segue": "d3",
+   "sistema": [],
+   "tempo": {
+    "execucao": "2h"
+   }
+  },
+  {
+   "id": "d3",
+   "tipo": "decisao",
+   "nome": "Contrato aprovado?",
+   "papel": "r3",
+   "segue": [
+    {
+     "para": "p2",
+     "rotulo": "Sim",
+     "percentual": 80
+    },
+    {
+     "para": "a4c",
+     "rotulo": "Não",
+     "percentual": 20
+    }
+   ]
+  },
+  {
+   "id": "a4c",
+   "nome": "Ajustar contrato",
+   "papel": "r1",
+   "segue": "a4",
+   "sistema": [],
+   "tempo": {
+    "execucao": "1h"
+   }
+  },
+  {
+   "id": "a4b",
+   "nome": "Validar impostos",
+   "papel": "r6",
+   "segue": "p2",
+   "sistema": [],
+   "tempo": {
+    "execucao": "30min"
+   }
+  },
+  {
+   "id": "p2",
+   "tipo": "paralelo",
+   "papel": "r1",
+   "segue": "d4"
+  },
+  {
+   "id": "d4",
+   "tipo": "decisao",
+   "nome": "Diretoria aprova?",
+   "papel": "r7",
+   "segue": [
+    {
+     "para": "a5",
+     "rotulo": "Sim",
+     "percentual": 85
+    },
+    {
+     "para": "f_rec",
+     "rotulo": "Não",
+     "percentual": 15
+    }
+   ]
+  },
+  {
+   "id": "a5",
+   "nome": "Enviar proposta",
+   "papel": "r1",
+   "segue": "c1",
+   "sistema": [],
+   "tempo": {
+    "execucao": "1h"
+   },
+   "envia": true
+  },
+  {
+   "id": "c1",
+   "tipo": "corrida",
+   "nome": "O que vier primeiro",
+   "papel": "r1",
+   "segue": [
+    {
+     "para": "e1",
+     "percentual": 75
+    },
+    {
+     "para": "e2",
+     "percentual": 25
+    }
+   ]
+  },
+  {
+   "id": "e1",
+   "tipo": "evento",
+   "gatilho": "mensagem",
+   "nome": "Aceite recebido",
+   "segue": "o1",
+   "tempo": {
+    "espera": "3d"
+   }
+  },
+  {
+   "id": "e2",
+   "tipo": "evento",
+   "gatilho": "tempo",
+   "nome": "Aguardar 10 dias corridos",
+   "tempo": {
+    "espera": "10dc"
+   },
+   "segue": "f_exp"
+  },
+  {
+   "id": "o1",
+   "tipo": "inclusivo",
+   "nome": "Quais entregas?",
+   "papel": "r5",
+   "segue": [
+    {
+     "para": "a6",
+     "rotulo": "Física",
+     "percentual": 70
+    },
+    {
+     "para": "a7",
+     "rotulo": "Digital",
+     "percentual": 60
+    }
+   ]
+  },
+  {
+   "id": "a6",
+   "nome": "Separar mercadoria",
+   "papel": "r5",
+   "segue": "o2",
+   "sistema": [],
+   "tempo": {
+    "execucao": "3h"
+   }
+  },
+  {
+   "id": "a7",
+   "nome": "Liberar acesso",
+   "papel": "r8",
+   "segue": "o2",
+   "sistema": [],
+   "tempo": {
+    "execucao": "20min"
+   },
+   "automatizada": true
+  },
+  {
+   "id": "o2",
+   "tipo": "inclusivo",
+   "papel": "r5",
+   "segue": "a8"
+  },
+  {
+   "id": "a8",
+   "nome": "Emitir nota fiscal",
+   "papel": "r6",
+   "segue": "a9",
+   "sistema": [],
+   "tempo": {
+    "execucao": "1h"
+   }
+  },
+  {
+   "id": "a9",
+   "nome": "Faturar pedido",
+   "papel": "r4",
+   "segue": "f_ok",
+   "sistema": [],
+   "tempo": {
+    "execucao": "30min"
+   }
+  },
+  {
+   "id": "f_ok",
+   "tipo": "fim",
+   "nome": "Pedido faturado"
+  },
+  {
+   "id": "f_rec",
+   "tipo": "fim",
+   "nome": "Pedido recusado"
+  },
+  {
+   "id": "f_exp",
+   "tipo": "fim",
+   "nome": "Proposta expirada"
+  },
+  {
+   "id": "m3",
+   "tipo": "decisao",
+   "papel": "r2",
+   "segue": "p2"
+  }
+ ]
+}

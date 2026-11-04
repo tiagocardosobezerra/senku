@@ -1,0 +1,13 @@
+{"processo": {"nome": "Revisão com lembrete"},
+ "papeis": [{"id": "an", "nome": "Analista"}, {"id": "ger", "nome": "Gerente"}],
+ "elementos": [
+  {"id": "i", "tipo": "inicio", "nome": "Documento recebido", "segue": "a1"},
+  {"id": "a1", "nome": "Revisar documento", "papel": "an",
+   "bordas": [{"gatilho": "tempo", "nome": "Lembrete de 1 dia", "tempo": "1d", "interrompe": false, "percentual": 20, "segue": "a9"}],
+   "segue": "d1"},
+  {"id": "d1", "tipo": "decisao", "nome": "Documento correto?", "papel": "an",
+   "segue": [{"para": "f", "rotulo": "Sim", "percentual": 80}, {"para": "a2", "rotulo": "Não", "percentual": 20}]},
+  {"id": "a2", "nome": "Corrigir documento", "papel": "an", "segue": "a1"},
+  {"id": "a9", "nome": "Cobrar revisão", "papel": "ger", "segue": "f9"},
+  {"id": "f", "tipo": "fim", "nome": "Documento aprovado"},
+  {"id": "f9", "tipo": "fim", "nome": "Cobrança feita"}]}

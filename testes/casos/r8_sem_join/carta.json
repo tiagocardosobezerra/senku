@@ -1,0 +1,13 @@
+{"processo": {"nome": "Join com ramo encerrado", "volume": "1000 por mês"},
+ "papeis": [{"id": "a", "nome": "Analista"}, {"id": "b", "nome": "Backoffice"}],
+ "elementos": [
+  {"id": "i", "tipo": "inicio", "nome": "Pedido recebido", "segue": "p1"},
+  {"id": "p1", "tipo": "paralelo", "segue": ["t1", "t2"]},
+  {"id": "t1", "nome": "Analisar risco", "papel": "a", "tempo": {"execucao": "1h"}, "segue": "p2",
+   "bordas": [{"gatilho": "mensagem", "nome": "Cliente cancelou", "percentual": 50, "segue": "fc"}]},
+  {"id": "t2", "nome": "Separar documentos", "papel": "b", "tempo": {"execucao": "1h"}, "segue": "p2"},
+  {"id": "p2", "tipo": "paralelo", "segue": "t3"},
+  {"id": "t3", "nome": "Emitir contrato", "papel": "b", "tempo": {"execucao": "10h"}, "segue": "f"},
+  {"id": "f", "tipo": "fim", "nome": "Contrato emitido"},
+  {"id": "fc", "tipo": "fim", "nome": "Pedido cancelado", "encerra": true}
+ ]}

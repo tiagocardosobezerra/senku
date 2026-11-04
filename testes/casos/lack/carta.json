@@ -1,0 +1,7 @@
+{"processo":{"nome":"Lack of sync"},"papeis":[{"id":"a","nome":"Analista"}],
+"elementos":[{"id":"i","tipo":"inicio","nome":"Pedido recebido","papel":"a","segue":"p"},
+{"id":"p","tipo":"paralelo","papel":"a","segue":["a2","a3"]},
+{"id":"a2","nome":"Emitir nota","papel":"a","segue":"a4"},
+{"id":"a3","nome":"Separar material","papel":"a","segue":"a4"},
+{"id":"a4","nome":"Despachar material","papel":"a","segue":"f"},
+{"id":"f","tipo":"fim","nome":"Pedido despachado","papel":"a"}]}

@@ -1,0 +1,230 @@
+{
+  "formato": "senku/1",
+  "processo": {
+    "nome": "Análise de sinistro",
+    "volume": "300 por mês"
+  },
+  "participantes": [],
+  "sipoc": {
+    "fornecedores": [],
+    "entradas": [],
+    "saidas": [],
+    "clientes": []
+  },
+  "papeis": [
+    {
+      "id": "an",
+      "nome": "Analista"
+    },
+    {
+      "id": "sup",
+      "nome": "Supervisor"
+    },
+    {
+      "id": "cli",
+      "nome": "Segurado",
+      "tipo": "externo"
+    },
+    {
+      "id": "Raia_sup",
+      "nome": "Supervisor de sinistros"
+    },
+    {
+      "id": "Raia_sup",
+      "nome": "Supervisor de sinistros"
+    },
+    {
+      "id": "Raia_sup",
+      "nome": "Supervisor de sinistros"
+    },
+    {
+      "id": "Raia_sup",
+      "nome": "Supervisor de sinistros"
+    },
+    {
+      "id": "Raia_sup",
+      "nome": "Supervisor de sinistros"
+    }
+  ],
+  "sistemas": [],
+  "elementos": [
+    {
+      "id": "i",
+      "tipo": "inicio",
+      "nome": "Sinistro aberto",
+      "papel": "cli",
+      "segue": "a1"
+    },
+    {
+      "id": "a1",
+      "tipo": "atividade",
+      "nome": "Enviar documentos",
+      "papel": "cli",
+      "segue": "a2",
+      "sistema": []
+    },
+    {
+      "id": "a2",
+      "tipo": "atividade",
+      "nome": "Analisar sinistro",
+      "papel": "an",
+      "segue": "d1",
+      "bordas": [
+        {
+          "nome": "Prazo de 48h estourado",
+          "gatilho": "tempo",
+          "segue": [
+            {
+              "para": "a3"
+            }
+          ],
+          "tempo": "48hc",
+          "percentual": 10
+        },
+        {
+          "nome": "Segurado desistiu",
+          "gatilho": "mensagem",
+          "segue": [
+            {
+              "para": "f2"
+            }
+          ],
+          "percentual": 5
+        },
+        {
+          "nome": "Fraude detectada",
+          "gatilho": "erro",
+          "segue": [
+            {
+              "para": "a5"
+            }
+          ],
+          "percentual": 2
+        },
+        {
+          "nome": "Lembrete de 24h",
+          "gatilho": "tempo",
+          "segue": [
+            {
+              "para": "a4"
+            }
+          ],
+          "tempo": "24hc",
+          "interrompe": false,
+          "percentual": 30
+        },
+        {
+          "nome": "Catástrofe declarada",
+          "gatilho": "sinal",
+          "segue": [
+            {
+              "para": "a2"
+            }
+          ],
+          "percentual": 1
+        }
+      ],
+      "sistema": [],
+      "tempo": {
+        "execucao": "2h",
+        "espera": "3d"
+      }
+    },
+    {
+      "id": "a3",
+      "tipo": "atividade",
+      "nome": "Escalar ao supervisor",
+      "papel": "Raia_sup",
+      "segue": "a2",
+      "sistema": [],
+      "tempo": {
+        "execucao": "30min"
+      }
+    },
+    {
+      "id": "a4",
+      "tipo": "atividade",
+      "nome": "Avisar analista",
+      "papel": "Raia_sup",
+      "segue": "f3",
+      "sistema": [],
+      "tempo": {
+        "execucao": "5min"
+      }
+    },
+    {
+      "id": "a5",
+      "tipo": "atividade",
+      "nome": "Abrir investigação",
+      "papel": "Raia_sup",
+      "segue": "f4",
+      "sistema": [],
+      "tempo": {
+        "execucao": "1h"
+      }
+    },
+    {
+      "id": "d1",
+      "tipo": "decisao",
+      "nome": "Sinistro coberto?",
+      "papel": "an",
+      "segue": [
+        {
+          "para": "a6",
+          "rotulo": "Sim",
+          "percentual": 80.0
+        },
+        {
+          "para": "f2",
+          "rotulo": "Não",
+          "percentual": 20.0
+        }
+      ]
+    },
+    {
+      "id": "a6",
+      "tipo": "atividade",
+      "nome": "Pagar indenização",
+      "papel": "an",
+      "automatizada": true,
+      "segue": "f1",
+      "sistema": [],
+      "tempo": {
+        "execucao": "30min"
+      }
+    },
+    {
+      "id": "f1",
+      "tipo": "fim",
+      "nome": "Indenização paga",
+      "papel": "an"
+    },
+    {
+      "id": "f2",
+      "tipo": "fim",
+      "nome": "Sinistro encerrado sem pagamento",
+      "papel": "an"
+    },
+    {
+      "id": "f3",
+      "tipo": "fim",
+      "nome": "Lembrete enviado",
+      "papel": "Raia_sup"
+    },
+    {
+      "id": "f4",
+      "tipo": "fim",
+      "nome": "Investigação aberta",
+      "papel": "Raia_sup",
+      "encerra": true
+    }
+  ],
+  "regras": [],
+  "indicadores": [],
+  "dores": [],
+  "riscos": [],
+  "melhorias": [],
+  "glossario": [],
+  "pendencias": [],
+  "historico": []
+}

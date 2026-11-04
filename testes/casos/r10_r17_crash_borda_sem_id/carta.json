@@ -1,0 +1,10 @@
+{"processo": {"nome": "Borda em atividade sem id"},
+ "papeis": [{"id": "a", "nome": "Analista"}],
+ "elementos": [
+  {"id": "i", "tipo": "inicio", "nome": "Pedido recebido", "papel": "a", "segue": "x1"},
+  {"id": "x1", "nome": "Analisar pedido", "papel": "a", "segue": "e4",
+   "bordas": [{"gatilho": "tempo", "nome": "Prazo de 2 dias estourado", "tempo": "2d", "percentual": 10, "segue": "f"}]},
+  {"nome": "Registrar pedido", "papel": "a", "segue": "f",
+   "bordas": [{"gatilho": "erro", "nome": "Falha no sistema", "percentual": 5, "segue": "f"}]},
+  {"id": "f", "tipo": "fim", "nome": "Pedido concluído"}
+ ]}

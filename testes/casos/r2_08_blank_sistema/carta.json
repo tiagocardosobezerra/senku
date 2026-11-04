@@ -1,0 +1,7 @@
+{"processo":{"nome":"Recebimento fiscal"},"papeis":[{"id":"fis","nome":"Analista Fiscal"},{"id":"alm","nome":"Almoxarife"}],
+ "elementos":[
+  {"id":"i","tipo":"inicio","nome":"Nota fiscal recebida","papel":"alm","segue":"a1"},
+  {"id":"a1","nome":"Conferir mercadoria","papel":"alm","sistema":"","tempo":{"execucao":"","espera":""},"valor":"","segue":"a2"},
+  {"id":"a2","nome":"Lançar nota fiscal","papel":"fis","sistema":"","segue":"a3"},
+  {"id":"a3","nome":"Arquivar nota fiscal","papel":"fis","sistema":null,"segue":"f"},
+  {"id":"f","tipo":"fim","nome":"Nota lançada"}]}

@@ -1,0 +1,14 @@
+{"processo": {"nome": "Reembolso", "codigo": "FIN-09"},
+ "papeis": [{"id": "col", "nome": "Colaborador", "tipo": "externo"}, {"id": "ana", "nome": "Analista Financeiro"}, {"id": "ger", "nome": "Gerente"}],
+ "elementos": [
+  {"id": "i", "tipo": "inicio", "nome": "Despesa realizada", "segue": "a0"},
+  {"id": "a0", "nome": "Enviar comprovantes", "papel": "col", "segue": "a1"},
+  {"id": "a1", "nome": "Conferir comprovantes", "papel": "ana", "segue": "d1"},
+  {"id": "d1", "tipo": "decisao", "nome": "Comprovantes completos?", "papel": "ana",
+   "segue": [{"para": "a2", "rotulo": "Sim"}, {"para": "a9", "rotulo": "Não"}]},
+  {"id": "a9", "nome": "Complementar comprovantes", "papel": "col", "segue": "d2"},
+  {"id": "d2", "tipo": "decisao", "nome": "Dentro do prazo?", "papel": "ana",
+   "segue": [{"para": "a1", "rotulo": "Sim"}, {"para": "f2", "rotulo": "Não"}]},
+  {"id": "a2", "nome": "Aprovar reembolso", "papel": "ger", "segue": "f"},
+  {"id": "f", "tipo": "fim", "nome": "Reembolso pago"},
+  {"id": "f2", "tipo": "fim", "nome": "Reembolso negado"}]}

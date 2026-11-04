@@ -1,0 +1,12 @@
+{"processo": {"nome": "Corrida incoerente"},
+ "papeis": [{"id": "a", "nome": "Comercial"}],
+ "elementos": [
+  {"id": "i", "tipo": "inicio", "nome": "Proposta solicitada", "segue": "t1"},
+  {"id": "t1", "nome": "Enviar proposta", "papel": "a", "envia": true, "tempo": {"execucao": "3d"}, "segue": "c",
+   "bordas": [{"gatilho": "tempo", "nome": "Prazo de 1 dia estourado", "tempo": "1d", "percentual": 5, "segue": "f2"}]},
+  {"id": "c", "tipo": "corrida", "nome": "O que vier primeiro", "segue": [{"para": "e1", "percentual": 90}, {"para": "e2", "percentual": 10}]},
+  {"id": "e1", "tipo": "evento", "gatilho": "mensagem", "nome": "Aceite recebido", "tempo": {"espera": "30dc"}, "segue": "f"},
+  {"id": "e2", "tipo": "evento", "gatilho": "tempo", "nome": "Aguardar 10 dias corridos", "segue": "f2"},
+  {"id": "f", "tipo": "fim", "nome": "Proposta aceita"},
+  {"id": "f2", "tipo": "fim", "nome": "Proposta expirada"}
+ ]}

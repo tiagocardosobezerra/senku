@@ -1,0 +1,5 @@
+{"processo":{"nome":"T"},"papeis":[{"id":"a","nome":"Analista"},{"id":"b","nome":"Gestor"}],
+"elementos":[{"id":"i","tipo":"inicio","nome":"Pedido recebido","segue":"x"},
+{"id":"x","nome":"Analisar pedido","papel":"a","sistema":[],"tempo":{"execucao":"1h","espera":"3dc"},"segue":"y"},
+{"id":"y","nome":"Aprovar pedido","papel":"b","sistema":[],"tempo":{"execucao":"30min","espera":"48h"},"segue":"f"},
+{"id":"f","tipo":"fim","nome":"Pedido aprovado"}]}

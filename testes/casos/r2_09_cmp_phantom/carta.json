@@ -1,0 +1,183 @@
+{
+ "processo": {
+  "nome": "Contratação de serviço"
+ },
+ "papeis": [
+  {
+   "id": "sol",
+   "nome": "Solicitante"
+  },
+  {
+   "id": "ges",
+   "nome": "Gestor da área"
+  },
+  {
+   "id": "cmp",
+   "nome": "Comprador"
+  },
+  {
+   "id": "fin",
+   "nome": "Analista Financeiro"
+  },
+  {
+   "id": "for",
+   "nome": "Fornecedor",
+   "tipo": "externo"
+  }
+ ],
+ "elementos": [
+  {
+   "id": "i",
+   "tipo": "inicio",
+   "nome": "Necessidade identificada",
+   "papel": "sol",
+   "segue": "a1"
+  },
+  {
+   "id": "a1",
+   "nome": "Preencher requisição",
+   "papel": "sol",
+   "segue": "p1",
+   "tempo": {
+    "execucao": "30min"
+   }
+  },
+  {
+   "id": "p1",
+   "tipo": "paralelo",
+   "segue": [
+    "a2",
+    "a3"
+   ]
+  },
+  {
+   "id": "a2",
+   "nome": "Analisar orçamento",
+   "papel": "ges",
+   "segue": "p2",
+   "tempo": {
+    "execucao": "1h",
+    "espera": "2d"
+   }
+  },
+  {
+   "id": "a3",
+   "nome": "Analisar contrato",
+   "papel": "fin",
+   "segue": "p2",
+   "tempo": {
+    "execucao": "2h",
+    "espera": "3d"
+   }
+  },
+  {
+   "id": "p2",
+   "tipo": "paralelo",
+   "segue": "d1"
+  },
+  {
+   "id": "d1",
+   "tipo": "decisao",
+   "nome": "Aprovado pelas duas áreas?",
+   "papel": "ges",
+   "segue": [
+    {
+     "para": "d2",
+     "rotulo": "Sim",
+     "percentual": 70
+    },
+    {
+     "para": "a4",
+     "rotulo": "Não",
+     "percentual": 30
+    }
+   ]
+  },
+  {
+   "id": "a4",
+   "nome": "Corrigir requisição",
+   "papel": "sol",
+   "segue": "a1",
+   "tempo": {
+    "execucao": "1h"
+   }
+  },
+  {
+   "id": "d2",
+   "tipo": "decisao",
+   "nome": "Valor acima de R$ 50 mil?",
+   "papel": "ges",
+   "segue": [
+    {
+     "para": "a5",
+     "rotulo": "Sim",
+     "percentual": 20
+    },
+    {
+     "para": "a6",
+     "rotulo": "Não",
+     "percentual": 80
+    }
+   ]
+  },
+  {
+   "id": "a5",
+   "nome": "Aprovar na diretoria",
+   "papel": "ges",
+   "segue": "a6",
+   "tempo": {
+    "execucao": "30min",
+    "espera": "5d"
+   }
+  },
+  {
+   "id": "a6",
+   "nome": "Enviar pedido ao fornecedor",
+   "papel": "cmp",
+   "segue": "g1",
+   "tempo": {
+    "execucao": "20min"
+   }
+  },
+  {
+   "id": "g1",
+   "tipo": "decisao",
+   "nome": "O que chega primeiro?",
+   "papel": "cmp",
+   "segue": [
+    {
+     "para": "e1",
+     "rotulo": "Resposta"
+    },
+    {
+     "para": "e2",
+     "rotulo": "Prazo"
+    }
+   ]
+  },
+  {
+   "id": "e1",
+   "tipo": "evento",
+   "gatilho": "mensagem",
+   "nome": "Aceite do fornecedor recebido",
+   "segue": "f1"
+  },
+  {
+   "id": "e2",
+   "tipo": "evento",
+   "gatilho": "tempo",
+   "nome": "Aguardar 5 dias corridos",
+   "segue": "f2"
+  },
+  {
+   "id": "f1",
+   "tipo": "fim",
+   "nome": "Serviço contratado"
+  },
+  {
+   "id": "f2",
+   "tipo": "fim",
+   "nome": "Pedido expirado"
+  }
+ ]
+}

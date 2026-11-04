@@ -1,0 +1,12 @@
+{"processo": {"nome": "Pareceres"},
+ "papeis": [{"id": "jur", "nome": "Jurídico"}, {"id": "fin", "nome": "Financeiro"}, {"id": "aud", "nome": "Auditoria"}],
+ "elementos": [
+  {"id": "i", "tipo": "inicio", "nome": "Contrato recebido", "segue": "a1"},
+  {"id": "a1", "nome": "Analisar contrato", "papel": "jur", "tempo": {"execucao": "1h"}, "segue": "o1"},
+  {"id": "o1", "tipo": "inclusivo", "nome": "Quem precisa opinar?", "papel": "jur",
+   "segue": [{"para": "a2", "rotulo": "Financeiro", "percentual": 80}, {"para": "a3", "rotulo": "Auditoria", "percentual": 60}]},
+  {"id": "a2", "nome": "Emitir parecer financeiro", "papel": "fin", "tempo": {"execucao": "2h", "espera": "5d"}, "segue": "o2"},
+  {"id": "a3", "nome": "Emitir parecer de auditoria", "papel": "aud", "tempo": {"execucao": "2h", "espera": "5d"}, "segue": "o2"},
+  {"id": "o2", "tipo": "inclusivo", "papel": "jur", "segue": "a4"},
+  {"id": "a4", "nome": "Assinar contrato", "papel": "jur", "tempo": {"execucao": "30min"}, "segue": "f"},
+  {"id": "f", "tipo": "fim", "nome": "Contrato assinado"}]}

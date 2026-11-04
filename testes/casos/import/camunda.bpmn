@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" id="Defs_1" targetNamespace="http://bpmn.io/schema/bpmn">
+  <bpmn:message id="Msg_Pedido" name="Pedido"/>
+  <bpmn:collaboration id="Collab_1">
+    <bpmn:participant id="P_Cliente" name="Cliente" processRef="Proc_Cliente"/>
+    <bpmn:participant id="P_Empresa" name="Empresa XYZ" processRef="Proc_Empresa"/>
+    <bpmn:participant id="P_Banco" name="Banco"/>
+    <bpmn:messageFlow id="MF1" sourceRef="T_Cli_Envia" targetRef="SE_Pedido"/>
+    <bpmn:messageFlow id="MF2" sourceRef="T_Notificar" targetRef="T_Cli_Recebe"/>
+    <bpmn:messageFlow id="MF3" sourceRef="T_Cobrar" targetRef="P_Banco"/>
+  </bpmn:collaboration>
+  <bpmn:process id="Proc_Cliente" isExecutable="false">
+    <bpmn:startEvent id="SE_Cli"><bpmn:outgoing>c1</bpmn:outgoing></bpmn:startEvent>
+    <bpmn:sendTask id="T_Cli_Envia" name="Enviar pedido"><bpmn:incoming>c1</bpmn:incoming><bpmn:outgoing>c2</bpmn:outgoing></bpmn:sendTask>
+    <bpmn:receiveTask id="T_Cli_Recebe" name="Receber confirmação"><bpmn:incoming>c2</bpmn:incoming><bpmn:outgoing>c3</bpmn:outgoing></bpmn:receiveTask>
+    <bpmn:endEvent id="EE_Cli"><bpmn:incoming>c3</bpmn:incoming></bpmn:endEvent>
+    <bpmn:sequenceFlow id="c1" sourceRef="SE_Cli" targetRef="T_Cli_Envia"/>
+    <bpmn:sequenceFlow id="c2" sourceRef="T_Cli_Envia" targetRef="T_Cli_Recebe"/>
+    <bpmn:sequenceFlow id="c3" sourceRef="T_Cli_Recebe" targetRef="EE_Cli"/>
+  </bpmn:process>
+  <bpmn:process id="Proc_Empresa" name="Atendimento de pedido" isExecutable="true">
+    <bpmn:laneSet id="LS1">
+      <bpmn:lane id="L_Comercial" name="Comercial">
+        <bpmn:flowNodeRef>SE_Pedido</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>T_Analisar</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>GW_Ok</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>T_Notificar</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>BE_Timer</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>T_Escalar</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>EE_Ok</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>EE_Rej</bpmn:flowNodeRef>
+        <bpmn:childLaneSet id="LS2">
+          <bpmn:lane id="L_Vendedor" name="Vendedor">
+            <bpmn:flowNodeRef>SE_Pedido</bpmn:flowNodeRef>
+            <bpmn:flowNodeRef>T_Analisar</bpmn:flowNodeRef>
+            <bpmn:flowNodeRef>BE_Timer</bpmn:flowNodeRef>
+          </bpmn:lane>
+          <bpmn:lane id="L_Supervisor" name="Supervisor">
+            <bpmn:flowNodeRef>GW_Ok</bpmn:flowNodeRef>
+            <bpmn:flowNodeRef>T_Notificar</bpmn:flowNodeRef>
+            <bpmn:flowNodeRef>T_Escalar</bpmn:flowNodeRef>
+            <bpmn:flowNodeRef>EE_Ok</bpmn:flowNodeRef>
+            <bpmn:flowNodeRef>EE_Rej</bpmn:flowNodeRef>
+          </bpmn:lane>
+        </bpmn:childLaneSet>
+      </bpmn:lane>
+      <bpmn:lane id="L_Financeiro" name="Financeiro">
+        <bpmn:flowNodeRef>SP_Faturar</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>T_Cobrar</bpmn:flowNodeRef>
+      </bpmn:lane>
+    </bpmn:laneSet>
+    <bpmn:startEvent id="SE_Pedido" name="Pedido recebido">
+      <bpmn:outgoing>s1</bpmn:outgoing>
+      <bpmn:messageEventDefinition id="MED1" messageRef="Msg_Pedido"/>
+    </bpmn:startEvent>
+    <bpmn:userTask id="T_Analisar" name="Analisar&#10;pedido" camunda:assignee="vendedor">
+      <bpmn:documentation>Verifica estoque e preço</bpmn:documentation>
+      <bpmn:incoming>s1</bpmn:incoming><bpmn:outgoing>s2</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:boundaryEvent id="BE_Timer" name="48h sem análise" attachedToRef="T_Analisar" cancelActivity="false">
+      <bpmn:outgoing>s7</bpmn:outgoing>
+      <bpmn:timerEventDefinition id="TED1"><bpmn:timeDuration>PT48H</bpmn:timeDuration></bpmn:timerEventDefinition>
+    </bpmn:boundaryEvent>
+    <bpmn:task id="T_Escalar" name="Escalar para supervisor"><bpmn:incoming>s7</bpmn:incoming><bpmn:outgoing>s8</bpmn:outgoing></bpmn:task>
+    <bpmn:exclusiveGateway id="GW_Ok" name="Pedido viável?" default="s4">
+      <bpmn:incoming>s2</bpmn:incoming><bpmn:outgoing>s3</bpmn:outgoing><bpmn:outgoing>s4</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:subProcess id="SP_Faturar" name="Faturar pedido">
+      <bpmn:incoming>s3</bpmn:incoming><bpmn:outgoing>s5</bpmn:outgoing>
+      <bpmn:startEvent id="SP_SE"><bpmn:outgoing>sp1</bpmn:outgoing></bpmn:startEvent>
+      <bpmn:task id="SP_T1" name="Emitir nota"><bpmn:incoming>sp1</bpmn:incoming><bpmn:outgoing>sp2</bpmn:outgoing></bpmn:task>
+      <bpmn:endEvent id="SP_EE"><bpmn:incoming>sp2</bpmn:incoming></bpmn:endEvent>
+      <bpmn:sequenceFlow id="sp1" sourceRef="SP_SE" targetRef="SP_T1"/>
+      <bpmn:sequenceFlow id="sp2" sourceRef="SP_T1" targetRef="SP_EE"/>
+    </bpmn:subProcess>
+    <bpmn:sendTask id="T_Cobrar" name="Cobrar via banco"><bpmn:incoming>s5</bpmn:incoming><bpmn:outgoing>s6</bpmn:outgoing></bpmn:sendTask>
+    <bpmn:sendTask id="T_Notificar" name="Notificar cliente"><bpmn:incoming>s6</bpmn:incoming><bpmn:outgoing>s9</bpmn:outgoing></bpmn:sendTask>
+    <bpmn:endEvent id="EE_Ok" name="Pedido atendido"><bpmn:incoming>s9</bpmn:incoming></bpmn:endEvent>
+    <bpmn:endEvent id="EE_Rej" name="Pedido recusado"><bpmn:incoming>s4</bpmn:incoming><bpmn:incoming>s8</bpmn:incoming><bpmn:terminateEventDefinition id="TER1"/></bpmn:endEvent>
+    <bpmn:sequenceFlow id="s1" sourceRef="SE_Pedido" targetRef="T_Analisar"/>
+    <bpmn:sequenceFlow id="s2" sourceRef="T_Analisar" targetRef="GW_Ok"/>
+    <bpmn:sequenceFlow id="s3" name="Sim" sourceRef="GW_Ok" targetRef="SP_Faturar">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">${viavel}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="s4" sourceRef="GW_Ok" targetRef="EE_Rej"/>
+    <bpmn:sequenceFlow id="s5" sourceRef="SP_Faturar" targetRef="T_Cobrar"/>
+    <bpmn:sequenceFlow id="s6" sourceRef="T_Cobrar" targetRef="T_Notificar"/>
+    <bpmn:sequenceFlow id="s7" sourceRef="BE_Timer" targetRef="T_Escalar"/>
+    <bpmn:sequenceFlow id="s8" sourceRef="T_Escalar" targetRef="EE_Rej"/>
+    <bpmn:sequenceFlow id="s9" sourceRef="T_Notificar" targetRef="EE_Ok"/>
+    <bpmn:textAnnotation id="TA1"><bpmn:text>SLA 2 dias</bpmn:text></bpmn:textAnnotation>
+    <bpmn:association id="As1" sourceRef="T_Analisar" targetRef="TA1"/>
+    <bpmn:dataObjectReference id="DO1" name="Pedido" dataObjectRef="DOb1"/>
+    <bpmn:dataObject id="DOb1"/>
+  </bpmn:process>
+</bpmn:definitions>

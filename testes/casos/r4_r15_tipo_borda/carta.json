@@ -1,0 +1,8 @@
+{"processo": {"nome": "Borda escrita como elemento"},
+ "papeis": [{"id": "an", "nome": "Analista"}],
+ "elementos": [
+  {"id": "i", "tipo": "inicio", "nome": "Pedido recebido", "segue": "a1"},
+  {"id": "a1", "nome": "Analisar pedido", "papel": "an", "segue": ["f", "b1"]},
+  {"id": "b1", "tipo": "borda", "gatilho": "tempo", "nome": "Prazo estourado", "segue": "f2"},
+  {"id": "f", "tipo": "fim", "nome": "Pedido analisado"},
+  {"id": "f2", "tipo": "fim", "nome": "Pedido expirado"}]}

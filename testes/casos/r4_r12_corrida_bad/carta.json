@@ -1,0 +1,14 @@
+{"processo": {"nome": "Cobrança"},
+ "papeis": [{"id": "cob", "nome": "Cobrador"}],
+ "elementos": [
+  {"id": "i", "tipo": "inicio", "nome": "Fatura vencida", "segue": "a1"},
+  {"id": "a1", "nome": "Enviar lembrete", "papel": "cob", "segue": "c1"},
+  {"id": "c1", "tipo": "corrida", "nome": "O que vier primeiro", "papel": "cob",
+   "segue": [{"para": "e1", "percentual": 70}, {"para": "e2", "percentual": 30}]},
+  {"id": "e1", "tipo": "evento", "gatilho": "mensagem", "nome": "Pagamento recebido", "segue": "f"},
+  {"id": "e2", "tipo": "evento", "gatilho": "tempo", "nome": "Aguardar 5 dias", "segue": "a2"},
+  {"id": "a2", "nome": "Ligar para o cliente", "papel": "cob", "segue": "d1"},
+  {"id": "d1", "tipo": "decisao", "nome": "Cliente prometeu pagar?", "papel": "cob",
+   "segue": [{"para": "e1", "rotulo": "Sim", "percentual": 60}, {"para": "f2", "rotulo": "Não", "percentual": 40}]},
+  {"id": "f", "tipo": "fim", "nome": "Fatura paga", "encerra": true},
+  {"id": "f2", "tipo": "fim", "nome": "Enviada para jurídico", "encerra": true}]}

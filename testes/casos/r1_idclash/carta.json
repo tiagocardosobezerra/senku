@@ -1,0 +1,9 @@
+{"processo":{"nome":"Colisão de ids"},
+ "papeis":[{"id":"x","nome":"Analista"}],
+ "elementos":[
+  {"id":"i","tipo":"inicio","nome":"Pedido recebido","gatilho":"mensagem","segue":"a1"},
+  {"id":"a1","nome":"Executar um","papel":"x","segue":"a1_di"},
+  {"id":"a1_di","nome":"Executar dois","papel":"x","segue":"Msg_i"},
+  {"id":"Msg_i","nome":"Executar três","papel":"x","segue":"Pool_Processo_senku"},
+  {"id":"Pool_Processo_senku","nome":"Executar quatro","papel":"x","segue":"f"},
+  {"id":"f","tipo":"fim","nome":"Concluído"}]}

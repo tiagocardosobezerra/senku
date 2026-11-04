@@ -1,0 +1,9 @@
+{"processo": {"nome": "Typo no paralelo"},
+ "papeis": [{"id": "a", "nome": "Analista"}],
+ "elementos": [
+  {"id": "i", "tipo": "inicio", "nome": "Pedido recebido", "papel": "a", "segue": "p1"},
+  {"id": "p1", "tipo": "paralelo", "papel": "a", "segue": ["t1", "t2x"]},
+  {"id": "t1", "nome": "Conferir pedido", "papel": "a", "segue": "p2"},
+  {"id": "t2", "nome": "Separar material", "papel": "a", "segue": "p2"},
+  {"id": "p2", "tipo": "paralelo", "papel": "a", "segue": "f"},
+  {"id": "f", "tipo": "fim", "nome": "Pedido pronto"}]}

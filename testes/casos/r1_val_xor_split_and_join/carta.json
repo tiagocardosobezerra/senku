@@ -1,0 +1,69 @@
+{
+ "elementos": [
+  {
+   "id": "i",
+   "tipo": "inicio",
+   "nome": "Pedido recebido",
+   "papel": "x",
+   "segue": "a0"
+  },
+  {
+   "id": "a0",
+   "nome": "Executar a0",
+   "papel": "x",
+   "segue": "d"
+  },
+  {
+   "id": "d",
+   "tipo": "decisao",
+   "nome": "Ok?",
+   "papel": "x",
+   "segue": [
+    {
+     "para": "a1",
+     "rotulo": "Sim"
+    },
+    {
+     "para": "a2",
+     "rotulo": "Não"
+    }
+   ]
+  },
+  {
+   "id": "a1",
+   "nome": "Executar a1",
+   "papel": "x",
+   "segue": "j"
+  },
+  {
+   "id": "a2",
+   "nome": "Executar a2",
+   "papel": "x",
+   "segue": "j"
+  },
+  {
+   "id": "j",
+   "tipo": "paralelo",
+   "papel": "x",
+   "segue": "f"
+  },
+  {
+   "id": "f",
+   "tipo": "fim",
+   "nome": "Concluído"
+  }
+ ],
+ "processo": {
+  "nome": "xor_split_and_join"
+ },
+ "papeis": [
+  {
+   "id": "x",
+   "nome": "Analista"
+  },
+  {
+   "id": "y",
+   "nome": "Gestor"
+  }
+ ]
+}

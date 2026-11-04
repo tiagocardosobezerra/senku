@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bizagi="http://www.bizagi.com/bpmn20" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Definition_1" targetNamespace="http://www.bizagi.com/definitions" exporter="Bizagi Modeler" exporterVersion="4.0.0">
+  <collaboration id="col">
+    <participant id="P_loja" name="Loja" processRef="Proc_loja"/>
+    <participant id="P_cd" name="Centro de Distribuição" processRef="Proc_cd"/>
+    <messageFlow id="mf1" sourceRef="t_pedir" targetRef="s_cd"/>
+    <messageFlow id="mf2" sourceRef="t_expedir" targetRef="t_receber"/>
+  </collaboration>
+  <process id="Proc_loja" name="Loja">
+    <laneSet id="ls1"><lane id="L_ger" name="Gerente da loja"><flowNodeRef>s1</flowNodeRef><flowNodeRef>t_pedir</flowNodeRef><flowNodeRef>t_receber</flowNodeRef><flowNodeRef>e1</flowNodeRef></lane></laneSet>
+    <startEvent id="s1" name="Estoque baixo"><outgoing>a</outgoing></startEvent>
+    <sendTask id="t_pedir" name="Pedir reposição"><incoming>a</incoming><outgoing>b</outgoing></sendTask>
+    <receiveTask id="t_receber" name="Receber mercadoria"><incoming>b</incoming><outgoing>c</outgoing></receiveTask>
+    <endEvent id="e1" name="Estoque reposto"><incoming>c</incoming></endEvent>
+    <sequenceFlow id="a" sourceRef="s1" targetRef="t_pedir"/><sequenceFlow id="b" sourceRef="t_pedir" targetRef="t_receber"/><sequenceFlow id="c" sourceRef="t_receber" targetRef="e1"/>
+  </process>
+  <process id="Proc_cd" name="CD">
+    <laneSet id="ls2"><lane id="L_sep" name="Separador"><flowNodeRef>s_cd</flowNodeRef><flowNodeRef>t_sep</flowNodeRef><flowNodeRef>t_conf</flowNodeRef></lane><lane id="L_exp" name="Expedição"><flowNodeRef>t_expedir</flowNodeRef><flowNodeRef>e_cd</flowNodeRef></lane></laneSet>
+    <startEvent id="s_cd" name="Pedido recebido"><outgoing>x1</outgoing><messageEventDefinition/></startEvent>
+    <task id="t_sep" name="Separar itens"><incoming>x1</incoming><outgoing>x2</outgoing></task>
+    <task id="t_conf" name="Conferir separação"><incoming>x2</incoming><outgoing>x3</outgoing></task>
+    <task id="t_expedir" name="Expedir carga"><incoming>x3</incoming><outgoing>x4</outgoing></task>
+    <endEvent id="e_cd" name="Carga expedida"><incoming>x4</incoming></endEvent>
+    <sequenceFlow id="x1" sourceRef="s_cd" targetRef="t_sep"/><sequenceFlow id="x2" sourceRef="t_sep" targetRef="t_conf"/><sequenceFlow id="x3" sourceRef="t_conf" targetRef="t_expedir"/><sequenceFlow id="x4" sourceRef="t_expedir" targetRef="e_cd"/>
+  </process>
+</definitions>

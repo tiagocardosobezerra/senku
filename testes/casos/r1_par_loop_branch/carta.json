@@ -1,0 +1,13 @@
+{"processo":{"nome":"Paralelo com laço no ramo"},"papeis":[{"id":"x","nome":"Equipe"},{"id":"y","nome":"Financeiro"}],
+"elementos":[
+ {"id":"i","tipo":"inicio","nome":"Pedido aprovado","papel":"x","segue":"p1"},
+ {"id":"p1","tipo":"paralelo","papel":"x","segue":["a1","b1"]},
+ {"id":"a1","nome":"Separar material","papel":"x","segue":"a2"},
+ {"id":"a2","nome":"Conferir separação","papel":"x","segue":"d1"},
+ {"id":"d1","tipo":"decisao","nome":"Separação correta?","papel":"x","segue":[{"para":"p2","rotulo":"Sim","percentual":90},{"para":"a1","rotulo":"Não","percentual":10}]},
+ {"id":"b1","nome":"Emitir nota fiscal","papel":"y","segue":"d2"},
+ {"id":"d2","tipo":"decisao","nome":"Nota rejeitada pela SEFAZ?","papel":"y","segue":[{"para":"b2","rotulo":"Sim","percentual":5},{"para":"p2","rotulo":"Não","percentual":95}]},
+ {"id":"b2","nome":"Corrigir dados da nota","papel":"y","segue":"b1"},
+ {"id":"p2","tipo":"paralelo","papel":"x","segue":"a3"},
+ {"id":"a3","nome":"Despachar pedido","papel":"x","segue":"f"},
+ {"id":"f","tipo":"fim","nome":"Pedido despachado"}]}

@@ -1,0 +1,310 @@
+{
+ "formato": "senku/1",
+ "processo": {
+  "codigo": "CRE-02",
+  "nome": "Concess\u00e3o de limite de cr\u00e9dito para cliente PJ",
+  "cenario": "as-is",
+  "versao": "0.4",
+  "objetivo": "Liberar limite de cr\u00e9dito para clientes pessoa jur\u00eddica com risco aceit\u00e1vel, no menor prazo, dentro da pol\u00edtica de cr\u00e9dito e das al\u00e7adas.",
+  "dono": "Gerente de Cr\u00e9dito e Cobran\u00e7a",
+  "area": "Financeiro",
+  "macroprocesso": "Gest\u00e3o de receitas",
+  "nivel": "processo",
+  "gatilho": "Vendedor recebe pedido de cliente novo ou pedido de aumento de limite",
+  "resultado": "Limite cadastrado no ERP e contrato assinado, ou recusa comunicada ao cliente",
+  "frequencia": "cont\u00ednuo",
+  "volume": "cerca de 260 propostas por m\u00eas (70% clientes novos)",
+  "prazo_informado": "de 5 a 20 dias \u00fateis; o comercial reclama dos casos que v\u00e3o a comit\u00ea",
+  "escopo": {
+   "inicio": "Vendedor registra a proposta de cr\u00e9dito",
+   "fim": "Limite liberado no ERP, ou cliente informado da recusa ou da expira\u00e7\u00e3o",
+   "inclui": [
+    "clientes novos",
+    "aumento de limite de clientes ativos"
+   ],
+   "nao_inclui": [
+    "renova\u00e7\u00e3o anual autom\u00e1tica (CRE-03)",
+    "cobran\u00e7a e bloqueio por atraso (CRE-05)",
+    "venda \u00e0 vista"
+   ]
+  },
+  "normas": [
+   "Pol\u00edtica de Cr\u00e9dito POL-FIN-07 rev. 3",
+   "Matriz de al\u00e7adas de cr\u00e9dito 2026",
+   "Procedimento KYC / PLD (Lei 9.613/1998)"
+  ],
+  "premissas": [
+   "Tempos e percentuais estimados nas entrevistas de 21 e 22/10/2026",
+   "Score do bureau consultado por integra\u00e7\u00e3o autom\u00e1tica do ERP"
+  ]
+ },
+ "participantes": [
+  {
+   "nome": "Marina Lopes",
+   "papel": "Analista de Cr\u00e9dito S\u00eanior",
+   "data": "21/10/2026"
+  },
+  {
+   "nome": "Rafael Souza",
+   "papel": "Gerente de Cr\u00e9dito e Cobran\u00e7a",
+   "data": "21/10/2026"
+  },
+  {
+   "nome": "Bruno Costa",
+   "papel": "Coordenador Comercial",
+   "data": "22/10/2026"
+  },
+  {
+   "nome": "Let\u00edcia Prado",
+   "papel": "Advogada (Jur\u00eddico)",
+   "data": "22/10/2026"
+  }
+ ],
+ "sipoc": {
+  "fornecedores": [
+   "Cliente PJ",
+   "Vendedor",
+   "Bureau de cr\u00e9dito",
+   "Receita Federal (consulta CNPJ)"
+  ],
+  "entradas": [
+   "Proposta de cr\u00e9dito",
+   "Contrato social e balan\u00e7o",
+   "Score e restri\u00e7\u00f5es do bureau",
+   "Pol\u00edtica e al\u00e7adas"
+  ],
+  "saidas": [
+   "Parecer de cr\u00e9dito",
+   "Contrato de cr\u00e9dito assinado",
+   "Limite cadastrado no ERP",
+   "Comunica\u00e7\u00e3o de recusa"
+  ],
+  "clientes": [
+   "Cliente PJ",
+   "\u00c1rea Comercial",
+   "Faturamento"
+  ]
+ },
+ "papeis": [
+  {
+   "id": "cliente",
+   "nome": "Cliente PJ",
+   "tipo": "externo"
+  },
+  {
+   "id": "vendedor",
+   "nome": "Vendedor",
+   "tipo": "interno"
+  },
+  {
+   "id": "cadastro",
+   "nome": "Cadastro",
+   "tipo": "interno"
+  },
+  {
+   "id": "erp",
+   "nome": "ERP (autom\u00e1tico)",
+   "tipo": "sistema"
+  },
+  {
+   "id": "analista",
+   "nome": "Analista de Cr\u00e9dito",
+   "tipo": "interno"
+  },
+  {
+   "id": "comite",
+   "nome": "Comit\u00ea de Cr\u00e9dito",
+   "tipo": "interno"
+  },
+  {
+   "id": "juridico",
+   "nome": "Jur\u00eddico",
+   "tipo": "interno"
+  }
+ ],
+ "sistemas": [
+  {
+   "id": "crm",
+   "nome": "CRM",
+   "descricao": "Salesforce"
+  },
+  {
+   "id": "sis_erp",
+   "nome": "ERP",
+   "descricao": "TOTVS Protheus"
+  },
+  {
+   "id": "bureau",
+   "nome": "Bureau",
+   "descricao": "Serasa Experian, via integra\u00e7\u00e3o"
+  },
+  {
+   "id": "email",
+   "nome": "E-mail"
+  },
+  {
+   "id": "planilha",
+   "nome": "Planilha de an\u00e1lise"
+  },
+  {
+   "id": "docusign",
+   "nome": "DocuSign"
+  }
+ ],
+ "regras": [
+  {
+   "id": "R1",
+   "texto": "Sem contrato social atualizado, dois \u00faltimos balan\u00e7os e cart\u00e3o CNPJ ativo, a proposta n\u00e3o segue.",
+   "fonte": "POL-FIN-07, item 3.1"
+  },
+  {
+   "id": "R2",
+   "texto": "S\u00f3cio em lista restritiva ou PEP sem dilig\u00eancia refor\u00e7ada: recusa obrigat\u00f3ria.",
+   "fonte": "Procedimento KYC/PLD"
+  },
+  {
+   "id": "R3",
+   "texto": "Score \u2265 700 e limite at\u00e9 R$ 50 mil: aprova\u00e7\u00e3o autom\u00e1tica. Score < 400 ou protesto ativo: recusa. Demais: an\u00e1lise manual.",
+   "fonte": "POL-FIN-07, item 4"
+  },
+  {
+   "id": "R4",
+   "texto": "Liquidez corrente m\u00ednima de 1,0 e endividamento at\u00e9 70% do patrim\u00f4nio l\u00edquido.",
+   "fonte": "POL-FIN-07, item 5.2"
+  },
+  {
+   "id": "R5",
+   "texto": "Analista aprova at\u00e9 R$ 200 mil; gerente at\u00e9 R$ 500 mil; acima disso, comit\u00ea.",
+   "fonte": "Matriz de al\u00e7adas 2026"
+  },
+  {
+   "id": "R6",
+   "texto": "Contrato n\u00e3o assinado em 10 dias corridos expira; nova proposta reinicia a an\u00e1lise.",
+   "fonte": "POL-FIN-07, item 7"
+  },
+  {
+   "id": "R7",
+   "texto": "A recusa n\u00e3o informa o motivo detalhado de score; o vendedor oferece venda \u00e0 vista ou com garantia.",
+   "fonte": "Jur\u00eddico"
+  }
+ ],
+ "indicadores": [
+  {
+   "nome": "Prazo de concess\u00e3o",
+   "formula": "data de desbloqueio - data da proposta (dias \u00fateis), mediana",
+   "meta": "\u2264 5 dias \u00fateis",
+   "polaridade": "menor \u00e9 melhor",
+   "periodicidade": "mensal",
+   "fonte": "CRM + ERP",
+   "dono": "Gerente de Cr\u00e9dito e Cobran\u00e7a",
+   "atual": "9 dias \u00fateis (mediana set/2026)"
+  },
+  {
+   "nome": "Taxa de aprova\u00e7\u00e3o autom\u00e1tica",
+   "formula": "propostas aprovadas sem an\u00e1lise manual / propostas analisadas",
+   "meta": "\u2265 50%",
+   "polaridade": "maior \u00e9 melhor",
+   "periodicidade": "mensal",
+   "fonte": "ERP",
+   "dono": "Gerente de Cr\u00e9dito e Cobran\u00e7a",
+   "atual": "40%"
+  },
+  {
+   "nome": "Inadimpl\u00eancia da safra",
+   "formula": "valor vencido > 60 dias / limite liberado, por m\u00eas de concess\u00e3o",
+   "meta": "\u2264 2,5%",
+   "polaridade": "menor \u00e9 melhor",
+   "periodicidade": "mensal",
+   "fonte": "ERP",
+   "dono": "Gerente de Cr\u00e9dito e Cobran\u00e7a",
+   "atual": "2,1%"
+  },
+  {
+   "nome": "Retrabalho de documenta\u00e7\u00e3o",
+   "formula": "propostas devolvidas por documento / propostas recebidas",
+   "meta": "\u2264 15%",
+   "polaridade": "menor \u00e9 melhor",
+   "periodicidade": "mensal",
+   "fonte": "CRM",
+   "dono": "Coordenador Comercial",
+   "atual": "35%"
+  }
+ ],
+ "glossario": [
+  {
+   "termo": "KYC",
+   "definicao": "Know Your Customer: identifica\u00e7\u00e3o e verifica\u00e7\u00e3o de quem \u00e9 o cliente e seus s\u00f3cios."
+  },
+  {
+   "termo": "PLD",
+   "definicao": "Preven\u00e7\u00e3o \u00e0 lavagem de dinheiro (Lei 9.613/1998)."
+  },
+  {
+   "termo": "PEP",
+   "definicao": "Pessoa exposta politicamente."
+  },
+  {
+   "termo": "Al\u00e7ada",
+   "definicao": "Valor m\u00e1ximo que cada cargo pode aprovar sozinho."
+  }
+ ],
+ "pendencias": [
+  {
+   "pergunta": "Quem confere se o limite cadastrado no ERP \u00e9 igual ao aprovado (K4 sem controle)?",
+   "para": "Gerente de Cr\u00e9dito e Cobran\u00e7a"
+  },
+  {
+   "pergunta": "A faixa do gerente (R$ 200 a 500 mil) passa pelo analista ou vai direto? O fluxo atual manda tudo acima da al\u00e7ada do analista ao comit\u00ea.",
+   "para": "Gerente de Cr\u00e9dito e Cobran\u00e7a"
+  }
+ ],
+ "historico": [
+  {
+   "versao": "0.1",
+   "data": "21/10/2026",
+   "autor": "Marina Lopes",
+   "mudanca": "Entrevista com Cr\u00e9dito"
+  },
+  {
+   "versao": "0.3",
+   "data": "22/10/2026",
+   "autor": "Marina Lopes",
+   "mudanca": "Comercial e Jur\u00eddico: documenta\u00e7\u00e3o, contrato e expira\u00e7\u00e3o"
+  },
+  {
+   "versao": "0.4",
+   "data": "23/10/2026",
+   "autor": "Marina Lopes",
+   "mudanca": "KYC como subprocesso; paralelo contrato x cadastro"
+  }
+ ],
+ "elementos": [
+  {
+   "id": "i",
+   "tipo": "inicio",
+   "nome": "Pedido recebido",
+   "papel": "vendedor",
+   "segue": "a"
+  },
+  {
+   "id": "a",
+   "nome": "Fazer A",
+   "papel": "vendedor",
+   "raci": {
+    "A": [
+     "vendedor",
+     "cadastro"
+    ],
+    "R": "juridico",
+    "C": "naoexiste",
+    "X": 1
+   },
+   "segue": "f"
+  },
+  {
+   "id": "f",
+   "tipo": "fim",
+   "nome": "Fim"
+  }
+ ]
+}

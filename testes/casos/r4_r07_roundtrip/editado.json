@@ -1,0 +1,162 @@
+{
+  "formato": "senku/1",
+  "processo": {
+    "nome": "Atendimento com muitas exceções"
+  },
+  "participantes": [],
+  "sipoc": {
+    "fornecedores": [],
+    "entradas": [],
+    "saidas": [],
+    "clientes": []
+  },
+  "papeis": [
+    {
+      "id": "at",
+      "nome": "Atendente"
+    },
+    {
+      "id": "sup",
+      "nome": "Supervisor"
+    },
+    {
+      "id": "ti",
+      "nome": "TI"
+    }
+  ],
+  "sistemas": [],
+  "elementos": [
+    {
+      "id": "i",
+      "tipo": "inicio",
+      "nome": "Chamado aberto",
+      "papel": "at",
+      "segue": "a1"
+    },
+    {
+      "id": "a1",
+      "tipo": "atividade",
+      "nome": "Registrar chamado",
+      "papel": "at",
+      "segue": "a2"
+    },
+    {
+      "id": "a2",
+      "tipo": "atividade",
+      "nome": "Analisar chamado",
+      "papel": "at",
+      "segue": "d1",
+      "bordas": [
+        {
+          "gatilho": "tempo",
+          "nome": "Prazo de 8 horas corridas estourado",
+          "tempo": "8hc",
+          "percentual": 10,
+          "segue": "a5"
+        },
+        {
+          "gatilho": "mensagem",
+          "nome": "Cliente cancelou o chamado",
+          "percentual": 5,
+          "segue": "fc"
+        },
+        {
+          "gatilho": "tempo",
+          "nome": "Lembrete de 2h",
+          "tempo": "2h",
+          "interrompe": false,
+          "percentual": 30,
+          "segue": "a6"
+        },
+        {
+          "gatilho": "erro",
+          "nome": "Sistema fora do ar",
+          "percentual": 3,
+          "segue": "a7"
+        },
+        {
+          "gatilho": "sinal",
+          "nome": "Incidente geral declarado",
+          "percentual": 2,
+          "segue": "a1"
+        }
+      ],
+      "tempo": {
+        "execucao": "30min",
+        "espera": "4h"
+      }
+    },
+    {
+      "id": "d1",
+      "tipo": "decisao",
+      "nome": "Resolvido?",
+      "papel": "at",
+      "segue": [
+        {
+          "para": "a3",
+          "rotulo": "Sim",
+          "percentual": 70.0
+        },
+        {
+          "para": "a2",
+          "rotulo": "Não, reanalisar",
+          "percentual": 30.0
+        }
+      ]
+    },
+    {
+      "id": "a3",
+      "tipo": "atividade",
+      "nome": "Encerrar chamado",
+      "papel": "at",
+      "segue": "f"
+    },
+    {
+      "id": "a5",
+      "tipo": "atividade",
+      "nome": "Escalar chamado",
+      "papel": "sup",
+      "segue": "a2"
+    },
+    {
+      "id": "a6",
+      "tipo": "atividade",
+      "nome": "Avisar supervisor",
+      "papel": "sup",
+      "segue": "f2"
+    },
+    {
+      "id": "a7",
+      "tipo": "atividade",
+      "nome": "Abrir incidente técnico",
+      "papel": "ti",
+      "segue": "a2"
+    },
+    {
+      "id": "f",
+      "tipo": "fim",
+      "nome": "Chamado resolvido",
+      "papel": "at"
+    },
+    {
+      "id": "f2",
+      "tipo": "fim",
+      "nome": "Supervisor avisado",
+      "papel": "sup"
+    },
+    {
+      "id": "fc",
+      "tipo": "fim",
+      "nome": "Chamado cancelado",
+      "papel": "at"
+    }
+  ],
+  "regras": [],
+  "indicadores": [],
+  "dores": [],
+  "riscos": [],
+  "melhorias": [],
+  "glossario": [],
+  "pendencias": [],
+  "historico": []
+}

@@ -1,0 +1,84 @@
+{
+ "processo": {
+  "nome": "v18_border_par_deadlock"
+ },
+ "papeis": [
+  {
+   "id": "a",
+   "nome": "Analista"
+  }
+ ],
+ "elementos": [
+  {
+   "id": "i",
+   "tipo": "inicio",
+   "nome": "Pedido recebido",
+   "papel": "a",
+   "segue": "t1"
+  },
+  {
+   "id": "t1",
+   "nome": "Analisar pedido",
+   "papel": "a",
+   "sistema": [],
+   "segue": "p1",
+   "tempo": {
+    "execucao": "1h"
+   }
+  },
+  {
+   "id": "p1",
+   "tipo": "paralelo",
+   "papel": "a",
+   "segue": [
+    "t2",
+    "t3"
+   ]
+  },
+  {
+   "id": "t2",
+   "nome": "Fazer x",
+   "papel": "a",
+   "sistema": [],
+   "segue": "p2",
+   "bordas": [
+    {
+     "gatilho": "erro",
+     "nome": "Falhou",
+     "percentual": 5,
+     "segue": "f2"
+    }
+   ],
+   "tempo": {
+    "execucao": "4h"
+   }
+  },
+  {
+   "id": "t3",
+   "nome": "Fazer y",
+   "papel": "a",
+   "sistema": [],
+   "segue": "p2",
+   "tempo": {
+    "execucao": "1h"
+   }
+  },
+  {
+   "id": "p2",
+   "tipo": "paralelo",
+   "papel": "a",
+   "segue": "f"
+  },
+  {
+   "id": "f",
+   "tipo": "fim",
+   "nome": "Pedido pronto"
+  },
+  {
+   "id": "f2",
+   "tipo": "fim",
+   "nome": "Pedido com falha",
+   "encerra": true
+  }
+ ]
+}

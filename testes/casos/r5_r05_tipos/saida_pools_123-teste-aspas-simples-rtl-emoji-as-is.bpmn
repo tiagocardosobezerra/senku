@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:senku="http://senku/carta" id="Definicoes.Processo_123" targetNamespace="http://senku/processos" exporter="Senku" exporterVersion="2">
+  <bpmn:collaboration id="Colaboracao.Processo_123">
+    <bpmn:participant id="Pool.Processo_123" name="123 · Teste &lt;&amp;&gt; &quot;aspas&quot; 'simples' ‮RTL‬ 🚀 emoji" processRef="Processo_123"/>
+  </bpmn:collaboration>
+  <bpmn:process id="Processo_123" name="123 · Teste &lt;&amp;&gt; &quot;aspas&quot; 'simples' ‮RTL‬ 🚀 emoji" isExecutable="false">
+    <bpmn:extensionElements><senku:carta>{&quot;processo&quot;:{&quot;nome&quot;:&quot;Teste &lt;&amp;&gt; \&quot;aspas\&quot; 'simples' ‮RTL‬ 🚀 emoji&quot;,&quot;codigo&quot;:123,&quot;dono&quot;:[&quot;Gerente&quot;,&quot;Diretor&quot;],&quot;escopo&quot;:{&quot;inicio&quot;:5,&quot;inclui&quot;:&quot;tudo&quot;},&quot;volume&quot;:120},&quot;papeis&quot;:[{&quot;id&quot;:&quot;p1&quot;,&quot;nome&quot;:&quot;Analista &lt;b&gt;negrito&lt;/b&gt;&quot;},{&quot;id&quot;:2,&quot;nome&quot;:&quot;Gestor bell&quot;},&quot;Cliente&quot;],&quot;sistemas&quot;:[&quot;SAP&quot;,{&quot;id&quot;:&quot;x&quot;,&quot;nome&quot;:&quot;Excel &amp; VBA&quot;}],&quot;regras&quot;:{&quot;R1&quot;:&quot;texto&quot;},&quot;indicadores&quot;:&quot;lead time&quot;,&quot;dores&quot;:[{&quot;id&quot;:&quot;D1&quot;,&quot;descricao&quot;:&quot;x&quot;,&quot;elementos&quot;:&quot;a1&quot;},5],&quot;riscos&quot;:[{&quot;id&quot;:&quot;K1&quot;,&quot;descricao&quot;:&quot;y&quot;,&quot;probabilidade&quot;:5,&quot;impacto&quot;:&quot;altíssimo&quot;}],&quot;melhorias&quot;:[{&quot;id&quot;:&quot;M1&quot;,&quot;resolve&quot;:&quot;D1&quot;,&quot;prazo&quot;:&quot;ontem&quot;}]}</senku:carta></bpmn:extensionElements>
+    <bpmn:laneSet id="Raias.Processo_123">
+      <bpmn:lane id="Raia_p1" name="Analista &lt;b&gt;negrito&lt;/b&gt;">
+        <bpmn:flowNodeRef>i</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>a2</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>d1</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>f</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="Raia_2" name="Gestor bell">
+        <bpmn:flowNodeRef>a1</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="Raia__sem_papel" name="(sem responsável)">
+        <bpmn:flowNodeRef>z</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>b</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>b2</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>b2_1</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>b2_3</bpmn:flowNodeRef>
+      </bpmn:lane>
+    </bpmn:laneSet>
+    <bpmn:startEvent id="i" name="Começo   nulo">
+      <bpmn:extensionElements><senku:dados>{&quot;id&quot;:&quot;i&quot;,&quot;tipo&quot;:&quot;Início&quot;,&quot;nome&quot;:&quot;Começo   nulo&quot;,&quot;papel&quot;:&quot;p1&quot;}</senku:dados></bpmn:extensionElements>
+      <bpmn:outgoing>Fluxo_f1</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:userTask id="a1" name="Analisar pedido">
+      <bpmn:documentation>Sistema: SAP&#10;Tempo: execucao 2h</bpmn:documentation>
+      <bpmn:extensionElements><senku:dados>{&quot;id&quot;:&quot;a1&quot;,&quot;tipo&quot;:&quot;TAREFA&quot;,&quot;nome&quot;:[&quot;Analisar&quot;,&quot;pedido&quot;],&quot;papel&quot;:2,&quot;tempo&quot;:&quot;2h&quot;,&quot;sistema&quot;:&quot;SAP&quot;,&quot;percentual&quot;:50}</senku:dados></bpmn:extensionElements>
+      <bpmn:incoming>Fluxo_f1</bpmn:incoming>
+      <bpmn:incoming>Fluxo_f5</bpmn:incoming>
+      <bpmn:incoming>Fluxo_f13</bpmn:incoming>
+      <bpmn:outgoing>Fluxo_f2</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:task id="a2" name="Aprovar &lt;/text&gt;&lt;script&gt;alert(1)&lt;/script&gt;">
+      <bpmn:documentation>Tempo: execucao ['1h'], espera {'x': 1}&#10;Valor: VA</bpmn:documentation>
+      <bpmn:extensionElements><senku:dados>{&quot;id&quot;:&quot;a2&quot;,&quot;nome&quot;:&quot;Aprovar &lt;/text&gt;&lt;script&gt;alert(1)&lt;/script&gt;&quot;,&quot;papel&quot;:&quot;p1&quot;,&quot;tempo&quot;:{&quot;execucao&quot;:[&quot;1h&quot;],&quot;espera&quot;:{&quot;x&quot;:1}},&quot;valor&quot;:&quot;va&quot;,&quot;raci&quot;:{&quot;A&quot;:&quot;Gestor&quot;,&quot;C&quot;:&quot;p9&quot;}}</senku:dados></bpmn:extensionElements>
+      <bpmn:incoming>Fluxo_f2</bpmn:incoming>
+      <bpmn:outgoing>Fluxo_f3</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:exclusiveGateway id="d1" name="Ok">
+      <bpmn:extensionElements><senku:dados>{&quot;id&quot;:&quot;d1&quot;,&quot;tipo&quot;:&quot;xor&quot;,&quot;nome&quot;:&quot;Ok&quot;,&quot;papel&quot;:&quot;p1&quot;}</senku:dados></bpmn:extensionElements>
+      <bpmn:incoming>Fluxo_f3</bpmn:incoming>
+      <bpmn:outgoing>Fluxo_f4</bpmn:outgoing>
+      <bpmn:outgoing>Fluxo_f5</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:endEvent id="f" name="Fim ]]&gt; cdata">
+      <bpmn:extensionElements><senku:dados>{&quot;id&quot;:&quot;f&quot;,&quot;tipo&quot;:&quot;end&quot;,&quot;nome&quot;:&quot;Fim ]]&gt; cdata&quot;,&quot;encerra&quot;:&quot;talvez&quot;}</senku:dados></bpmn:extensionElements>
+      <bpmn:incoming>Fluxo_f4</bpmn:incoming>
+      <bpmn:incoming>Fluxo_f7</bpmn:incoming>
+      <bpmn:incoming>Fluxo_f8</bpmn:incoming>
+      <bpmn:incoming>Fluxo_f10</bpmn:incoming>
+      <bpmn:incoming>Fluxo_f12</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:task id="z" name="Lançar NF">
+      <bpmn:extensionElements><senku:dados>{&quot;id&quot;:&quot;z&quot;,&quot;tipo&quot;:&quot;atividade&quot;,&quot;nome&quot;:&quot;Lançar NF&quot;}</senku:dados></bpmn:extensionElements>
+    </bpmn:task>
+    <bpmn:task id="b" name="Atividade com borda">
+      <bpmn:extensionElements><senku:dados>{&quot;id&quot;:&quot;b&quot;,&quot;nome&quot;:&quot;Atividade com borda&quot;,&quot;bordas&quot;:{&quot;gatilho&quot;:&quot;tempo&quot;}}</senku:dados></bpmn:extensionElements>
+      <bpmn:outgoing>Fluxo_f7</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="b2" name="Atividade com borda ruim">
+      <bpmn:extensionElements><senku:dados>{&quot;id&quot;:&quot;b2&quot;,&quot;nome&quot;:&quot;Atividade com borda ruim&quot;,&quot;bordas&quot;:[{&quot;gatilho&quot;:&quot;explosao&quot;,&quot;segue&quot;:&quot;f&quot;},&quot;texto&quot;,{&quot;gatilho&quot;:&quot;tempo&quot;,&quot;tempo&quot;:&quot;abc&quot;,&quot;segue&quot;:[&quot;f&quot;,&quot;a1&quot;]}]}</senku:dados></bpmn:extensionElements>
+      <bpmn:outgoing>Fluxo_f8</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:boundaryEvent id="b2_1" attachedToRef="b2">
+      <bpmn:outgoing>Fluxo_f10</bpmn:outgoing>
+    </bpmn:boundaryEvent>
+    <bpmn:boundaryEvent id="b2_3" attachedToRef="b2">
+      <bpmn:documentation>Tempo: espera abc</bpmn:documentation>
+      <bpmn:outgoing>Fluxo_f12</bpmn:outgoing>
+      <bpmn:outgoing>Fluxo_f13</bpmn:outgoing>
+      <bpmn:timerEventDefinition id="b2_3.def"/>
+    </bpmn:boundaryEvent>
+    <bpmn:sequenceFlow id="Fluxo_f1" sourceRef="i" targetRef="a1"/>
+    <bpmn:sequenceFlow id="Fluxo_f2" sourceRef="a1" targetRef="a2"/>
+    <bpmn:sequenceFlow id="Fluxo_f3" sourceRef="a2" targetRef="d1" name="1"/>
+    <bpmn:sequenceFlow id="Fluxo_f4" sourceRef="d1" targetRef="f" name="Sim">
+      <bpmn:documentation>85% dos casos</bpmn:documentation>
+      <bpmn:extensionElements><senku:dados>{&quot;percentual&quot;:85.0}</senku:dados></bpmn:extensionElements>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Fluxo_f5" sourceRef="d1" targetRef="a1" name="Não">
+      <bpmn:documentation>15% dos casos</bpmn:documentation>
+      <bpmn:extensionElements><senku:dados>{&quot;percentual&quot;:15.0}</senku:dados></bpmn:extensionElements>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Fluxo_f7" sourceRef="b" targetRef="f"/>
+    <bpmn:sequenceFlow id="Fluxo_f8" sourceRef="b2" targetRef="f"/>
+    <bpmn:sequenceFlow id="Fluxo_f10" sourceRef="b2_1" targetRef="f"/>
+    <bpmn:sequenceFlow id="Fluxo_f12" sourceRef="b2_3" targetRef="f"/>
+    <bpmn:sequenceFlow id="Fluxo_f13" sourceRef="b2_3" targetRef="a1"/>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="Diagrama.Processo_123">
+    <bpmndi:BPMNPlane id="Plano.Processo_123" bpmnElement="Colaboracao.Processo_123">
+      <bpmndi:BPMNShape id="Pool.Processo_123.di" bpmnElement="Pool.Processo_123" isHorizontal="true"><dc:Bounds x="20" y="20" width="1010" height="621"/></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Raia_p1.di" bpmnElement="Raia_p1" isHorizontal="true"><dc:Bounds x="50" y="20" width="980" height="120"/></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Raia_2.di" bpmnElement="Raia_2" isHorizontal="true"><dc:Bounds x="50" y="140" width="980" height="120"/></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Raia__sem_papel.di" bpmnElement="Raia__sem_papel" isHorizontal="true"><dc:Bounds x="50" y="260" width="980" height="381"/></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="i.di" bpmnElement="i"><dc:Bounds x="155" y="60" width="40" height="40"/>
+<bpmndi:BPMNLabel><dc:Bounds x="125" y="104" width="100" height="27"/></bpmndi:BPMNLabel>
+</bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="a1.di" bpmnElement="a1"><dc:Bounds x="300" y="165" width="130" height="70"/>
+</bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="a2.di" bpmnElement="a2"><dc:Bounds x="490" y="45" width="130" height="70"/>
+</bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="d1.di" bpmnElement="d1" isMarkerVisible="true"><dc:Bounds x="720" y="55" width="50" height="50"/>
+<bpmndi:BPMNLabel><dc:Bounds x="650" y="21" width="100" height="27"/></bpmndi:BPMNLabel>
+</bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="f.di" bpmnElement="f"><dc:Bounds x="915" y="60" width="40" height="40"/>
+<bpmndi:BPMNLabel><dc:Bounds x="885" y="104" width="100" height="27"/></bpmndi:BPMNLabel>
+</bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="z.di" bpmnElement="z"><dc:Bounds x="110" y="285" width="130" height="70"/>
+</bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="b.di" bpmnElement="b"><dc:Bounds x="110" y="405" width="130" height="70"/>
+</bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="b2.di" bpmnElement="b2"><dc:Bounds x="110" y="525" width="130" height="70"/>
+</bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="b2_1.di" bpmnElement="b2_1"><dc:Bounds x="213" y="583" width="24" height="24"/>
+</bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="b2_3.di" bpmnElement="b2_3"><dc:Bounds x="183" y="583" width="24" height="24"/>
+</bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Fluxo_f1.di" bpmnElement="Fluxo_f1">
+        <di:waypoint x="195" y="80"/>
+        <di:waypoint x="270" y="80"/>
+        <di:waypoint x="270" y="148"/>
+        <di:waypoint x="345" y="148"/>
+        <di:waypoint x="345" y="165"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Fluxo_f2.di" bpmnElement="Fluxo_f2">
+        <di:waypoint x="430" y="200"/>
+        <di:waypoint x="460" y="200"/>
+        <di:waypoint x="460" y="132"/>
+        <di:waypoint x="575" y="132"/>
+        <di:waypoint x="575" y="115"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Fluxo_f3.di" bpmnElement="Fluxo_f3">
+        <di:waypoint x="620" y="80"/>
+        <di:waypoint x="720" y="80"/>
+        <bpmndi:BPMNLabel><dc:Bounds x="624" y="62" width="30" height="14"/></bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Fluxo_f4.di" bpmnElement="Fluxo_f4">
+        <di:waypoint x="770" y="80"/>
+        <di:waypoint x="915" y="80"/>
+        <bpmndi:BPMNLabel><dc:Bounds x="774" y="62" width="30" height="14"/></bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Fluxo_f5.di" bpmnElement="Fluxo_f5">
+        <di:waypoint x="745" y="105"/>
+        <di:waypoint x="745" y="155"/>
+        <di:waypoint x="277" y="155"/>
+        <di:waypoint x="277" y="268"/>
+        <di:waypoint x="365" y="268"/>
+        <di:waypoint x="365" y="235"/>
+        <bpmndi:BPMNLabel><dc:Bounds x="750" y="106" width="30" height="14"/></bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Fluxo_f7.di" bpmnElement="Fluxo_f7">
+        <di:waypoint x="240" y="440"/>
+        <di:waypoint x="263" y="440"/>
+        <di:waypoint x="263" y="125"/>
+        <di:waypoint x="935" y="125"/>
+        <di:waypoint x="935" y="100"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Fluxo_f8.di" bpmnElement="Fluxo_f8">
+        <di:waypoint x="240" y="560"/>
+        <di:waypoint x="284" y="560"/>
+        <di:waypoint x="284" y="162"/>
+        <di:waypoint x="935" y="162"/>
+        <di:waypoint x="935" y="100"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Fluxo_f10.di" bpmnElement="Fluxo_f10">
+        <di:waypoint x="225" y="607"/>
+        <di:waypoint x="225" y="628"/>
+        <di:waypoint x="840" y="628"/>
+        <di:waypoint x="840" y="118"/>
+        <di:waypoint x="935" y="118"/>
+        <di:waypoint x="935" y="100"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Fluxo_f12.di" bpmnElement="Fluxo_f12">
+        <di:waypoint x="195" y="607"/>
+        <di:waypoint x="195" y="628"/>
+        <di:waypoint x="847" y="628"/>
+        <di:waypoint x="847" y="148"/>
+        <di:waypoint x="935" y="148"/>
+        <di:waypoint x="935" y="100"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Fluxo_f13.di" bpmnElement="Fluxo_f13">
+        <di:waypoint x="195" y="607"/>
+        <di:waypoint x="195" y="635"/>
+        <di:waypoint x="256" y="635"/>
+        <di:waypoint x="256" y="252"/>
+        <di:waypoint x="385" y="252"/>
+        <di:waypoint x="385" y="235"/>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

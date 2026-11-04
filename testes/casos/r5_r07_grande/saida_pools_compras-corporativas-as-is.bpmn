@@ -1,0 +1,1109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:senku="http://senku/carta" id="Definicoes.Processo_senku" targetNamespace="http://senku/processos" exporter="Senku" exporterVersion="2">
+  <bpmn:message id="Msg.e1" name="Certidões recebidas"/>
+  <bpmn:message id="Msg.e2" name="Confirmação recebida"/>
+  <bpmn:message id="Msg.e4" name="Carta de correção recebida"/>
+  <bpmn:collaboration id="Colaboracao.Processo_senku">
+    <bpmn:participant id="Pool.Processo_senku" name="Compras corporativas" processRef="Processo_senku"/>
+    <bpmn:participant id="PoolExt.1" name="Fornecedor"/>
+    <bpmn:messageFlow id="MsgFlow.1" name="Revisar minuta" sourceRef="a14" targetRef="PoolExt.1"/>
+    <bpmn:messageFlow id="MsgFlow.2" name="Assinar contrato" sourceRef="PoolExt.1" targetRef="a16"/>
+    <bpmn:messageFlow id="MsgFlow.3" name="Confirmação recebida" sourceRef="e2" targetRef="PoolExt.1"/>
+    <bpmn:messageFlow id="MsgFlow.4" name="Entregar material" sourceRef="PoolExt.1" targetRef="a21"/>
+    <bpmn:messageFlow id="MsgFlow.5" name="Registrar devolução" sourceRef="a23" targetRef="PoolExt.1"/>
+    <bpmn:messageFlow id="MsgFlow.6" name="Entregar material" sourceRef="PoolExt.1" targetRef="a21"/>
+  </bpmn:collaboration>
+  <bpmn:process id="Processo_senku" name="Compras corporativas" isExecutable="false">
+    <bpmn:extensionElements><senku:carta>{&quot;processo&quot;:{&quot;nome&quot;:&quot;Compras corporativas&quot;,&quot;volume&quot;:&quot;1.500 requisições por mês&quot;},&quot;papeis&quot;:[{&quot;id&quot;:&quot;sol&quot;,&quot;nome&quot;:&quot;Solicitante&quot;},{&quot;id&quot;:&quot;ges&quot;,&quot;nome&quot;:&quot;Gestor da área&quot;},{&quot;id&quot;:&quot;com&quot;,&quot;nome&quot;:&quot;Comprador&quot;},{&quot;id&quot;:&quot;fis&quot;,&quot;nome&quot;:&quot;Fiscal&quot;},{&quot;id&quot;:&quot;jur&quot;,&quot;nome&quot;:&quot;Jurídico&quot;},{&quot;id&quot;:&quot;fin&quot;,&quot;nome&quot;:&quot;Financeiro&quot;},{&quot;id&quot;:&quot;alm&quot;,&quot;nome&quot;:&quot;Almoxarifado&quot;},{&quot;id&quot;:&quot;ti&quot;,&quot;nome&quot;:&quot;TI&quot;},{&quot;id&quot;:&quot;dir&quot;,&quot;nome&quot;:&quot;Diretoria&quot;}]}</senku:carta></bpmn:extensionElements>
+    <bpmn:laneSet id="Raias.Processo_senku">
+      <bpmn:lane id="Raia_sol" name="Solicitante">
+        <bpmn:flowNodeRef>ini</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>a1</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>a3</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>a6</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="Raia_ges" name="Gestor da área">
+        <bpmn:flowNodeRef>a2</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>d1</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>d2</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>a11</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>f_canc</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="Raia_com" name="Comprador">
+        <bpmn:flowNodeRef>j1</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>d4</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>j2</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>p1</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>a7</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>a7_1</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>a10</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>p2</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>d7</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>j3</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>a17</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>a18</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>c1</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>e2</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>e3</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>a20</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>a29</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>a30</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>f_ok</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="Raia_fis" name="Fiscal">
+        <bpmn:flowNodeRef>a9</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>d6</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>a12</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>e1</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>a25</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>d10</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>a27</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>e4</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="Raia_jur" name="Jurídico">
+        <bpmn:flowNodeRef>a13</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>a14</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>d8</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="Raia_fin" name="Financeiro">
+        <bpmn:flowNodeRef>a8</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>a26</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>p4</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>a28</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="Raia_alm" name="Almoxarifado">
+        <bpmn:flowNodeRef>a21</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>d9</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>a22</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>a23</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>p3</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>a24</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="Raia_ti" name="TI">
+        <bpmn:flowNodeRef>a5</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>d5</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="Raia_dir" name="Diretoria">
+        <bpmn:flowNodeRef>a4</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>d3</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>a16</bpmn:flowNodeRef>
+      </bpmn:lane>
+    </bpmn:laneSet>
+    <bpmn:startEvent id="ini" name="Necessidade identificada">
+      <bpmn:extensionElements><senku:dados>{&quot;id&quot;:&quot;ini&quot;,&quot;tipo&quot;:&quot;inicio&quot;,&quot;nome&quot;:&quot;Necessidade identificada&quot;,&quot;papel&quot;:&quot;sol&quot;}</senku:dados></bpmn:extensionElements>
+      <bpmn:outgoing>Fluxo_f1</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:task id="a1" name="Registrar requisição">
+      <bpmn:documentation>Tempo: execucao 30min, espera 1d</bpmn:documentation>
+      <bpmn:extensionElements><senku:dados>{&quot;id&quot;:&quot;a1&quot;,&quot;nome&quot;:&quot;Registrar requisição&quot;,&quot;papel&quot;:&quot;sol&quot;,&quot;sistema&quot;:[],&quot;tempo&quot;:{&quot;execucao&quot;:&quot;30min&quot;,&quot;espera&quot;:&quot;1d&quot;}}</senku:dados></bpmn:extensionElements>
+      <bpmn:incoming>Fluxo_f1</bpmn:incoming>
+      <bpmn:outgoing>Fluxo_f2</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="a2" name="Analisar requisição">
+      <bpmn:documentation>Tempo: execucao 30min, espera 1d</bpmn:documentation>
+      <bpmn:extensionElements><senku:dados>{&quot;id&quot;:&quot;a2&quot;,&quot;nome&quot;:&quot;Analisar requisição&quot;,&quot;papel&quot;:&quot;ges&quot;,&quot;sistema&quot;:[],&quot;tempo&quot;:{&quot;execucao&quot;:&quot;30min&quot;,&quot;espera&quot;:&quot;1d&quot;}}</senku:dados></bpmn:extensionElements>
+      <bpmn:incoming>Fluxo_f2</bpmn:incoming>
+      <bpmn:incoming>Fluxo_f7</bpmn:incoming>
+      <bpmn:outgoing>Fluxo_f3</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:exclusiveGateway id="d1" name="Requisição aprovada?">
+      <bpmn:extensionElements><senku:dados>{&quot;id&quot;:&quot;d1&quot;,&quot;tipo&quot;:&quot;decisao&quot;,&quot;nome&quot;:&quot;Requisição aprovada?&quot;,&quot;papel&quot;:&quot;ges&quot;}</senku:dados></bpmn:extensionElements>
+      <bpmn:incoming>Fluxo_f3</bpmn:incoming>
+      <bpmn:outgoing>Fluxo_f4</bpmn:outgoing>
+      <bpmn:outgoing>Fluxo_f5</bpmn:outgoing>
+      <bpmn:outgoing>Fluxo_f6</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:task id="a3" name="Corrigir requisição">
+      <bpmn:documentation>Tempo: execucao 30min, espera 1d</bpmn:documentation>
+      <bpmn:extensionElements><senku:dados>{&quot;id&quot;:&quot;a3&quot;,&quot;nome&quot;:&quot;Corrigir requisição&quot;,&quot;papel&quot;:&quot;sol&quot;,&quot;sistema&quot;:[],&quot;tempo&quot;:{&quot;execucao&quot;:&quot;30min&quot;,&quot;espera&quot;:&quot;1d&quot;}}</senku:dados></bpmn:extensionElements>
+      <bpmn:incoming>Fluxo_f5</bpmn:incoming>
+      <bpmn:outgoing>Fluxo_f7</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:exclusiveGateway id="d2" name="Valor acima de 50 mil?">
+      <bpmn:extensionElements><senku:dados>{&quot;id&quot;:&quot;d2&quot;,&quot;tipo&quot;:&quot;decisao&quot;,&quot;nome&quot;:&quot;Valor acima de 50 mil?&quot;,&quot;papel&quot;:&quot;ges&quot;}</senku:dados></bpmn:extensionElements>
+      <bpmn:incoming>Fluxo_f4</bpmn:incoming>
+      <bpmn:outgoing>Fluxo_f8</bpmn:outgoing>
+      <bpmn:outgoing>Fluxo_f9</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:task id="a4" name="Aprovar na diretoria">
+      <bpmn:documentation>Tempo: execucao 30min, espera 1d</bpmn:documentation>
+      <bpmn:extensionElements><senku:dados>{&quot;id&quot;:&quot;a4&quot;,&quot;nome&quot;:&quot;Aprovar na diretoria&quot;,&quot;papel&quot;:&quot;dir&quot;,&quot;sistema&quot;:[],&quot;tempo&quot;:{&quot;execucao&quot;:&quot;30min&quot;,&quot;espera&quot;:&quot;1d&quot;}}</senku:dados></bpmn:extensionElements>
+      <bpmn:incoming>Fluxo_f8</bpmn:incoming>
+      <bpmn:outgoing>Fluxo_f10</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:exclusiveGateway id="d3" name="Diretoria aprovou?">
+      <bpmn:extensionElements><senku:dados>{&quot;id&quot;:&quot;d3&quot;,&quot;tipo&quot;:&quot;decisao&quot;,&quot;nome&quot;:&quot;Diretoria aprovou?&quot;,&quot;papel&quot;:&quot;dir&quot;}</senku:dados></bpmn:extensionElements>
+      <bpmn:incoming>Fluxo_f10</bpmn:incoming>
+      <bpmn:outgoing>Fluxo_f11</bpmn:outgoing>
+      <bpmn:outgoing>Fluxo_f12</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:exclusiveGateway id="j1">
+      <bpmn:extensionElements><senku:dados>{&quot;id&quot;:&quot;j1&quot;,&quot;tipo&quot;:&quot;decisao&quot;,&quot;papel&quot;:&quot;com&quot;}</senku:dados></bpmn:extensionElements>
+      <bpmn:incoming>Fluxo_f9</bpmn:incoming>
+      <bpmn:incoming>Fluxo_f11</bpmn:incoming>
+      <bpmn:outgoing>Fluxo_f13</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:exclusiveGateway id="d4" name="Item de TI?">
+      <bpmn:extensionElements><senku:dados>{&quot;id&quot;:&quot;d4&quot;,&quot;tipo&quot;:&quot;decisao&quot;,&quot;nome&quot;:&quot;Item de TI?&quot;,&quot;papel&quot;:&quot;com&quot;}</senku:dados></bpmn:extensionElements>
+      <bpmn:incoming>Fluxo_f13</bpmn:incoming>
+      <bpmn:outgoing>Fluxo_f14</bpmn:outgoing>
+      <bpmn:outgoing>Fluxo_f15</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:task id="a5" name="Emitir parecer técnico">
+      <bpmn:documentation>Tempo: execucao 30min, espera 1d</bpmn:documentation>
+      <bpmn:extensionElements><senku:dados>{&quot;id&quot;:&quot;a5&quot;,&quot;nome&quot;:&quot;Emitir parecer técnico&quot;,&quot;papel&quot;:&quot;ti&quot;,&quot;sistema&quot;:[],&quot;tempo&quot;:{&quot;execucao&quot;:&quot;30min&quot;,&quot;espera&quot;:&quot;1d&quot;}}</senku:dados></bpmn:extensionElements>
+      <bpmn:incoming>Fluxo_f14</bpmn:incoming>
+      <bpmn:incoming>Fluxo_f19</bpmn:incoming>
+      <bpmn:outgoing>Fluxo_f16</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:exclusiveGateway id="d5" name="Parecer favorável?">
+      <bpmn:extensionElements><senku:dados>{&quot;id&quot;:&quot;d5&quot;,&quot;tipo&quot;:&quot;decisao&quot;,&quot;nome&quot;:&quot;Parecer favorável?&quot;,&quot;papel&quot;:&quot;ti&quot;}</senku:dados></bpmn:extensionElements>
+      <bpmn:incoming>Fluxo_f16</bpmn:incoming>
+      <bpmn:outgoing>Fluxo_f17</bpmn:outgoing>
+      <bpmn:outgoing>Fluxo_f18</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:task id="a6" name="Ajustar especificação">
+      <bpmn:documentation>Tempo: execucao 30min, espera 1d</bpmn:documentation>
+      <bpmn:extensionElements><senku:dados>{&quot;id&quot;:&quot;a6&quot;,&quot;nome&quot;:&quot;Ajustar especificação&quot;,&quot;papel&quot;:&quot;sol&quot;,&quot;sistema&quot;:[],&quot;tempo&quot;:{&quot;execucao&quot;:&quot;30min&quot;,&quot;espera&quot;:&quot;1d&quot;}}</senku:dados></bpmn:extensionElements>
+      <bpmn:incoming>Fluxo_f18</bpmn:incoming>
+      <bpmn:outgoing>Fluxo_f19</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:exclusiveGateway id="j2">
+      <bpmn:extensionElements><senku:dados>{&quot;id&quot;:&quot;j2&quot;,&quot;tipo&quot;:&quot;decisao&quot;,&quot;papel&quot;:&quot;com&quot;}</senku:dados></bpmn:extensionElements>
+      <bpmn:incoming>Fluxo_f15</bpmn:incoming>
+      <bpmn:incoming>Fluxo_f17</bpmn:incoming>
+      <bpmn:outgoing>Fluxo_f20</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:parallelGateway id="p1">
+      <bpmn:extensionElements><senku:dados>{&quot;id&quot;:&quot;p1&quot;,&quot;tipo&quot;:&quot;paralelo&quot;,&quot;papel&quot;:&quot;com&quot;}</senku:dados></bpmn:extensionElements>
+      <bpmn:incoming>Fluxo_f20</bpmn:incoming>
+      <bpmn:outgoing>Fluxo_f21</bpmn:outgoing>
+      <bpmn:outgoing>Fluxo_f22</bpmn:outgoing>
+      <bpmn:outgoing>Fluxo_f23</bpmn:outgoing>
+    </bpmn:parallelGateway>
+    <bpmn:task id="a7" name="Cotar com fornecedores">
+      <bpmn:documentation>Tempo: execucao 30min, espera 1d</bpmn:documentation>
+      <bpmn:extensionElements><senku:dados>{&quot;id&quot;:&quot;a7&quot;,&quot;nome&quot;:&quot;Cotar com fornecedores&quot;,&quot;papel&quot;:&quot;com&quot;,&quot;sistema&quot;:[],&quot;tempo&quot;:{&quot;execucao&quot;:&quot;30min&quot;,&quot;espera&quot;:&quot;1d&quot;},&quot;bordas&quot;:[{&quot;gatilho&quot;:&quot;tempo&quot;,&quot;nome&quot;:&quot;Prazo de 5 dias estourado&quot;,&quot;tempo&quot;:&quot;5d&quot;,&quot;percentual&quot;:10,&quot;segue&quot;:&quot;a11&quot;}]}</senku:dados></bpmn:extensionElements>
+      <bpmn:incoming>Fluxo_f21</bpmn:incoming>
+      <bpmn:outgoing>Fluxo_f24</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:boundaryEvent id="a7_1" name="Prazo de 5 dias estourado" attachedToRef="a7">
+      <bpmn:documentation>Tempo: espera 5d</bpmn:documentation>
+      <bpmn:outgoing>Fluxo_f26</bpmn:outgoing>
+      <bpmn:timerEventDefinition id="a7_1.def"><bpmn:timeDuration xsi:type="bpmn:tFormalExpression">P7D</bpmn:timeDuration></bpmn:timerEventDefinition>
+    </bpmn:boundaryEvent>
+    <bpmn:task id="a8" name="Verificar orçamento">
+      <bpmn:documentation>Tempo: execucao 30min, espera 1d</bpmn:documentation>
+      <bpmn:extensionElements><senku:dados>{&quot;id&quot;:&quot;a8&quot;,&quot;nome&quot;:&quot;Verificar orçamento&quot;,&quot;papel&quot;:&quot;fin&quot;,&quot;sistema&quot;:[],&quot;tempo&quot;:{&quot;execucao&quot;:&quot;30min&quot;,&quot;espera&quot;:&quot;1d&quot;}}</senku:dados></bpmn:extensionElements>
+      <bpmn:incoming>Fluxo_f22</bpmn:incoming>
+      <bpmn:outgoing>Fluxo_f27</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="a9" name="Consultar cadastro do fornecedor">
+      <bpmn:documentation>Tempo: execucao 30min, espera 1d</bpmn:documentation>
+      <bpmn:extensionElements><senku:dados>{&quot;id&quot;:&quot;a9&quot;,&quot;nome&quot;:&quot;Consultar cadastro do fornecedor&quot;,&quot;papel&quot;:&quot;fis&quot;,&quot;sistema&quot;:[],&quot;tempo&quot;:{&quot;execucao&quot;:&quot;30min&quot;,&quot;espera&quot;:&quot;1d&quot;}}</senku:dados></bpmn:extensionElements>
+      <bpmn:incoming>Fluxo_f23</bpmn:incoming>
+      <bpmn:outgoing>Fluxo_f28</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:exclusiveGateway id="d6" name="Fornecedor regular?">
+      <bpmn:extensionElements><senku:dados>{&quot;id&quot;:&quot;d6&quot;,&quot;tipo&quot;:&quot;decisao&quot;,&quot;nome&quot;:&quot;Fornecedor regular?&quot;,&quot;papel&quot;:&quot;fis&quot;}</senku:dados></bpmn:extensionElements>
+      <bpmn:incoming>Fluxo_f28</bpmn:incoming>
+      <bpmn:outgoing>Fluxo_f29</bpmn:outgoing>
+      <bpmn:outgoing>Fluxo_f30</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:task id="a12" name="Solicitar certidões">
+      <bpmn:documentation>Tempo: execucao 30min, espera 1d</bpmn:documentation>
+      <bpmn:extensionElements><senku:dados>{&quot;id&quot;:&quot;a12&quot;,&quot;nome&quot;:&quot;Solicitar certidões&quot;,&quot;papel&quot;:&quot;fis&quot;,&quot;sistema&quot;:[],&quot;tempo&quot;:{&quot;execucao&quot;:&quot;30min&quot;,&quot;espera&quot;:&quot;1d&quot;}}</senku:dados></bpmn:extensionElements>
+      <bpmn:incoming>Fluxo_f30</bpmn:incoming>
+      <bpmn:outgoing>Fluxo_f31</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:intermediateCatchEvent id="e1" name="Certidões recebidas">
+      <bpmn:extensionElements><senku:dados>{&quot;id&quot;:&quot;e1&quot;,&quot;tipo&quot;:&quot;evento&quot;,&quot;gatilho&quot;:&quot;mensagem&quot;,&quot;nome&quot;:&quot;Certidões recebidas&quot;,&quot;papel&quot;:&quot;fis&quot;}</senku:dados></bpmn:extensionElements>
+      <bpmn:incoming>Fluxo_f31</bpmn:incoming>
+      <bpmn:outgoing>Fluxo_f32</bpmn:outgoing>
+      <bpmn:messageEventDefinition id="e1.def" messageRef="Msg.e1"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:task id="a10" name="Comparar propostas">
+      <bpmn:documentation>Tempo: execucao 30min, espera 1d</bpmn:documentation>
+      <bpmn:extensionElements><senku:dados>{&quot;id&quot;:&quot;a10&quot;,&quot;nome&quot;:&quot;Comparar propostas&quot;,&quot;papel&quot;:&quot;com&quot;,&quot;sistema&quot;:[],&quot;tempo&quot;:{&quot;execucao&quot;:&quot;30min&quot;,&quot;espera&quot;:&quot;1d&quot;}}</senku:dados></bpmn:extensionElements>
+      <bpmn:incoming>Fluxo_f24</bpmn:incoming>
+      <bpmn:incoming>Fluxo_f34</bpmn:incoming>
+      <bpmn:outgoing>Fluxo_f33</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="a11" name="Escalar ao gestor">
+      <bpmn:documentation>Tempo: execucao 30min, espera 1d</bpmn:documentation>
+      <bpmn:extensionElements><senku:dados>{&quot;id&quot;:&quot;a11&quot;,&quot;nome&quot;:&quot;Escalar ao gestor&quot;,&quot;papel&quot;:&quot;ges&quot;,&quot;sistema&quot;:[],&quot;tempo&quot;:{&quot;execucao&quot;:&quot;30min&quot;,&quot;espera&quot;:&quot;1d&quot;}}</senku:dados></bpmn:extensionElements>
+      <bpmn:incoming>Fluxo_f26</bpmn:incoming>
+      <bpmn:outgoing>Fluxo_f34</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:parallelGateway id="p2">
+      <bpmn:extensionElements><senku:dados>{&quot;id&quot;:&quot;p2&quot;,&quot;tipo&quot;:&quot;paralelo&quot;,&quot;papel&quot;:&quot;com&quot;}</senku:dados></bpmn:extensionElements>
+      <bpmn:incoming>Fluxo_f27</bpmn:incoming>
+      <bpmn:incoming>Fluxo_f29</bpmn:incoming>
+      <bpmn:incoming>Fluxo_f32</bpmn:incoming>
+      <bpmn:incoming>Fluxo_f33</bpmn:incoming>
+      <bpmn:outgoing>Fluxo_f35</bpmn:outgoing>
+    </bpmn:parallelGateway>
+    <bpmn:exclusiveGateway id="d7" name="Precisa de contrato?">
+      <bpmn:extensionElements><senku:dados>{&quot;id&quot;:&quot;d7&quot;,&quot;tipo&quot;:&quot;decisao&quot;,&quot;nome&quot;:&quot;Precisa de contrato?&quot;,&quot;papel&quot;:&quot;com&quot;}</senku:dados></bpmn:extensionElements>
+      <bpmn:incoming>Fluxo_f35</bpmn:incoming>
+      <bpmn:outgoing>Fluxo_f36</bpmn:outgoing>
+      <bpmn:outgoing>Fluxo_f37</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:task id="a13" name="Elaborar minuta">
+      <bpmn:documentation>Tempo: execucao 30min, espera 1d</bpmn:documentation>
+      <bpmn:extensionElements><senku:dados>{&quot;id&quot;:&quot;a13&quot;,&quot;nome&quot;:&quot;Elaborar minuta&quot;,&quot;papel&quot;:&quot;jur&quot;,&quot;sistema&quot;:[],&quot;tempo&quot;:{&quot;execucao&quot;:&quot;30min&quot;,&quot;espera&quot;:&quot;1d&quot;}}</senku:dados></bpmn:extensionElements>
+      <bpmn:incoming>Fluxo_f36</bpmn:incoming>
+      <bpmn:incoming>Fluxo_f41</bpmn:incoming>
+      <bpmn:outgoing>Fluxo_f38</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="a14" name="Revisar minuta">
+      <bpmn:documentation>Tempo: execucao 30min, espera 1d</bpmn:documentation>
+      <bpmn:extensionElements><senku:dados>{&quot;id&quot;:&quot;a14&quot;,&quot;nome&quot;:&quot;Revisar minuta&quot;,&quot;papel&quot;:&quot;jur&quot;,&quot;sistema&quot;:[],&quot;tempo&quot;:{&quot;execucao&quot;:&quot;30min&quot;,&quot;espera&quot;:&quot;1d&quot;}}</senku:dados></bpmn:extensionElements>
+      <bpmn:incoming>Fluxo_f38</bpmn:incoming>
+      <bpmn:outgoing>Fluxo_f39</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:exclusiveGateway id="d8" name="Minuta aprovada?">
+      <bpmn:extensionElements><senku:dados>{&quot;id&quot;:&quot;d8&quot;,&quot;tipo&quot;:&quot;decisao&quot;,&quot;nome&quot;:&quot;Minuta aprovada?&quot;,&quot;papel&quot;:&quot;jur&quot;}</senku:dados></bpmn:extensionElements>
+      <bpmn:incoming>Fluxo_f39</bpmn:incoming>
+      <bpmn:outgoing>Fluxo_f40</bpmn:outgoing>
+      <bpmn:outgoing>Fluxo_f41</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:task id="a16" name="Assinar contrato pela empresa">
+      <bpmn:documentation>Tempo: execucao 30min, espera 1d</bpmn:documentation>
+      <bpmn:extensionElements><senku:dados>{&quot;id&quot;:&quot;a16&quot;,&quot;nome&quot;:&quot;Assinar contrato pela empresa&quot;,&quot;papel&quot;:&quot;dir&quot;,&quot;sistema&quot;:[],&quot;tempo&quot;:{&quot;execucao&quot;:&quot;30min&quot;,&quot;espera&quot;:&quot;1d&quot;}}</senku:dados></bpmn:extensionElements>
+      <bpmn:incoming>Fluxo_f40</bpmn:incoming>
+      <bpmn:outgoing>Fluxo_f42</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:exclusiveGateway id="j3">
+      <bpmn:extensionElements><senku:dados>{&quot;id&quot;:&quot;j3&quot;,&quot;tipo&quot;:&quot;decisao&quot;,&quot;papel&quot;:&quot;com&quot;}</senku:dados></bpmn:extensionElements>
+      <bpmn:incoming>Fluxo_f37</bpmn:incoming>
+      <bpmn:incoming>Fluxo_f42</bpmn:incoming>
+      <bpmn:outgoing>Fluxo_f43</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:task id="a17" name="Emitir pedido de compra">
+      <bpmn:documentation>Tempo: execucao 30min, espera 1d</bpmn:documentation>
+      <bpmn:extensionElements><senku:dados>{&quot;id&quot;:&quot;a17&quot;,&quot;nome&quot;:&quot;Emitir pedido de compra&quot;,&quot;papel&quot;:&quot;com&quot;,&quot;sistema&quot;:[],&quot;tempo&quot;:{&quot;execucao&quot;:&quot;30min&quot;,&quot;espera&quot;:&quot;1d&quot;}}</senku:dados></bpmn:extensionElements>
+      <bpmn:incoming>Fluxo_f43</bpmn:incoming>
+      <bpmn:outgoing>Fluxo_f44</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="a18" name="Enviar pedido ao fornecedor">
+      <bpmn:documentation>Tempo: execucao 30min, espera 1d</bpmn:documentation>
+      <bpmn:extensionElements><senku:dados>{&quot;id&quot;:&quot;a18&quot;,&quot;nome&quot;:&quot;Enviar pedido ao fornecedor&quot;,&quot;papel&quot;:&quot;com&quot;,&quot;sistema&quot;:[],&quot;tempo&quot;:{&quot;execucao&quot;:&quot;30min&quot;,&quot;espera&quot;:&quot;1d&quot;}}</senku:dados></bpmn:extensionElements>
+      <bpmn:incoming>Fluxo_f44</bpmn:incoming>
+      <bpmn:incoming>Fluxo_f50</bpmn:incoming>
+      <bpmn:outgoing>Fluxo_f45</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:eventBasedGateway id="c1" name="O que vier primeiro">
+      <bpmn:extensionElements><senku:dados>{&quot;id&quot;:&quot;c1&quot;,&quot;tipo&quot;:&quot;corrida&quot;,&quot;nome&quot;:&quot;O que vier primeiro&quot;,&quot;papel&quot;:&quot;com&quot;}</senku:dados></bpmn:extensionElements>
+      <bpmn:incoming>Fluxo_f45</bpmn:incoming>
+      <bpmn:outgoing>Fluxo_f46</bpmn:outgoing>
+      <bpmn:outgoing>Fluxo_f47</bpmn:outgoing>
+    </bpmn:eventBasedGateway>
+    <bpmn:intermediateCatchEvent id="e2" name="Confirmação recebida">
+      <bpmn:extensionElements><senku:dados>{&quot;id&quot;:&quot;e2&quot;,&quot;tipo&quot;:&quot;evento&quot;,&quot;gatilho&quot;:&quot;mensagem&quot;,&quot;nome&quot;:&quot;Confirmação recebida&quot;}</senku:dados></bpmn:extensionElements>
+      <bpmn:incoming>Fluxo_f46</bpmn:incoming>
+      <bpmn:outgoing>Fluxo_f48</bpmn:outgoing>
+      <bpmn:messageEventDefinition id="e2.def" messageRef="Msg.e2"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:intermediateCatchEvent id="e3" name="Aguardar 3 dias corridos">
+      <bpmn:documentation>Tempo: espera 3 dias corridos</bpmn:documentation>
+      <bpmn:extensionElements><senku:dados>{&quot;id&quot;:&quot;e3&quot;,&quot;tipo&quot;:&quot;evento&quot;,&quot;gatilho&quot;:&quot;tempo&quot;,&quot;nome&quot;:&quot;Aguardar 3 dias corridos&quot;}</senku:dados></bpmn:extensionElements>
+      <bpmn:incoming>Fluxo_f47</bpmn:incoming>
+      <bpmn:outgoing>Fluxo_f49</bpmn:outgoing>
+      <bpmn:timerEventDefinition id="e3.def"><bpmn:timeDuration xsi:type="bpmn:tFormalExpression">P3D</bpmn:timeDuration></bpmn:timerEventDefinition>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:task id="a20" name="Cobrar fornecedor">
+      <bpmn:documentation>Tempo: execucao 30min, espera 1d</bpmn:documentation>
+      <bpmn:extensionElements><senku:dados>{&quot;id&quot;:&quot;a20&quot;,&quot;nome&quot;:&quot;Cobrar fornecedor&quot;,&quot;papel&quot;:&quot;com&quot;,&quot;sistema&quot;:[],&quot;tempo&quot;:{&quot;execucao&quot;:&quot;30min&quot;,&quot;espera&quot;:&quot;1d&quot;}}</senku:dados></bpmn:extensionElements>
+      <bpmn:incoming>Fluxo_f49</bpmn:incoming>
+      <bpmn:outgoing>Fluxo_f50</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="a21" name="Conferir material">
+      <bpmn:documentation>Tempo: execucao 30min, espera 1d</bpmn:documentation>
+      <bpmn:extensionElements><senku:dados>{&quot;id&quot;:&quot;a21&quot;,&quot;nome&quot;:&quot;Conferir material&quot;,&quot;papel&quot;:&quot;alm&quot;,&quot;sistema&quot;:[],&quot;tempo&quot;:{&quot;execucao&quot;:&quot;30min&quot;,&quot;espera&quot;:&quot;1d&quot;}}</senku:dados></bpmn:extensionElements>
+      <bpmn:incoming>Fluxo_f48</bpmn:incoming>
+      <bpmn:incoming>Fluxo_f55</bpmn:incoming>
+      <bpmn:outgoing>Fluxo_f51</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:exclusiveGateway id="d9" name="Material conforme?">
+      <bpmn:extensionElements><senku:dados>{&quot;id&quot;:&quot;d9&quot;,&quot;tipo&quot;:&quot;decisao&quot;,&quot;nome&quot;:&quot;Material conforme?&quot;,&quot;papel&quot;:&quot;alm&quot;}</senku:dados></bpmn:extensionElements>
+      <bpmn:incoming>Fluxo_f51</bpmn:incoming>
+      <bpmn:outgoing>Fluxo_f52</bpmn:outgoing>
+      <bpmn:outgoing>Fluxo_f53</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:task id="a22" name="Devolver material">
+      <bpmn:documentation>Tempo: execucao 30min, espera 1d</bpmn:documentation>
+      <bpmn:extensionElements><senku:dados>{&quot;id&quot;:&quot;a22&quot;,&quot;nome&quot;:&quot;Devolver material&quot;,&quot;papel&quot;:&quot;alm&quot;,&quot;sistema&quot;:[],&quot;tempo&quot;:{&quot;execucao&quot;:&quot;30min&quot;,&quot;espera&quot;:&quot;1d&quot;}}</senku:dados></bpmn:extensionElements>
+      <bpmn:incoming>Fluxo_f53</bpmn:incoming>
+      <bpmn:outgoing>Fluxo_f54</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="a23" name="Registrar devolução">
+      <bpmn:documentation>Tempo: execucao 30min, espera 1d</bpmn:documentation>
+      <bpmn:extensionElements><senku:dados>{&quot;id&quot;:&quot;a23&quot;,&quot;nome&quot;:&quot;Registrar devolução&quot;,&quot;papel&quot;:&quot;alm&quot;,&quot;sistema&quot;:[],&quot;tempo&quot;:{&quot;execucao&quot;:&quot;30min&quot;,&quot;espera&quot;:&quot;1d&quot;}}</senku:dados></bpmn:extensionElements>
+      <bpmn:incoming>Fluxo_f54</bpmn:incoming>
+      <bpmn:outgoing>Fluxo_f55</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:parallelGateway id="p3">
+      <bpmn:extensionElements><senku:dados>{&quot;id&quot;:&quot;p3&quot;,&quot;tipo&quot;:&quot;paralelo&quot;,&quot;papel&quot;:&quot;alm&quot;}</senku:dados></bpmn:extensionElements>
+      <bpmn:incoming>Fluxo_f52</bpmn:incoming>
+      <bpmn:outgoing>Fluxo_f56</bpmn:outgoing>
+      <bpmn:outgoing>Fluxo_f57</bpmn:outgoing>
+    </bpmn:parallelGateway>
+    <bpmn:task id="a24" name="Dar entrada no estoque">
+      <bpmn:documentation>Tempo: execucao 30min, espera 1d</bpmn:documentation>
+      <bpmn:extensionElements><senku:dados>{&quot;id&quot;:&quot;a24&quot;,&quot;nome&quot;:&quot;Dar entrada no estoque&quot;,&quot;papel&quot;:&quot;alm&quot;,&quot;sistema&quot;:[],&quot;tempo&quot;:{&quot;execucao&quot;:&quot;30min&quot;,&quot;espera&quot;:&quot;1d&quot;}}</senku:dados></bpmn:extensionElements>
+      <bpmn:incoming>Fluxo_f56</bpmn:incoming>
+      <bpmn:outgoing>Fluxo_f58</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="a25" name="Lançar nota fiscal">
+      <bpmn:documentation>Tempo: execucao 30min, espera 1d</bpmn:documentation>
+      <bpmn:extensionElements><senku:dados>{&quot;id&quot;:&quot;a25&quot;,&quot;nome&quot;:&quot;Lançar nota fiscal&quot;,&quot;papel&quot;:&quot;fis&quot;,&quot;sistema&quot;:[],&quot;tempo&quot;:{&quot;execucao&quot;:&quot;30min&quot;,&quot;espera&quot;:&quot;1d&quot;}}</senku:dados></bpmn:extensionElements>
+      <bpmn:incoming>Fluxo_f57</bpmn:incoming>
+      <bpmn:incoming>Fluxo_f63</bpmn:incoming>
+      <bpmn:outgoing>Fluxo_f59</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:exclusiveGateway id="d10" name="Nota correta?">
+      <bpmn:extensionElements><senku:dados>{&quot;id&quot;:&quot;d10&quot;,&quot;tipo&quot;:&quot;decisao&quot;,&quot;nome&quot;:&quot;Nota correta?&quot;,&quot;papel&quot;:&quot;fis&quot;}</senku:dados></bpmn:extensionElements>
+      <bpmn:incoming>Fluxo_f59</bpmn:incoming>
+      <bpmn:outgoing>Fluxo_f60</bpmn:outgoing>
+      <bpmn:outgoing>Fluxo_f61</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:task id="a27" name="Solicitar carta de correção">
+      <bpmn:documentation>Tempo: execucao 30min, espera 1d</bpmn:documentation>
+      <bpmn:extensionElements><senku:dados>{&quot;id&quot;:&quot;a27&quot;,&quot;nome&quot;:&quot;Solicitar carta de correção&quot;,&quot;papel&quot;:&quot;fis&quot;,&quot;sistema&quot;:[],&quot;tempo&quot;:{&quot;execucao&quot;:&quot;30min&quot;,&quot;espera&quot;:&quot;1d&quot;}}</senku:dados></bpmn:extensionElements>
+      <bpmn:incoming>Fluxo_f61</bpmn:incoming>
+      <bpmn:outgoing>Fluxo_f62</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:intermediateCatchEvent id="e4" name="Carta de correção recebida">
+      <bpmn:extensionElements><senku:dados>{&quot;id&quot;:&quot;e4&quot;,&quot;tipo&quot;:&quot;evento&quot;,&quot;gatilho&quot;:&quot;mensagem&quot;,&quot;nome&quot;:&quot;Carta de correção recebida&quot;}</senku:dados></bpmn:extensionElements>
+      <bpmn:incoming>Fluxo_f62</bpmn:incoming>
+      <bpmn:outgoing>Fluxo_f63</bpmn:outgoing>
+      <bpmn:messageEventDefinition id="e4.def" messageRef="Msg.e4"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:task id="a26" name="Programar pagamento">
+      <bpmn:documentation>Tempo: execucao 30min, espera 1d</bpmn:documentation>
+      <bpmn:extensionElements><senku:dados>{&quot;id&quot;:&quot;a26&quot;,&quot;nome&quot;:&quot;Programar pagamento&quot;,&quot;papel&quot;:&quot;fin&quot;,&quot;sistema&quot;:[],&quot;tempo&quot;:{&quot;execucao&quot;:&quot;30min&quot;,&quot;espera&quot;:&quot;1d&quot;}}</senku:dados></bpmn:extensionElements>
+      <bpmn:incoming>Fluxo_f60</bpmn:incoming>
+      <bpmn:outgoing>Fluxo_f64</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:parallelGateway id="p4">
+      <bpmn:extensionElements><senku:dados>{&quot;id&quot;:&quot;p4&quot;,&quot;tipo&quot;:&quot;paralelo&quot;,&quot;papel&quot;:&quot;fin&quot;}</senku:dados></bpmn:extensionElements>
+      <bpmn:incoming>Fluxo_f58</bpmn:incoming>
+      <bpmn:incoming>Fluxo_f64</bpmn:incoming>
+      <bpmn:outgoing>Fluxo_f65</bpmn:outgoing>
+    </bpmn:parallelGateway>
+    <bpmn:task id="a28" name="Pagar fornecedor">
+      <bpmn:documentation>Tempo: execucao 30min, espera 1d</bpmn:documentation>
+      <bpmn:extensionElements><senku:dados>{&quot;id&quot;:&quot;a28&quot;,&quot;nome&quot;:&quot;Pagar fornecedor&quot;,&quot;papel&quot;:&quot;fin&quot;,&quot;sistema&quot;:[],&quot;tempo&quot;:{&quot;execucao&quot;:&quot;30min&quot;,&quot;espera&quot;:&quot;1d&quot;}}</senku:dados></bpmn:extensionElements>
+      <bpmn:incoming>Fluxo_f65</bpmn:incoming>
+      <bpmn:outgoing>Fluxo_f66</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="a29" name="Arquivar processo">
+      <bpmn:documentation>Tempo: execucao 30min, espera 1d</bpmn:documentation>
+      <bpmn:extensionElements><senku:dados>{&quot;id&quot;:&quot;a29&quot;,&quot;nome&quot;:&quot;Arquivar processo&quot;,&quot;papel&quot;:&quot;com&quot;,&quot;sistema&quot;:[],&quot;tempo&quot;:{&quot;execucao&quot;:&quot;30min&quot;,&quot;espera&quot;:&quot;1d&quot;}}</senku:dados></bpmn:extensionElements>
+      <bpmn:incoming>Fluxo_f66</bpmn:incoming>
+      <bpmn:outgoing>Fluxo_f67</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="a30" name="Avaliar fornecedor">
+      <bpmn:documentation>Tempo: execucao 30min, espera 1d</bpmn:documentation>
+      <bpmn:extensionElements><senku:dados>{&quot;id&quot;:&quot;a30&quot;,&quot;nome&quot;:&quot;Avaliar fornecedor&quot;,&quot;papel&quot;:&quot;com&quot;,&quot;sistema&quot;:[],&quot;tempo&quot;:{&quot;execucao&quot;:&quot;30min&quot;,&quot;espera&quot;:&quot;1d&quot;}}</senku:dados></bpmn:extensionElements>
+      <bpmn:incoming>Fluxo_f67</bpmn:incoming>
+      <bpmn:outgoing>Fluxo_f68</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:endEvent id="f_ok" name="Material entregue e pago">
+      <bpmn:extensionElements><senku:dados>{&quot;id&quot;:&quot;f_ok&quot;,&quot;tipo&quot;:&quot;fim&quot;,&quot;nome&quot;:&quot;Material entregue e pago&quot;}</senku:dados></bpmn:extensionElements>
+      <bpmn:incoming>Fluxo_f68</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:endEvent id="f_canc" name="Requisição cancelada">
+      <bpmn:extensionElements><senku:dados>{&quot;id&quot;:&quot;f_canc&quot;,&quot;tipo&quot;:&quot;fim&quot;,&quot;nome&quot;:&quot;Requisição cancelada&quot;}</senku:dados></bpmn:extensionElements>
+      <bpmn:incoming>Fluxo_f6</bpmn:incoming>
+      <bpmn:incoming>Fluxo_f12</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Fluxo_f1" sourceRef="ini" targetRef="a1"/>
+    <bpmn:sequenceFlow id="Fluxo_f2" sourceRef="a1" targetRef="a2"/>
+    <bpmn:sequenceFlow id="Fluxo_f3" sourceRef="a2" targetRef="d1"/>
+    <bpmn:sequenceFlow id="Fluxo_f4" sourceRef="d1" targetRef="d2" name="Sim">
+      <bpmn:documentation>80% dos casos</bpmn:documentation>
+      <bpmn:extensionElements><senku:dados>{&quot;percentual&quot;:80.0}</senku:dados></bpmn:extensionElements>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Fluxo_f5" sourceRef="d1" targetRef="a3" name="Não">
+      <bpmn:documentation>15% dos casos</bpmn:documentation>
+      <bpmn:extensionElements><senku:dados>{&quot;percentual&quot;:15.0}</senku:dados></bpmn:extensionElements>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Fluxo_f6" sourceRef="d1" targetRef="f_canc" name="Cancelar">
+      <bpmn:documentation>5% dos casos</bpmn:documentation>
+      <bpmn:extensionElements><senku:dados>{&quot;percentual&quot;:5.0}</senku:dados></bpmn:extensionElements>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Fluxo_f7" sourceRef="a3" targetRef="a2"/>
+    <bpmn:sequenceFlow id="Fluxo_f8" sourceRef="d2" targetRef="a4" name="Sim">
+      <bpmn:documentation>20% dos casos</bpmn:documentation>
+      <bpmn:extensionElements><senku:dados>{&quot;percentual&quot;:20.0}</senku:dados></bpmn:extensionElements>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Fluxo_f9" sourceRef="d2" targetRef="j1" name="Não">
+      <bpmn:documentation>80% dos casos</bpmn:documentation>
+      <bpmn:extensionElements><senku:dados>{&quot;percentual&quot;:80.0}</senku:dados></bpmn:extensionElements>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Fluxo_f10" sourceRef="a4" targetRef="d3"/>
+    <bpmn:sequenceFlow id="Fluxo_f11" sourceRef="d3" targetRef="j1" name="Sim">
+      <bpmn:documentation>90% dos casos</bpmn:documentation>
+      <bpmn:extensionElements><senku:dados>{&quot;percentual&quot;:90.0}</senku:dados></bpmn:extensionElements>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Fluxo_f12" sourceRef="d3" targetRef="f_canc" name="Não">
+      <bpmn:documentation>10% dos casos</bpmn:documentation>
+      <bpmn:extensionElements><senku:dados>{&quot;percentual&quot;:10.0}</senku:dados></bpmn:extensionElements>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Fluxo_f13" sourceRef="j1" targetRef="d4"/>
+    <bpmn:sequenceFlow id="Fluxo_f14" sourceRef="d4" targetRef="a5" name="Sim">
+      <bpmn:documentation>30% dos casos</bpmn:documentation>
+      <bpmn:extensionElements><senku:dados>{&quot;percentual&quot;:30.0}</senku:dados></bpmn:extensionElements>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Fluxo_f15" sourceRef="d4" targetRef="j2" name="Não">
+      <bpmn:documentation>70% dos casos</bpmn:documentation>
+      <bpmn:extensionElements><senku:dados>{&quot;percentual&quot;:70.0}</senku:dados></bpmn:extensionElements>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Fluxo_f16" sourceRef="a5" targetRef="d5"/>
+    <bpmn:sequenceFlow id="Fluxo_f17" sourceRef="d5" targetRef="j2" name="Sim">
+      <bpmn:documentation>85% dos casos</bpmn:documentation>
+      <bpmn:extensionElements><senku:dados>{&quot;percentual&quot;:85.0}</senku:dados></bpmn:extensionElements>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Fluxo_f18" sourceRef="d5" targetRef="a6" name="Não">
+      <bpmn:documentation>15% dos casos</bpmn:documentation>
+      <bpmn:extensionElements><senku:dados>{&quot;percentual&quot;:15.0}</senku:dados></bpmn:extensionElements>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Fluxo_f19" sourceRef="a6" targetRef="a5"/>
+    <bpmn:sequenceFlow id="Fluxo_f20" sourceRef="j2" targetRef="p1"/>
+    <bpmn:sequenceFlow id="Fluxo_f21" sourceRef="p1" targetRef="a7"/>
+    <bpmn:sequenceFlow id="Fluxo_f22" sourceRef="p1" targetRef="a8"/>
+    <bpmn:sequenceFlow id="Fluxo_f23" sourceRef="p1" targetRef="a9"/>
+    <bpmn:sequenceFlow id="Fluxo_f24" sourceRef="a7" targetRef="a10"/>
+    <bpmn:sequenceFlow id="Fluxo_f26" sourceRef="a7_1" targetRef="a11"/>
+    <bpmn:sequenceFlow id="Fluxo_f27" sourceRef="a8" targetRef="p2"/>
+    <bpmn:sequenceFlow id="Fluxo_f28" sourceRef="a9" targetRef="d6"/>
+    <bpmn:sequenceFlow id="Fluxo_f29" sourceRef="d6" targetRef="p2" name="Sim">
+      <bpmn:documentation>90% dos casos</bpmn:documentation>
+      <bpmn:extensionElements><senku:dados>{&quot;percentual&quot;:90.0}</senku:dados></bpmn:extensionElements>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Fluxo_f30" sourceRef="d6" targetRef="a12" name="Não">
+      <bpmn:documentation>10% dos casos</bpmn:documentation>
+      <bpmn:extensionElements><senku:dados>{&quot;percentual&quot;:10.0}</senku:dados></bpmn:extensionElements>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Fluxo_f31" sourceRef="a12" targetRef="e1"/>
+    <bpmn:sequenceFlow id="Fluxo_f32" sourceRef="e1" targetRef="p2"/>
+    <bpmn:sequenceFlow id="Fluxo_f33" sourceRef="a10" targetRef="p2"/>
+    <bpmn:sequenceFlow id="Fluxo_f34" sourceRef="a11" targetRef="a10"/>
+    <bpmn:sequenceFlow id="Fluxo_f35" sourceRef="p2" targetRef="d7"/>
+    <bpmn:sequenceFlow id="Fluxo_f36" sourceRef="d7" targetRef="a13" name="Sim">
+      <bpmn:documentation>40% dos casos</bpmn:documentation>
+      <bpmn:extensionElements><senku:dados>{&quot;percentual&quot;:40.0}</senku:dados></bpmn:extensionElements>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Fluxo_f37" sourceRef="d7" targetRef="j3" name="Não">
+      <bpmn:documentation>60% dos casos</bpmn:documentation>
+      <bpmn:extensionElements><senku:dados>{&quot;percentual&quot;:60.0}</senku:dados></bpmn:extensionElements>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Fluxo_f38" sourceRef="a13" targetRef="a14"/>
+    <bpmn:sequenceFlow id="Fluxo_f39" sourceRef="a14" targetRef="d8"/>
+    <bpmn:sequenceFlow id="Fluxo_f40" sourceRef="d8" targetRef="a16" name="Sim">
+      <bpmn:documentation>70% dos casos</bpmn:documentation>
+      <bpmn:extensionElements><senku:dados>{&quot;percentual&quot;:70.0}</senku:dados></bpmn:extensionElements>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Fluxo_f41" sourceRef="d8" targetRef="a13" name="Não">
+      <bpmn:documentation>30% dos casos</bpmn:documentation>
+      <bpmn:extensionElements><senku:dados>{&quot;percentual&quot;:30.0}</senku:dados></bpmn:extensionElements>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Fluxo_f42" sourceRef="a16" targetRef="j3"/>
+    <bpmn:sequenceFlow id="Fluxo_f43" sourceRef="j3" targetRef="a17"/>
+    <bpmn:sequenceFlow id="Fluxo_f44" sourceRef="a17" targetRef="a18"/>
+    <bpmn:sequenceFlow id="Fluxo_f45" sourceRef="a18" targetRef="c1"/>
+    <bpmn:sequenceFlow id="Fluxo_f46" sourceRef="c1" targetRef="e2">
+      <bpmn:documentation>85% dos casos</bpmn:documentation>
+      <bpmn:extensionElements><senku:dados>{&quot;percentual&quot;:85.0}</senku:dados></bpmn:extensionElements>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Fluxo_f47" sourceRef="c1" targetRef="e3">
+      <bpmn:documentation>15% dos casos</bpmn:documentation>
+      <bpmn:extensionElements><senku:dados>{&quot;percentual&quot;:15.0}</senku:dados></bpmn:extensionElements>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Fluxo_f48" sourceRef="e2" targetRef="a21"/>
+    <bpmn:sequenceFlow id="Fluxo_f49" sourceRef="e3" targetRef="a20"/>
+    <bpmn:sequenceFlow id="Fluxo_f50" sourceRef="a20" targetRef="a18"/>
+    <bpmn:sequenceFlow id="Fluxo_f51" sourceRef="a21" targetRef="d9"/>
+    <bpmn:sequenceFlow id="Fluxo_f52" sourceRef="d9" targetRef="p3" name="Sim">
+      <bpmn:documentation>92% dos casos</bpmn:documentation>
+      <bpmn:extensionElements><senku:dados>{&quot;percentual&quot;:92.0}</senku:dados></bpmn:extensionElements>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Fluxo_f53" sourceRef="d9" targetRef="a22" name="Não">
+      <bpmn:documentation>8% dos casos</bpmn:documentation>
+      <bpmn:extensionElements><senku:dados>{&quot;percentual&quot;:8.0}</senku:dados></bpmn:extensionElements>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Fluxo_f54" sourceRef="a22" targetRef="a23"/>
+    <bpmn:sequenceFlow id="Fluxo_f55" sourceRef="a23" targetRef="a21"/>
+    <bpmn:sequenceFlow id="Fluxo_f56" sourceRef="p3" targetRef="a24"/>
+    <bpmn:sequenceFlow id="Fluxo_f57" sourceRef="p3" targetRef="a25"/>
+    <bpmn:sequenceFlow id="Fluxo_f58" sourceRef="a24" targetRef="p4"/>
+    <bpmn:sequenceFlow id="Fluxo_f59" sourceRef="a25" targetRef="d10"/>
+    <bpmn:sequenceFlow id="Fluxo_f60" sourceRef="d10" targetRef="a26" name="Sim">
+      <bpmn:documentation>88% dos casos</bpmn:documentation>
+      <bpmn:extensionElements><senku:dados>{&quot;percentual&quot;:88.0}</senku:dados></bpmn:extensionElements>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Fluxo_f61" sourceRef="d10" targetRef="a27" name="Não">
+      <bpmn:documentation>12% dos casos</bpmn:documentation>
+      <bpmn:extensionElements><senku:dados>{&quot;percentual&quot;:12.0}</senku:dados></bpmn:extensionElements>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Fluxo_f62" sourceRef="a27" targetRef="e4"/>
+    <bpmn:sequenceFlow id="Fluxo_f63" sourceRef="e4" targetRef="a25"/>
+    <bpmn:sequenceFlow id="Fluxo_f64" sourceRef="a26" targetRef="p4"/>
+    <bpmn:sequenceFlow id="Fluxo_f65" sourceRef="p4" targetRef="a28"/>
+    <bpmn:sequenceFlow id="Fluxo_f66" sourceRef="a28" targetRef="a29"/>
+    <bpmn:sequenceFlow id="Fluxo_f67" sourceRef="a29" targetRef="a30"/>
+    <bpmn:sequenceFlow id="Fluxo_f68" sourceRef="a30" targetRef="f_ok"/>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="Diagrama.Processo_senku">
+    <bpmndi:BPMNPlane id="Plano.Processo_senku" bpmnElement="Colaboracao.Processo_senku">
+      <bpmndi:BPMNShape id="Pool.Processo_senku.di" bpmnElement="Pool.Processo_senku" isHorizontal="true"><dc:Bounds x="20" y="120" width="7470" height="1320"/></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Raia_sol.di" bpmnElement="Raia_sol" isHorizontal="true"><dc:Bounds x="50" y="120" width="7440" height="120"/></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Raia_ges.di" bpmnElement="Raia_ges" isHorizontal="true"><dc:Bounds x="50" y="240" width="7440" height="120"/></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Raia_com.di" bpmnElement="Raia_com" isHorizontal="true"><dc:Bounds x="50" y="360" width="7440" height="240"/></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Raia_fis.di" bpmnElement="Raia_fis" isHorizontal="true"><dc:Bounds x="50" y="600" width="7440" height="120"/></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Raia_jur.di" bpmnElement="Raia_jur" isHorizontal="true"><dc:Bounds x="50" y="720" width="7440" height="120"/></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Raia_fin.di" bpmnElement="Raia_fin" isHorizontal="true"><dc:Bounds x="50" y="840" width="7440" height="120"/></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Raia_alm.di" bpmnElement="Raia_alm" isHorizontal="true"><dc:Bounds x="50" y="960" width="7440" height="240"/></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Raia_ti.di" bpmnElement="Raia_ti" isHorizontal="true"><dc:Bounds x="50" y="1200" width="7440" height="120"/></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Raia_dir.di" bpmnElement="Raia_dir" isHorizontal="true"><dc:Bounds x="50" y="1320" width="7440" height="120"/></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ini.di" bpmnElement="ini"><dc:Bounds x="155" y="160" width="40" height="40"/>
+<bpmndi:BPMNLabel><dc:Bounds x="125" y="204" width="100" height="27"/></bpmndi:BPMNLabel>
+</bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="a1.di" bpmnElement="a1"><dc:Bounds x="300" y="145" width="130" height="70"/>
+</bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="a2.di" bpmnElement="a2"><dc:Bounds x="490" y="265" width="130" height="70"/>
+</bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="d1.di" bpmnElement="d1" isMarkerVisible="true"><dc:Bounds x="720" y="275" width="50" height="50"/>
+<bpmndi:BPMNLabel><dc:Bounds x="650" y="241" width="100" height="27"/></bpmndi:BPMNLabel>
+</bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="a3.di" bpmnElement="a3"><dc:Bounds x="870" y="145" width="130" height="70"/>
+</bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="d2.di" bpmnElement="d2" isMarkerVisible="true"><dc:Bounds x="910" y="275" width="50" height="50"/>
+<bpmndi:BPMNLabel><dc:Bounds x="840" y="241" width="100" height="27"/></bpmndi:BPMNLabel>
+</bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="a4.di" bpmnElement="a4"><dc:Bounds x="1060" y="1345" width="130" height="70"/>
+</bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="d3.di" bpmnElement="d3" isMarkerVisible="true"><dc:Bounds x="1290" y="1355" width="50" height="50"/>
+<bpmndi:BPMNLabel><dc:Bounds x="1220" y="1321" width="100" height="27"/></bpmndi:BPMNLabel>
+</bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="j1.di" bpmnElement="j1" isMarkerVisible="true"><dc:Bounds x="1480" y="395" width="50" height="50"/>
+</bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="d4.di" bpmnElement="d4" isMarkerVisible="true"><dc:Bounds x="1670" y="395" width="50" height="50"/>
+<bpmndi:BPMNLabel><dc:Bounds x="1600" y="361" width="100" height="27"/></bpmndi:BPMNLabel>
+</bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="a5.di" bpmnElement="a5"><dc:Bounds x="1820" y="1225" width="130" height="70"/>
+</bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="d5.di" bpmnElement="d5" isMarkerVisible="true"><dc:Bounds x="2050" y="1235" width="50" height="50"/>
+<bpmndi:BPMNLabel><dc:Bounds x="1980" y="1201" width="100" height="27"/></bpmndi:BPMNLabel>
+</bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="a6.di" bpmnElement="a6"><dc:Bounds x="2200" y="145" width="130" height="70"/>
+</bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="j2.di" bpmnElement="j2" isMarkerVisible="true"><dc:Bounds x="2240" y="395" width="50" height="50"/>
+</bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="p1.di" bpmnElement="p1"><dc:Bounds x="2430" y="395" width="50" height="50"/>
+</bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="a7.di" bpmnElement="a7"><dc:Bounds x="2580" y="385" width="130" height="70"/>
+</bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="a7_1.di" bpmnElement="a7_1"><dc:Bounds x="2683" y="443" width="24" height="24"/>
+<bpmndi:BPMNLabel><dc:Bounds x="2645" y="471" width="100" height="27"/></bpmndi:BPMNLabel>
+</bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="a8.di" bpmnElement="a8"><dc:Bounds x="2580" y="865" width="130" height="70"/>
+</bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="a9.di" bpmnElement="a9"><dc:Bounds x="2580" y="625" width="130" height="70"/>
+</bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="d6.di" bpmnElement="d6" isMarkerVisible="true"><dc:Bounds x="2810" y="635" width="50" height="50"/>
+<bpmndi:BPMNLabel><dc:Bounds x="2740" y="601" width="100" height="27"/></bpmndi:BPMNLabel>
+</bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="a12.di" bpmnElement="a12"><dc:Bounds x="2960" y="625" width="130" height="70"/>
+</bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="e1.di" bpmnElement="e1"><dc:Bounds x="3195" y="640" width="40" height="40"/>
+<bpmndi:BPMNLabel><dc:Bounds x="3165" y="684" width="100" height="27"/></bpmndi:BPMNLabel>
+</bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="a10.di" bpmnElement="a10"><dc:Bounds x="2960" y="385" width="130" height="70"/>
+</bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="a11.di" bpmnElement="a11"><dc:Bounds x="2770" y="265" width="130" height="70"/>
+</bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="p2.di" bpmnElement="p2"><dc:Bounds x="3380" y="395" width="50" height="50"/>
+</bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="d7.di" bpmnElement="d7" isMarkerVisible="true"><dc:Bounds x="3570" y="395" width="50" height="50"/>
+<bpmndi:BPMNLabel><dc:Bounds x="3500" y="361" width="100" height="27"/></bpmndi:BPMNLabel>
+</bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="a13.di" bpmnElement="a13"><dc:Bounds x="3720" y="745" width="130" height="70"/>
+</bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="a14.di" bpmnElement="a14"><dc:Bounds x="3910" y="745" width="130" height="70"/>
+</bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="d8.di" bpmnElement="d8" isMarkerVisible="true"><dc:Bounds x="4140" y="755" width="50" height="50"/>
+<bpmndi:BPMNLabel><dc:Bounds x="4070" y="721" width="100" height="27"/></bpmndi:BPMNLabel>
+</bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="a16.di" bpmnElement="a16"><dc:Bounds x="4290" y="1345" width="130" height="70"/>
+</bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="j3.di" bpmnElement="j3" isMarkerVisible="true"><dc:Bounds x="4520" y="395" width="50" height="50"/>
+</bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="a17.di" bpmnElement="a17"><dc:Bounds x="4670" y="385" width="130" height="70"/>
+</bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="a18.di" bpmnElement="a18"><dc:Bounds x="4860" y="385" width="130" height="70"/>
+</bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="c1.di" bpmnElement="c1"><dc:Bounds x="5090" y="395" width="50" height="50"/>
+<bpmndi:BPMNLabel><dc:Bounds x="5020" y="361" width="100" height="27"/></bpmndi:BPMNLabel>
+</bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="e2.di" bpmnElement="e2"><dc:Bounds x="5285" y="400" width="40" height="40"/>
+<bpmndi:BPMNLabel><dc:Bounds x="5255" y="444" width="100" height="27"/></bpmndi:BPMNLabel>
+</bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="e3.di" bpmnElement="e3"><dc:Bounds x="5285" y="520" width="40" height="40"/>
+<bpmndi:BPMNLabel><dc:Bounds x="5255" y="564" width="100" height="27"/></bpmndi:BPMNLabel>
+</bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="a20.di" bpmnElement="a20"><dc:Bounds x="5430" y="505" width="130" height="70"/>
+</bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="a21.di" bpmnElement="a21"><dc:Bounds x="5430" y="985" width="130" height="70"/>
+</bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="d9.di" bpmnElement="d9" isMarkerVisible="true"><dc:Bounds x="5660" y="995" width="50" height="50"/>
+<bpmndi:BPMNLabel><dc:Bounds x="5590" y="961" width="100" height="27"/></bpmndi:BPMNLabel>
+</bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="a22.di" bpmnElement="a22"><dc:Bounds x="5810" y="985" width="130" height="70"/>
+</bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="a23.di" bpmnElement="a23"><dc:Bounds x="6000" y="985" width="130" height="70"/>
+</bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="p3.di" bpmnElement="p3"><dc:Bounds x="5850" y="1115" width="50" height="50"/>
+</bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="a24.di" bpmnElement="a24"><dc:Bounds x="6000" y="1105" width="130" height="70"/>
+</bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="a25.di" bpmnElement="a25"><dc:Bounds x="6000" y="625" width="130" height="70"/>
+</bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="d10.di" bpmnElement="d10" isMarkerVisible="true"><dc:Bounds x="6230" y="635" width="50" height="50"/>
+<bpmndi:BPMNLabel><dc:Bounds x="6160" y="601" width="100" height="27"/></bpmndi:BPMNLabel>
+</bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="a27.di" bpmnElement="a27"><dc:Bounds x="6380" y="625" width="130" height="70"/>
+</bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="e4.di" bpmnElement="e4"><dc:Bounds x="6615" y="640" width="40" height="40"/>
+<bpmndi:BPMNLabel><dc:Bounds x="6585" y="684" width="100" height="27"/></bpmndi:BPMNLabel>
+</bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="a26.di" bpmnElement="a26"><dc:Bounds x="6380" y="865" width="130" height="70"/>
+</bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="p4.di" bpmnElement="p4"><dc:Bounds x="6610" y="875" width="50" height="50"/>
+</bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="a28.di" bpmnElement="a28"><dc:Bounds x="6760" y="865" width="130" height="70"/>
+</bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="a29.di" bpmnElement="a29"><dc:Bounds x="6950" y="385" width="130" height="70"/>
+</bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="a30.di" bpmnElement="a30"><dc:Bounds x="7140" y="385" width="130" height="70"/>
+</bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="f_ok.di" bpmnElement="f_ok"><dc:Bounds x="7375" y="400" width="40" height="40"/>
+<bpmndi:BPMNLabel><dc:Bounds x="7345" y="444" width="100" height="27"/></bpmndi:BPMNLabel>
+</bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="f_canc.di" bpmnElement="f_canc"><dc:Bounds x="1485" y="280" width="40" height="40"/>
+<bpmndi:BPMNLabel><dc:Bounds x="1455" y="324" width="100" height="27"/></bpmndi:BPMNLabel>
+</bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Fluxo_f1.di" bpmnElement="Fluxo_f1">
+        <di:waypoint x="195" y="180"/>
+        <di:waypoint x="300" y="180"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Fluxo_f2.di" bpmnElement="Fluxo_f2">
+        <di:waypoint x="430" y="180"/>
+        <di:waypoint x="460" y="180"/>
+        <di:waypoint x="460" y="248"/>
+        <di:waypoint x="535" y="248"/>
+        <di:waypoint x="535" y="265"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Fluxo_f3.di" bpmnElement="Fluxo_f3">
+        <di:waypoint x="620" y="300"/>
+        <di:waypoint x="720" y="300"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Fluxo_f4.di" bpmnElement="Fluxo_f4">
+        <di:waypoint x="770" y="300"/>
+        <di:waypoint x="910" y="300"/>
+        <bpmndi:BPMNLabel><dc:Bounds x="774" y="282" width="30" height="14"/></bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Fluxo_f5.di" bpmnElement="Fluxo_f5">
+        <di:waypoint x="745" y="275"/>
+        <di:waypoint x="745" y="232"/>
+        <di:waypoint x="955" y="232"/>
+        <di:waypoint x="955" y="215"/>
+        <bpmndi:BPMNLabel><dc:Bounds x="750" y="257" width="30" height="14"/></bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Fluxo_f6.di" bpmnElement="Fluxo_f6">
+        <di:waypoint x="745" y="325"/>
+        <di:waypoint x="745" y="368"/>
+        <di:waypoint x="1505" y="368"/>
+        <di:waypoint x="1505" y="320"/>
+        <bpmndi:BPMNLabel><dc:Bounds x="750" y="326" width="56" height="14"/></bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Fluxo_f7.di" bpmnElement="Fluxo_f7">
+        <di:waypoint x="977" y="215"/>
+        <di:waypoint x="977" y="255"/>
+        <di:waypoint x="467" y="255"/>
+        <di:waypoint x="467" y="352"/>
+        <di:waypoint x="555" y="352"/>
+        <di:waypoint x="555" y="335"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Fluxo_f8.di" bpmnElement="Fluxo_f8">
+        <di:waypoint x="960" y="300"/>
+        <di:waypoint x="1030" y="300"/>
+        <di:waypoint x="1030" y="1328"/>
+        <di:waypoint x="1105" y="1328"/>
+        <di:waypoint x="1105" y="1345"/>
+        <bpmndi:BPMNLabel><dc:Bounds x="964" y="282" width="30" height="14"/></bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Fluxo_f9.di" bpmnElement="Fluxo_f9">
+        <di:waypoint x="935" y="325"/>
+        <di:waypoint x="935" y="375"/>
+        <di:waypoint x="1410" y="375"/>
+        <di:waypoint x="1410" y="420"/>
+        <di:waypoint x="1480" y="420"/>
+        <bpmndi:BPMNLabel><dc:Bounds x="940" y="326" width="30" height="14"/></bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Fluxo_f10.di" bpmnElement="Fluxo_f10">
+        <di:waypoint x="1190" y="1380"/>
+        <di:waypoint x="1290" y="1380"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Fluxo_f11.di" bpmnElement="Fluxo_f11">
+        <di:waypoint x="1315" y="1355"/>
+        <di:waypoint x="1315" y="1312"/>
+        <di:waypoint x="1417" y="1312"/>
+        <di:waypoint x="1417" y="488"/>
+        <di:waypoint x="1403" y="488"/>
+        <di:waypoint x="1403" y="420"/>
+        <di:waypoint x="1480" y="420"/>
+        <bpmndi:BPMNLabel><dc:Bounds x="1320" y="1337" width="30" height="14"/></bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Fluxo_f12.di" bpmnElement="Fluxo_f12">
+        <di:waypoint x="1340" y="1380"/>
+        <di:waypoint x="1424" y="1380"/>
+        <di:waypoint x="1424" y="345"/>
+        <di:waypoint x="1505" y="345"/>
+        <di:waypoint x="1505" y="320"/>
+        <bpmndi:BPMNLabel><dc:Bounds x="1344" y="1362" width="30" height="14"/></bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Fluxo_f13.di" bpmnElement="Fluxo_f13">
+        <di:waypoint x="1530" y="420"/>
+        <di:waypoint x="1670" y="420"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Fluxo_f14.di" bpmnElement="Fluxo_f14">
+        <di:waypoint x="1695" y="445"/>
+        <di:waypoint x="1695" y="488"/>
+        <di:waypoint x="1790" y="488"/>
+        <di:waypoint x="1790" y="1208"/>
+        <di:waypoint x="1865" y="1208"/>
+        <di:waypoint x="1865" y="1225"/>
+        <bpmndi:BPMNLabel><dc:Bounds x="1700" y="446" width="30" height="14"/></bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Fluxo_f15.di" bpmnElement="Fluxo_f15">
+        <di:waypoint x="1720" y="420"/>
+        <di:waypoint x="2240" y="420"/>
+        <bpmndi:BPMNLabel><dc:Bounds x="1724" y="402" width="30" height="14"/></bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Fluxo_f16.di" bpmnElement="Fluxo_f16">
+        <di:waypoint x="1950" y="1260"/>
+        <di:waypoint x="2050" y="1260"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Fluxo_f17.di" bpmnElement="Fluxo_f17">
+        <di:waypoint x="2075" y="1235"/>
+        <di:waypoint x="2075" y="1192"/>
+        <di:waypoint x="2170" y="1192"/>
+        <di:waypoint x="2170" y="495"/>
+        <di:waypoint x="2177" y="495"/>
+        <di:waypoint x="2177" y="420"/>
+        <di:waypoint x="2240" y="420"/>
+        <bpmndi:BPMNLabel><dc:Bounds x="2080" y="1217" width="30" height="14"/></bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Fluxo_f18.di" bpmnElement="Fluxo_f18">
+        <di:waypoint x="2100" y="1260"/>
+        <di:waypoint x="2163" y="1260"/>
+        <di:waypoint x="2163" y="225"/>
+        <di:waypoint x="2285" y="225"/>
+        <di:waypoint x="2285" y="215"/>
+        <bpmndi:BPMNLabel><dc:Bounds x="2104" y="1242" width="30" height="14"/></bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Fluxo_f19.di" bpmnElement="Fluxo_f19">
+        <di:waypoint x="2307" y="215"/>
+        <di:waypoint x="2307" y="262"/>
+        <di:waypoint x="1797" y="262"/>
+        <di:waypoint x="1797" y="1335"/>
+        <di:waypoint x="1885" y="1335"/>
+        <di:waypoint x="1885" y="1295"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Fluxo_f20.di" bpmnElement="Fluxo_f20">
+        <di:waypoint x="2290" y="420"/>
+        <di:waypoint x="2430" y="420"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Fluxo_f21.di" bpmnElement="Fluxo_f21">
+        <di:waypoint x="2480" y="420"/>
+        <di:waypoint x="2580" y="420"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Fluxo_f22.di" bpmnElement="Fluxo_f22">
+        <di:waypoint x="2455" y="395"/>
+        <di:waypoint x="2455" y="382"/>
+        <di:waypoint x="2550" y="382"/>
+        <di:waypoint x="2550" y="848"/>
+        <di:waypoint x="2625" y="848"/>
+        <di:waypoint x="2625" y="865"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Fluxo_f23.di" bpmnElement="Fluxo_f23">
+        <di:waypoint x="2455" y="445"/>
+        <di:waypoint x="2455" y="495"/>
+        <di:waypoint x="2557" y="495"/>
+        <di:waypoint x="2557" y="608"/>
+        <di:waypoint x="2625" y="608"/>
+        <di:waypoint x="2625" y="625"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Fluxo_f24.di" bpmnElement="Fluxo_f24">
+        <di:waypoint x="2710" y="420"/>
+        <di:waypoint x="2960" y="420"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Fluxo_f26.di" bpmnElement="Fluxo_f26">
+        <di:waypoint x="2695" y="467"/>
+        <di:waypoint x="2695" y="502"/>
+        <di:waypoint x="2740" y="502"/>
+        <di:waypoint x="2740" y="338"/>
+        <di:waypoint x="2855" y="338"/>
+        <di:waypoint x="2855" y="335"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Fluxo_f27.di" bpmnElement="Fluxo_f27">
+        <di:waypoint x="2710" y="900"/>
+        <di:waypoint x="2747" y="900"/>
+        <di:waypoint x="2747" y="502"/>
+        <di:waypoint x="3310" y="502"/>
+        <di:waypoint x="3310" y="420"/>
+        <di:waypoint x="3380" y="420"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Fluxo_f28.di" bpmnElement="Fluxo_f28">
+        <di:waypoint x="2710" y="660"/>
+        <di:waypoint x="2810" y="660"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Fluxo_f29.di" bpmnElement="Fluxo_f29">
+        <di:waypoint x="2835" y="635"/>
+        <di:waypoint x="2835" y="592"/>
+        <di:waypoint x="3317" y="592"/>
+        <di:waypoint x="3317" y="488"/>
+        <di:waypoint x="3303" y="488"/>
+        <di:waypoint x="3303" y="420"/>
+        <di:waypoint x="3380" y="420"/>
+        <bpmndi:BPMNLabel><dc:Bounds x="2840" y="617" width="30" height="14"/></bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Fluxo_f30.di" bpmnElement="Fluxo_f30">
+        <di:waypoint x="2860" y="660"/>
+        <di:waypoint x="2960" y="660"/>
+        <bpmndi:BPMNLabel><dc:Bounds x="2864" y="642" width="30" height="14"/></bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Fluxo_f31.di" bpmnElement="Fluxo_f31">
+        <di:waypoint x="3090" y="660"/>
+        <di:waypoint x="3195" y="660"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Fluxo_f32.di" bpmnElement="Fluxo_f32">
+        <di:waypoint x="3235" y="660"/>
+        <di:waypoint x="3324" y="660"/>
+        <di:waypoint x="3324" y="488"/>
+        <di:waypoint x="3296" y="488"/>
+        <di:waypoint x="3296" y="420"/>
+        <di:waypoint x="3380" y="420"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Fluxo_f33.di" bpmnElement="Fluxo_f33">
+        <di:waypoint x="3090" y="420"/>
+        <di:waypoint x="3380" y="420"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Fluxo_f34.di" bpmnElement="Fluxo_f34">
+        <di:waypoint x="2900" y="300"/>
+        <di:waypoint x="2930" y="300"/>
+        <di:waypoint x="2930" y="368"/>
+        <di:waypoint x="3005" y="368"/>
+        <di:waypoint x="3005" y="385"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Fluxo_f35.di" bpmnElement="Fluxo_f35">
+        <di:waypoint x="3430" y="420"/>
+        <di:waypoint x="3570" y="420"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Fluxo_f36.di" bpmnElement="Fluxo_f36">
+        <di:waypoint x="3595" y="445"/>
+        <di:waypoint x="3595" y="495"/>
+        <di:waypoint x="3690" y="495"/>
+        <di:waypoint x="3690" y="728"/>
+        <di:waypoint x="3765" y="728"/>
+        <di:waypoint x="3765" y="745"/>
+        <bpmndi:BPMNLabel><dc:Bounds x="3600" y="446" width="30" height="14"/></bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Fluxo_f37.di" bpmnElement="Fluxo_f37">
+        <di:waypoint x="3620" y="420"/>
+        <di:waypoint x="4520" y="420"/>
+        <bpmndi:BPMNLabel><dc:Bounds x="3624" y="402" width="30" height="14"/></bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Fluxo_f38.di" bpmnElement="Fluxo_f38">
+        <di:waypoint x="3850" y="780"/>
+        <di:waypoint x="3910" y="780"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Fluxo_f39.di" bpmnElement="Fluxo_f39">
+        <di:waypoint x="4040" y="780"/>
+        <di:waypoint x="4140" y="780"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Fluxo_f40.di" bpmnElement="Fluxo_f40">
+        <di:waypoint x="4190" y="780"/>
+        <di:waypoint x="4260" y="780"/>
+        <di:waypoint x="4260" y="1305"/>
+        <di:waypoint x="4335" y="1305"/>
+        <di:waypoint x="4335" y="1345"/>
+        <bpmndi:BPMNLabel><dc:Bounds x="4194" y="762" width="30" height="14"/></bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Fluxo_f41.di" bpmnElement="Fluxo_f41">
+        <di:waypoint x="4165" y="805"/>
+        <di:waypoint x="4165" y="832"/>
+        <di:waypoint x="3785" y="832"/>
+        <di:waypoint x="3785" y="815"/>
+        <bpmndi:BPMNLabel><dc:Bounds x="4170" y="806" width="30" height="14"/></bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Fluxo_f42.di" bpmnElement="Fluxo_f42">
+        <di:waypoint x="4420" y="1380"/>
+        <di:waypoint x="4450" y="1380"/>
+        <di:waypoint x="4450" y="495"/>
+        <di:waypoint x="4457" y="495"/>
+        <di:waypoint x="4457" y="420"/>
+        <di:waypoint x="4520" y="420"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Fluxo_f43.di" bpmnElement="Fluxo_f43">
+        <di:waypoint x="4570" y="420"/>
+        <di:waypoint x="4670" y="420"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Fluxo_f44.di" bpmnElement="Fluxo_f44">
+        <di:waypoint x="4800" y="420"/>
+        <di:waypoint x="4860" y="420"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Fluxo_f45.di" bpmnElement="Fluxo_f45">
+        <di:waypoint x="4990" y="420"/>
+        <di:waypoint x="5090" y="420"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Fluxo_f46.di" bpmnElement="Fluxo_f46">
+        <di:waypoint x="5140" y="420"/>
+        <di:waypoint x="5285" y="420"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Fluxo_f47.di" bpmnElement="Fluxo_f47">
+        <di:waypoint x="5115" y="445"/>
+        <di:waypoint x="5115" y="502"/>
+        <di:waypoint x="5305" y="502"/>
+        <di:waypoint x="5305" y="520"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Fluxo_f48.di" bpmnElement="Fluxo_f48">
+        <di:waypoint x="5325" y="420"/>
+        <di:waypoint x="5400" y="420"/>
+        <di:waypoint x="5400" y="968"/>
+        <di:waypoint x="5475" y="968"/>
+        <di:waypoint x="5475" y="985"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Fluxo_f49.di" bpmnElement="Fluxo_f49">
+        <di:waypoint x="5325" y="540"/>
+        <di:waypoint x="5430" y="540"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Fluxo_f50.di" bpmnElement="Fluxo_f50">
+        <di:waypoint x="5537" y="575"/>
+        <di:waypoint x="5537" y="615"/>
+        <di:waypoint x="4830" y="615"/>
+        <di:waypoint x="4830" y="502"/>
+        <di:waypoint x="4925" y="502"/>
+        <di:waypoint x="4925" y="455"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Fluxo_f51.di" bpmnElement="Fluxo_f51">
+        <di:waypoint x="5560" y="1020"/>
+        <di:waypoint x="5660" y="1020"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Fluxo_f52.di" bpmnElement="Fluxo_f52">
+        <di:waypoint x="5685" y="1045"/>
+        <di:waypoint x="5685" y="1088"/>
+        <di:waypoint x="5780" y="1088"/>
+        <di:waypoint x="5780" y="1140"/>
+        <di:waypoint x="5850" y="1140"/>
+        <bpmndi:BPMNLabel><dc:Bounds x="5690" y="1046" width="30" height="14"/></bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Fluxo_f53.di" bpmnElement="Fluxo_f53">
+        <di:waypoint x="5710" y="1020"/>
+        <di:waypoint x="5810" y="1020"/>
+        <bpmndi:BPMNLabel><dc:Bounds x="5714" y="1002" width="30" height="14"/></bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Fluxo_f54.di" bpmnElement="Fluxo_f54">
+        <di:waypoint x="5940" y="1020"/>
+        <di:waypoint x="6000" y="1020"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Fluxo_f55.di" bpmnElement="Fluxo_f55">
+        <di:waypoint x="6107" y="1055"/>
+        <di:waypoint x="6107" y="1072"/>
+        <di:waypoint x="5495" y="1072"/>
+        <di:waypoint x="5495" y="1055"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Fluxo_f56.di" bpmnElement="Fluxo_f56">
+        <di:waypoint x="5900" y="1140"/>
+        <di:waypoint x="6000" y="1140"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Fluxo_f57.di" bpmnElement="Fluxo_f57">
+        <di:waypoint x="5875" y="1115"/>
+        <di:waypoint x="5875" y="1095"/>
+        <di:waypoint x="5970" y="1095"/>
+        <di:waypoint x="5970" y="712"/>
+        <di:waypoint x="6085" y="712"/>
+        <di:waypoint x="6085" y="695"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Fluxo_f58.di" bpmnElement="Fluxo_f58">
+        <di:waypoint x="6130" y="1140"/>
+        <di:waypoint x="6160" y="1140"/>
+        <di:waypoint x="6160" y="952"/>
+        <di:waypoint x="6540" y="952"/>
+        <di:waypoint x="6540" y="900"/>
+        <di:waypoint x="6610" y="900"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Fluxo_f59.di" bpmnElement="Fluxo_f59">
+        <di:waypoint x="6130" y="660"/>
+        <di:waypoint x="6230" y="660"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Fluxo_f60.di" bpmnElement="Fluxo_f60">
+        <di:waypoint x="6255" y="685"/>
+        <di:waypoint x="6255" y="735"/>
+        <di:waypoint x="6350" y="735"/>
+        <di:waypoint x="6350" y="855"/>
+        <di:waypoint x="6425" y="855"/>
+        <di:waypoint x="6425" y="865"/>
+        <bpmndi:BPMNLabel><dc:Bounds x="6260" y="686" width="30" height="14"/></bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Fluxo_f61.di" bpmnElement="Fluxo_f61">
+        <di:waypoint x="6280" y="660"/>
+        <di:waypoint x="6380" y="660"/>
+        <bpmndi:BPMNLabel><dc:Bounds x="6284" y="642" width="30" height="14"/></bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Fluxo_f62.di" bpmnElement="Fluxo_f62">
+        <di:waypoint x="6510" y="660"/>
+        <di:waypoint x="6615" y="660"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Fluxo_f63.di" bpmnElement="Fluxo_f63">
+        <di:waypoint x="6635" y="680"/>
+        <di:waypoint x="6635" y="705"/>
+        <di:waypoint x="6065" y="705"/>
+        <di:waypoint x="6065" y="695"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Fluxo_f64.di" bpmnElement="Fluxo_f64">
+        <di:waypoint x="6510" y="900"/>
+        <di:waypoint x="6610" y="900"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Fluxo_f65.di" bpmnElement="Fluxo_f65">
+        <di:waypoint x="6660" y="900"/>
+        <di:waypoint x="6760" y="900"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Fluxo_f66.di" bpmnElement="Fluxo_f66">
+        <di:waypoint x="6890" y="900"/>
+        <di:waypoint x="6920" y="900"/>
+        <di:waypoint x="6920" y="488"/>
+        <di:waypoint x="7035" y="488"/>
+        <di:waypoint x="7035" y="455"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Fluxo_f67.di" bpmnElement="Fluxo_f67">
+        <di:waypoint x="7080" y="420"/>
+        <di:waypoint x="7140" y="420"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Fluxo_f68.di" bpmnElement="Fluxo_f68">
+        <di:waypoint x="7270" y="420"/>
+        <di:waypoint x="7375" y="420"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="PoolExt.1.di" bpmnElement="PoolExt.1" isHorizontal="true"><dc:Bounds x="20" y="20" width="7470" height="60"/></bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="MsgFlow.1.di" bpmnElement="MsgFlow.1"><di:waypoint x="3963" y="745"/><di:waypoint x="3963" y="80"/></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="MsgFlow.2.di" bpmnElement="MsgFlow.2"><di:waypoint x="4367" y="80"/><di:waypoint x="4367" y="1345"/></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="MsgFlow.3.di" bpmnElement="MsgFlow.3"><di:waypoint x="5293" y="400"/><di:waypoint x="5293" y="80"/></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="MsgFlow.4.di" bpmnElement="MsgFlow.4"><di:waypoint x="5507" y="80"/><di:waypoint x="5507" y="985"/></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="MsgFlow.5.di" bpmnElement="MsgFlow.5"><di:waypoint x="6053" y="985"/><di:waypoint x="6053" y="80"/></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="MsgFlow.6.di" bpmnElement="MsgFlow.6"><di:waypoint x="5507" y="80"/><di:waypoint x="5507" y="985"/></bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

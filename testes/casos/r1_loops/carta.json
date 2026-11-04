@@ -1,0 +1,136 @@
+{
+ "processo": {
+  "nome": "Laços"
+ },
+ "papeis": [
+  {
+   "id": "s",
+   "nome": "Solicitante"
+  },
+  {
+   "id": "g",
+   "nome": "Gestor"
+  },
+  {
+   "id": "j",
+   "nome": "Jurídico"
+  },
+  {
+   "id": "f",
+   "nome": "Financeiro"
+  }
+ ],
+ "elementos": [
+  {
+   "id": "i",
+   "tipo": "inicio",
+   "nome": "Contrato solicitado",
+   "papel": "s",
+   "segue": "a1"
+  },
+  {
+   "id": "a1",
+   "nome": "Redigir minuta",
+   "papel": "s",
+   "segue": "a2"
+  },
+  {
+   "id": "a2",
+   "nome": "Revisar minuta",
+   "papel": "g",
+   "segue": "d1"
+  },
+  {
+   "id": "d1",
+   "tipo": "decisao",
+   "nome": "Minuta ok?",
+   "papel": "g",
+   "segue": [
+    {
+     "para": "a3",
+     "rotulo": "Sim",
+     "percentual": 70
+    },
+    {
+     "para": "a1",
+     "rotulo": "Ajustar texto",
+     "percentual": 30
+    }
+   ]
+  },
+  {
+   "id": "a3",
+   "nome": "Analisar cláusulas",
+   "papel": "j",
+   "segue": "d2"
+  },
+  {
+   "id": "d2",
+   "tipo": "decisao",
+   "nome": "Cláusulas aceitas?",
+   "papel": "j",
+   "segue": [
+    {
+     "para": "a4",
+     "rotulo": "Sim",
+     "percentual": 60
+    },
+    {
+     "para": "a1",
+     "rotulo": "Reescrever cláusulas",
+     "percentual": 30
+    },
+    {
+     "para": "a2",
+     "rotulo": "Reavaliar escopo",
+     "percentual": 10
+    }
+   ]
+  },
+  {
+   "id": "a4",
+   "nome": "Validar orçamento",
+   "papel": "f",
+   "segue": "d3"
+  },
+  {
+   "id": "d3",
+   "tipo": "decisao",
+   "nome": "Há orçamento?",
+   "papel": "f",
+   "segue": [
+    {
+     "para": "a5",
+     "rotulo": "Sim",
+     "percentual": 80
+    },
+    {
+     "para": "a1",
+     "rotulo": "Reduzir valor",
+     "percentual": 15
+    },
+    {
+     "para": "fx",
+     "rotulo": "Não, cancelar",
+     "percentual": 5
+    }
+   ]
+  },
+  {
+   "id": "a5",
+   "nome": "Assinar contrato",
+   "papel": "g",
+   "segue": "fo"
+  },
+  {
+   "id": "fo",
+   "tipo": "fim",
+   "nome": "Contrato assinado"
+  },
+  {
+   "id": "fx",
+   "tipo": "fim",
+   "nome": "Contrato cancelado"
+  }
+ ]
+}

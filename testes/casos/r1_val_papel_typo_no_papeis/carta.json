@@ -1,0 +1,32 @@
+{
+ "papeis": [],
+ "elementos": [
+  {
+   "id": "i",
+   "tipo": "inicio",
+   "nome": "Pedido recebido",
+   "papel": "x",
+   "segue": "a1"
+  },
+  {
+   "id": "a1",
+   "nome": "Executar a1",
+   "papel": "Analista",
+   "segue": "a2"
+  },
+  {
+   "id": "a2",
+   "nome": "Executar a2",
+   "papel": "Analsita",
+   "segue": "f"
+  },
+  {
+   "id": "f",
+   "tipo": "fim",
+   "nome": "Concluído"
+  }
+ ],
+ "processo": {
+  "nome": "papel_typo_no_papeis"
+ }
+}

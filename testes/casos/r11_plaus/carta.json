@@ -1,0 +1,67 @@
+{
+ "processo": {
+  "nome": "Plaus",
+  "volume": "50.000 por mês",
+  "prazo_informado": "2 dias"
+ },
+ "papeis": [
+  {
+   "id": "a",
+   "nome": "Analista"
+  },
+  {
+   "id": "g",
+   "nome": "Gestor"
+  }
+ ],
+ "elementos": [
+  {
+   "id": "i",
+   "tipo": "inicio",
+   "nome": "Inicio",
+   "papel": "a",
+   "segue": "x"
+  },
+  {
+   "id": "x",
+   "nome": "Conferir nota",
+   "papel": "a",
+   "segue": "d",
+   "tempo": {
+    "execucao": "uma hora e quinze"
+   }
+  },
+  {
+   "id": "d",
+   "tipo": "decisao",
+   "nome": "Nota ok?",
+   "papel": "a",
+   "segue": [
+    {
+     "para": "y",
+     "rotulo": "Sim",
+     "percentual": "80%"
+    },
+    {
+     "para": "x",
+     "rotulo": "Não",
+     "percentual": "45%"
+    }
+   ]
+  },
+  {
+   "id": "y",
+   "nome": "Lançar nota",
+   "papel": "a",
+   "segue": "f",
+   "tempo": {
+    "execucao": "3 meses"
+   }
+  },
+  {
+   "id": "f",
+   "tipo": "fim",
+   "nome": "Nota lançada"
+  }
+ ]
+}

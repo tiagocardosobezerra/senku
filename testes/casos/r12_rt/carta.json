@@ -1,0 +1,517 @@
+{
+ "dores": [
+  {
+   "descricao": "Cliente espera muito pela proposta",
+   "elementos": [
+    "a5"
+   ],
+   "frequencia": "30%",
+   "id": "D1",
+   "impacto": "alto"
+  }
+ ],
+ "elementos": [
+  {
+   "gatilho": "mensagem",
+   "id": "s",
+   "nome": "Pedido recebido",
+   "papel": "r9",
+   "segue": "a1",
+   "tipo": "inicio"
+  },
+  {
+   "bordas": [
+    {
+     "gatilho": "tempo",
+     "nome": "Prazo de 4h estourado",
+     "percentual": 5,
+     "segue": "a1x",
+     "tempo": "4h"
+    },
+    {
+     "gatilho": "erro",
+     "nome": "Sistema fora do ar",
+     "percentual": 5,
+     "segue": "a1y"
+    }
+   ],
+   "id": "a1",
+   "nome": "Registrar pedido",
+   "papel": "r0",
+   "segue": "d1",
+   "sistema": [],
+   "tempo": {
+    "execucao": "1h"
+   }
+  },
+  {
+   "id": "a1x",
+   "nome": "Avisar supervisor",
+   "papel": "r0",
+   "segue": "a1",
+   "sistema": [],
+   "tempo": {
+    "execucao": "1h"
+   }
+  },
+  {
+   "id": "a1y",
+   "nome": "Registrar em planilha",
+   "papel": "r0",
+   "segue": "d1",
+   "sistema": [],
+   "tempo": {
+    "execucao": "1h"
+   }
+  },
+  {
+   "id": "d1",
+   "nome": "Cliente novo?",
+   "papel": "r1",
+   "segue": [
+    {
+     "para": "a2",
+     "percentual": 30,
+     "rotulo": "Sim"
+    },
+    {
+     "para": "d2",
+     "percentual": 70,
+     "rotulo": "Não"
+    }
+   ],
+   "tipo": "decisao"
+  },
+  {
+   "id": "a2",
+   "nome": "Cadastrar cliente",
+   "papel": "r1",
+   "segue": "d2",
+   "sistema": [],
+   "tempo": {
+    "execucao": "1h"
+   }
+  },
+  {
+   "id": "d2",
+   "nome": "Valor acima de R$ 50 mil?",
+   "papel": "r1",
+   "segue": [
+    {
+     "para": "p1",
+     "percentual": 20,
+     "rotulo": "Sim"
+    },
+    {
+     "para": "a5",
+     "percentual": 80,
+     "rotulo": "Não"
+    }
+   ],
+   "tipo": "decisao"
+  },
+  {
+   "id": "p1",
+   "papel": "r1",
+   "segue": [
+    "a3",
+    "a4",
+    "a4b"
+   ],
+   "tipo": "paralelo"
+  },
+  {
+   "bordas": [
+    {
+     "gatilho": "tempo",
+     "nome": "Prazo de 2 dias estourado",
+     "percentual": 10,
+     "segue": "a3x",
+     "tempo": "2d"
+    }
+   ],
+   "como": [
+    "Abrir SAP",
+    "Consultar Serasa"
+   ],
+   "descricao": "Analisa o score",
+   "id": "a3",
+   "nome": "Analisar crédito",
+   "papel": "r2",
+   "raci": {
+    "A": "r7",
+    "I": [
+     "r1"
+    ]
+   },
+   "regras": [
+    "R1"
+   ],
+   "segue": "m3",
+   "sistema": [
+    "sap"
+   ],
+   "tempo": {
+    "execucao": "4h"
+   },
+   "valor": "NAV-N"
+  },
+  {
+   "id": "a3x",
+   "nome": "Escalar análise",
+   "papel": "r7",
+   "segue": "m3",
+   "sistema": [],
+   "tempo": {
+    "execucao": "1h"
+   }
+  },
+  {
+   "id": "a4",
+   "nome": "Revisar contrato",
+   "papel": "r3",
+   "segue": "d3",
+   "sistema": [],
+   "tempo": {
+    "execucao": "2h"
+   }
+  },
+  {
+   "id": "d3",
+   "nome": "Contrato aprovado?",
+   "papel": "r3",
+   "segue": [
+    {
+     "para": "p2",
+     "percentual": 80,
+     "rotulo": "Sim"
+    },
+    {
+     "para": "a4c",
+     "percentual": 20,
+     "rotulo": "Não"
+    }
+   ],
+   "tipo": "decisao"
+  },
+  {
+   "id": "a4c",
+   "nome": "Ajustar contrato",
+   "papel": "r1",
+   "segue": "a4",
+   "sistema": [],
+   "tempo": {
+    "execucao": "1h"
+   }
+  },
+  {
+   "id": "a4b",
+   "nome": "Validar impostos",
+   "papel": "r6",
+   "segue": "p2",
+   "sistema": [],
+   "tempo": {
+    "execucao": "30min"
+   }
+  },
+  {
+   "id": "p2",
+   "papel": "r1",
+   "segue": "d4",
+   "tipo": "paralelo"
+  },
+  {
+   "id": "d4",
+   "nome": "Diretoria aprova?",
+   "papel": "r7",
+   "segue": [
+    {
+     "para": "a5",
+     "percentual": 85,
+     "rotulo": "Sim"
+    },
+    {
+     "para": "f_rec",
+     "percentual": 15,
+     "rotulo": "Não"
+    }
+   ],
+   "tipo": "decisao"
+  },
+  {
+   "envia": true,
+   "id": "a5",
+   "nome": "Enviar proposta",
+   "papel": "r1",
+   "segue": "c1",
+   "sistema": [],
+   "tempo": {
+    "execucao": "1h"
+   }
+  },
+  {
+   "id": "c1",
+   "nome": "O que vier primeiro",
+   "papel": "r1",
+   "segue": [
+    {
+     "para": "e1",
+     "percentual": 75
+    },
+    {
+     "para": "e2",
+     "percentual": 25
+    }
+   ],
+   "tipo": "corrida"
+  },
+  {
+   "gatilho": "mensagem",
+   "id": "e1",
+   "nome": "Aceite recebido",
+   "segue": "o1",
+   "tempo": {
+    "espera": "3d"
+   },
+   "tipo": "evento"
+  },
+  {
+   "gatilho": "tempo",
+   "id": "e2",
+   "nome": "Aguardar 10 dias corridos",
+   "segue": "f_exp",
+   "tempo": {
+    "espera": "10dc"
+   },
+   "tipo": "evento"
+  },
+  {
+   "id": "o1",
+   "nome": "Quais entregas?",
+   "papel": "r5",
+   "segue": [
+    {
+     "para": "a6",
+     "percentual": 70,
+     "rotulo": "Física"
+    },
+    {
+     "para": "a7",
+     "percentual": 60,
+     "rotulo": "Digital"
+    }
+   ],
+   "tipo": "inclusivo"
+  },
+  {
+   "id": "a6",
+   "nome": "Separar mercadoria",
+   "papel": "r5",
+   "segue": "o2",
+   "sistema": [],
+   "tempo": {
+    "execucao": "3h"
+   }
+  },
+  {
+   "automatizada": true,
+   "id": "a7",
+   "nome": "Liberar acesso",
+   "papel": "r8",
+   "segue": "o2",
+   "sistema": [],
+   "tempo": {
+    "execucao": "20min"
+   }
+  },
+  {
+   "id": "o2",
+   "papel": "r5",
+   "segue": "a8",
+   "tipo": "inclusivo"
+  },
+  {
+   "id": "a8",
+   "nome": "Emitir nota fiscal",
+   "papel": "r6",
+   "segue": "a9",
+   "sistema": [],
+   "tempo": {
+    "execucao": "1h"
+   }
+  },
+  {
+   "id": "a9",
+   "nome": "Faturar pedido",
+   "papel": "r4",
+   "segue": "f_ok",
+   "sistema": [],
+   "tempo": {
+    "execucao": "30min"
+   }
+  },
+  {
+   "id": "f_ok",
+   "nome": "Pedido faturado",
+   "tipo": "fim"
+  },
+  {
+   "id": "f_rec",
+   "nome": "Pedido recusado",
+   "tipo": "fim"
+  },
+  {
+   "id": "f_exp",
+   "nome": "Proposta expirada",
+   "tipo": "fim"
+  },
+  {
+   "id": "m3",
+   "papel": "r2",
+   "segue": "p2",
+   "tipo": "decisao"
+  }
+ ],
+ "indicadores": [
+  {
+   "atual": "14 dias úteis",
+   "dono": "Gerente",
+   "fonte": "ERP",
+   "formula": "data fim - data início",
+   "meta": "≤ 10 dias úteis",
+   "nome": "Lead time",
+   "periodicidade": "mensal",
+   "polaridade": "menor é melhor"
+  },
+  {
+   "atual": "",
+   "meta": "90%",
+   "nome": "Taxa de aprovação"
+  }
+ ],
+ "melhorias": [
+  {
+   "descricao": "Proposta automática",
+   "elementos": [
+    "a5"
+   ],
+   "esforco": "baixo",
+   "id": "M1",
+   "impacto": "alto",
+   "prazo": "31/02/2027",
+   "resolve": [
+    "D1"
+   ],
+   "responsavel": "Coordenador Comercial",
+   "status": "em andamento"
+  }
+ ],
+ "papeis": [
+  {
+   "id": "r0",
+   "nome": "Atendimento"
+  },
+  {
+   "id": "r1",
+   "nome": "Comercial"
+  },
+  {
+   "id": "r2",
+   "nome": "Crédito"
+  },
+  {
+   "id": "r3",
+   "nome": "Jurídico"
+  },
+  {
+   "id": "r4",
+   "nome": "Financeiro"
+  },
+  {
+   "id": "r5",
+   "nome": "Logística"
+  },
+  {
+   "id": "r6",
+   "nome": "Fiscal"
+  },
+  {
+   "id": "r7",
+   "nome": "Diretoria"
+  },
+  {
+   "id": "r8",
+   "nome": "TI"
+  },
+  {
+   "id": "r9",
+   "nome": "Cliente",
+   "tipo": "externo"
+  }
+ ],
+ "participantes": [
+  {
+   "data": "01/11/2026",
+   "nome": "Maria Souza",
+   "papel": "Vendedora"
+  }
+ ],
+ "processo": {
+  "codigo": "VEN-01",
+  "dono": "Gerente Comercial",
+  "nome": "Venda B2B",
+  "objetivo": "Vender",
+  "prazo_informado": "5 dias úteis",
+  "versao": "1.0",
+  "volume": "1.200 pedidos por mês"
+ },
+ "regras": [
+  {
+   "id": "R1",
+   "texto": "Acima de 50 mil vai à diretoria"
+  }
+ ],
+ "riscos": [
+  {
+   "controle": "Nenhum",
+   "descricao": "Crédito liberado sem análise",
+   "elementos": [
+    "a3"
+   ],
+   "id": "K1",
+   "impacto": "alto",
+   "probabilidade": "alta",
+   "tipo_controle": "preventivo"
+  },
+  {
+   "descricao": "Nota com imposto errado",
+   "elementos": [
+    "a8"
+   ],
+   "id": "K2",
+   "impacto": "médio",
+   "probabilidade": "baixa"
+  },
+  {
+   "descricao": "Fraude",
+   "elementos": [
+    "a1"
+   ],
+   "id": "K3",
+   "impacto": "catastrófico",
+   "probabilidade": "rara"
+  },
+  {
+   "descricao": "Perda de documento",
+   "id": "K5",
+   "impacto": "Baixo ",
+   "probabilidade": "Média"
+  }
+ ],
+ "sistemas": [
+  {
+   "id": "sap",
+   "nome": "SAP"
+  }
+ ]
+}

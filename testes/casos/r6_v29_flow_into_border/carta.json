@@ -1,0 +1,9 @@
+{"processo": {"nome": "Fluxo para dentro da borda"},
+ "papeis": [{"id": "a", "nome": "Analista"}],
+ "elementos": [
+  {"id": "i", "tipo": "inicio", "nome": "Pedido recebido", "papel": "a", "segue": "t1"},
+  {"id": "t1", "nome": "Analisar pedido", "papel": "a", "segue": "d",
+   "bordas": [{"id": "b1", "gatilho": "tempo", "nome": "Prazo estourado", "tempo": "2h", "percentual": 10, "segue": "t2"}]},
+  {"id": "d", "tipo": "decisao", "nome": "Pedido ok?", "papel": "a", "segue": [{"para": "f", "rotulo": "Sim", "percentual": 90}, {"para": "b1", "rotulo": "Não", "percentual": 10}]},
+  {"id": "t2", "nome": "Escalar pedido", "papel": "a", "segue": "f"},
+  {"id": "f", "tipo": "fim", "nome": "Pedido tratado"}]}
