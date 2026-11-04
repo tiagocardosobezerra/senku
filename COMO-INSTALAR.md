@@ -26,9 +26,10 @@ git clone https://github.com/tiagocardosobezerra/senku.git $HOME\.claude\skills\
 Só para um projeto, use `.claude/skills/senku` dentro dele. Para atualizar,
 rode `git pull` na pasta da skill.
 
-## No claude.ai
+## Zip pessoal (skill na sua conta do claude.ai)
 
-O claude.ai recebe a skill como `.zip`. Gere o seu na raiz do repositório:
+Para usar a skill na sua própria conta do claude.ai, gere o zip da raiz do
+repositório:
 
 ```bash
 python ferramentas/empacotar.py
@@ -37,7 +38,8 @@ python ferramentas/empacotar.py
 Ele cria `senku-skill-<versão>.zip` só com o que a skill usa: sem testes,
 ferramentas, animações, saídas geradas nem aceites locais. Num clone git, só
 entra arquivo rastreado, então um mapeamento real deixado na pasta nunca vai
-junto. Suba o zip em **Configurações → Capacidades → Skills**.
+junto. Suba o zip em **Configurações → Capacidades → Skills**. O zip é seu:
+não é a forma de distribuir o Senku, que se instala pelo `git clone` acima.
 
 ## Conferir a instalação
 

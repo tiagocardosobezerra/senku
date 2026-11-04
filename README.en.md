@@ -70,7 +70,7 @@ git clone https://github.com/tiagocardosobezerra/senku.git ~/.claude/skills/senk
 git clone https://github.com/tiagocardosobezerra/senku.git $HOME\.claude\skills\senku
 ```
 
-For the current project only, use `.claude/skills/senku` as the destination. On claude.ai, upload the skill zip (see [`COMO-INSTALAR.md`](COMO-INSTALAR.md)).
+For the current project only, use `.claude/skills/senku` as the destination.
 
 ### 2. Describe the process
 
@@ -166,7 +166,7 @@ senku/
 ├── SKILL.md               # What Claude reads: rules, flow and how to run the interview
 ├── README.md              # README in Portuguese
 ├── README.en.md           # This file
-├── COMO-INSTALAR.md       # Installation, checks and the claude.ai zip
+├── COMO-INSTALAR.md       # Installation, checks and updates
 ├── AVISO.md               # Process data, privacy and trademarks
 ├── LICENCAS-DE-TERCEIROS.md  # Animation fonts (OFL) and projects that inspired the design
 ├── LICENSE                # MIT License
