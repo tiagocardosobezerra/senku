@@ -28,9 +28,7 @@ rode `git pull` na pasta da skill.
 
 ## No claude.ai
 
-O claude.ai recebe a skill como `.zip`. Baixe o zip da última versão na
-página de [Releases](https://github.com/tiagocardosobezerra/senku/releases),
-ou gere o seu na raiz do repositório:
+O claude.ai recebe a skill como `.zip`. Gere o seu na raiz do repositório:
 
 ```bash
 python ferramentas/empacotar.py
