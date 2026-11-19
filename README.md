@@ -38,14 +38,14 @@ Serve para analistas de processos, escritórios de BPM, qualidade, auditoria e q
 ## O que ele faz por você
 
 * **Conduz a entrevista.** Sete blocos de perguntas (abertura, SIPOC, passos, decisões, tempos, gestão, TO-BE), na ordem em que um bom analista pergunta. Ele não espera o relato perfeito: pergunta o que falta.
-* **Nunca inventa o processo.** Passo, responsável, sistema, regra, tempo e percentual vêm de você. O que ele deduz vira pergunta. O que ninguém respondeu vira **lacuna**, com prioridade, e o documento sai marcado como rascunho.
+* **Não inventa o processo.** Passo, responsável, sistema, regra, tempo e percentual vêm de você. O que ele deduz vira pergunta. O que ninguém respondeu vira **lacuna**, com prioridade, e o documento sai marcado como rascunho.
 * **Prova que o fluxo termina.** Fichas (tokens) percorrem todos os caminhos: decisão sem saída, paralelo que nunca se junta, laço sem fim e atividade que não chega a lugar nenhum aparecem antes do desenho. São 73 verificações, das regras 7PMG ao estilo do *BPMN Method and Style*.
 * **Mede com simulação, não com chute.** Simula 4.000 casos com os tempos e percentuais da entrevista e entrega o lead time típico, o prazo em que 80% e 90% dos casos terminam, a eficiência do ciclo, as passagens de bastão, o retrabalho e a carga de cada área.
 * **Desenha o fluxograma em raias.** SVG, PNG, **BPMN 2.0** (abre no Bizagi, bpmn.io, Camunda, ARIS e Signavio), **draw.io** (edita e exporta para o Visio) e Mermaid. Cliente e fornecedor podem sair em pool próprio, com mensagens.
 * **Escreve o mapeamento completo.** Ficha, escopo, SIPOC, descrição das atividades, regras de negócio, matriz RACI, indicadores, tempos, valor agregado, dores, riscos e controles, oportunidades Lean priorizadas e glossário, em HTML, Word, Markdown e uma planilha CSV das atividades.
 * **Pede o aceite do dono e guarda.** O `aprovar` registra quem aprovou, quando e um hash por seção. Mudou depois? O `situacao` avisa e o `comparar` mostra o que mudou, campo por campo.
 * **Redesenha com base.** O TO-BE nasce da carta aprovada e é comparado com o AS-IS, atividade por atividade.
-* **Guarda o processo aprovado no Memory Card.** Como o cartão de memória de um videogame: depois do aceite, cada processo vira um save no seu repositório privado do GitHub (o mesmo cartão do Vegapunk), com o fluxograma, o mapeamento, a carta, a versão e o motivo de cada mudança. Antes de mapear um processo novo, ele procura no cartão se já existe.
+* **Guarda o processo aprovado no Memory Card.** Como o cartão de memória de um videogame: depois do aceite, cada processo vira um save num repositório seu no GitHub, privado por padrão (o mesmo cartão do Vegapunk), com o fluxograma, o mapeamento, a carta, a versão e o motivo de cada mudança. Antes de mapear um processo novo, ele procura no cartão se já existe.
 * **Traz o que você já tem.** Importa `.bpmn` do Bizagi, bpmn.io, Camunda, ARIS e Signavio. Exportou, editou no modelador e trouxe de volta? As suas edições valem, e o que o BPMN não guarda volta da carta.
 
 ## Como fica na prática
@@ -116,7 +116,7 @@ Medidos na versão 1.14.0, com os exemplos do repositório (um processo de compr
 
 | O quê | Resultado |
 |---|---|
-| Testes automatizados | **213 passando** |
+| Testes automatizados | **214 passando** |
 | Verificações de boa modelagem (7PMG, BPMN Method and Style, tempos, RACI, prazos) | **73** |
 | Casos simulados a cada análise | **4.000** |
 | Formatos de saída (SVG, PNG, BPMN 2.0, draw.io, Mermaid, HTML, Word, Markdown, CSV) | **9** |
@@ -269,7 +269,7 @@ senku/
 
 **Criador:** Tiago Cardoso Bezerra | [tiagocardosobezerra](https://github.com/tiagocardosobezerra)
 
-Batizado em homenagem a Senku, o cientista de Dr. Stone que reconstrói a civilização do zero com método: observa, registra, testa e só então afirma. Aqui, a observação é a entrevista, o registro é a carta, o teste é a prova de fichas e a simulação, e a afirmação é o mapa aprovado.
+Batizado em homenagem a Senku, o cientista de Dr. Stone que reconstrói a civilização do zero com método: observa, registra, testa e só então afirma. Aqui, a observação é a entrevista, o registro é a carta, o teste é a prova de fichas e a simulação, e a afirmação é o mapa aprovado. Projeto independente, sem ligação com a obra ou seus autores.
 
 Ideias de desenho de projetos MIT em Node, que por isso não entram aqui: [quickpre/bpmn-skills](https://github.com/quickpre/bpmn-skills) (entrevista, depois schema fixo, depois compilação) e [architawr/claude-bpmn-skill](https://github.com/architawr/claude-bpmn-skill) (o modelo raciocina, o script desenha e valida). Nenhum código foi copiado deles.
 

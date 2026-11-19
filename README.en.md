@@ -38,14 +38,14 @@ It is built for process analysts, BPM offices, quality, audit, and anyone who ne
 ## What it does for you
 
 * **Runs the interview.** Seven blocks of questions (opening, SIPOC, steps, decisions, times, management, TO-BE), in the order a good analyst asks them. It does not wait for a perfect description: it asks for what is missing.
-* **Never makes up the process.** Steps, owners, systems, rules, times and percentages come from you. What it infers becomes a question. What nobody answered becomes a **gap**, with a priority, and the document is marked as a draft.
+* **Does not make up the process.** Steps, owners, systems, rules, times and percentages come from you. What it infers becomes a question. What nobody answered becomes a **gap**, with a priority, and the document is marked as a draft.
 * **Proves the flow ends.** Tokens run down every path: a decision without an exit, a parallel split that never joins, an endless loop or an activity that leads nowhere shows up before the drawing. There are 73 checks, from the 7PMG guidelines to the *BPMN Method and Style* rules.
 * **Measures with simulation, not guesswork.** It simulates 4,000 cases with the times and percentages from the interview and reports the typical lead time, the time within which 80% and 90% of cases finish, cycle efficiency, handoffs, rework and each area's workload.
 * **Draws the swimlane flowchart.** SVG, PNG, **BPMN 2.0** (opens in Bizagi, bpmn.io, Camunda, ARIS and Signavio), **draw.io** (editable, exports to Visio) and Mermaid. Customers and suppliers can get their own pool, with message flows.
 * **Writes the full process map.** Profile, scope, SIPOC, activity descriptions, business rules, RACI matrix, KPIs, times, value added, pain points, risks and controls, prioritized Lean opportunities and glossary, in HTML, Word, Markdown and a CSV of the activities.
 * **Gets the owner's sign-off and keeps it.** `aprovar` records who approved, when, and a hash per section. Changed afterwards? `situacao` warns and `comparar` shows what changed, field by field.
 * **Redesigns from a baseline.** The TO-BE starts from the approved charter and is compared with the AS-IS, activity by activity.
-* **Keeps the approved process on the Memory Card.** Like a video game memory card: after sign-off, each process becomes a save in your private GitHub repository (the same card Vegapunk uses), with the flowchart, the process map, the charter, the version and the reason for each change. Before mapping a new process, it searches the card to see whether it already exists.
+* **Keeps the approved process on the Memory Card.** Like a video game memory card: after sign-off, each process becomes a save in your own GitHub repository, private by default (the same card Vegapunk uses), with the flowchart, the process map, the charter, the version and the reason for each change. Before mapping a new process, it searches the card to see whether it already exists.
 * **Brings in what you already have.** Imports `.bpmn` from Bizagi, bpmn.io, Camunda, ARIS and Signavio. Exported, edited in the modeler and brought back? Your edits win, and whatever BPMN does not store comes back from the charter.
 
 ## What it looks like
@@ -118,7 +118,7 @@ Measured on version 1.14.0, with the repository examples (a fictional purchasing
 
 | What | Result |
 |---|---|
-| Automated tests | **213 passing** |
+| Automated tests | **214 passing** |
 | Modeling checks (7PMG, BPMN Method and Style, times, RACI, deadlines) | **73** |
 | Cases simulated per analysis | **4,000** |
 | Output formats (SVG, PNG, BPMN 2.0, draw.io, Mermaid, HTML, Word, Markdown, CSV) | **9** |
@@ -271,7 +271,7 @@ senku/
 
 **Creator:** Tiago Cardoso Bezerra | [tiagocardosobezerra](https://github.com/tiagocardosobezerra)
 
-Named after Senku, the scientist from Dr. Stone who rebuilds civilization from scratch with method: observe, record, test and only then claim. Here, the observation is the interview, the record is the charter, the test is the token proof and the simulation, and the claim is the approved map.
+Named after Senku, the scientist from Dr. Stone who rebuilds civilization from scratch with method: observe, record, test and only then claim. Here, the observation is the interview, the record is the charter, the test is the token proof and the simulation, and the claim is the approved map. Independent project, not affiliated with the series or its creators.
 
 Design ideas from MIT-licensed Node projects, which is why they are not included: [quickpre/bpmn-skills](https://github.com/quickpre/bpmn-skills) (interview, then a fixed schema, then compilation) and [architawr/claude-bpmn-skill](https://github.com/architawr/claude-bpmn-skill) (the model reasons, the script draws and validates). No code was copied from them.
 
