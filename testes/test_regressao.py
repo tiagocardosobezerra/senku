@@ -1481,5 +1481,20 @@ class TestRodada13(unittest.TestCase):
         self.assertIsNotNone(f('meio milhão por ano'))
 
 
+class TestSimulacaoComTempos(unittest.TestCase):
+    """O histograma do site sai de simular(..., com_tempos=True): os tempos batem com os percentis."""
+
+    def test_tempos_batem_com_os_percentis(self):
+        from carta.simulacao import simular
+        c = modelo.carregar(os.path.join(RAIZ, 'exemplos', 'compras', 'carta.json'))
+        sem = simular(c)
+        com = simular(c, com_tempos=True)
+        self.assertNotIn('tempos', sem)
+        self.assertEqual(len(com['tempos']), com['casos'])
+        self.assertEqual(com['p50'], sem['p50'])
+        t = sorted(com['tempos'])
+        self.assertEqual(t[int(0.8 * len(t))], com['p80'])
+
+
 if __name__ == '__main__':
     unittest.main()

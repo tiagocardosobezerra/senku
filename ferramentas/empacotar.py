@@ -21,7 +21,7 @@ sys.path.insert(0, RAIZ)
 from carta import VERSAO  # noqa: E402
 
 PASTAS_FORA = {'.git', '.github', '__pycache__', 'saida', 'local', 'testes', 'ferramentas', '.claude', '.ruff_cache',
-               'assets', 'roteiros'}
+               'assets', 'roteiros', 'docs'}
 ARQUIVOS_FORA = {'.gitignore', 'ruff.toml'}
 
 

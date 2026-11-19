@@ -1,18 +1,39 @@
-# Senku
+<a href="https://tiagocardosobezerra.github.io/senku/"><img width="100%" alt="Senku: antes de desenhar o processo, prove que ele anda. Fichas percorrem o fluxograma em raias do exemplo de compras; o validar diz Nenhum problema e a simulação de 4.000 casos mostra que 80% das compras levam até 17,2 dias úteis, com prazo combinado de 10." src="assets/readme/hero.svg" /></a>
 
-**Português** | [English](README.en.md)
+<p align="center">
+  <a href="https://tiagocardosobezerra.github.io/senku/"><strong>Site do projeto</strong></a> ·
+  <a href="https://tiagocardosobezerra.github.io/senku/#prova"><strong>Ver a prova de fichas</strong></a> ·
+  <a href="#comece-em-3-passos"><strong>Instalar</strong></a> ·
+  <a href="#resultados"><strong>Resultados</strong></a>
+</p>
 
-**Conte o processo em português. Receba o fluxograma em raias e o mapeamento completo, conferidos e prontos para o dono aprovar.**
+<p align="center">
+  <strong>Português</strong> · <a href="README.en.md">English</a>
+</p>
 
-![Python 3.8+](https://img.shields.io/badge/python-3.8%2B-3776AB?style=flat-square&logo=python&logoColor=white)
-![Sem dependências](https://img.shields.io/badge/depend%C3%AAncias-nenhuma-2ea44f?style=flat-square)
-![BPMN 2.0](https://img.shields.io/badge/BPMN-2.0-A3E635?style=flat-square)
-[![Testes](https://github.com/tiagocardosobezerra/senku/actions/workflows/testes.yml/badge.svg)](https://github.com/tiagocardosobezerra/senku/actions/workflows/testes.yml)
-![MIT](https://img.shields.io/badge/licen%C3%A7a-MIT-blue?style=flat-square)
+<p align="center">
+  <img alt="Versão 1.14.0" src="https://img.shields.io/badge/vers%C3%A3o-1.14.0-A3E635?style=flat-square" />
+  <img alt="Skill do Claude Code" src="https://img.shields.io/badge/Claude%20Code-skill-d97757?style=flat-square" />
+  <img alt="BPMN 2.0" src="https://img.shields.io/badge/BPMN-2.0-0B1220?style=flat-square" />
+  <img alt="Python 3.8+" src="https://img.shields.io/badge/python-3.8%2B-3776AB?style=flat-square&logo=python&logoColor=white" />
+  <img alt="Sem dependências" src="https://img.shields.io/badge/depend%C3%AAncias-nenhuma-2ea44f?style=flat-square" />
+  <a href="https://github.com/tiagocardosobezerra/senku/actions/workflows/testes.yml"><img alt="Testes" src="https://github.com/tiagocardosobezerra/senku/actions/workflows/testes.yml/badge.svg" /></a>
+  <img alt="Licença MIT" src="https://img.shields.io/badge/licen%C3%A7a-MIT-blue?style=flat-square" />
+</p>
 
-<img width="100%" alt="Senku: da conversa ao fluxograma e ao mapeamento do processo, com prova" src="assets/senku-banner.svg" />
+O **Senku** é uma skill de código aberto para o [Claude Code](https://claude.com/claude-code) que mapeia processos de negócio **com prova**. Você conta como o trabalho anda, do seu jeito (conversa, áudio transcrito, procedimento colado, planilha ou um `.bpmn` que já existe). O Senku conduz a entrevista, escreve a **carta do processo**, pergunta o que falta, **prova** que o fluxo se sustenta e entrega o fluxograma em raias BPMN 2.0 e o mapeamento completo, prontos para o dono aprovar. Tudo sai de um arquivo só, nada é desenhado à mão.
 
-O Senku é uma skill do Claude para quem mapeia processos de negócio: analistas de processos, escritórios de BPM, qualidade, auditoria e quem precisa documentar "como o trabalho anda" de verdade. Você conta o processo do seu jeito (conversa, áudio transcrito, procedimento colado, planilha ou um `.bpmn` que já existe). O Senku conduz a entrevista, escreve a **carta do processo**, pergunta o que falta, **prova** que o fluxo se sustenta e entrega o fluxograma e o mapeamento. Tudo sai de um arquivo só, nada é desenhado à mão.
+Serve para analistas de processos, escritórios de BPM, qualidade, auditoria e quem precisa documentar "como o trabalho anda" de verdade.
+
+<table>
+  <tr>
+    <td align="center" width="20%"><h3>73</h3><sub>verificações de boa modelagem</sub></td>
+    <td align="center" width="20%"><h3>4.000</h3><sub>casos simulados a cada análise</sub></td>
+    <td align="center" width="20%"><h3>9</h3><sub>formatos de saída, de um arquivo só</sub></td>
+    <td align="center" width="20%"><h3>5</h3><sub>modeladores de onde o .bpmn pode vir</sub></td>
+    <td align="center" width="20%"><h3>0</h3><sub>dependências para instalar</sub></td>
+  </tr>
+</table>
 
 ## O que ele faz por você
 
@@ -38,6 +59,17 @@ O Senku é uma skill do Claude para quem mapeia processos de negócio: analistas
 > **Claude:** registra o aceite e aponta as três maiores oportunidades: "a espera de 3 dias antes da cotação é o maior desperdício; quer redesenhar o TO-BE a partir daqui?"
 
 Nada de "acho que o gerente aprova depois". Se não veio de você, entra como pergunta, não como passo.
+
+## A prova de fichas
+
+Antes do desenho, o Senku solta **fichas** (tokens, como o BPMN define a execução) por todos os caminhos: na decisão, a ficha segue um caminho; no paralelo, se divide; na junção, espera as outras. Se alguma fica presa, o mapa está errado, e ele avisa antes de você mostrar ao dono. Apague a saída de "Corrigir requisição" no exemplo e o `validar` responde:
+
+```text
+✗ ERROS (o desenho sai errado; corrija antes do aceite): 1
+  [a1b] "Corrigir requisição" não segue para lugar nenhum: depois dela, o que acontece? (ou ligue a um fim)  (M&S)
+```
+
+<p align="center"><sub><a href="https://tiagocardosobezerra.github.io/senku/#prova"><strong>Veja as fichas andando no fluxograma real</strong></a> e quebre o fluxo você mesmo, no site do projeto.</sub></p>
 
 ## Veja o que ele entrega
 
@@ -71,6 +103,12 @@ Abra o mesmo fluxo no seu modelador: [`.bpmn`](exemplos/compras/saida/sup-01-com
 </table>
 
 O documento inteiro: [Markdown](exemplos/compras/saida/sup-01-compra-de-materiais-indiretos-as-is.md) (abre direto no GitHub) · [Word](exemplos/compras/saida/sup-01-compra-de-materiais-indiretos-as-is.docx) · [HTML](exemplos/compras/saida/sup-01-compra-de-materiais-indiretos-as-is.html) (baixe e abra no navegador para imprimir em PDF) · [planilha das atividades](exemplos/compras/saida/sup-01-compra-de-materiais-indiretos-as-is-atividades.csv).
+
+## A simulação
+
+Com os tempos e percentuais da entrevista, o `analisar` simula 4.000 casos, com retrabalho e paralelo, e mostra o que a média esconde. No exemplo de compras, o prazo combinado é de 10 dias úteis, mas nenhum caso simulado termina dentro dele:
+
+<a href="https://tiagocardosobezerra.github.io/senku/#simulacao"><img width="100%" alt="Histograma de 4.000 casos simulados do exemplo de compras. 78% terminam em 14 dias úteis, 12% em 17, 6% em 18 e o resto entre 20 e 27. Metade termina em até 14,1 dias úteis, 80% em até 17,2 e 90% em até 18,4. O prazo combinado é de 10 dias úteis e nenhum caso fica dentro dele." src="assets/readme/simulacao.svg" /></a>
 
 ## Resultados
 
@@ -221,8 +259,9 @@ senku/
 ├── referencias/           # Guias: carta, entrevista, notação, estilo, análise, documento e Memory Card
 ├── exemplos/              # Processos fictícios completos, com tudo o que o Senku gera: compras (SUP-01) e crédito
 ├── roteiros/              # Roteiros das animações do README
-├── ferramentas/           # Empacotador da skill, gerador das animações, fuzz e testes de estresse
+├── ferramentas/           # Empacotador da skill, geradores das animações e do site, fuzz e testes de estresse
 ├── assets/                # Animações e vitrine do README
+├── docs/                  # Site do projeto (GitHub Pages), gerado do exemplo de compras
 └── testes/                # Suíte de testes e casos de regressão
 ```
 
