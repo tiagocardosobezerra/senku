@@ -1,32 +1,51 @@
-# Senku
+<a href="https://tiagocardosobezerra.github.io/senku/"><img width="100%" alt="Senku: before you draw the process, prove that it flows. Tokens run through the swimlane flowchart of the purchasing example; validate says No problems and a 4,000-case simulation shows 80% of purchases take up to 17.2 business days, against an agreed deadline of 10." src="assets/readme/hero-en.svg" /></a>
 
-[Português](README.md) | **English**
+<p align="center">
+  <a href="https://tiagocardosobezerra.github.io/senku/"><strong>Project site</strong> (in Portuguese)</a> ·
+  <a href="https://tiagocardosobezerra.github.io/senku/#prova"><strong>See the token proof</strong></a> ·
+  <a href="#get-started-in-3-steps"><strong>Install</strong></a> ·
+  <a href="#results"><strong>Results</strong></a>
+</p>
 
-**Describe the process in plain words. Get the swimlane flowchart and the full process map, checked and ready for the owner to sign off.**
+<p align="center">
+  <a href="README.md">Português</a> · <strong>English</strong>
+</p>
 
-![Python 3.8+](https://img.shields.io/badge/python-3.8%2B-3776AB?style=flat-square&logo=python&logoColor=white)
-![No dependencies](https://img.shields.io/badge/dependencies-none-2ea44f?style=flat-square)
-![BPMN 2.0](https://img.shields.io/badge/BPMN-2.0-A3E635?style=flat-square)
-[![Tests](https://github.com/tiagocardosobezerra/senku/actions/workflows/testes.yml/badge.svg)](https://github.com/tiagocardosobezerra/senku/actions/workflows/testes.yml)
-![MIT](https://img.shields.io/badge/license-MIT-blue?style=flat-square)
+<p align="center">
+  <img alt="Version 1.14.0" src="https://img.shields.io/badge/version-1.14.0-A3E635?style=flat-square" />
+  <img alt="Claude Code skill" src="https://img.shields.io/badge/Claude%20Code-skill-d97757?style=flat-square" />
+  <img alt="BPMN 2.0" src="https://img.shields.io/badge/BPMN-2.0-0B1220?style=flat-square" />
+  <img alt="Python 3.8+" src="https://img.shields.io/badge/python-3.8%2B-3776AB?style=flat-square&logo=python&logoColor=white" />
+  <img alt="No dependencies" src="https://img.shields.io/badge/dependencies-none-2ea44f?style=flat-square" />
+  <a href="https://github.com/tiagocardosobezerra/senku/actions/workflows/testes.yml"><img alt="Tests" src="https://github.com/tiagocardosobezerra/senku/actions/workflows/testes.yml/badge.svg" /></a>
+  <img alt="MIT license" src="https://img.shields.io/badge/license-MIT-blue?style=flat-square" />
+</p>
 
-<img width="100%" alt="Senku: from conversation to flowchart and process map, with proof" src="assets/senku-banner-en.svg" />
+**Senku** is an open-source skill for [Claude Code](https://claude.com/claude-code) that maps business processes **with proof**. You describe how the work flows, your way (a conversation, a transcribed recording, a pasted procedure, a spreadsheet or an existing `.bpmn`). Senku runs the interview, writes the **process charter**, asks what is missing, **proves** the flow holds together and delivers the BPMN 2.0 swimlane flowchart and the full process map, ready for the owner to sign off. Everything comes from a single file; nothing is drawn by hand.
 
-Senku is a Claude skill for people who map business processes: process analysts, BPM offices, quality, audit, and anyone who needs to document how the work really flows. You describe the process your way (a conversation, a transcribed recording, a pasted procedure, a spreadsheet or an existing `.bpmn`). Senku runs the interview, writes the **process charter**, asks what is missing, **proves** the flow holds together and delivers the flowchart and the process map. Everything comes from a single file; nothing is drawn by hand.
+It is built for process analysts, BPM offices, quality, audit, and anyone who needs to document how the work really flows.
 
-> Senku speaks and writes in Brazilian Portuguese: the interview, the commands' output and the generated documents are in pt-BR. The process itself can be described in any language Claude understands.
+<table>
+  <tr>
+    <td align="center" width="20%"><h3>73</h3><sub>modeling checks</sub></td>
+    <td align="center" width="20%"><h3>4,000</h3><sub>simulated cases per analysis</sub></td>
+    <td align="center" width="20%"><h3>9</h3><sub>output formats from one file</sub></td>
+    <td align="center" width="20%"><h3>5</h3><sub>modelers a .bpmn can come from</sub></td>
+    <td align="center" width="20%"><h3>0</h3><sub>dependencies to install</sub></td>
+  </tr>
+</table>
 
 ## What it does for you
 
 * **Runs the interview.** Seven blocks of questions (opening, SIPOC, steps, decisions, times, management, TO-BE), in the order a good analyst asks them. It does not wait for a perfect description: it asks for what is missing.
-* **Never makes up the process.** Steps, owners, systems, rules, times and percentages come from you. What it infers becomes a question. What nobody answered becomes a **gap**, with a priority, and the document is marked as a draft.
+* **Does not make up the process.** Steps, owners, systems, rules, times and percentages come from you. What it infers becomes a question. What nobody answered becomes a **gap**, with a priority, and the document is marked as a draft.
 * **Proves the flow ends.** Tokens run down every path: a decision without an exit, a parallel split that never joins, an endless loop or an activity that leads nowhere shows up before the drawing. There are 73 checks, from the 7PMG guidelines to the *BPMN Method and Style* rules.
 * **Measures with simulation, not guesswork.** It simulates 4,000 cases with the times and percentages from the interview and reports the typical lead time, the time within which 80% and 90% of cases finish, cycle efficiency, handoffs, rework and each area's workload.
 * **Draws the swimlane flowchart.** SVG, PNG, **BPMN 2.0** (opens in Bizagi, bpmn.io, Camunda, ARIS and Signavio), **draw.io** (editable, exports to Visio) and Mermaid. Customers and suppliers can get their own pool, with message flows.
 * **Writes the full process map.** Profile, scope, SIPOC, activity descriptions, business rules, RACI matrix, KPIs, times, value added, pain points, risks and controls, prioritized Lean opportunities and glossary, in HTML, Word, Markdown and a CSV of the activities.
 * **Gets the owner's sign-off and keeps it.** `aprovar` records who approved, when, and a hash per section. Changed afterwards? `situacao` warns and `comparar` shows what changed, field by field.
 * **Redesigns from a baseline.** The TO-BE starts from the approved charter and is compared with the AS-IS, activity by activity.
-* **Keeps the approved process on the Memory Card.** Like a video game memory card: after sign-off, each process becomes a save in your private GitHub repository (the same card Vegapunk uses), with the flowchart, the process map, the charter, the version and the reason for each change. Before mapping a new process, it searches the card to see whether it already exists.
+* **Keeps the approved process on the Memory Card.** Like a video game memory card: after sign-off, each process becomes a save in your own GitHub repository, private by default (the same card Vegapunk uses), with the flowchart, the process map, the charter, the version and the reason for each change. Before mapping a new process, it searches the card to see whether it already exists.
 * **Brings in what you already have.** Imports `.bpmn` from Bizagi, bpmn.io, Camunda, ARIS and Signavio. Exported, edited in the modeler and brought back? Your edits win, and whatever BPMN does not store comes back from the charter.
 
 ## What it looks like
@@ -40,6 +59,17 @@ Senku is a Claude skill for people who map business processes: process analysts,
 > **Claude:** records the sign-off and points out the three biggest opportunities: "the 3-day wait before quoting is the biggest waste; shall we redesign the TO-BE from here?"
 
 No "I think the manager approves afterwards". If it did not come from you, it goes in as a question, not as a step.
+
+## The token proof
+
+Before drawing, Senku sends **tokens** (the way BPMN defines execution) down every path: at a decision the token takes one way; at a parallel gateway it splits; at a join it waits for the others. If one gets stuck, the map is wrong, and Senku says so before you show it to the owner. Delete the exit of "Corrigir requisição" (fix the requisition) in the example and `validar` answers:
+
+```text
+✗ ERROS (o desenho sai errado; corrija antes do aceite): 1
+  [a1b] "Corrigir requisição" não segue para lugar nenhum: depois dela, o que acontece? (ou ligue a um fim)  (M&S)
+```
+
+<p align="center"><sub><a href="https://tiagocardosobezerra.github.io/senku/#prova"><strong>Watch the tokens run through the real flowchart</strong></a> and break the flow yourself on the project site.</sub></p>
 
 ## See what it delivers
 
@@ -76,13 +106,19 @@ Open the same flow in your modeler: [`.bpmn`](exemplos/compras/saida/sup-01-comp
 
 The full document: [Markdown](exemplos/compras/saida/sup-01-compra-de-materiais-indiretos-as-is.md) (opens right on GitHub) · [Word](exemplos/compras/saida/sup-01-compra-de-materiais-indiretos-as-is.docx) · [HTML](exemplos/compras/saida/sup-01-compra-de-materiais-indiretos-as-is.html) (download and open in a browser to print to PDF) · [activity sheet](exemplos/compras/saida/sup-01-compra-de-materiais-indiretos-as-is-atividades.csv).
 
+## The simulation
+
+Using the times and percentages from the interview, `analisar` simulates 4,000 cases, with rework and parallel work, and shows what the average hides. In the purchasing example the agreed deadline is 10 business days, but no simulated case finishes within it:
+
+<a href="https://tiagocardosobezerra.github.io/senku/#simulacao"><img width="100%" alt="Histogram of 4,000 simulated cases of the purchasing example. 78% finish in 14 business days, 12% in 17, 6% in 18 and the rest between 20 and 27. Half finish within 14.1 business days, 80% within 17.2 and 90% within 18.4. The agreed deadline is 10 business days and no case meets it." src="assets/readme/simulacao-en.svg" /></a>
+
 ## Results
 
 Measured on version 1.14.0, with the repository examples (a fictional purchasing process and a fictional credit process).
 
 | What | Result |
 |---|---|
-| Automated tests | **213 passing** |
+| Automated tests | **214 passing** |
 | Modeling checks (7PMG, BPMN Method and Style, times, RACI, deadlines) | **73** |
 | Cases simulated per analysis | **4,000** |
 | Output formats (SVG, PNG, BPMN 2.0, draw.io, Mermaid, HTML, Word, Markdown, CSV) | **9** |
@@ -225,8 +261,9 @@ senku/
 ├── referencias/           # Guides: charter, interview, notation, style, analysis, document and Memory Card
 ├── exemplos/              # Complete fictional processes, with everything Senku generates: purchasing (SUP-01) and credit
 ├── roteiros/              # Scripts for the README animations
-├── ferramentas/           # Skill packager, animation generator, fuzz and stress tests
+├── ferramentas/           # Skill packager, README animation and site generators, fuzz and stress tests
 ├── assets/                # README animations and showcase
+├── docs/                  # Project site (GitHub Pages), generated from the purchasing example
 └── testes/                # Test suite and regression cases
 ```
 
@@ -234,7 +271,7 @@ senku/
 
 **Creator:** Tiago Cardoso Bezerra | [tiagocardosobezerra](https://github.com/tiagocardosobezerra)
 
-Named after Senku, the scientist from Dr. Stone who rebuilds civilization from scratch with method: observe, record, test and only then claim. Here, the observation is the interview, the record is the charter, the test is the token proof and the simulation, and the claim is the approved map.
+Named after Senku, the scientist from Dr. Stone who rebuilds civilization from scratch with method: observe, record, test and only then claim. Here, the observation is the interview, the record is the charter, the test is the token proof and the simulation, and the claim is the approved map. Independent project, not affiliated with the series or its creators.
 
 Design ideas from MIT-licensed Node projects, which is why they are not included: [quickpre/bpmn-skills](https://github.com/quickpre/bpmn-skills) (interview, then a fixed schema, then compilation) and [architawr/claude-bpmn-skill](https://github.com/architawr/claude-bpmn-skill) (the model reasons, the script draws and validates). No code was copied from them.
 

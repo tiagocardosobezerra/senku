@@ -91,8 +91,10 @@ ORCAMENTO = 1_500_000      # passos no total: para mapa enorme, menos casos (o m
 MINIMO_CASOS = 400
 
 
-def simular(c, casos=CASOS, semente=SEMENTE, duracoes=None):
-    """{'media', 'p50', 'p80', 'p90', 'visitas': {id: média por caso}, 'incompletos': n} ou None sem início."""
+def simular(c, casos=CASOS, semente=SEMENTE, duracoes=None, com_tempos=False):
+    """{'media', 'p50', 'p80', 'p90', 'visitas': {id: média por caso}, 'incompletos': n} ou None sem início.
+
+    com_tempos=True devolve também 'tempos': o lead time de cada caso, em minutos úteis (para histogramas)."""
     from .analise import probabilidades
     inicios = [e['id'] for e in c.de_tipo('inicio') if c.saidas[e['id']]]
     if not inicios:
@@ -287,7 +289,10 @@ def simular(c, casos=CASOS, semente=SEMENTE, duracoes=None):
 
     def pct(q):
         return tempos[min(len(tempos) - 1, int(q * len(tempos)))]
-    return {'media': sum(tempos) / len(tempos), 'p50': pct(0.5), 'p80': pct(0.8), 'p90': pct(0.9),
-            'visitas': {k: v / casos for k, v in visitas.items()},
-            'trabalho': {k: v / casos for k, v in trabalho.items()}, 'incompletos': incompletos,
-            'travados': travados, 'casos': casos}
+    out = {'media': sum(tempos) / len(tempos), 'p50': pct(0.5), 'p80': pct(0.8), 'p90': pct(0.9),
+           'visitas': {k: v / casos for k, v in visitas.items()},
+           'trabalho': {k: v / casos for k, v in trabalho.items()}, 'incompletos': incompletos,
+           'travados': travados, 'casos': casos}
+    if com_tempos:
+        out['tempos'] = tempos
+    return out
