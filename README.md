@@ -1,8 +1,8 @@
-<a href="https://tiagocardosobezerra.github.io/senku/"><img width="100%" alt="Senku: antes de desenhar o processo, prove que ele anda. Fichas percorrem o fluxograma em raias do exemplo de compras; o validar diz Nenhum problema e a simulação de 4.000 casos mostra que 80% das compras levam até 17,2 dias úteis, com prazo combinado de 10." src="assets/readme/hero.svg" /></a>
+<a href="https://tiagocardosobezerra.github.io/senku/?utm_source=github&utm_medium=readme&utm_campaign=senku-v2"><img width="100%" alt="Senku: não desenha no chute. Prova. Num quadro-negro, fichas luminosas percorrem o fluxograma em raias do exemplo de compras; anotação em giz: aqui ninguém chuta o Não. Fórmula: relato mais perguntas mais fichas mais 4.000 casos igual a processo provado." src="assets/readme/hero.svg" /></a>
 
 <p align="center">
-  <a href="https://tiagocardosobezerra.github.io/senku/"><strong>Site do projeto</strong></a> ·
-  <a href="https://tiagocardosobezerra.github.io/senku/#prova"><strong>Ver a prova de fichas</strong></a> ·
+  <a href="https://tiagocardosobezerra.github.io/senku/?utm_source=github&utm_medium=readme&utm_campaign=senku-v2"><strong>Site do projeto</strong></a> ·
+  <a href="https://tiagocardosobezerra.github.io/senku/?utm_source=github&utm_medium=readme&utm_campaign=senku-v2#experimento"><strong>Ver a prova de fichas</strong></a> ·
   <a href="#comece-em-3-passos"><strong>Instalar</strong></a> ·
   <a href="#resultados"><strong>Resultados</strong></a>
 </p>
@@ -12,7 +12,7 @@
 </p>
 
 <p align="center">
-  <img alt="Versão 1.14.0" src="https://img.shields.io/badge/vers%C3%A3o-1.14.0-A3E635?style=flat-square" />
+  <img alt="Versão 1.14.0" src="https://img.shields.io/badge/vers%C3%A3o-1.14.0-B6F23A?style=flat-square" />
   <img alt="Skill do Claude Code" src="https://img.shields.io/badge/Claude%20Code-skill-d97757?style=flat-square" />
   <img alt="BPMN 2.0" src="https://img.shields.io/badge/BPMN-2.0-0B1220?style=flat-square" />
   <img alt="Python 3.8+" src="https://img.shields.io/badge/python-3.8%2B-3776AB?style=flat-square&logo=python&logoColor=white" />
@@ -69,7 +69,7 @@ Antes do desenho, o Senku solta **fichas** (tokens, como o BPMN define a execuç
   [a1b] "Corrigir requisição" não segue para lugar nenhum: depois dela, o que acontece? (ou ligue a um fim)  (M&S)
 ```
 
-<p align="center"><sub><a href="https://tiagocardosobezerra.github.io/senku/#prova"><strong>Veja as fichas andando no fluxograma real</strong></a> e quebre o fluxo você mesmo, no site do projeto.</sub></p>
+<p align="center"><sub><a href="https://tiagocardosobezerra.github.io/senku/?utm_source=github&utm_medium=readme&utm_campaign=senku-v2#experimento"><strong>Veja as fichas andando no fluxograma real</strong></a> e quebre o fluxo você mesmo, no site do projeto.</sub></p>
 
 ## Veja o que ele entrega
 
@@ -108,7 +108,7 @@ O documento inteiro: [Markdown](exemplos/compras/saida/sup-01-compra-de-materiai
 
 Com os tempos e percentuais da entrevista, o `analisar` simula 4.000 casos, com retrabalho e paralelo, e mostra o que a média esconde. No exemplo de compras, o prazo combinado é de 10 dias úteis, mas nenhum caso simulado termina dentro dele:
 
-<a href="https://tiagocardosobezerra.github.io/senku/#simulacao"><img width="100%" alt="Histograma de 4.000 casos simulados do exemplo de compras. 78% terminam em 14 dias úteis, 12% em 17, 6% em 18 e o resto entre 20 e 27. Metade termina em até 14,1 dias úteis, 80% em até 17,2 e 90% em até 18,4. O prazo combinado é de 10 dias úteis e nenhum caso fica dentro dele." src="assets/readme/simulacao.svg" /></a>
+<a href="https://tiagocardosobezerra.github.io/senku/?utm_source=github&utm_medium=readme&utm_campaign=senku-v2#medicao"><img width="100%" alt="Histograma de 4.000 casos simulados do exemplo de compras. 78% terminam em 14 dias úteis, 12% em 17, 6% em 18 e o resto entre 20 e 27. Metade termina em até 14,1 dias úteis, 80% em até 17,2 e 90% em até 18,4. O prazo combinado é de 10 dias úteis e nenhum caso fica dentro dele." src="assets/readme/simulacao.svg" /></a>
 
 ## Resultados
 

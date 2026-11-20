@@ -7,7 +7,7 @@ do Python. O que vem de fora está listado aqui.
 
 As animações de `assets/` embutem, em base64, subconjuntos destas fontes
 (latim básico, Latin-1 e alguns símbolos), guardados em
-`ferramentas/animacoes_fontes.css`. Todas são da SIL Open Font License 1.1,
+`ferramentas/animacoes_fontes.css` e `ferramentas/lab_fontes.css`. Todas são da SIL Open Font License 1.1,
 que permite embutir e redistribuir. O texto completo da licença está em
 [`ferramentas/OFL.txt`](ferramentas/OFL.txt).
 
@@ -16,6 +16,8 @@ que permite embutir e redistribuir. O texto completo da licença está em
 | Inter | Copyright 2020 The Inter Project Authors | https://github.com/rsms/inter (via google/fonts) |
 | Poppins | Copyright 2020 The Poppins Project Authors | https://github.com/itfoundry/Poppins (via google/fonts) |
 | JetBrains Mono | Copyright 2020 The JetBrains Mono Project Authors | https://github.com/JetBrains/JetBrainsMono (via google/fonts) |
+| Bricolage Grotesque | Copyright 2022 The Bricolage Grotesque Project Authors | https://github.com/ateliertriay/bricolage (via google/fonts) |
+| Caveat | Copyright 2014 The Caveat Project Authors | https://github.com/googlefonts/caveat (via google/fonts) |
 
 As fontes ficam fora do pacote da skill: o `ferramentas/empacotar.py` não leva
 `ferramentas/` nem `assets/` para o zip.
