@@ -21,7 +21,7 @@
 <style>
 :root{
   --board:#0E1512; --board2:#121C17; --board3:#18241E; --line:rgba(237,237,228,.12); --line2:rgba(237,237,228,.22);
-  --chalk:#EDEDE4; --chalk2:#C9CCBF; --dust:#8E978C; --faint:#5E685F;
+  --chalk:#EDEDE4; --chalk2:#C9CCBF; --dust:#8E978C; --faint:#8A9488;
   --lime:#B6F23A; --lime2:#8BC81A; --amb:#FFB547; --red:#FF6B5E; --sky:#7FD3FF; --pink:#FF8FC7; --vio:#B9A4FF;
   --dp:'Bricolage Grotesque','Inter',system-ui,sans-serif; --tx:'Inter',system-ui,-apple-system,'Segoe UI',sans-serif;
   --hw:'Caveat','Comic Sans MS',cursive; --mo:'JetBrains Mono',ui-monospace,Consolas,monospace;
@@ -382,7 +382,7 @@ footer.site p+p{margin-top:8px}
 <header class="hero" id="topo">
   <div class="wrap">
     <div class="exp">
-      <span>Experimento <b>nº 001</b></span>
+      <span>Experimento <b>001</b></span>
       <span>Mapeamento de processos</span>
       <span>Skill de código aberto para o <b>Claude Code</b></span>
       <span class="live">fichas rodando</span>
@@ -410,9 +410,9 @@ footer.site p+p{margin-top:8px}
   </div>
 </header>
 
-<div class="ticker" aria-label="Números do Senku">
-  <div class="tr" id="tick">
-    <span><b>73</b>verificações</span><span><b>4.000</b>casos simulados</span><span><b>9</b>formatos</span><span><b>5</b>modeladores</span><span><b>0</b>dependências</span><span><b>214</b>testes</span><span>dez bilhões por cento rastreável</span>
+<div class="ticker" role="marquee" aria-label="73 verificações, 4.000 casos simulados, 9 formatos, 5 modeladores, 0 dependências, 214 testes">
+  <div class="tr" id="tick" aria-hidden="true">
+    <span><b>73</b>verificações</span><span><b>4.000</b>casos simulados</span><span><b>9</b>formatos</span><span><b>5</b>modeladores</span><span><b>0</b>dependências</span><span><b>214</b>testes</span><span>dez bilhões por cento rastreável, como diria o Senku</span>
   </div>
 </div>
 
@@ -426,7 +426,7 @@ footer.site p+p{margin-top:8px}
         <div class="cena on" data-c="0">
           <span class="k"><b>observa</b> · a entrevista</span>
           <div class="bolhas">
-            <div class="bolha v"><small>você</small>O pedido chega por e-mail, o comprador cota com três fornecedores e, acima de R$ 5 mil, o gerente aprova.</div>
+            <div class="bolha v"><small>você</small>O pedido entra pelo ERP, o gestor da área aprova e, acima de R$ 5 mil, o comprador cota com três fornecedores.</div>
             <div class="bolha s"><small>senku</small>Quem aprova quando o gerente está de férias?</div>
             <div class="bolha s"><small>senku</small>Quanto tempo o pedido espera antes da cotação?</div>
             <div class="bolha v"><small>você</small>Uns 3 dias… depende da fila.</div>
@@ -447,7 +447,7 @@ footer.site p+p{margin-top:8px}
             <div class="row"><span>processo</span><b>SUP-01</b></div>
             <div class="row"><span>por</span><b>Gerente de Suprimentos</b></div>
             <div class="row"><span>registro</span><b>hash por seção</b></div>
-            <div class="row"><span>mudou depois?</span><b>situacao avisa</b></div>
+            <div class="row"><span>mudou depois?</span><b>o comando situacao avisa</b></div>
             <div class="row" style="border:0"><span>salvo em</span><b>Memory Card</b></div>
           </div>
         </div>
@@ -478,7 +478,7 @@ footer.site p+p{margin-top:8px}
   <div class="wrap">
     <span class="label rv">02 · <b>Os elementos</b></span>
     <h2 class="t rv">A tabela periódica do <em>processo.</em></h2>
-    <p class="lead rv">Todo processo é feito dos mesmos elementos. A carta do Senku tem um campo para cada um, e é com eles que ele desenha, mede e pergunta. Toque num elemento.</p>
+    <p class="lead rv">Todo processo é feito dos mesmos elementos. Quase todos são um campo da carta do Senku; os três últimos são a prova que ele faz em cima dela. Toque num elemento.</p>
     <div class="tabela rv" id="tabela" role="group" aria-label="Elementos da carta do processo"></div>
     <div class="legenda rv" id="legenda"></div>
     <div class="ficha-el rv" id="fichaEl" aria-live="polite"></div>
@@ -498,8 +498,8 @@ footer.site p+p{margin-top:8px}
       </div>
       <div class="lab-bar">
         <div class="t">exemplos/compras/carta.json</div>
-        <div class="cnt" aria-live="polite"><span>chegaram ao fim <b id="cFim">0</b></span><span class="bad">presas <b id="cPresa">0</b></span></div>
-        <button class="btn btn-ghost btn-sm mag" type="button" id="bRodar" aria-pressed="true">Pausar</button>
+        <div class="cnt"><span>chegaram ao fim <b id="cFim">0</b></span><span class="bad">presas <b id="cPresa">0</b></span></div>
+        <button class="btn btn-ghost btn-sm mag" type="button" id="bRodar">Pausar</button>
         <button class="btn btn-lime btn-sm mag" type="button" id="bQuebrar" aria-pressed="false">Quebrar o fluxo</button>
       </div>
       <div class="diagram" id="provaDiagram" tabindex="0" role="img" aria-label="Fluxograma em raias do processo SUP-01, compra de materiais indiretos: seis raias, 14 atividades, 2 decisões e 2 paralelos, com fichas percorrendo os caminhos. Arraste para o lado para ver o mapa inteiro."><div class="inner"></div></div>
@@ -580,7 +580,7 @@ footer.site p+p{margin-top:8px}
       <ol>
         <li>Mendling, J.; Reijers, H. A.; van der Aalst, W. M. P. <i>Seven Process Modeling Guidelines (7PMG)</i>, 2010.</li>
         <li>Silver, B. <i>BPMN Method and Style</i>: as regras de estilo do desenho.</li>
-        <li>ABPMP. <i>BPM CBOK</i>; SIPOC, RACI e os oito desperdícios do Lean.</li>
+        <li>ABPMP. <i>BPM CBOK</i> (SIPOC e RACI). Lean: os oito desperdícios.</li>
       </ol>
     </div>
   </div>
@@ -593,7 +593,7 @@ footer.site p+p{margin-top:8px}
       <h2 class="t rv">Um comando. <em>Nada</em> de pip.</h2>
       <p class="lead rv">Você precisa de Python 3.8 ou mais novo e do Claude Code. Só a biblioteca padrão do Python.</p>
       <div class="req rv">
-        <div>Testado no Windows e no Linux; Python puro, roda também no macOS</div>
+        <div>Testado no Windows e no Linux; Python puro, deve rodar no macOS, mas não é testado lá</div>
         <div>Seus mapeamentos ficam fora do repositório, na sua máquina</div>
         <div>Conferir a instalação: <span class="mono" style="color:var(--chalk)">python senku.py status</span></div>
       </div>
@@ -724,7 +724,7 @@ const JSON_CENA = ['{',
   '  <span class="jk">"papel"</span>: <span class="s">"compras"</span>,',
   '  <span class="jk">"tempo"</span>: {<span class="jk">"execucao"</span>: <span class="s">"1h"</span>,',
   '           <span class="jk">"espera"</span>: <span class="s">"3d"</span>},',
-  '  <span class="jk">"valor"</span>: <span class="s">"VA"</span>,',
+  '  <span class="jk">"valor"</span>: <span class="s">"NAV-N"</span>,',
   '  <span class="jk">"raci"</span>: <span class="lac">?? quem responde (A)?</span>',
   '}', '',
   '<span class="c">$ python senku.py lacunas carta.json</span>',
@@ -741,7 +741,7 @@ function digita(){
 const GR = {fluxo:['Fluxo','#B6F23A'], quem:['Quem e onde','#7FD3FF'], medida:['Medida','#FFB547'], gestao:['Gestão','#FF8FC7'], prova:['Prova','#B9A4FF']};
 const EL = [
   ['In','Início','fluxo','O estado que dispara o processo: “Necessidade de material identificada”.','{"id": "inicio", "tipo": "inicio",\n "nome": "Necessidade de material identificada"}'],
-  ['At','Atividade','fluxo','Um passo de trabalho, com verbo e objeto: “Cotar com fornecedores”.','{"id": "a3", "nome": "Cotar com fornecedores",\n "papel": "compras", "sistema": "erp"}'],
+  ['At','Atividade','fluxo','Um passo de trabalho, com verbo e objeto: “Cotar com fornecedores”.','{"id": "a3", "nome": "Cotar com fornecedores",\n "papel": "compras", "sistema": ["email", "planilha"]}'],
   ['Dc','Decisão','fluxo','Uma pergunta com “?” e para onde vai cada resposta, com o percentual de casos.','{"tipo": "decisao", "nome": "Requisição aprovada?",\n "segue": [{"para": "a3",  "rotulo": "Sim", "percentual": 85},\n           {"para": "a1b", "rotulo": "Não", "percentual": 15}]}'],
   ['Pa','Paralelo','fluxo','Trabalho que acontece ao mesmo tempo, por pessoas diferentes, e se junta depois.','{"id": "p1", "tipo": "paralelo", "segue": ["a8", "a9"]}'],
   ['Ic','Inclusivo','fluxo','Um ou mais caminhos ao mesmo tempo, conforme a condição de cada um.','{"tipo": "inclusivo", "segue": [...]}'],
@@ -802,7 +802,7 @@ quando(cont, () => {
 function medicao(){
   const T = D.tempos_dias, H = D.histograma; if (!T || !H) return;
   const total = H.reduce((s, h) => s + h[1], 0);
-  const noPrazo = H.filter(h => h[0] < 10).reduce((s, h) => s + h[1], 0);
+  const noPrazo = H.filter(h => h[0] <= 10).reduce((s, h) => s + h[1], 0);
   const d0 = 9, d1 = 28, W = 680, Hh = 380, L = 40, B = 84, top = 70;
   const x = d => L + (d - d0) / (d1 - d0) * (W - L - 8);
   const y = p => top + (1 - p / 100) * (Hh - top - B);
@@ -826,7 +826,7 @@ function medicao(){
   $('#hist').innerHTML = s + '</svg>';
   quando($('#hist'), () => $$('#hist animate').forEach(a => a.beginElement()), .35);
 
-  const K = [[fmt(T.p50) + ' d','metade das compras termina em até isso',false],[T.eficiencia_pct + '%','eficiência: ' + fmt(T.execucao_h) + ' h de trabalho em ' + fmt(T.lead_time) + ' dias úteis',true],[fmt(T.espera) + ' d','parados esperando, no caso típico',true],[String(D.passagens_caso),'passagens de bastão entre áreas',false]];
+  const K = [[fmt(T.p50) + ' d','metade das compras leva até isso',false],[T.eficiencia_pct + '%','eficiência: só ' + T.eficiencia_pct + '% do tempo é trabalho; o resto é espera',true],[fmt(T.espera) + ' d','parados esperando, no caso típico',true],[String(D.passagens_caso),'passagens de bastão entre áreas',false]];
   $('#kpis').innerHTML = K.map(([b, t, w]) => `<div class="kpi${w?' w':''}"><b>${b}</b><span>${esc(t)}</span></div>`).join('');
   const C = D.carga, mx = Math.max(...C.por_papel.map(p => p[1]));
   $('#cargaSub').textContent = `carga · ${Math.round(C.casos_mes)} casos/mês = ${C.horas_mes} h (≈ ${fmt(C.pessoas)} pessoas)`;
@@ -835,8 +835,8 @@ function medicao(){
   $('#opps').innerHTML = D.oportunidades.slice(0, 3).map((o, i) => `<div class="opp"><span class="n">0${i+1}</span><span class="g">${esc(o.desperdicio)}</span><p>${esc(o.texto)}</p></div>`).join('');
 
   /* 4.000 pontos: um por caso, na ordem da simulação agrupada por dia */
-  const FAIXAS = [[0, 9, '#B6F23A', 'até 10 dias (prazo)'], [10, 14, '#B6F23A', '14 dias'], [15, 18, '#FFB547', '17 a 18 dias'], [19, 99, '#FF6B5E', '20 dias ou mais']];
-  const cor = d => d <= 9 ? '#B6F23A' : d <= 14 ? '#B6F23A' : d <= 18 ? '#FFB547' : '#FF6B5E';
+  const FAIXAS = [[0, 10, '#B6F23A', 'até 10 dias (prazo)'], [11, 14, '#B6F23A', '14 dias'], [15, 18, '#FFB547', '17 a 18 dias'], [19, 99, '#FF6B5E', '20 dias ou mais']];
+  const cor = d => d <= 10 ? '#B6F23A' : d <= 14 ? '#B6F23A' : d <= 18 ? '#FFB547' : '#FF6B5E';
   const casos = []; H.forEach(([d, n]) => { for (let k = 0; k < n; k++) casos.push(d); });
   const conta = f => H.filter(([d]) => d >= f[0] && d <= f[1]).reduce((s, h) => s + h[1], 0);
   $('#casosSub').textContent = `${total.toLocaleString('pt-BR')} casos · ${noPrazo} dentro do prazo de 10 dias`;
@@ -983,7 +983,7 @@ fetch('img/fluxo-compras.svg').then(r => r.text()).then(txt => {
   mh.iniciar(); mm.iniciar(); mp.iniciar();
   $('#bRodar').addEventListener('click', () => {
     mp.pausado = mp.rodando; mp.rodando = !mp.rodando;
-    $('#bRodar').textContent = mp.rodando ? 'Pausar' : 'Soltar fichas'; $('#bRodar').setAttribute('aria-pressed', mp.rodando);
+    $('#bRodar').textContent = mp.rodando ? 'Pausar' : 'Soltar fichas';
   });
   $('#bQuebrar').addEventListener('click', () => {
     const on = !mp.quebrado; mp.quebrar(on);
@@ -992,7 +992,7 @@ fetch('img/fluxo-compras.svg').then(r => r.text()).then(txt => {
       $('#term').innerHTML = `<span class="p">$</span> <span class="dim"># a seta que sai de “Corrigir requisição” foi apagada. A próxima ficha vai pelo “Não”…</span>`;
       anota('vol', '<b>controle</b> seta de “Corrigir requisição” apagada');
       $('#provaDiagram').scrollTo({left: 320, behavior: calmo ? 'auto' : 'smooth'});
-      if (!mp.rodando){ mp.pausado = false; mp.rodando = true; $('#bRodar').textContent = 'Pausar'; $('#bRodar').setAttribute('aria-pressed', 'true'); }
+      if (!mp.rodando){ mp.pausado = false; mp.rodando = true; $('#bRodar').textContent = 'Pausar'; }
     } else { $('#cPresa').textContent = '0'; mp.presas = 0; $('#lab').classList.remove('falhou'); anota('ok', '<b>controle</b> fluxo consertado'); termOk(); }
   });
   const dg = $('#provaDiagram'); let arr = null;

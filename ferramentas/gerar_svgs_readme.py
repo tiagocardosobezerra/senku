@@ -30,7 +30,7 @@ TEXTOS = {
         'alt': 'Senku: não desenha no chute. Prova. Num quadro-negro, fichas luminosas percorrem o fluxograma em raias '
                'do exemplo de compras; anotação em giz: aqui ninguém chuta o Não. Fórmula: relato mais perguntas mais '
                'fichas mais 4.000 casos igual a processo provado.',
-        'exp': 'EXPERIMENTO Nº 001 · MAPEAMENTO DE PROCESSOS',
+        'exp': 'EXPERIMENTO 001 · MAPEAMENTO DE PROCESSOS',
         'h1': ['Não desenha', 'no chute.', 'Prova.'],
         # largura do "Prova." em Bricolage 800 de 96 px, medida no navegador (getComputedTextLength)
         'h1_larg': 290,
@@ -45,8 +45,8 @@ TEXTOS = {
         's_sub': 'SUP-01 · simulação com os tempos da entrevista · dias úteis',
         's_prazo': ['← prazo: 10 dias', '{n} de 4.000 chegam aqui'],
         's_ate': '{p} até {v}',
-        's_kpis': [('{p50} d', 'metade das compras', 'termina em até isso'),
-                   ('{ef}%', 'eficiência: {ex} h de', 'trabalho em {lt} dias'),
+        's_kpis': [('{p50} d', 'metade das compras', 'leva até isso'),
+                   ('{ef}%', 'só {ef}% do tempo', 'é trabalho'),
                    ('{esp} d', 'parados esperando,', 'no caso típico'),
                    ('{pas}', 'passagens de bastão', 'entre áreas')],
         's_nota': 'tempos estimados na entrevista, não medidos: confirme antes de decidir',
@@ -55,7 +55,7 @@ TEXTOS = {
         'alt': 'Senku: don’t guess the flow. Prove it. On a chalkboard, glowing tokens run through the swimlane '
                'flowchart of the purchasing example; chalk note: nobody guesses the No here. Formula: description '
                'plus questions plus tokens plus 4,000 cases equals a proven process.',
-        'exp': 'EXPERIMENT Nº 001 · PROCESS MAPPING',
+        'exp': 'EXPERIMENT NO. 001 · PROCESS MAPPING',
         'h1': ['Don’t guess', 'the flow.', 'Prove it.'],
         'h1_larg': 368,
         'nota': ['nobody guesses', 'the “No” here'],
@@ -70,7 +70,7 @@ TEXTOS = {
         's_prazo': ['← deadline: 10 days', '{n} of 4,000 make it'],
         's_ate': '{p} within {v}',
         's_kpis': [('{p50} d', 'half of purchases', 'finish within this'),
-                   ('{ef}%', 'efficiency: {ex} h of', 'work in {lt} days'),
+                   ('{ef}%', 'only {ef}% of the', 'time is actual work'),
                    ('{esp} d', 'waiting in queues,', 'in the typical case'),
                    ('{pas}', 'hand-offs', 'between teams')],
         's_nota': 'times are interview estimates, not measurements: confirm before deciding',
@@ -207,7 +207,7 @@ def hero(lingua, d, fontes, corpo, setas):
     # anotação em giz
     o.append('<g transform="rotate(-8 830 360)">' + _t(780, 350, t['nota'][0], 30, AMBAR, 'h', 700)
              + _t(780, 380, t['nota'][1], 30, AMBAR, 'h', 700) + '</g>')
-    o.append(f'<path class="risca" d="M880 318 C 905 285, 915 250, 908 206 M898 218 L908 204 L918 217" stroke="{AMBAR}" '
+    o.append(f'<path class="risca" d="M880 318 C 908 280, 918 220, 902 166 M893 179 L902 163 L913 176" stroke="{AMBAR}" '
              f'stroke-width="2.6" fill="none" stroke-linecap="round" style="animation-delay:1.4s"/>')
     # fórmula
     f1, f2, f3 = t['formula']
@@ -229,7 +229,7 @@ def simulacao(lingua, d, fontes):
     t = TEXTOS[lingua]
     T, Hs = d['tempos_dias'], d['histograma']
     total = sum(n for _, n in Hs)
-    dentro = sum(n for dia, n in Hs if dia < 10)
+    dentro = sum(n for dia, n in Hs if dia <= 10)
     W, H = 1280, 600
     o = [f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}" width="{W}" height="{H}" role="img" '
          f'aria-label="{escape(t["s_alt"])}">', f'<title>{escape(t["s_alt"])}</title>',

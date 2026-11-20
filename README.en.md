@@ -1,8 +1,8 @@
-<a href="https://tiagocardosobezerra.github.io/senku/"><img width="100%" alt="Senku: don’t guess the flow. Prove it. On a chalkboard, glowing tokens run through the swimlane flowchart of the purchasing example; chalk note: nobody guesses the No here. Formula: description plus questions plus tokens plus 4,000 cases equals a proven process." src="assets/readme/hero-en.svg" /></a>
+<a href="https://tiagocardosobezerra.github.io/senku/?utm_source=github&utm_medium=readme&utm_campaign=senku-v2"><img width="100%" alt="Senku: don’t guess the flow. Prove it. On a chalkboard, glowing tokens run through the swimlane flowchart of the purchasing example; chalk note: nobody guesses the No here. Formula: description plus questions plus tokens plus 4,000 cases equals a proven process." src="assets/readme/hero-en.svg" /></a>
 
 <p align="center">
-  <a href="https://tiagocardosobezerra.github.io/senku/"><strong>Project site</strong> (in Portuguese)</a> ·
-  <a href="https://tiagocardosobezerra.github.io/senku/#experimento"><strong>See the token proof</strong></a> ·
+  <a href="https://tiagocardosobezerra.github.io/senku/?utm_source=github&utm_medium=readme&utm_campaign=senku-v2"><strong>Project site</strong> (in Portuguese)</a> ·
+  <a href="https://tiagocardosobezerra.github.io/senku/?utm_source=github&utm_medium=readme&utm_campaign=senku-v2#experimento"><strong>See the token proof</strong></a> ·
   <a href="#get-started-in-3-steps"><strong>Install</strong></a> ·
   <a href="#results"><strong>Results</strong></a>
 </p>
@@ -12,7 +12,7 @@
 </p>
 
 <p align="center">
-  <img alt="Version 1.14.0" src="https://img.shields.io/badge/version-1.14.0-A3E635?style=flat-square" />
+  <img alt="Version 1.14.0" src="https://img.shields.io/badge/version-1.14.0-B6F23A?style=flat-square" />
   <img alt="Claude Code skill" src="https://img.shields.io/badge/Claude%20Code-skill-d97757?style=flat-square" />
   <img alt="BPMN 2.0" src="https://img.shields.io/badge/BPMN-2.0-0B1220?style=flat-square" />
   <img alt="Python 3.8+" src="https://img.shields.io/badge/python-3.8%2B-3776AB?style=flat-square&logo=python&logoColor=white" />
@@ -69,7 +69,7 @@ Before drawing, Senku sends **tokens** (the way BPMN defines execution) down eve
   [a1b] "Corrigir requisição" não segue para lugar nenhum: depois dela, o que acontece? (ou ligue a um fim)  (M&S)
 ```
 
-<p align="center"><sub><a href="https://tiagocardosobezerra.github.io/senku/#experimento"><strong>Watch the tokens run through the real flowchart</strong></a> and break the flow yourself on the project site.</sub></p>
+<p align="center"><sub><a href="https://tiagocardosobezerra.github.io/senku/?utm_source=github&utm_medium=readme&utm_campaign=senku-v2#experimento"><strong>Watch the tokens run through the real flowchart</strong></a> and break the flow yourself on the project site.</sub></p>
 
 ## See what it delivers
 
@@ -110,7 +110,7 @@ The full document: [Markdown](exemplos/compras/saida/sup-01-compra-de-materiais-
 
 Using the times and percentages from the interview, `analisar` simulates 4,000 cases, with rework and parallel work, and shows what the average hides. In the purchasing example the agreed deadline is 10 business days, but no simulated case finishes within it:
 
-<a href="https://tiagocardosobezerra.github.io/senku/#medicao"><img width="100%" alt="Histogram of 4,000 simulated cases of the purchasing example. 78% finish in 14 business days, 12% in 17, 6% in 18 and the rest between 20 and 27. Half finish within 14.1 business days, 80% within 17.2 and 90% within 18.4. The agreed deadline is 10 business days and no case meets it." src="assets/readme/simulacao-en.svg" /></a>
+<a href="https://tiagocardosobezerra.github.io/senku/?utm_source=github&utm_medium=readme&utm_campaign=senku-v2#medicao"><img width="100%" alt="Histogram of 4,000 simulated cases of the purchasing example. 78% finish in 14 business days, 12% in 17, 6% in 18 and the rest between 20 and 27. Half finish within 14.1 business days, 80% within 17.2 and 90% within 18.4. The agreed deadline is 10 business days and no case meets it." src="assets/readme/simulacao-en.svg" /></a>
 
 ## Results
 

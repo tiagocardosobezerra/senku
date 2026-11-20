@@ -197,13 +197,13 @@
 <g transform="translate(64 48) scale(1.25)"><rect x=".75" y=".75" width="30.5" height="30.5" rx="8" fill="#121C17" stroke="rgba(237,237,228,.25)" stroke-width="1.5"/><path d="M22.5 9.5H11.5a3 3 0 0 0-3 3v.5a3 3 0 0 0 3 3h9a3 3 0 0 1 3 3v.5a3 3 0 0 1-3 3H9.5" fill="none" stroke="#B6F23A" stroke-width="2.4" stroke-linecap="round"/><path d="M12.5 19.5 9.5 22.5l3 3" fill="none" stroke="#B6F23A" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/><circle cx="22.5" cy="9.5" r="2.8" fill="#B6F23A"/></g>
 <text x="116" y="80" class="b" font-size="32" font-weight="800" fill="#EDEDE4" text-anchor="start" letter-spacing="-1.2">senku</text>
 <circle class="pisca" cx="70" cy="128" r="4.5" fill="#B6F23A"/>
-<text x="84" y="133" class="m" font-size="13" font-weight="500" fill="#8E978C" text-anchor="start" letter-spacing="1.2">EXPERIMENT Nº 001 · PROCESS MAPPING</text>
+<text x="84" y="133" class="m" font-size="13" font-weight="500" fill="#8E978C" text-anchor="start" letter-spacing="1.2">EXPERIMENT NO. 001 · PROCESS MAPPING</text>
 <g class="sobe s1"><text x="60" y="252" class="b" font-size="96" font-weight="800" fill="#EDEDE4" text-anchor="start" letter-spacing="-5">Don’t guess</text></g>
 <g class="sobe s2"><text x="60" y="344" class="b" font-size="96" font-weight="800" fill="#EDEDE4" text-anchor="start" letter-spacing="-5">the flow.</text></g>
 <g class="sobe s3"><text x="60" y="436" class="b" font-size="96" font-weight="800" fill="#B6F23A" text-anchor="start" letter-spacing="-5">Prove it.</text></g>
 <path class="risca" d="M58 456 C 131.60000000000002 444, 205.20000000000002 466, 278.79999999999995 454 S 389.2 448, 434 458" stroke="#B6F23A" stroke-width="7" fill="none" stroke-linecap="round"/>
 <g transform="rotate(-8 830 360)"><text x="780" y="350" class="h" font-size="30" font-weight="700" fill="#FFB547" text-anchor="start">nobody guesses</text><text x="780" y="380" class="h" font-size="30" font-weight="700" fill="#FFB547" text-anchor="start">the “No” here</text></g>
-<path class="risca" d="M880 318 C 905 285, 915 250, 908 206 M898 218 L908 204 L918 217" stroke="#FFB547" stroke-width="2.6" fill="none" stroke-linecap="round" style="animation-delay:1.4s"/>
+<path class="risca" d="M880 318 C 908 280, 918 220, 902 166 M893 179 L902 163 L913 176" stroke="#FFB547" stroke-width="2.6" fill="none" stroke-linecap="round" style="animation-delay:1.4s"/>
 <g transform="rotate(-2 1216 540)"><text x="1216" y="500" class="h" font-size="33" font-weight="700" fill="#EDEDE4" text-anchor="end">description + questions</text>
 <text x="1216" y="536" class="h" font-size="33" font-weight="700" fill="#EDEDE4" text-anchor="end">+ tokens + <tspan fill="#B6F23A">4,000 cases</tspan></text>
 <text x="1216" y="572" class="h" font-size="33" font-weight="700" fill="#EDEDE4" text-anchor="end">= <tspan fill="#B6F23A">proven</tspan> process</text></g>
