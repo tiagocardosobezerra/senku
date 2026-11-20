@@ -1,8 +1,8 @@
-<a href="https://tiagocardosobezerra.github.io/senku/"><img width="100%" alt="Senku: before you draw the process, prove that it flows. Tokens run through the swimlane flowchart of the purchasing example; validate says No problems and a 4,000-case simulation shows 80% of purchases take up to 17.2 business days, against an agreed deadline of 10." src="assets/readme/hero-en.svg" /></a>
+<a href="https://tiagocardosobezerra.github.io/senku/"><img width="100%" alt="Senku: don’t guess the flow. Prove it. On a chalkboard, glowing tokens run through the swimlane flowchart of the purchasing example; chalk note: nobody guesses the No here. Formula: description plus questions plus tokens plus 4,000 cases equals a proven process." src="assets/readme/hero-en.svg" /></a>
 
 <p align="center">
   <a href="https://tiagocardosobezerra.github.io/senku/"><strong>Project site</strong> (in Portuguese)</a> ·
-  <a href="https://tiagocardosobezerra.github.io/senku/#prova"><strong>See the token proof</strong></a> ·
+  <a href="https://tiagocardosobezerra.github.io/senku/#experimento"><strong>See the token proof</strong></a> ·
   <a href="#get-started-in-3-steps"><strong>Install</strong></a> ·
   <a href="#results"><strong>Results</strong></a>
 </p>
@@ -69,7 +69,7 @@ Before drawing, Senku sends **tokens** (the way BPMN defines execution) down eve
   [a1b] "Corrigir requisição" não segue para lugar nenhum: depois dela, o que acontece? (ou ligue a um fim)  (M&S)
 ```
 
-<p align="center"><sub><a href="https://tiagocardosobezerra.github.io/senku/#prova"><strong>Watch the tokens run through the real flowchart</strong></a> and break the flow yourself on the project site.</sub></p>
+<p align="center"><sub><a href="https://tiagocardosobezerra.github.io/senku/#experimento"><strong>Watch the tokens run through the real flowchart</strong></a> and break the flow yourself on the project site.</sub></p>
 
 ## See what it delivers
 
@@ -110,7 +110,7 @@ The full document: [Markdown](exemplos/compras/saida/sup-01-compra-de-materiais-
 
 Using the times and percentages from the interview, `analisar` simulates 4,000 cases, with rework and parallel work, and shows what the average hides. In the purchasing example the agreed deadline is 10 business days, but no simulated case finishes within it:
 
-<a href="https://tiagocardosobezerra.github.io/senku/#simulacao"><img width="100%" alt="Histogram of 4,000 simulated cases of the purchasing example. 78% finish in 14 business days, 12% in 17, 6% in 18 and the rest between 20 and 27. Half finish within 14.1 business days, 80% within 17.2 and 90% within 18.4. The agreed deadline is 10 business days and no case meets it." src="assets/readme/simulacao-en.svg" /></a>
+<a href="https://tiagocardosobezerra.github.io/senku/#medicao"><img width="100%" alt="Histogram of 4,000 simulated cases of the purchasing example. 78% finish in 14 business days, 12% in 17, 6% in 18 and the rest between 20 and 27. Half finish within 14.1 business days, 80% within 17.2 and 90% within 18.4. The agreed deadline is 10 business days and no case meets it." src="assets/readme/simulacao-en.svg" /></a>
 
 ## Results
 
